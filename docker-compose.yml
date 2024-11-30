@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  pomar-na-mao-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pomar-na-mao:v1
+    container_name: pomar-na-mao
+    restart: on-failure
+    ports:
+      - 8080:80
