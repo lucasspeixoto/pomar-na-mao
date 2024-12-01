@@ -7,7 +7,7 @@ on:
     branches: ['master', 'main']
 
 jobs:
-  build:
+  Build:
     name: Continuous Integration
     runs-on: ubuntu-latest
 
@@ -39,9 +39,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 🏗️ Build e tag da Imagem
-        run: |
-          touch .env
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/pomar-na-mao:${{ github.run_id }} .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/pomar-na-mao:${{ github.run_id }} .
 
       - name: 🐳 Push da Imagem
         run: docker push ${{ secrets.DOCKER_USERNAME }}/pomar-na-mao:${{ github.run_id }}
