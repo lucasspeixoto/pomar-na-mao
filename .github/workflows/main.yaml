@@ -46,7 +46,7 @@ jobs:
   Continuous-Deploy:
     name: Continuous Deploy
     runs-on: ubuntu-latest
-    needs: Build
+    needs: Continuous-Integration
     steps:
       - uses: actions/checkout@v2
       - name: 📂 Install Vercel CLI
