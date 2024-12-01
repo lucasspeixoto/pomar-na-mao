@@ -7,7 +7,7 @@ on:
     branches: ['master', 'main']
 
 jobs:
-  Continuous Integration:
+  Continuous-Integration:
     name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +43,7 @@ jobs:
       - name: 🐳 Push da Imagem
         run: docker push ${{ secrets.DOCKER_USERNAME }}/pomar-na-mao:${{ github.run_id }}
 
-  Continuous Deploy:
+  Continuous-Deploy:
     name: Continuous Deploy
     runs-on: ubuntu-latest
     needs: Build
