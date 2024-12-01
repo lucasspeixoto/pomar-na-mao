@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 📑 Checkout Code
         uses: actions/checkout@v3
 
       - name: Set up Node.js
@@ -19,11 +19,14 @@ jobs:
         with:
           node-version: "21"
 
-      - name: Install dependencies
+      - name: 📥 Installing Dependencies
         run: npm install
+
+      - name: 🧹 Linting
+        run: npm run lint
       
-      - name: Testing
+      - name: 🧪 Testing
         run: npm run test
 
-      - name: Build the project
+      - name: 🏗️ Building  
         run: npm run build
