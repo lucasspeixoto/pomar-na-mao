@@ -6,4 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `<p>reports works!</p>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReportsComponent { }
+export class ReportsComponent {}

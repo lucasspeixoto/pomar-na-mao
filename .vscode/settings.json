@@ -1,8 +1,8 @@
 {
-    "angular-schematics.schematicsDefaultOptions": {
-        "angular-*": {
-            "style": "scss",
-            "skipStyle": true
-        }
+  "angular-schematics.schematicsDefaultOptions": {
+    "angular-*": {
+      "style": "scss",
+      "skipStyle": true
     }
+  }
 }
