@@ -1,7 +1,7 @@
 version: '3.5'
 
 services:
-  pomar-na-mao-app:
+  app:
     build:
       context: .
       dockerfile: Dockerfile

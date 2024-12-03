@@ -1,25 +1,25 @@
-name: CI/CD pipeline
+name: App Workflow
 
 on:
   push:
-    branches: ['master', 'main']
+    branches: ['main']
   pull_request:
-    branches: ['master', 'main']
+    branches: ['main']
 
 jobs:
   CI:
-    name: CI
-    runs-on: ubuntu-latest
+    name: Continuous integration
+    runs-on: ubuntu-latest #
     steps:
       - name: 📑 Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Clona o repostório para ter acesso a pasta do projeto no servidor
 
       - name: 📩 Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # Instala o node na versão 20
         with:
-          node-version: '21'
+          node-version: '20'
 
-      - name: 📥 Installing Dependencies
+      - name: 📥 Install Dependencies
         run: npm install
 
       - name: 🧹 Linting
@@ -43,12 +43,12 @@ jobs:
       - name: 🐳 Push da Imagem
         run: docker push ${{ secrets.DOCKER_USERNAME }}/pomar-na-mao:${{ github.run_id }}
 
-  Deploy:
-    name: Deploy
+  CD:
+    name: Continuous Deploy
     runs-on: ubuntu-latest
     needs: CI
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: 📂 Install Vercel CLI
         run: npm install --global vercel@latest
       - name: 📩 Pull Vercel Environment Information
