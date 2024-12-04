@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-detection',
   imports: [],
   template: `
-    <div class="p-10">
+    <div class="z-0 p-10">
       <h2 class="m-10">Detections 1</h2>
       <h2 class="m-10">Detections 2</h2>
       <h2 class="m-10">Detections</h2>

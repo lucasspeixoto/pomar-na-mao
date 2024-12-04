@@ -7,10 +7,9 @@ const COMPONENTS = [ThemeToggleComponent];
   selector: 'app-header',
   imports: [...COMPONENTS],
   template: `
-    <div
-      class="navbar backdrop-brightness-150 backdrop-blur fixed top-0 left-0 h-16">
+    <div class="z-[9999] navbar backdrop-brightness-150 backdrop-blur h-16">
       <div class="navbar-start">
-        <div class="dropdown ">
+        <div class="dropdown" style="z-index: 99999">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +27,7 @@ const COMPONENTS = [ThemeToggleComponent];
           <ul
             tabindex="0"
             class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow">
-            <li class="z-10 "><a>Gráficos</a></li>
+            <li><a>Gráficos</a></li>
             <li><a>Relatórios</a></li>
             <li><a>Ordem serviço</a></li>
             <li><a>Outros</a></li>
@@ -36,7 +35,8 @@ const COMPONENTS = [ThemeToggleComponent];
         </div>
       </div>
       <div class="navbar-center">
-        <label class="input input-bordered flex items-center gap-2">
+        <label
+          class="input input-bordered input-secondary w-full max-w-xs flex items-center gap-2">
           <input type="text" class="grow" placeholder="Pesquisar" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
