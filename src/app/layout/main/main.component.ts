@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
-const COMPONENTS = [HeaderComponent];
+const COMPONENTS = [HeaderComponent, FooterComponent];
 
 const COMMONS = [RouterOutlet];
 
@@ -14,6 +15,8 @@ const COMMONS = [RouterOutlet];
       <app-header />
 
       <router-outlet />
+
+      <app-footer />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
