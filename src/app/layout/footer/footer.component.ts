@@ -6,11 +6,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <footer class="footer bg-primary dark:bg-accent-content p-10">
       <nav>
-        <h6 class="footer-title">Services</h6>
-        <a class="link link-hover">Branding</a>
+        <h6 class="footer-title">Serviços</h6>
+        <a class="link link-hover">Marca</a>
         <a class="link link-hover">Design</a>
         <a class="link link-hover">Marketing</a>
-        <a class="link link-hover">Advertisement</a>
+        <a class="link link-hover">Anúncio</a>
       </nav>
       <nav>
         <h6 class="footer-title">Empresa</h6>
