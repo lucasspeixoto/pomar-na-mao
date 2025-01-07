@@ -38,21 +38,27 @@ import { DetectionComponent } from '../detection/components/detection/detection.
   styles: `
     .main-container{
       border: 400px;
+      flex-wrap: wrap;
+      justify-content: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
-      padding: 20px;
+      width: 50%;
+      height: 100%;
     }
     .container{
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     padding: 10px;
     border: 4px #655D8A;
     border-radius: 10px;
     width: 100%;
+    height: 85px;
     background-color: #655D8A;
     transition: filter 0.3s ease, transform 0.3s ease;
+    max-width: 500px;
     }
     .titulo{
       color: Black;
@@ -68,14 +74,18 @@ import { DetectionComponent } from '../detection/components/detection/detection.
       transform: scale(0.9);
     }
     .container2{
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     padding: 10px;
     border: 4px #7897AB;
     border-radius: 10px;
     width: 100%;
+    height: 85px;
     background-color: #7897AB;
     transition: filter 0.3s ease, transform 0.3s ease;
+    max-width: 500px;
     }
     .titulo2{
       color: Black;
@@ -92,14 +102,18 @@ import { DetectionComponent } from '../detection/components/detection/detection.
       transform: scale(0.9);
     }
     .container3{
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     padding: 10px;
     border: 4px #D885A3;
     border-radius: 10px;
     width: 100%;
+    height: 85px;
     background-color: #D885A3;
     transition: filter 0.3s ease, transform 0.3s ease;
+    max-width: 500px;
     }
     .titulo3{
       color: Black;
@@ -116,14 +130,18 @@ import { DetectionComponent } from '../detection/components/detection/detection.
       transform: scale(0.9);
     }
     .container4{
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     padding: 10px;
     border: 4px solid #FDCEB9;
     border-radius: 10px;
     width: 100%;
+    height: 85px;
     background-color: #FDCEB9;
     transition: filter 0.3s ease, transform 0.3s ease;
+    max-width: 500px;
     }
     .titulo4{
       color: Black;
@@ -134,11 +152,26 @@ import { DetectionComponent } from '../detection/components/detection/detection.
     }
     .container4:hover{
       filter: brightness(0.8);
-
+      
     }
     .container4:active{
       transform: scale(0.9);
     }
+
+    @media (max-width: 1200px) {
+      .container4, .container3, .container2, .container {
+      width: 70%;
+      }
+    } 
+    @media (max-width: 700px) {
+      .container4, .container3, .container2, .container {
+      width: 50%;
+      }
+      .main-container{
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    } 
   `
 })
 export class HomeComponent {}
