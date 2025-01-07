@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DetectionComponent } from './features/detection/detection.component';
+import { DetectionComponent } from './features/detection/components/detection/detection.component';
 import { ReportsComponent } from './features/reports/reports.component';
 import { MainComponent } from './layout/main/main.component';
 import { HomeComponent } from './features/home/home.component';
