@@ -68,6 +68,7 @@ import { DetectionComponent } from '../detection/components/detection/detection.
     }
     .container:hover{
       filter: brightness(0.8);
+      transform: scale(1.03);
 
     }
     .container:active{
@@ -96,6 +97,7 @@ import { DetectionComponent } from '../detection/components/detection/detection.
     }
     .container2:hover{
       filter: brightness(0.8);
+      transform: scale(1.03);
 
     }
     .container2:active{
@@ -124,6 +126,7 @@ import { DetectionComponent } from '../detection/components/detection/detection.
     }
     .container3:hover{
       filter: brightness(0.8);
+      transform: scale(1.03);
 
     }
     .container3:active{
@@ -152,6 +155,7 @@ import { DetectionComponent } from '../detection/components/detection/detection.
     }
     .container4:hover{
       filter: brightness(0.8);
+      transform: scale(1.03);
       
     }
     .container4:active{
@@ -161,6 +165,7 @@ import { DetectionComponent } from '../detection/components/detection/detection.
     @media (max-width: 1200px) {
       .container4, .container3, .container2, .container {
       width: 70%;
+
       }
     } 
     @media (max-width: 700px) {
@@ -168,7 +173,7 @@ import { DetectionComponent } from '../detection/components/detection/detection.
       width: 50%;
       }
       .main-container{
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
       }
     } 
