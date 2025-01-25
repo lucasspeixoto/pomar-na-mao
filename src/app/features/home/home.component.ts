@@ -13,30 +13,31 @@ import { DetectionComponent } from '../detection/components/detection/detection.
           <app-detection />
         </div>
         <div class="divider divider-horizontal"></div>
-        <div class="border-2 border-orange-400 h-full w-full md:w-1/2 flex items-center justify-center p-0 md:p-2 overflow-none rounded-box">
-            <!--Inicio -->
-            <div class="main-container">
-              <div class="container">
-                <span class="titulo">Gráficos</span>
-              </div>
-              <div class="container2">
-                <span class="titulo2">Relatórios</span>
-              </div>
-              <div class="container3">
-                <span class="titulo3">Ordem serviço</span>
-              </div>
-              <div class="container4">
-                <span class="titulo4">Outros</span>
-              </div>
+        <div
+          class="border-2 border-orange-400 h-full w-full md:w-1/2 flex items-center justify-center p-0 md:p-2 overflow-none rounded-box">
+          <!--Inicio -->
+          <div class="main-container">
+            <div class="container">
+              <span class="titulo">Gráficos</span>
             </div>
-            <!--Fim-->
+            <div class="container2">
+              <span class="titulo2">Relatórios</span>
+            </div>
+            <div class="container3">
+              <span class="titulo3">Ordem serviço</span>
+            </div>
+            <div class="container4">
+              <span class="titulo4">Outros</span>
+            </div>
+          </div>
+          <!--Fim-->
         </div>
       </div>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
-    .main-container{
+    .main-container {
       border: 400px;
       flex-wrap: wrap;
       justify-content: center;
@@ -46,137 +47,146 @@ import { DetectionComponent } from '../detection/components/detection/detection.
       width: 50%;
       height: 100%;
     }
-    .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border: 4px #655D8A;
-    border-radius: 10px;
-    width: 100%;
-    height: 85px;
-    background-color: #655D8A;
-    transition: filter 0.3s ease, transform 0.3s ease;
-    max-width: 500px;
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 4px #655d8a;
+      border-radius: 10px;
+      width: 100%;
+      height: 85px;
+      background-color: #655d8a;
+      transition:
+        filter 0.3s ease,
+        transform 0.3s ease;
+      max-width: 500px;
     }
-    .titulo{
+    .titulo {
       color: Black;
       font-size: 20px;
       font-weight: bold;
       text-align: center;
     }
-    .container:hover{
+    .container:hover {
       filter: brightness(0.8);
       transform: scale(1.03);
-
     }
-    .container:active{
+    .container:active {
       transform: scale(0.9);
     }
-    .container2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border: 4px #7897AB;
-    border-radius: 10px;
-    width: 100%;
-    height: 85px;
-    background-color: #7897AB;
-    transition: filter 0.3s ease, transform 0.3s ease;
-    max-width: 500px;
+    .container2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 4px #7897ab;
+      border-radius: 10px;
+      width: 100%;
+      height: 85px;
+      background-color: #7897ab;
+      transition:
+        filter 0.3s ease,
+        transform 0.3s ease;
+      max-width: 500px;
     }
-    .titulo2{
+    .titulo2 {
       color: Black;
-      transition: filter 0.3s ease;;
+      transition: filter 0.3s ease;
       font-size: 20px;
       font-weight: bold;
       text-align: center;
     }
-    .container2:hover{
+    .container2:hover {
       filter: brightness(0.8);
       transform: scale(1.03);
-
     }
-    .container2:active{
+    .container2:active {
       transform: scale(0.9);
     }
-    .container3{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border: 4px #D885A3;
-    border-radius: 10px;
-    width: 100%;
-    height: 85px;
-    background-color: #D885A3;
-    transition: filter 0.3s ease, transform 0.3s ease;
-    max-width: 500px;
+    .container3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 4px #d885a3;
+      border-radius: 10px;
+      width: 100%;
+      height: 85px;
+      background-color: #d885a3;
+      transition:
+        filter 0.3s ease,
+        transform 0.3s ease;
+      max-width: 500px;
     }
-    .titulo3{
+    .titulo3 {
       color: Black;
-      transition: filter 0.3s ease;;
+      transition: filter 0.3s ease;
       font-size: 20px;
       font-weight: bold;
       text-align: center;
     }
-    .container3:hover{
+    .container3:hover {
       filter: brightness(0.8);
       transform: scale(1.03);
-
     }
-    .container3:active{
+    .container3:active {
       transform: scale(0.9);
     }
-    .container4{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    padding: 10px;
-    border: 4px solid #FDCEB9;
-    border-radius: 10px;
-    width: 100%;
-    height: 85px;
-    background-color: #FDCEB9;
-    transition: filter 0.3s ease, transform 0.3s ease;
-    max-width: 500px;
+    .container4 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      padding: 10px;
+      border: 4px solid #fdceb9;
+      border-radius: 10px;
+      width: 100%;
+      height: 85px;
+      background-color: #fdceb9;
+      transition:
+        filter 0.3s ease,
+        transform 0.3s ease;
+      max-width: 500px;
     }
-    .titulo4{
+    .titulo4 {
       color: Black;
-      transition: filter 0.3s ease;;
+      transition: filter 0.3s ease;
       font-size: 20px;
       font-weight: bold;
       text-align: center;
     }
-    .container4:hover{
+    .container4:hover {
       filter: brightness(0.8);
       transform: scale(1.03);
-      
     }
-    .container4:active{
+    .container4:active {
       transform: scale(0.9);
     }
 
     @media (max-width: 1200px) {
-      .container4, .container3, .container2, .container {
-      width: 70%;
-
+      .container4,
+      .container3,
+      .container2,
+      .container {
+        width: 70%;
       }
-    } 
+    }
     @media (max-width: 700px) {
-      .container4, .container3, .container2, .container {
-      width: 50%;
+      .container4,
+      .container3,
+      .container2,
+      .container {
+        width: 50%;
       }
-      .main-container{
+      .main-container {
         justify-content: center;
         align-items: center;
       }
-    } 
-  `
+    }
+  `,
 })
 export class HomeComponent {}
