@@ -16,7 +16,7 @@ describe('LoginComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NzButtonModule, NzFlexModule, NzInputModule, NzFormModule, ReactiveFormsModule],
-      providers: [SupabaseService]
+      providers: [SupabaseService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
