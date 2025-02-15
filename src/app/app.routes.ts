@@ -3,6 +3,7 @@ import { LoginComponent } from './features/authentication/login/login.component'
 import { MainComponent } from './features/layout/main/main.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', pathMatch: 'full', component: LoginComponent },
   {
     path: 'home',
