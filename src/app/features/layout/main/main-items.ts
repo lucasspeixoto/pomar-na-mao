@@ -1,15 +1,13 @@
-
-
 type MenuItemRoute = {
   routerLink: string;
   title: string;
-}
+};
 
 type MenuItem = {
   title: string;
   icon: string;
-  routes: MenuItemRoute[]
-}
+  routes: MenuItemRoute[];
+};
 
 export const menuItems: MenuItem[] = [
   { title: 'Coleta', icon: 'audit', routes: [{ routerLink: '/collect', title: 'Cadastrar' }] },

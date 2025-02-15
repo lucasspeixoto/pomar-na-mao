@@ -19,6 +19,7 @@ export const routes: Routes = [
   /* Detecção */
   {
     path: 'detection',
-    loadChildren: () => import('./features/detection/detection.routes').then(m => m.DETECTION_ROUTES),
+    loadChildren: () =>
+      import('./features/detection/detection.routes').then(m => m.DETECTION_ROUTES),
   },
 ];

@@ -1,5 +1,10 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
     <div class="sidebar-logo">
       <a href="/" target="_blank">
@@ -8,16 +13,16 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      @for(menuItem of menuItems; track menuItem.title) {
-      <li nz-submenu nzOpen [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
-        <ul>
-          @for(route of menuItem.routes; track route.routerLink) {
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="route.routerLink">{{route.title}}</a>
-          </li>
-          }
-        </ul>
-      </li>
+      @for (menuItem of menuItems; track menuItem.title) {
+        <li nz-submenu nzOpen [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
+          <ul>
+            @for (route of menuItem.routes; track route.routerLink) {
+              <li nz-menu-item nzMatchRouter>
+                <a [routerLink]="route.routerLink">{{ route.title }}</a>
+              </li>
+            }
+          </ul>
+        </li>
       }
     </ul>
   </nz-sider>
