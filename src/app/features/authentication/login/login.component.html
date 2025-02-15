@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="app-title">Pomar na Mão</div>
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="login-form">
+    <h2>Login</h2>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input formControlName="email" placeholder="Email" />
+        @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.dirty) {
+          <span class="error-message"> O email é obrigatório </span>
+        }
+
+        @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.dirty) {
+          <span class="error-message"> Formato de email inválido </span>
+        }
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input type="password" formControlName="password" placeholder="Senha" />
+        @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.dirty) {
+          <span class="error-message"> A senha é obrigatória </span>
+        }
+
+        @if (loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.dirty) {
+          <span class="error-message"> A senha deve ter pelo menos 6 caracteres </span>
+        }
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button nzType="primary">Entrar</button>
+  </form>
+</div>

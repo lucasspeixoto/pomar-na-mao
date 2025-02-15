@@ -7,7 +7,7 @@
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="/" target="_blank">
+      <a href="/home/collect" target="_blank">
         <img src="favicon.ico" alt="logo" />
         <h1>Pomar na mão</h1>
       </a>
@@ -31,6 +31,14 @@
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+          <nz-icon
+            class="trigger"
+            nzType="logout"
+            routerLink="/login"
+            nzTooltipTitle="Sair"
+            nzTooltipPlacement="left"
+            nz-button
+            nz-tooltip />
         </span>
       </div>
     </nz-header>
