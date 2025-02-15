@@ -29,7 +29,7 @@ export class LoginComponent {
     password: ['', [Validators.required, Validators.minLength(3)]],
   });
 
-  public async loginHandler() {
+  public async loginHandler(): Promise<void> {
     if (!this.loginForm.valid) {
       this.notificationService.error('Erro', 'Preenchas os campos corretamente!');
     }

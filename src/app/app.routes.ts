@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './features/authentication/login/login.component';
 import { MainComponent } from './features/layout/main/main.component';
