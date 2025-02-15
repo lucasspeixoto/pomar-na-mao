@@ -3,6 +3,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@features/*": ["./src/app/featues/*"],
+      "@env/*": ["./src/environments/*"],
+      "@services/*": ["./src/app/shared/services/*"]
+    },
     "outDir": "./dist/out-tsc",
     "types": ["jest", "node"],
     "strict": true,

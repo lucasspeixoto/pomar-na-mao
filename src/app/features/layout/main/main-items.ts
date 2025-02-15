@@ -10,18 +10,18 @@ type MenuItem = {
 };
 
 export const menuItems: MenuItem[] = [
-  { title: 'Coleta', icon: 'audit', routes: [{ routerLink: '/collect', title: 'Cadastrar' }] },
+  { title: 'Coleta', icon: 'audit', routes: [{ routerLink: '/home/collect', title: 'Cadastrar' }] },
   {
     title: 'Relatórios',
     icon: 'pie-chart',
     routes: [
-      { routerLink: '/collects', title: 'Coletas' },
-      { routerLink: '/charts', title: 'Gráficos' },
+      { routerLink: '/home/collects', title: 'Coletas' },
+      { routerLink: '/home/charts', title: 'Gráficos' },
     ],
   },
   {
     title: 'Detecção',
     icon: 'dashboard',
-    routes: [{ routerLink: '/detection', title: 'Localizar' }],
+    routes: [{ routerLink: '/home/detection', title: 'Localizar' }],
   },
 ];
