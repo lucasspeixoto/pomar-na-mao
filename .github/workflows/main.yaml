@@ -7,7 +7,7 @@ on:
 jobs:
   CI:
     name: Continuous Integration
-    runs-on: ubuntu-latest # Servidor ubuntu na última versão
+    runs-on: ubuntu-latest
     steps:
       - name: 📑 Checkout Code
         uses: actions/checkout@v4 # Clona o repostório para ter acesso a pasta do projeto no servidor
