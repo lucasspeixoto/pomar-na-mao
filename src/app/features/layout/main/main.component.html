@@ -40,7 +40,8 @@
             nzTooltipTitle="Sair"
             nzTooltipPlacement="left"
             nz-button
-            nz-tooltip />
+            nz-tooltip
+            (click)="authenticationService.logoutAndRedirect()" />
         </span>
       </div>
     </nz-header>

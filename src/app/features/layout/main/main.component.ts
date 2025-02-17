@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthenticationService } from './../../authentication/services/authentication.service';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -16,4 +17,6 @@ export class MainComponent {
   public isCollapsed = false;
 
   public menuItems = menuItems;
+
+  public authenticationService = inject(AuthenticationService);
 }
