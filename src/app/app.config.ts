@@ -1,4 +1,11 @@
-import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
+import { AuthenticationService } from './features/authentication/services/authentication.service';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  importProvidersFrom,
+  provideAppInitializer,
+  inject,
+} from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -24,5 +31,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FormsModule),
     provideAnimationsAsync(),
     provideHttpClient(),
+    provideAppInitializer(() => inject(AuthenticationService).loadUserData()),
   ],
 };

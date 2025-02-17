@@ -1,6 +1,5 @@
-<div class="login-container">
-  <div class="app-title">Pomar na Mão</div>
-  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="login-form">
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="form">
     <h2>Login</h2>
     <nz-form-item>
       <nz-form-control>
@@ -18,19 +17,39 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <nz-input-group nzPrefixIcon="lock">
-          <input nz-input type="password" formControlName="password" placeholder="Senha" />
+        <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+          <input
+            nz-input
+            [type]="passwordVisible ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Senha" />
         </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span
+            nz-icon
+            class="ant-input-password-icon"
+            [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
+            (click)="passwordVisible = !passwordVisible"></span>
+        </ng-template>
         @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.dirty) {
           <span class="error-message"> A senha é obrigatória </span>
         }
-
         @if (loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.dirty) {
           <span class="error-message"> A senha deve ter pelo menos 6 caracteres </span>
         }
       </nz-form-control>
+
+      <a class="forgot-password" (click)="router.navigateByUrl('/forgot-password')"
+        >Esqueceu a senha ?</a
+      >
     </nz-form-item>
 
-    <button nz-button nzType="primary">Entrar</button>
+    <button nz-button nzType="primary" [nzLoading]="isLoading()">
+      @if (isLoading()) {
+        Loading
+      } @else {
+        Entrar
+      }
+    </button>
   </form>
 </div>
