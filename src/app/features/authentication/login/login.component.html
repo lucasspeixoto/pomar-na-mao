@@ -4,7 +4,9 @@
     <h2>Login</h2>
     <nz-form-item>
       <nz-form-control>
-        <input nz-input formControlName="email" placeholder="Email" />
+        <nz-input-group nzPrefixIcon="user">
+          <input nz-input formControlName="email" placeholder="Email" />
+        </nz-input-group>
         @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.dirty) {
           <span class="error-message"> O email é obrigatório </span>
         }
@@ -16,7 +18,9 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <input nz-input type="password" formControlName="password" placeholder="Senha" />
+        <nz-input-group nzPrefixIcon="lock">
+          <input nz-input type="password" formControlName="password" placeholder="Senha" />
+        </nz-input-group>
         @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.dirty) {
           <span class="error-message"> A senha é obrigatória </span>
         }
@@ -26,6 +30,7 @@
         }
       </nz-form-control>
     </nz-form-item>
+
     <button nz-button nzType="primary">Entrar</button>
   </form>
 </div>

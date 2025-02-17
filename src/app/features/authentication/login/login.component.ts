@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
@@ -8,6 +8,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { injectSupabase } from './../../../../app/shared/utils/inject-supabase';
+import { messages } from './../../../../app/shared/utils/messages';
+import { createLoginForm, type LoginFormValue } from './constants/login-form';
 
 @Component({
   selector: 'app-login',
@@ -22,24 +24,21 @@ export class LoginComponent {
 
   private notificationService = inject(NzNotificationService);
 
-  private formBuilder = inject(UntypedFormBuilder);
+  public loginForm = createLoginForm();
 
-  public loginForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(3)]],
-  });
+  public messages = messages;
 
   public async loginHandler(): Promise<void> {
     if (!this.loginForm.valid) {
       this.notificationService.error('Erro', 'Preenchas os campos corretamente!');
     }
 
-    const { email, password } = this.loginForm.value;
+    const { email, password } = this.loginForm.value as LoginFormValue;
 
     const { error } = await this.supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      this.notificationService.error('Erro', error.message);
+      this.notificationService.error('Erro', messages[error?.code!]);
       return;
     }
 

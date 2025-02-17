@@ -1,4 +1,18 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Envs
+.env
+
+#cache
+./angular
+.angular
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
 
 # Node
 /node_modules
@@ -7,7 +21,6 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
-.angular
 .project
 .classpath
 .c9/
