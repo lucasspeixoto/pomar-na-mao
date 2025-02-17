@@ -2,7 +2,7 @@
   <nz-sider
     class="menu-sidebar"
     nzCollapsible
-    nzWidth="256px"
+    nzWidth="200px"
     nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
@@ -30,9 +30,9 @@
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <nz-icon class="trigger" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+          <nz-icon class="trigger menu-toggle" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
           <nz-icon
-            class="trigger"
+            class="trigger menu-logout"
             nzType="logout"
             routerLink="/login"
             nzTooltipTitle="Sair"
