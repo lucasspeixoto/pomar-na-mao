@@ -30,7 +30,9 @@
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <nz-icon class="trigger menu-toggle" [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
+          <nz-icon
+            class="trigger menu-toggle"
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
           <nz-icon
             class="trigger menu-logout"
             nzType="logout"

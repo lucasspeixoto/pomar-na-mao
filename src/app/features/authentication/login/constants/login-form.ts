@@ -1,10 +1,5 @@
 import { inject } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 type LoginFormControl = {
   email: FormControl<string>;
