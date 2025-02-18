@@ -78,7 +78,7 @@ nz-content {
       all 0.3s,
       padding 0s;
 
-    &-toggle {
+    &-left {
       display: block;
 
       &:hover {
@@ -90,11 +90,25 @@ nz-content {
       }
     }
 
-    &-logout {
-      align-self: end;
+    &-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
 
-      &:hover {
-        color: #1890ff;
+      & span {
+        font-size: 14px;
+        display: block;
+
+        @media screen and (max-width: 300px) {
+          display: none;
+        }
+      }
+
+      &_logout {
+        &:hover {
+          color: #1890ff;
+        }
       }
     }
 
