@@ -7,7 +7,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { SupabaseService } from '../../../shared/services/supabase.service';
+import { SupabaseService } from '../../../../shared/services/supabase.service';
 
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;

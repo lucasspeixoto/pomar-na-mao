@@ -1,18 +1,12 @@
-<div class="container">
-  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="form">
+<div class="login">
+  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="login__form">
     <h2>Login</h2>
     <nz-form-item>
       <nz-form-control>
         <nz-input-group nzPrefixIcon="user">
           <input nz-input formControlName="email" placeholder="Email" />
         </nz-input-group>
-        @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.dirty) {
-          <span class="error-message"> O email é obrigatório </span>
-        }
-
-        @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.dirty) {
-          <span class="error-message"> Formato de email inválido </span>
-        }
+        <app-custom-validation-message controlName="email" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -31,12 +25,7 @@
             [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
             (click)="passwordVisible = !passwordVisible"></span>
         </ng-template>
-        @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.dirty) {
-          <span class="error-message"> A senha é obrigatória </span>
-        }
-        @if (loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.dirty) {
-          <span class="error-message"> A senha deve ter pelo menos 6 caracteres </span>
-        }
+        <app-custom-validation-message controlName="password" />
       </nz-form-control>
 
       <a class="forgot-password" (click)="router.navigateByUrl('/forgot-password')"
@@ -44,7 +33,11 @@
       >
     </nz-form-item>
 
-    <button nz-button nzType="primary" [nzLoading]="isLoading()">
+    <button
+      nz-button
+      nzType="primary"
+      [nzLoading]="isLoading()"
+      [disabled]="isLoading() || loginForm.invalid">
       @if (isLoading()) {
         Loading
       } @else {

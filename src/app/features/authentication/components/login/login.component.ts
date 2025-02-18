@@ -11,6 +11,7 @@ import { messages } from '../../../../shared/utils/messages';
 import { createLoginForm, type LoginFormValue } from '../../constants/login-form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { Router } from '@angular/router';
+import { CustomValidationMessageComponent } from '../../../../shared/components/custom-validation-message/custom-validation-message';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ import { Router } from '@angular/router';
     NzInputModule,
     NzFormModule,
     ReactiveFormsModule,
+    CustomValidationMessageComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],

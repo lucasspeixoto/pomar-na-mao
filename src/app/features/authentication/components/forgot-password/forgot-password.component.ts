@@ -14,6 +14,7 @@ import {
   type ForgotPasswordFormValue,
 } from '../../constants/forgot-password-form';
 import { Router } from '@angular/router';
+import { CustomValidationMessageComponent } from '../../../../shared/components/custom-validation-message/custom-validation-message';
 
 @Component({
   selector: 'app-forgot-password',
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
     NzInputModule,
     NzFormModule,
     ReactiveFormsModule,
+    CustomValidationMessageComponent,
   ],
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],

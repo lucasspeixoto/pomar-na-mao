@@ -7,12 +7,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { AuthenticationService } from '../../../features/authentication/services/authentication.service';
-import { messages } from '../../../shared/utils/messages';
+import { messages } from '../../../../shared/utils/messages';
 import {
   createResetPasswordForm,
   type ResetPasswordFormValue,
-} from '../../../features/authentication/constants/reset-password-form';
+} from '../../constants/reset-password-form';
+import { AuthenticationService } from '../../services/authentication.service';
+import { CustomValidationMessageComponent } from '../../../../shared/components/custom-validation-message/custom-validation-message';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,6 +24,7 @@ import {
     NzInputModule,
     NzFormModule,
     ReactiveFormsModule,
+    CustomValidationMessageComponent,
   ],
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
