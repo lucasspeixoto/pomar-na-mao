@@ -90,9 +90,11 @@ export class AuthenticationService {
   public async loadUserData(): Promise<void> {
     this.isLoading.set(true);
 
-    const { data } = await this.supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await this.supabase.auth.getSession();
 
-    if (!data.session) {
+    if (!session) {
       await this.logoutAndRedirect();
 
       this.isLoading.set(false);
@@ -100,12 +102,23 @@ export class AuthenticationService {
       return;
     }
 
-    this.currentUser.set(data.session.user as unknown as iUser);
-
     this.isLogged.set(true);
 
     this.isLoading.set(false);
+
+    const { data, error } = await this.supabase
+      .from('users')
+      .select('*')
+      .eq('id', session.user.id)
+      .single();
+
+    if (error) {
+      this.isLoading.set(false);
+    }
+
+    this.currentUser.set(data as unknown as iUser);
   }
+
   public async logoutAndRedirect(): Promise<void> {
     await this.supabase.auth.signOut();
     this.router.navigate(['/']);

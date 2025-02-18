@@ -6,10 +6,19 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { menuItems } from './main-items';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @Component({
   selector: 'app-main',
-  imports: [RouterLink, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzToolTipModule],
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    NzTypographyModule,
+    NzIconModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzToolTipModule,
+  ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
@@ -19,4 +28,6 @@ export class MainComponent {
   public menuItems = menuItems;
 
   public authenticationService = inject(AuthenticationService);
+
+  public currentUser = this.authenticationService.currentUser;
 }

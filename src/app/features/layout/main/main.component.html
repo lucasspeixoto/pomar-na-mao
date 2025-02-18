@@ -31,17 +31,22 @@
       <div class="header">
         <span class="header__trigger" (click)="isCollapsed = !isCollapsed">
           <nz-icon
-            class="header__trigger-toggle"
+            class="header__trigger-left"
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
-          <nz-icon
-            class="header__trigger-logout"
-            nzType="logout"
-            routerLink="/login"
-            nzTooltipTitle="Sair"
-            nzTooltipPlacement="left"
-            nz-button
-            nz-tooltip
-            (click)="authenticationService.logoutAndRedirect()" />
+          <div class="header__trigger-right">
+            <span nz-typography nzType="warning"
+              >Olá! <strong>{{ currentUser()?.full_name!.split(' ')[0] }}</strong></span
+            >
+            <nz-icon
+              class="header__trigger-right_logout"
+              nzType="logout"
+              routerLink="/login"
+              nzTooltipTitle="Sair"
+              nzTooltipPlacement="left"
+              nz-button
+              nz-tooltip
+              (click)="authenticationService.logoutAndRedirect()" />
+          </div>
         </span>
       </div>
     </nz-header>
