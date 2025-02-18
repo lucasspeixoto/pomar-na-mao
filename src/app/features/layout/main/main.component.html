@@ -1,12 +1,12 @@
-<nz-layout class="app-layout">
+<nz-layout class="main">
   <nz-sider
-    class="menu-sidebar"
+    class="main__sidebar"
     nzCollapsible
     nzWidth="200px"
     nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
-    <div class="sidebar-logo">
+    <div class="main__sidebar-logo">
       <a href="/home/collect" target="_blank">
         <img src="favicon.ico" alt="logo" />
         <h1>Pomar na mão</h1>
@@ -28,13 +28,13 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <div class="header">
+        <span class="header__trigger" (click)="isCollapsed = !isCollapsed">
           <nz-icon
-            class="trigger menu-toggle"
+            class="header__trigger-toggle"
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
           <nz-icon
-            class="trigger menu-logout"
+            class="header__trigger-logout"
             nzType="logout"
             routerLink="/login"
             nzTooltipTitle="Sair"
@@ -46,7 +46,7 @@
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
+      <div class="content">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
