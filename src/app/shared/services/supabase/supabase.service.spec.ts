@@ -10,7 +10,7 @@ describe('Service: Supabase', () => {
     });
   });
 
-  it('should ...', inject([SupabaseService], (service: SupabaseService) => {
+  it('should create service', inject([SupabaseService], (service: SupabaseService) => {
     expect(service).toBeTruthy();
   }));
 });
