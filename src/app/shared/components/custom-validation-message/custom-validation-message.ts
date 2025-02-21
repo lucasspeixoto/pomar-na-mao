@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -44,6 +44,7 @@ import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomValidationMessageComponent {
   @Input({ required: true })

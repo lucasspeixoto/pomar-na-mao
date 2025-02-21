@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzResultModule } from 'ng-zorro-antd/result';
@@ -8,6 +8,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
   imports: [NzResultModule, NzButtonModule],
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotFoundComponent {
   private router = inject(Router);

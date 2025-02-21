@@ -1,5 +1,5 @@
 import { AuthenticationService } from './../../authentication/services/authentication.service';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -21,6 +21,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
   ],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent {
   public isCollapsed = false;

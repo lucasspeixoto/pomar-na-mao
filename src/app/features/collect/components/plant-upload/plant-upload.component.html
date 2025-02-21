@@ -1,0 +1,22 @@
+<div class="container" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+  <input type="file" accept="image/*" (change)="onFileChange($event)" hidden #fileInput />
+  <div
+    [class.success]="uploadSuccess"
+    [class.error]="uploadError"
+    class="container__dropper"
+    (click)="fileInput.click()">
+    <nz-icon nzType="upload" nzTheme="outline" />
+    <p class="container__dropper-text">Foto Planta</p>
+    <div class="container__dropper-image-container">
+      @if (selectedFile || collectFormService.plantPhotoString()) {
+        <img [src]="collectFormService.plantPhotoString()" alt="Foto planta" />
+
+        <p>
+          <span>{{ imageName() }}</span> ({{ fileSize() }} KB)
+        </p>
+      } @else {
+        <img src="empty-photo.jpg" width="150px" height="150px" alt="Sem foto" />
+      }
+    </div>
+  </div>
+</div>
