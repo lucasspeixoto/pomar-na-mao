@@ -1,1 +1,45 @@
-<p>geolocation works!</p>
+<div class="container">
+  <nz-card [nzBordered]="true" nzTitle="Geolocalização">
+    @if (geolocationService.isLoading()) {
+      <nz-skeleton></nz-skeleton>
+    } @else {
+      <div class="content">
+        <div class="content__data">
+          <p>
+            Longitude:
+            @if (geolocationService.isCoordinatesAvailable()) {
+              <strong>{{ geolocationService.coordinates()?.longitude }}</strong>
+            } @else {
+              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25px" />
+            }
+          </p>
+          <p>
+            Latitude:
+            @if (geolocationService.isCoordinatesAvailable()) {
+              <strong>{{ geolocationService.coordinates()?.latitude }}</strong>
+            } @else {
+              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25" />
+            }
+          </p>
+          <p>
+            Altitude:
+            @if (geolocationService.isCoordinatesAvailable()) {
+              <strong>{{ geolocationService.coordinates()?.altitude }}</strong>
+            } @else {
+              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25" />
+            }
+          </p>
+        </div>
+
+        <div class="content__action" (click)="loadGeolocationData()">
+          <img alt="Gps logo" src="gps.png" width="80px" height="70" />
+          @if (geolocationService.isCoordinatesAvailable()) {
+            <span>Atualizar</span>
+          } @else {
+            <span>Ative o Gps e atualize</span>
+          }
+        </div>
+      </div>
+    }
+  </nz-card>
+</div>

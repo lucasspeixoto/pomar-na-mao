@@ -5,23 +5,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-nz-header {
-  padding: 0;
-  width: 100%;
-  z-index: 2;
-}
-
-nz-content {
-  margin: 24px;
-}
-
 .main {
   height: 100vh;
 
   &__sidebar {
-    position: relative;
     z-index: 10;
-    min-height: 100vh;
+    min-height: 100%;
     box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
 
     &-logo {
@@ -119,13 +108,24 @@ nz-content {
 }
 
 .content {
-  padding: 24px;
+  padding: 20px;
   background: #fff;
   height: 100%;
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 767px) {
   nz-content {
     margin: 5px;
   }
+}
+
+nz-header {
+  padding: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+nz-content {
+  margin: 24px;
 }

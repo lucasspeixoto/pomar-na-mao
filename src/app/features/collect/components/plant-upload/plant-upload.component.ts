@@ -10,10 +10,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CollectFormService } from '../../services/collect-form.service';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @Component({
   selector: 'app-plant-upload',
-  imports: [NzButtonModule, NzIconModule],
+  imports: [NzButtonModule, NzIconModule, NzCardModule],
   templateUrl: './plant-upload.component.html',
   styleUrls: ['./plant-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

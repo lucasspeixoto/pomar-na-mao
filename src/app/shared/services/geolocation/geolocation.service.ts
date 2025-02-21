@@ -27,6 +27,10 @@ export class GeolocationService {
 
   public isLoading = signal(false);
 
+  public isCoordinatesAvailable = computed(() => {
+    return this.permissionStatusState() === 'granted' && this.coordinates;
+  });
+
   public async getLocaltionPermission(): Promise<void> {
     this.isLoading.set(true);
 
@@ -41,11 +45,14 @@ export class GeolocationService {
         throw new Error(`Erro ao obter estado de conexão do dispositivo: ${error.message}`);
       });
 
-    this.isLoading.set(false);
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 2000);
   }
 
   public async getLocaltionCoordinate(): Promise<void> {
     this.isLoading.set(true);
+
     navigator.geolocation.getCurrentPosition(
       position => {
         const coordinates = {
@@ -66,6 +73,8 @@ export class GeolocationService {
       { enableHighAccuracy: true, maximumAge: 3600000 } // Cache location for 1 hour
     );
 
-    this.isLoading.set(false);
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 2000);
   }
 }
