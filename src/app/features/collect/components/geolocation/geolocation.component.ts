@@ -1,4 +1,3 @@
-import { CollectFormService } from './../../services/collect-form.service';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -7,6 +6,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
+import { EpochToTimePipe } from '../../../../shared/pipes/epoch-to-time.pipe';
 
 @Component({
   selector: 'app-geolocation',
@@ -17,6 +17,7 @@ import { GeolocationService } from '../../../../shared/services/geolocation/geol
     NzIconModule,
     NzSwitchModule,
     NzSkeletonModule,
+    EpochToTimePipe,
   ],
   templateUrl: './geolocation.component.html',
   styleUrls: ['./geolocation.component.scss'],
@@ -24,8 +25,6 @@ import { GeolocationService } from '../../../../shared/services/geolocation/geol
 })
 export class GeolocationComponent implements OnInit {
   public geolocationService = inject(GeolocationService);
-
-  public collectFormService = inject(CollectFormService);
 
   public ngOnInit(): void {
     this.loadGeolocationData();

@@ -52,6 +52,7 @@
     </nz-header>
     <nz-content>
       <div class="content">
+        <app-loading [isLoading]="loadingService.isLoading()" />
         <router-outlet></router-outlet>
       </div>
     </nz-content>

@@ -9,7 +9,7 @@ import {
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CollectFormService } from '../../services/collect-form.service';
+import { PlantFileService } from '../../services/plant-file/plant-file.service';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
 @Component({
@@ -38,7 +38,7 @@ export class PlantUploadComponent {
 
   public messageService = inject(NzMessageService);
 
-  public collectFormService = inject(CollectFormService);
+  public plantFileService = inject(PlantFileService);
 
   public onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -71,7 +71,7 @@ export class PlantUploadComponent {
       const reader = new FileReader();
 
       reader.onload = (e): void => {
-        this.collectFormService.plantPhotoString.set(e.target?.result as string);
+        this.plantFileService.plantPhotoString.set(e.target?.result as string);
       };
 
       reader.readAsDataURL(file);

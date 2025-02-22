@@ -115,7 +115,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  nz-content {
+  .nz-content {
     margin: 5px;
   }
 }
@@ -128,4 +128,14 @@ nz-header {
 
 nz-content {
   margin: 24px;
+}
+
+@media screen and (max-width: 576px) {
+  nz-content {
+    margin: 0;
+  }
+
+  nz-sider {
+    padding: 0;
+  }
 }

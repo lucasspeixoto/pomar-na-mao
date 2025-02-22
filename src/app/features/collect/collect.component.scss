@@ -1,5 +1,9 @@
 .container {
   &__photo_geolocalization {
     margin-bottom: 20px;
+
+    @media screen and (max-width: 576px) {
+      gap: 20px;
+    }
   }
 }

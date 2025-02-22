@@ -18,21 +18,21 @@
             @if (geolocationService.isCoordinatesAvailable()) {
               <strong>{{ geolocationService.coordinates()?.latitude }}</strong>
             } @else {
-              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25" />
+              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25px" />
             }
           </p>
           <p>
-            Altitude:
+            Tempo:
             @if (geolocationService.isCoordinatesAvailable()) {
-              <strong>{{ geolocationService.coordinates()?.altitude }}</strong>
+              <strong>{{ geolocationService.coordinatesTimestamp()! | epochToTime }}</strong>
             } @else {
-              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25" />
+              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25px" />
             }
           </p>
         </div>
 
         <div class="content__action" (click)="loadGeolocationData()">
-          <img alt="Gps logo" src="gps.png" width="80px" height="70" />
+          <img alt="Gps logo" src="gps.png" />
           @if (geolocationService.isCoordinatesAvailable()) {
             <span>Atualizar</span>
           } @else {

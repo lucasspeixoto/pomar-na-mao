@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-validation-message',
   template: `
-    @if (control && control.invalid && control.touched) {
+    @if (control && control.invalid && control.dirty) {
       <ul>
         @if (control.hasError('required')) {
           <li class="error-message">&#9888; Este Campo é obrigatório!</li>
@@ -44,7 +44,6 @@ import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomValidationMessageComponent {
   @Input({ required: true })

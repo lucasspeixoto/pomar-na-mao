@@ -3,7 +3,6 @@ import { computed, Injectable, signal } from '@angular/core';
 type Coordinate = {
   latitude: number;
   longitude: number;
-  altitude: number;
 };
 
 @Injectable({
@@ -24,6 +23,8 @@ export class GeolocationService {
   public permissionStatusState = computed(() => this.permissionStatus()!.state);
 
   public coordinates = signal<Coordinate | null>(null);
+
+  public coordinatesTimestamp = signal<EpochTimeStamp | null>(null);
 
   public isLoading = signal(false);
 
@@ -58,10 +59,10 @@ export class GeolocationService {
         const coordinates = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          altitude: position.coords.altitude || 'Não disponível',
         } as Coordinate;
 
         this.coordinates.set(coordinates);
+        this.coordinatesTimestamp.set(position.timestamp);
       },
       error => {
         const { message } = error;

@@ -8,8 +8,8 @@
     <nz-icon nzType="upload" nzTheme="outline" />
     <p class="container__dropper-text">Foto Planta</p>
     <div class="container__dropper-image-container">
-      @if (selectedFile || collectFormService.plantPhotoString()) {
-        <img [src]="collectFormService.plantPhotoString()" alt="Foto planta" />
+      @if (selectedFile || plantFileService.plantPhotoString()) {
+        <img [src]="plantFileService.plantPhotoString()" alt="Foto planta" />
 
         <p>
           <span>{{ imageName() }}</span> ({{ fileSize() }} KB)

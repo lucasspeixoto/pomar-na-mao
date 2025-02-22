@@ -3,6 +3,8 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class CollectFormService {
+export class PlantFileService {
   public plantPhotoString = signal('');
+
+  public isLoading = signal(false);
 }

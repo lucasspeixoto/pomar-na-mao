@@ -1,2 +1,51 @@
-.container {
+nz-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+
+  gap: 2px;
+
+  @media screen and (max-width: 880px) {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__left {
+    width: 60%;
+
+    @media screen and (max-width: 880px) {
+      width: 100%;
+    }
+  }
+
+  &__right {
+    width: 40%;
+
+    @media screen and (max-width: 880px) {
+      width: 100%;
+    }
+  }
+}
+
+.action {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+nz-form-control {
+  width: 80%;
+  padding: 5px;
+
+  @media screen and (max-width: 880px) {
+    width: 100%;
+  }
 }
