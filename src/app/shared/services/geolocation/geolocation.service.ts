@@ -3,7 +3,6 @@ import { computed, Injectable, signal } from '@angular/core';
 type Coordinate = {
   latitude: number;
   longitude: number;
-  altitude: number;
 };
 
 @Injectable({
@@ -25,7 +24,13 @@ export class GeolocationService {
 
   public coordinates = signal<Coordinate | null>(null);
 
+  public coordinatesTimestamp = signal<EpochTimeStamp | null>(null);
+
   public isLoading = signal(false);
+
+  public isCoordinatesAvailable = computed(() => {
+    return this.permissionStatusState() === 'granted' && this.coordinates;
+  });
 
   public async getLocaltionPermission(): Promise<void> {
     this.isLoading.set(true);
@@ -41,20 +46,23 @@ export class GeolocationService {
         throw new Error(`Erro ao obter estado de conexão do dispositivo: ${error.message}`);
       });
 
-    this.isLoading.set(false);
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 2000);
   }
 
   public async getLocaltionCoordinate(): Promise<void> {
     this.isLoading.set(true);
+
     navigator.geolocation.getCurrentPosition(
       position => {
         const coordinates = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          altitude: position.coords.altitude || 'Não disponível',
         } as Coordinate;
 
         this.coordinates.set(coordinates);
+        this.coordinatesTimestamp.set(position.timestamp);
       },
       error => {
         const { message } = error;
@@ -66,6 +74,8 @@ export class GeolocationService {
       { enableHighAccuracy: true, maximumAge: 3600000 } // Cache location for 1 hour
     );
 
-    this.isLoading.set(false);
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 2000);
   }
 }
