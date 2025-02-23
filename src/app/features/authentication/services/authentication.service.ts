@@ -42,7 +42,7 @@ export class AuthenticationService {
 
     this.isLoading.set(false);
 
-    this.router.navigateByUrl('/home/collect');
+    this.router.navigateByUrl('/collect/register');
   }
 
   public async forgotPasswordHandler(email: string): Promise<void> {

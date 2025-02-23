@@ -1,10 +1,11 @@
-import { inject, Injectable } from '@angular/core';
-import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
+import { inject, Injectable, signal } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
 import { LoadingService } from '../../../../shared/services/loading/loading.service';
 import { injectSupabase } from '../../../../shared/utils/inject-supabase';
+import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
 import { PlantFileService } from '../plant-file/plant-file.service';
+import type { PlantData } from '../../models/collect.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,29 @@ export class CollectService {
 
   public loadingService = inject(LoadingService);
 
+  public plantData = signal<PlantData[]>([]);
+
   private supabase = injectSupabase();
+
+  public async getAllCollectsDataHandler(): Promise<void> {
+    this.loadingService.isLoading.set(true);
+
+    const { data, error } = await this.supabase
+      .from('plant_collect')
+      .select('*, users(full_name)')
+      .order('created_at', { ascending: false });
+
+    if (data) this.plantData.set(data);
+
+    setTimeout(() => {
+      this.loadingService.isLoading.set(false);
+
+      if (error) {
+        this.plantData.set([]);
+        this.messageService.error('Erro ao carregar base de coletas, tente novamente mais tarde!');
+      }
+    }, 2000);
+  }
 
   public async insertAPlantCollectHandler(
     complementData: CollectComplementDataFormValue
