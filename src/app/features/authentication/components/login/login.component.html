@@ -1,48 +1,57 @@
 <div class="login">
-  <form [formGroup]="loginForm" (ngSubmit)="loginHandler()" class="login__form">
-    <h2>Login</h2>
-    <nz-form-item>
-      <nz-form-control>
-        <nz-input-group nzPrefixIcon="user">
-          <input nz-input formControlName="email" placeholder="Email" />
-        </nz-input-group>
-        <app-custom-validation-message controlName="email" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control>
-        <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
-          <input
-            nz-input
-            [type]="passwordVisible ? 'text' : 'password'"
-            formControlName="password"
-            placeholder="Senha" />
-        </nz-input-group>
-        <ng-template #suffixTemplate>
-          <span
-            nz-icon
-            class="ant-input-password-icon"
-            [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
-            (click)="passwordVisible = !passwordVisible"></span>
-        </ng-template>
-        <app-custom-validation-message controlName="password" [minLength]="3" />
-      </nz-form-control>
+  <div class="login__left">
+    <img src="background.jpg" alt="Cover Image" />
+  </div>
 
-      <a class="forgot-password" (click)="router.navigateByUrl('/forgot-password')"
-        >Esqueceu a senha ?</a
-      >
-    </nz-form-item>
-
-    <button
-      nz-button
-      nzType="primary"
-      [nzLoading]="isLoading()"
-      [disabled]="isLoading() || loginForm.invalid">
-      @if (isLoading()) {
-        Loading
-      } @else {
-        Entrar
-      }
-    </button>
-  </form>
+  <div class="login__right">
+    <div class="login__right_form-container">
+      <h2>Login</h2>
+      <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="loginHandler()">
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="user">
+              <input nz-input formControlName="email" placeholder="Email" />
+            </nz-input-group>
+            <app-custom-validation-message controlName="email" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+              <input
+                nz-input
+                [type]="passwordVisible ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Senha" />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <span
+                nz-icon
+                class="ant-input-password-icon"
+                [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
+                (click)="passwordVisible = !passwordVisible"></span>
+            </ng-template>
+            <app-custom-validation-message controlName="password" [minLength]="3" />
+          </nz-form-control>
+        </nz-form-item>
+        <button
+          style="width: 100%; margin: 0.2rem 0 0.5rem 0"
+          type="submit"
+          nz-button
+          nzType="primary"
+          [nzLoading]="isLoading()"
+          [disabled]="isLoading() || loginForm.invalid">
+          @if (isLoading()) {
+            Loading
+          } @else {
+            Entrar
+          }
+        </button>
+      </form>
+      <p>
+        Esqueceu a senha ?
+        <a (click)="router.navigateByUrl('/forgot-password')" nz-button nzType="link">Lembrar</a>
+      </p>
+    </div>
+  </div>
 </div>
