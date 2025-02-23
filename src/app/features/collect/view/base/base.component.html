@@ -21,7 +21,7 @@
         <tr>
           <td nzLeft>{{ data.longitude }}</td>
           <td nzLeft>{{ data.latitude }}</td>
-          <td nzLeft>{{ data.gps_timestamp }}</td>
+          <td nzLeft>{{ data.gps_timestamp | timestamp }}</td>
           <td>{{ data.mass }}</td>
           <td>{{ data.harvest }}</td>
           <td>{{ data.description }}</td>

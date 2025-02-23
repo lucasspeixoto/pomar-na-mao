@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { CollectService } from '../../services/collect/collect.service';
 import { DatePipe } from '@angular/common';
+import { TimestampPipe } from '../../../../shared/pipes/timestamp/timestamp.pipe';
 
 @Component({
   selector: 'app-base',
-  imports: [NzTableModule, DatePipe],
+  imports: [NzTableModule, DatePipe, TimestampPipe],
   templateUrl: './base.component.html',
   styleUrl: './base.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
