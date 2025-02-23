@@ -25,7 +25,7 @@
             [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
             (click)="passwordVisible = !passwordVisible"></span>
         </ng-template>
-        <app-custom-validation-message controlName="password" />
+        <app-custom-validation-message controlName="password" [minLength]="3" />
       </nz-form-control>
 
       <a class="forgot-password" (click)="router.navigateByUrl('/forgot-password')"

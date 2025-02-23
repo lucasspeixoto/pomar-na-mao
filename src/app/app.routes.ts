@@ -26,18 +26,13 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'home',
+    path: '',
     component: MainComponent,
     canActivate: [isLoggedGuard],
     children: [
       {
         path: 'collect',
         loadChildren: () => import('./features/collect/collect.routes').then(m => m.COLLECT_ROUTES),
-      },
-      {
-        path: 'collects',
-        loadChildren: () =>
-          import('./features/collects/collects.routes').then(m => m.COLLECTS_ROUTES),
       },
       {
         path: 'charts',
