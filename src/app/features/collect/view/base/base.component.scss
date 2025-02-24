@@ -1,0 +1,36 @@
+.container {
+  &__table {
+    display: block;
+
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  &__cards {
+    display: none;
+    gap: 5px;
+
+    @media screen and (max-width: 900px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    @media screen and (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.expand-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+}

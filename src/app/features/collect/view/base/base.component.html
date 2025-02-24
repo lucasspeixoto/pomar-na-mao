@@ -1,17 +1,18 @@
 <div class="container">
   <h2>Coletas</h2>
   <nz-table
+    class="container__table"
     #fixedTable
     [nzData]="collectService.plantData()"
     [nzScroll]="{ x: '1150px', y: '240px' }">
     <thead>
       <tr>
-        <th nzLeft>Longitude</th>
-        <th nzLeft>Latitude</th>
-        <th nzLeft>Tempo Gps</th>
+        <th nzWidth="60px"></th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Tempo Gps</th>
         <th>Massa (kg)</th>
         <th>Safra</th>
-        <th>Descrição</th>
         <th>Data plantio</th>
         <th>Usuário</th>
       </tr>
@@ -19,16 +20,55 @@
     <tbody>
       @for (data of collectService.plantData(); track data.id) {
         <tr>
-          <td nzLeft>{{ data.longitude }}</td>
-          <td nzLeft>{{ data.latitude }}</td>
-          <td nzLeft>{{ data.gps_timestamp | timestamp }}</td>
+          <td
+            [nzExpand]="expandSet.has(data.id)"
+            (nzExpandChange)="onExpandChange(data.id, $event)"></td>
+          <td>{{ data.longitude }}</td>
+          <td>{{ data.latitude }}</td>
+          <td>{{ data.gps_timestamp | timestamp }}</td>
           <td>{{ data.mass }}</td>
           <td>{{ data.harvest }}</td>
-          <td>{{ data.description }}</td>
-          <td>{{ data.planting_date | date: 'fullDate' : '' : 'pt' }}</td>
+          <td>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</td>
           <td>{{ data.users.full_name }}</td>
+        </tr>
+        <tr [nzExpand]="expandSet.has(data.id)">
+          <div class="expand-detail">
+            <span>{{ data.description }}</span>
+            <img alt="Foto planta" width="160px" height="180px" [src]="data.plant_photo" />
+          </div>
         </tr>
       }
     </tbody>
   </nz-table>
+
+  <div class="container__cards">
+    @for (data of collectService.plantData(); track data.id) {
+      <nz-card style="max-width: 200px" [nzCover]="plantTemplate">
+        <p>
+          Latitude: <strong>{{ data.latitude }}</strong>
+        </p>
+        <p>
+          Longitude: <strong>{{ data.longitude }}</strong>
+        </p>
+        <p>
+          Tempo Gps: <strong>{{ data.gps_timestamp | timestamp }}</strong>
+        </p>
+        <p>
+          Safra: <strong>{{ data.harvest }}</strong>
+        </p>
+        <p>
+          Data: <strong>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</strong>
+        </p>
+        <p>
+          Descrição: <strong>{{ data.description }}</strong>
+        </p>
+        <p>
+          Usuário: <strong>{{ data.users.full_name }}</strong>
+        </p>
+      </nz-card>
+      <ng-template #plantTemplate>
+        <img alt="Foto planta" width="80px" height="120px" [src]="data.plant_photo" />
+      </ng-template>
+    }
+  </div>
 </div>
