@@ -1,28 +1,28 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { inject, Injectable, signal } from '@angular/core';
 import { iUser } from '../models/user.model';
-import { injectSupabase } from '../../../shared/utils/inject-supabase';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { messages } from '../../../shared/utils/messages';
+import { injectSupabase } from '../../../shared/utils/inject-supabase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private supabase = injectSupabase();
+  public supabase = injectSupabase();
 
   public currentUser = signal<iUser | null>(null);
 
   public isLogged = signal(false);
 
-  private router = inject(Router);
-
   public isLoading = signal(false);
 
-  private notificationService = inject(NzNotificationService);
-
   public messages = messages;
+
+  private router = inject(Router);
+
+  private notificationService = inject(NzNotificationService);
 
   public async loginUserHandler(email: string, password: string): Promise<void> {
     this.isLoading.set(true);
@@ -31,6 +31,7 @@ export class AuthenticationService {
 
     if (error) {
       this.notificationService.error('Erro', messages[error?.code!]);
+
       this.isLoading.set(false);
 
       return;
@@ -92,10 +93,13 @@ export class AuthenticationService {
 
     const {
       data: { session },
+      error: sessionError,
     } = await this.supabase.auth.getSession();
 
-    if (!session) {
-      await this.logoutAndRedirect();
+    if (sessionError) {
+      this.router.navigateByUrl('/');
+
+      this.supabase.auth.signOut();
 
       this.isLoading.set(false);
 
@@ -106,13 +110,14 @@ export class AuthenticationService {
 
     this.isLoading.set(false);
 
-    const { data, error } = await this.supabase
+    const { data, error: userDataError } = await this.supabase
       .from('users')
       .select('*')
-      .eq('id', session.user.id)
+      .eq('id', session!.user.id)
       .single();
 
-    if (error) {
+    if (userDataError) {
+      this.isLogged.set(false);
       this.isLoading.set(false);
     }
 
@@ -120,7 +125,7 @@ export class AuthenticationService {
   }
 
   public async logoutAndRedirect(): Promise<void> {
-    await this.supabase.auth.signOut();
     this.router.navigate(['/']);
+    await this.supabase.auth.signOut();
   }
 }
