@@ -32,7 +32,7 @@ import { CustomValidationMessageComponent } from '../../../../shared/components/
 export class ResetPasswordComponent {
   private notificationService = inject(NzNotificationService);
 
-  public passwordVisible = false;
+  public authenticationService = inject(AuthenticationService);
 
   public router = inject(Router);
 
@@ -40,13 +40,13 @@ export class ResetPasswordComponent {
 
   public messages = messages;
 
-  public authenticationService = inject(AuthenticationService);
-
-  public isLoading = this.authenticationService.isLoading;
+  public passwordVisible = false;
 
   public async resetPasswordHandler(): Promise<void> {
     if (!this.resetPasswordForm.valid) {
       this.notificationService.error('Erro', 'Preenchas os campos corretamente!');
+
+      return;
     }
 
     const { password } = this.resetPasswordForm.value as ResetPasswordFormValue;

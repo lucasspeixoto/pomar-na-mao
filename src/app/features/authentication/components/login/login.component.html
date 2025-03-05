@@ -7,18 +7,19 @@
     <div class="login__right_form-container">
       <h2>Login</h2>
       <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="loginHandler()">
-        <nz-form-item>
+        <nz-form-item id="emailItem">
           <nz-form-control>
             <nz-input-group nzPrefixIcon="user">
-              <input nz-input formControlName="email" placeholder="Email" />
+              <input id="emailField" nz-input formControlName="email" placeholder="Email" />
             </nz-input-group>
             <app-custom-validation-message controlName="email" />
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item>
+        <nz-form-item id="passwordItem">
           <nz-form-control>
             <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
               <input
+                id="passwordField"
                 nz-input
                 [type]="passwordVisible ? 'text' : 'password'"
                 formControlName="password"
@@ -26,6 +27,7 @@
             </nz-input-group>
             <ng-template #suffixTemplate>
               <span
+                id="passwordEyeToggle"
                 nz-icon
                 class="ant-input-password-icon"
                 [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
@@ -35,13 +37,14 @@
           </nz-form-control>
         </nz-form-item>
         <button
+          id="loginButton"
           style="width: 100%; margin: 0.2rem 0 0.5rem 0"
           type="submit"
           nz-button
           nzType="primary"
-          [nzLoading]="isLoading()"
-          [disabled]="isLoading() || loginForm.invalid">
-          @if (isLoading()) {
+          [nzLoading]="authenticationService.isLoading()"
+          [disabled]="authenticationService.isLoading() || loginForm.invalid">
+          @if (authenticationService.isLoading()) {
             Loading
           } @else {
             Entrar

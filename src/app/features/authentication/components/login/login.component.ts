@@ -30,27 +30,29 @@ import { NzAnchorModule } from 'ng-zorro-antd/anchor';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  public passwordVisible = false;
-
   private notificationService = inject(NzNotificationService);
 
   public router = inject(Router);
+
+  public authenticationService = inject(AuthenticationService);
 
   public loginForm = createLoginForm();
 
   public messages = messages;
 
-  public authenticationService = inject(AuthenticationService);
-
-  public isLoading = this.authenticationService.isLoading;
+  public passwordVisible = false;
 
   public async loginHandler(): Promise<void> {
     if (!this.loginForm.valid) {
       this.notificationService.error('Erro', 'Preenchas os campos corretamente!');
+
+      return;
     }
 
     const { email, password } = this.loginForm.value as LoginFormValue;
 
     this.authenticationService.loginUserHandler(email, password);
+
+    this.loginForm.reset();
   }
 }

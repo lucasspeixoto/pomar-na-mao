@@ -33,19 +33,19 @@ import { CustomValidationMessageComponent } from '../../../../shared/components/
 export class ForgotPasswordComponent {
   private notificationService = inject(NzNotificationService);
 
+  public authenticationService = inject(AuthenticationService);
+
   public router = inject(Router);
 
   public forgotPasswordForm = createForgotPasswordForm();
 
   public messages = messages;
 
-  public authenticationService = inject(AuthenticationService);
-
-  public isLoading = this.authenticationService.isLoading;
-
   public async forgotPasswordHandler(): Promise<void> {
     if (!this.forgotPasswordForm.valid) {
       this.notificationService.error('Erro', 'Preenchas os campos corretamente!');
+
+      return;
     }
 
     const { email } = this.forgotPasswordForm.value as ForgotPasswordFormValue;
