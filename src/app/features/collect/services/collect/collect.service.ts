@@ -31,7 +31,7 @@ export class CollectService {
       .select('*, users(full_name)')
       .order('created_at', { ascending: false });
 
-    if (data) this.plantData.set(data);
+    if (!error) this.plantData.set(data);
 
     setTimeout(() => {
       this.loadingService.isLoading.set(false);
