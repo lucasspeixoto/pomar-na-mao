@@ -13,28 +13,17 @@ export class NotificationService {
     return window.Notification.requestPermission();
   }
 
-  public async showNotification(title: string, options?: NotificationOptions): Promise<void> {
+  public showNotification(title: string, options?: NotificationOptions): void {
     if (!this.notificationSupported) {
-      console.warn('Sem suporte para notificações!');
+      console.warn('Notification not supported!');
+
       return;
     }
 
     if (window.Notification.permission === 'granted') {
-      try {
-        const registration = await navigator.serviceWorker?.ready;
-
-        if (registration) {
-          await registration.showNotification(title, options);
-
-          return;
-        }
-      } catch {
-        console.warn('ServiceWorker falhou');
-      }
-      // Fallback to window.Notification for desktop browsers
       new window.Notification(title, options);
     } else {
-      console.warn('Sem suporte para notificações!');
+      console.warn('Notification not supported!');
     }
   }
 
