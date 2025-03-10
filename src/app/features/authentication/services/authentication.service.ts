@@ -113,7 +113,7 @@ export class AuthenticationService {
     const { data, error: userDataError } = await this.supabase
       .from('users')
       .select('*')
-      .eq('id', session!.user.id)
+      .eq('id', session?.user.id)
       .single();
 
     if (userDataError) {

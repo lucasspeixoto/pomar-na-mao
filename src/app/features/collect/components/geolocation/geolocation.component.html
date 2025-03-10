@@ -13,7 +13,7 @@
               <img
                 id="longitudeEmptyImg"
                 alt="Empty text logo"
-                src="empty-text.png"
+                src="assets/images/empty-text.png"
                 width="30px"
                 height="25px" />
             }
@@ -26,7 +26,7 @@
               <img
                 id="latitudeEmptyImg"
                 alt="Empty text logo"
-                src="empty-text.png"
+                src="assets/images/empty-text.png"
                 width="30px"
                 height="25px" />
             }
@@ -41,7 +41,7 @@
               <img
                 id="timestampEmptyImg"
                 alt="Empty text logo"
-                src="empty-text.png"
+                src="assets/images/empty-text.png"
                 width="30px"
                 height="25px" />
             }
@@ -49,7 +49,7 @@
         </div>
 
         <div class="content__action" (click)="loadGeolocationData()">
-          <img alt="Gps logo" src="gps.png" />
+          <img alt="Gps logo" src="assets/images/gps.png" />
           @if (geolocationService.isCoordinatesAvailable()) {
             <span id="gpsUpdate">Atualizar</span>
           } @else {
