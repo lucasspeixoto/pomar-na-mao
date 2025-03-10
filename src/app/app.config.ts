@@ -5,6 +5,7 @@ import {
   importProvidersFrom,
   provideAppInitializer,
   inject,
+  isDevMode,
 } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
@@ -17,6 +18,7 @@ import pt from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideServiceWorker } from '@angular/service-worker';
 
 registerLocaleData(pt);
 
@@ -32,5 +34,9 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     provideAppInitializer(() => inject(AuthenticationService).loadUserData()),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };
