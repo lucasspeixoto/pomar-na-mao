@@ -13,16 +13,16 @@ export class ConnectivityComponent {
   public notificationService = inject(NotificationService);
 
   constructor() {
-    effect(async () => {
+    effect(() => {
       if (!this.connectivityService.isOnline()) {
-        await this.notificationService.showNotification('You are offline', {
+        this.notificationService.showNotification('You are offline', {
           body: 'Você está offline',
         });
 
         return;
       }
 
-      await this.notificationService.showNotification('You are online', {
+      this.notificationService.showNotification('You are online', {
         body: 'Você está online!',
       });
     });
