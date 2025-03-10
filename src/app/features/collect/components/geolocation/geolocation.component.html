@@ -8,25 +8,42 @@
           <p>
             Longitude:
             @if (geolocationService.isCoordinatesAvailable()) {
-              <strong>{{ geolocationService.coordinates()?.longitude }}</strong>
+              <strong id="longitude">{{ geolocationService.coordinates()?.longitude }}</strong>
             } @else {
-              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25px" />
+              <img
+                id="longitudeEmptyImg"
+                alt="Empty text logo"
+                src="empty-text.png"
+                width="30px"
+                height="25px" />
             }
           </p>
           <p>
             Latitude:
             @if (geolocationService.isCoordinatesAvailable()) {
-              <strong>{{ geolocationService.coordinates()?.latitude }}</strong>
+              <strong id="latitude">{{ geolocationService.coordinates()?.latitude }}</strong>
             } @else {
-              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25px" />
+              <img
+                id="latitudeEmptyImg"
+                alt="Empty text logo"
+                src="empty-text.png"
+                width="30px"
+                height="25px" />
             }
           </p>
           <p>
             Tempo:
             @if (geolocationService.isCoordinatesAvailable()) {
-              <strong>{{ geolocationService.coordinatesTimestamp()! | epochToTime }}</strong>
+              <strong id="timestamp">{{
+                geolocationService.coordinatesTimestamp()! | epochToTime
+              }}</strong>
             } @else {
-              <img alt="Empty text logo" src="empty-text.png" width="30px" height="25px" />
+              <img
+                id="timestampEmptyImg"
+                alt="Empty text logo"
+                src="empty-text.png"
+                width="30px"
+                height="25px" />
             }
           </p>
         </div>
@@ -34,9 +51,9 @@
         <div class="content__action" (click)="loadGeolocationData()">
           <img alt="Gps logo" src="gps.png" />
           @if (geolocationService.isCoordinatesAvailable()) {
-            <span>Atualizar</span>
+            <span id="gpsUpdate">Atualizar</span>
           } @else {
-            <span>Ative o Gps e atualize</span>
+            <span id="gpsActive">Ative o Gps e atualize</span>
           }
         </div>
       </div>

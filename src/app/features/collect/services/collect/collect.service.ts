@@ -2,10 +2,10 @@ import { inject, Injectable, signal } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
 import { LoadingService } from '../../../../shared/services/loading/loading.service';
-import { injectSupabase } from '../../../../shared/utils/inject-supabase';
-import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
+import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
 import { PlantFileService } from '../plant-file/plant-file.service';
-import type { PlantData } from '../../models/collect.model';
+import { PlantData } from '../../models/collect.model';
+import { injectSupabase } from '../../../../shared/utils/inject-supabase';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,7 @@ export class CollectService {
       .select('*, users(full_name)')
       .order('created_at', { ascending: false });
 
-    if (data) this.plantData.set(data);
+    if (!error) this.plantData.set(data);
 
     setTimeout(() => {
       this.loadingService.isLoading.set(false);

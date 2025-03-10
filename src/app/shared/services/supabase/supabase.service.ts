@@ -10,6 +10,16 @@ export class SupabaseService {
   public supabase!: SupabaseClient;
 
   constructor() {
-    this.supabase = new SupabaseClient(environment.SUPABASE_URL, environment.SUPABASE_KEY);
+    if (!this.supabase) {
+      this.supabase = new SupabaseClient(environment.SUPABASE_URL, environment.SUPABASE_KEY);
+    }
+  }
+
+  public getClient(): SupabaseClient {
+    return this.supabase;
+  }
+
+  async signOut(): Promise<void> {
+    await this.supabase.auth.signOut();
   }
 }
