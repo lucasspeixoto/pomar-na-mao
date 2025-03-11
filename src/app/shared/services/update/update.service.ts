@@ -9,7 +9,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class UpdateService {
   public notificationService = inject(NzNotificationService);
 
-  private swUpdate = inject(SwUpdate);
+  public swUpdate = inject(SwUpdate);
 
   constructor() {
     this.initializeUpdateChecks();
