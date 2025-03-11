@@ -5,7 +5,7 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scope": "./",
   "start_url": "./",
   "icons": [
