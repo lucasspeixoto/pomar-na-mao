@@ -11,7 +11,7 @@ describe('UpdateService', () => {
 
   beforeEach(async () => {
     versionUpdatesSubject = new Subject<VersionEvent>();
-    unrecoverableSubject = new Subject<any>();
+    unrecoverableSubject = new Subject();
 
     swUpdateMock = {
       available: of({}),
