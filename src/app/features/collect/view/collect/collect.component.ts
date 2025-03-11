@@ -62,7 +62,7 @@ export class CollectComponent implements OnInit {
 
         L.marker([latitude, longitude]);
 
-        map.flyTo([latitude, longitude], map.getZoom());
+        map.flyTo([latitude, longitude]);
       },
       error => {
         if (error.code === 1) {
