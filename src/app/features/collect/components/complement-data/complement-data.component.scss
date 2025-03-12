@@ -6,15 +6,9 @@ nz-card {
 }
 
 .form {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: start;
-
   gap: 2px;
 
   @media screen and (max-width: 880px) {
-    flex-direction: column;
     gap: 0;
   }
 

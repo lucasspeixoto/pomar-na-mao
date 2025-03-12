@@ -62,7 +62,7 @@ describe('ComplementDataComponent', () => {
   describe('form validates', () => {
     it('should initialize with empty form', () => {
       expect(component.collectComplementDataForm.get('mass')?.value).toBe('');
-      expect(component.collectComplementDataForm.get('identifier')?.value).toBe('');
+      expect(component.collectComplementDataForm.get('variety')?.value).toBe('');
       expect(component.collectComplementDataForm.get('plantingDate')?.value).toBe('');
       expect(component.collectComplementDataForm.get('harvest')?.value).toBe('');
       expect(component.collectComplementDataForm.get('description')?.value).toBe('');
@@ -86,13 +86,13 @@ describe('ComplementDataComponent', () => {
       expect(massControl?.errors).toBeFalsy();
     });
 
-    it('should validate identifier field', () => {
-      const identifierControl = component.collectComplementDataForm.controls.identifier;
+    it('should validate variety field', () => {
+      const identifierControl = component.collectComplementDataForm.controls.variety;
 
-      component.collectComplementDataForm.patchValue({ identifier: 'A#' });
+      component.collectComplementDataForm.patchValue({ variety: 'A#' });
       expect(identifierControl?.errors).toBeTruthy();
 
-      component.collectComplementDataForm.patchValue({ identifier: 'A#213ag3' });
+      component.collectComplementDataForm.patchValue({ variety: 'A#213ag3' });
       expect(identifierControl?.errors).toBeFalsy();
     });
 
