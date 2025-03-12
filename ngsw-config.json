@@ -23,17 +23,34 @@
       "resources": {
         "files": ["/assets/images/*.(jpg|jpeg|png|webp|avif|icon)", "/assets/sounds/*.(mp3|wav)"]
       }
+    },
+    {
+      "name": "leaflet-cdn",
+      "installMode": "prefetch",
+      "resources": {
+        "urls": [
+          "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+          "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        ]
+      }
+    },
+    {
+      "name": "openstreetmap",
+      "installMode": "prefetch",
+      "resources": {
+        "urls": ["https://tile.openstreetmap.org/*"]
+      }
     }
   ],
   "dataGroups": [
     {
       "name": "api-calls",
-      "urls": ["/api/**"],
+      "urls": ["https://qmhdkjspsnhkwvgodlru.supabase.co/*"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 100,
-        "maxAge": "3d",
-        "timeout": "10s"
+        "maxAge": "1d",
+        "timeout": "5s"
       }
     },
     {

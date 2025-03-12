@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, AfterViewChecked } from '@angular/core';
 import { PlantUploadComponent } from '../../components/plant-upload/plant-upload.component';
 import { GeolocationComponent } from '../../components/geolocation/geolocation.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -21,10 +21,10 @@ const COMPONENTS = [PlantUploadComponent, GeolocationComponent, ComplementDataCo
   styleUrl: './collect.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectComponent implements OnInit {
+export class CollectComponent implements AfterViewChecked {
   private notificationService = inject(NzNotificationService);
 
-  public ngOnInit(): void {
+  public ngAfterViewChecked(): void {
     if (!navigator.geolocation) {
       console.warn('location is not supported!');
       this.notificationService.warning('GPS', 'Localização indisponível neste dispositivo!');
@@ -63,16 +63,15 @@ export class CollectComponent implements OnInit {
         L.marker([latitude, longitude]);
       },
       error => {
-        if (error.code === 1) {
-          this.notificationService.warning('GPS', 'Por favor ative o GPS do dispositivo!');
-        } else {
-          this.notificationService.error('Erro', 'Não foi posível obter a localização!');
-        }
+        const { message } = error;
+
+        this.notificationService.error('Erro', message);
+
+        throw new Error(`Erro ao obter localização: ${error.message}`);
       },
       {
         enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
+        timeout: 3600000,
       }
     );
   }

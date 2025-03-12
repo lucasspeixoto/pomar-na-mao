@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { messages } from '../../../shared/utils/messages';
 import { injectSupabase } from '../../../shared/utils/inject-supabase';
+import { Session } from '@supabase/supabase-js';
+import { ConnectivityService } from '../../../shared/services/connectivity/connectivity.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +16,17 @@ export class AuthenticationService {
 
   public currentUser = signal<iUser | null>(null);
 
-  public isLogged = signal(false);
-
   public isLoading = signal(false);
 
   public messages = messages;
 
+  public session: Session | null = null;
+
   private router = inject(Router);
 
   private notificationService = inject(NzNotificationService);
+
+  private connectivityService = inject(ConnectivityService);
 
   public async loginUserHandler(email: string, password: string): Promise<void> {
     this.isLoading.set(true);
@@ -96,17 +100,11 @@ export class AuthenticationService {
       error: sessionError,
     } = await this.supabase.auth.getSession();
 
-    if (sessionError) {
-      this.router.navigateByUrl('/');
-
-      this.supabase.auth.signOut();
-
-      this.isLoading.set(false);
-
-      return;
+    if (sessionError || !session) {
+      this.restoreSessionFromStorage();
     }
 
-    this.isLogged.set(true);
+    this.session = session;
 
     this.isLoading.set(false);
 
@@ -117,11 +115,59 @@ export class AuthenticationService {
       .single();
 
     if (userDataError) {
-      this.isLogged.set(false);
       this.isLoading.set(false);
     }
 
     this.currentUser.set(data as unknown as iUser);
+
+    this.listenForNetworkChanges();
+  }
+
+  public restoreSessionFromStorage() {
+    this.isLoading.set(true);
+
+    const sessionData = localStorage.getItem('sb-qmhdkjspsnhkwvgodlru-auth-token');
+
+    if (sessionData) {
+      const parsedSession = JSON.parse(sessionData);
+      this.session = parsedSession?.currentSession || parsedSession?.session || null;
+      this.isLoading.set(false);
+    }
+  }
+
+  public listenForNetworkChanges() {
+    window.addEventListener('online', async () => {
+      this.connectivityService.isOnline = true;
+
+      const { data } = await this.supabase.auth.getSession();
+      if (!data.session) {
+        console.warn('Sessão expirada. Usuário precisa fazer login novamente.');
+        this.router.navigateByUrl('/');
+
+        this.supabase.auth.signOut();
+
+        this.isLoading.set(false);
+
+        return;
+      }
+    });
+  }
+
+  public isLoggedCheckHandler(): boolean {
+    if (this.session) {
+      return true;
+    }
+
+    const sessionData = localStorage.getItem('sb-qmhdkjspsnhkwvgodlru-auth-token');
+
+    if (sessionData) {
+      const parsedSession = JSON.parse(sessionData);
+      this.session = parsedSession?.currentSession || parsedSession?.session || null;
+
+      return this.session !== null;
+    }
+
+    return false;
   }
 
   public async logoutAndRedirect(): Promise<void> {

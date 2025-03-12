@@ -18,7 +18,7 @@ describe('isLoggedGuard', () => {
   let mockState: RouterStateSnapshot;
 
   beforeEach(() => {
-    const authServiceMock = { isLogged: jest.fn() };
+    const authServiceMock = { isLoggedCheckHandler: jest.fn() };
     const routerMock = { navigateByUrl: jest.fn() };
 
     mockRoute = {} as ActivatedRouteSnapshot;
@@ -37,7 +37,7 @@ describe('isLoggedGuard', () => {
 
   it('should allow access when user is logged in', () => {
     // Arrange
-    authService.isLogged.mockReturnValue(true);
+    authService.isLoggedCheckHandler.mockReturnValue(true);
 
     // Act
     const result = TestBed.runInInjectionContext(() => isLoggedGuard(mockRoute, mockState));
@@ -49,7 +49,7 @@ describe('isLoggedGuard', () => {
 
   it('should redirect to login when user is not logged in', () => {
     // Arrange
-    authService.isLogged.mockReturnValue(false);
+    authService.isLoggedCheckHandler.mockReturnValue(false);
 
     // Act
     const result = TestBed.runInInjectionContext(() => isLoggedGuard(mockRoute, mockState));
