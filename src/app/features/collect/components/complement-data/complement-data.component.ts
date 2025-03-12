@@ -12,6 +12,7 @@ import { CustomValidationMessageComponent } from '../../../../shared/components/
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { CollectService } from '../../services/collect/collect.service';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @Component({
   selector: 'app-complement-data',
@@ -22,6 +23,7 @@ import { CollectService } from '../../services/collect/collect.service';
     NzGridModule,
     NzDatePickerModule,
     NzFormModule,
+    NzCheckboxModule,
     ReactiveFormsModule,
     CustomValidationMessageComponent,
   ],

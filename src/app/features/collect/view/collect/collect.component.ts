@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { ChangeDetectionStrategy, Component, inject, AfterViewChecked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { PlantUploadComponent } from '../../components/plant-upload/plant-upload.component';
 import { GeolocationComponent } from '../../components/geolocation/geolocation.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -21,10 +21,10 @@ const COMPONENTS = [PlantUploadComponent, GeolocationComponent, ComplementDataCo
   styleUrl: './collect.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectComponent implements AfterViewChecked {
+export class CollectComponent implements OnInit {
   private notificationService = inject(NzNotificationService);
 
-  public ngAfterViewChecked(): void {
+  public ngOnInit(): void {
     if (!navigator.geolocation) {
       console.warn('location is not supported!');
       this.notificationService.warning('GPS', 'Localização indisponível neste dispositivo!');

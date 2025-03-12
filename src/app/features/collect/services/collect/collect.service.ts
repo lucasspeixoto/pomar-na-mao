@@ -48,7 +48,26 @@ export class CollectService {
   ): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    const { mass, harvest, description, plantingDate } = complementData;
+    const {
+      mass,
+      harvest,
+      description,
+      plantingDate,
+      lifeOfTheTree,
+      stick,
+      brokenBranch,
+      vineGrowing,
+      burntBranch,
+      struckByLightning,
+      drill,
+      anthill,
+      inExperiment,
+      weedsInTheBasin,
+      fertilizationOrManuring,
+      mites,
+      thrips,
+      emptyCollectionBoxNear,
+    } = complementData;
 
     const { longitude, latitude } = this.geolocationService.coordinates()!;
 
@@ -63,6 +82,20 @@ export class CollectService {
         harvest,
         description,
         planting_date: plantingDate,
+        life_of_the_tree: lifeOfTheTree,
+        stick,
+        broken_branch: brokenBranch,
+        vine_growing: vineGrowing,
+        burnt_branch: burntBranch,
+        struck_by_lightning: struckByLightning,
+        drill,
+        anthill,
+        in_experiment: inExperiment,
+        weeds_in_the_basin: weedsInTheBasin,
+        fertilization_or_manuring: fertilizationOrManuring,
+        mites,
+        thrips,
+        empty_collection_box_near: emptyCollectionBoxNear,
       },
     ]);
 
