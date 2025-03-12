@@ -69,7 +69,6 @@ describe('AuthenticationService', () => {
 
   it('initial state', () => {
     expect(service.isLoading()).toBe(false);
-    expect(service.isLogged()).toBe(false);
     expect(service.currentUser()).toBe(null);
   });
 

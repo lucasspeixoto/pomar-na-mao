@@ -21,4 +21,8 @@ export class ConnectivityService {
   get isOnline(): WritableSignal<boolean> {
     return this._isOnline;
   }
+
+  set isOnline(value: boolean) {
+    this._isOnline.set(value);
+  }
 }
