@@ -1,12 +1,13 @@
 /* eslint-disable prefer-const */
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, AfterViewInit } from '@angular/core';
 import { PlantUploadComponent } from '../../components/plant-upload/plant-upload.component';
 import { GeolocationComponent } from '../../components/geolocation/geolocation.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { ComplementDataComponent } from '../../components/complement-data/complement-data.component';
 
 import type * as Leaflet from 'leaflet';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
+
+import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
 
 declare let L: typeof Leaflet;
 
@@ -21,58 +22,48 @@ const COMPONENTS = [PlantUploadComponent, GeolocationComponent, ComplementDataCo
   styleUrl: './collect.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectComponent implements OnInit {
-  private notificationService = inject(NzNotificationService);
+export class CollectComponent implements AfterViewInit {
+  private geolocationService = inject(GeolocationService);
 
-  public ngOnInit(): void {
+  public userMarker!: Leaflet.Marker;
+
+  public map!: Leaflet.Map;
+
+  public ngAfterViewInit(): void {
     if (!navigator.geolocation) {
-      console.warn('location is not supported!');
-      this.notificationService.warning('GPS', 'Localização indisponível neste dispositivo!');
+      console.warn('Localização indisponível neste dispositivo!');
+      this.geolocationService.showUnavailableGeolocation();
     }
 
-    let map = L.map('map');
+    this.map = L.map('map');
 
-    navigator.geolocation.getCurrentPosition(position => {
-      const coords = position.coords;
-
-      const { latitude, longitude } = coords;
-
-      map.setView([latitude, longitude], 13);
-
-      let osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> ',
-        maxZoom: 19,
-      });
-
-      osm.addTo(map);
-
-      L.marker([latitude, longitude]).addTo(map);
-    });
-
-    let desLat = 0;
-
-    let id = navigator.geolocation.watchPosition(
+    navigator.geolocation.getCurrentPosition(
       position => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
+        const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        if (latitude === desLat) {
-          navigator.geolocation.clearWatch(id);
-        }
+        this.map.setView([latitude, longitude], 13);
 
-        L.marker([latitude, longitude]);
+        this.userMarker = L.marker([latitude, longitude]).addTo(this.map); // Cria um marcador para o usuário
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors',
+          maxZoom: 19,
+        }).addTo(this.map);
       },
-      error => {
-        const { message } = error;
+      this.geolocationService.handleGeolocationError,
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
 
-        this.notificationService.error('Erro', message);
+    navigator.geolocation.watchPosition(
+      position => {
+        const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        throw new Error(`Erro ao obter localização: ${error.message}`);
+        this.userMarker.setLatLng([latitude, longitude]); // Atualiza a posição do marcador
+
+        this.map.setView([latitude, longitude], 13); // Move o mapa para a nova posição
       },
-      {
-        enableHighAccuracy: true,
-        timeout: 3600000,
-      }
+      this.geolocationService.handleGeolocationError,
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
 }
