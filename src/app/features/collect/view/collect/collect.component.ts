@@ -41,7 +41,7 @@ export class CollectComponent implements AfterViewInit {
       position => {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        this.map.setView([latitude, longitude], 13);
+        this.map.setView([latitude, longitude], 19); // Move o mapa para a nova posição
 
         this.userMarker = L.marker([latitude, longitude]).addTo(this.map); // Cria um marcador para o usuário
 
@@ -59,8 +59,6 @@ export class CollectComponent implements AfterViewInit {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
         this.userMarker.setLatLng([latitude, longitude]); // Atualiza a posição do marcador
-
-        this.map.setView([latitude, longitude], 13); // Move o mapa para a nova posição
       },
       this.geolocationService.handleGeolocationError,
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
