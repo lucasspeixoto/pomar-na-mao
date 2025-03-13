@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 type Coordinate = {
   latitude: number;
@@ -12,6 +13,8 @@ export class GeolocationService {
   public geolocationErrorMessage = signal<string>('');
 
   public permissionStatus = signal<PermissionStatus | null>(null);
+
+  private notificationService = inject(NzNotificationService);
 
   /**
    * Computed signal that returns the current state of the geolocation permission.
@@ -77,5 +80,47 @@ export class GeolocationService {
     setTimeout(() => {
       this.isLoading.set(false);
     }, 2000);
+  }
+
+  public getUserLatitudeAndLongitude(position: GeolocationPosition): number[] {
+    const { latitude, longitude } = position.coords;
+    return [latitude, longitude];
+  }
+
+  public handleGeolocationError(error: GeolocationPositionError): void {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        console.warn('O usuário negou a solicitação de geolocalização.');
+        this.notificationService.error(
+          'Erro',
+          'Acesso à localização negado. Ative o GPS nas configurações do navegador.'
+        );
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.warn('As informações de localização não estão disponíveis.');
+        this.notificationService.error(
+          'Erro',
+          'Não foi possível determinar sua localização. Tente novamente mais tarde.'
+        );
+        break;
+      case error.TIMEOUT:
+        console.warn('A solicitação para obter a localização expirou.');
+        this.notificationService.error(
+          'Erro',
+          'Tempo limite excedido ao tentar obter a localização. Vá para uma área aberta e tente novamente.'
+        );
+        break;
+      default:
+        console.warn('Ocorreu um erro desconhecido.');
+        this.notificationService.error(
+          'Erro',
+          'Ocorreu um erro inesperado ao obter a localização.'
+        );
+        break;
+    }
+  }
+
+  public showUnavailableGeolocation(): void {
+    this.notificationService.warning('GPS', 'Localização indisponível neste dispositivo!');
   }
 }

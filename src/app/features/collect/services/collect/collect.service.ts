@@ -71,33 +71,35 @@ export class CollectService {
 
     const { longitude, latitude } = this.geolocationService.coordinates()!;
 
-    const { error } = await this.supabase.from('plant_collect').insert([
-      {
-        created_at: new Date().toISOString(),
-        longitude,
-        latitude,
-        gps_timestamp: this.geolocationService.coordinatesTimestamp(),
-        plant_photo: this.plantFileService.plantPhotoString(),
-        mass,
-        harvest,
-        description,
-        planting_date: plantingDate,
-        life_of_the_tree: lifeOfTheTree,
-        stick,
-        broken_branch: brokenBranch,
-        vine_growing: vineGrowing,
-        burnt_branch: burntBranch,
-        struck_by_lightning: struckByLightning,
-        drill,
-        anthill,
-        in_experiment: inExperiment,
-        weeds_in_the_basin: weedsInTheBasin,
-        fertilization_or_manuring: fertilizationOrManuring,
-        mites,
-        thrips,
-        empty_collection_box_near: emptyCollectionBoxNear,
-      },
-    ]);
+    const newCollectData = {
+      created_at: new Date().toISOString(),
+      longitude,
+      latitude,
+      gps_timestamp: this.geolocationService.coordinatesTimestamp(),
+      plant_photo: this.plantFileService.plantPhotoString(),
+      mass,
+      harvest,
+      description,
+      planting_date: plantingDate,
+      life_of_the_tree: lifeOfTheTree,
+      stick,
+      broken_branch: brokenBranch,
+      vine_growing: vineGrowing,
+      burnt_branch: burntBranch,
+      struck_by_lightning: struckByLightning,
+      drill,
+      anthill,
+      in_experiment: inExperiment,
+      weeds_in_the_basin: weedsInTheBasin,
+      fertilization_or_manuring: fertilizationOrManuring,
+      mites,
+      thrips,
+      empty_collection_box_near: emptyCollectionBoxNear,
+    };
+
+    console.log(newCollectData);
+
+    const { error } = await this.supabase.from('plant_collect').insert([newCollectData]);
 
     setTimeout(() => {
       this.loadingService.isLoading.set(false);
