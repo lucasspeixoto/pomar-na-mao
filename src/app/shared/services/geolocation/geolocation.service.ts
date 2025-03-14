@@ -54,10 +54,10 @@ export class GeolocationService {
     }, 2000);
   }
 
-  public async getLocaltionCoordinate(): Promise<void> {
+  public getLocaltionCoordinate(): void {
     this.isLoading.set(true);
 
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       position => {
         const coordinates = {
           latitude: position.coords.latitude,
@@ -67,19 +67,13 @@ export class GeolocationService {
         this.coordinates.set(coordinates);
         this.coordinatesTimestamp.set(position.timestamp);
       },
-      error => {
-        const { message } = error;
-
-        this.geolocationErrorMessage.set(message);
-
-        throw new Error(`Erro ao obter localização: ${error.message}`);
-      },
-      { enableHighAccuracy: true, maximumAge: 3600000 } // Cache location for 1 hour
+      this.handleGeolocationError,
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 
     setTimeout(() => {
       this.isLoading.set(false);
-    }, 2000);
+    }, 1000);
   }
 
   public getUserLatitudeAndLongitude(position: GeolocationPosition): number[] {

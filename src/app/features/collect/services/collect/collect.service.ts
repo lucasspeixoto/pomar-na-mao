@@ -97,8 +97,6 @@ export class CollectService {
       empty_collection_box_near: emptyCollectionBoxNear,
     };
 
-    console.log(newCollectData);
-
     const { error } = await this.supabase.from('plant_collect').insert([newCollectData]);
 
     setTimeout(() => {

@@ -15,14 +15,14 @@ export class ConnectivityComponent {
   constructor() {
     effect(() => {
       if (!this.connectivityService.isOnline()) {
-        this.notificationService.showNotification('You are offline', {
+        this.notificationService.showNotification('Acesso a internet', {
           body: 'Você está offline',
         });
 
         return;
       }
 
-      this.notificationService.showNotification('You are online', {
+      this.notificationService.showNotification('Acesso a internet', {
         body: 'Você está online!',
       });
     });
