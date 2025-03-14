@@ -10,7 +10,8 @@
         <nz-form-item id="emailItem">
           <nz-form-control>
             <nz-input-group nzPrefixIcon="user">
-              <input id="emailField" nz-input formControlName="email" placeholder="Email" />
+              <input id="emailField" nz-input formControlName="email"
+                placeholder="Email" />
             </nz-input-group>
             <app-custom-validation-message controlName="email" />
           </nz-form-control>
@@ -33,7 +34,8 @@
                 [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
                 (click)="passwordVisible = !passwordVisible"></span>
             </ng-template>
-            <app-custom-validation-message controlName="password" [minLength]="3" />
+            <app-custom-validation-message controlName="password"
+              [minLength]="3" />
           </nz-form-control>
         </nz-form-item>
         <button
@@ -45,19 +47,17 @@
           [nzLoading]="authenticationService.isLoading()"
           [disabled]="authenticationService.isLoading() || loginForm.invalid">
           @if (authenticationService.isLoading()) {
-            Loading
+          Loading
           } @else {
-            Entrar
+          Entrar
           }
         </button>
       </form>
       <p>
         Esqueceu a senha ?
-        <a (click)="router.navigateByUrl('/forgot-password')" nz-button nzType="link">Lembrar</a>
+        <a (click)="router.navigateByUrl('/forgot-password')" nz-button
+          nzType="link">Lembrar</a>
       </p>
-      <button style="width: 100%; margin: 0.2rem 0 0.5rem 0" type="button" nz-button>
-        Modo offline
-      </button>
     </div>
   </div>
 </div>
