@@ -5,9 +5,9 @@
     {
       "name": "app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
           "/favicon.ico",
           "/index.csr.html",
           "/index.html",
@@ -20,10 +20,10 @@
     },
     {
       "name": "assets",
-      "installMode": "lazy",
+      "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
-        "files": ["/assets/images/**", "/assets/sounds/*.(mp3|wav)"]
+        "files": ["/assets/**"]
       }
     },
     {
