@@ -14,18 +14,16 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.scss",
-          "/*.js"
+          "/*.js",
+          "/*.woff2",
+          "/*.woff",
+          "/*.ttf",
+          "/*.json",
+          "/assets/**"
         ]
       }
     },
-    {
-      "name": "assets",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": ["/assets/**"]
-      }
-    },
+
     {
       "name": "leaflet-cdn",
       "installMode": "prefetch",
@@ -38,7 +36,7 @@
     },
     {
       "name": "openstreetmap",
-      "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "urls": ["https://tile.openstreetmap.org/*"]
       }
