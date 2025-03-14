@@ -9,6 +9,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { LoadingService } from '../../../shared/services/loading/loading.service';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +21,9 @@ import { LoadingService } from '../../../shared/services/loading/loading.service
     NzIconModule,
     NzLayoutModule,
     NzMenuModule,
+    NzDrawerModule,
     NzToolTipModule,
+    NzButtonModule,
     LoadingComponent,
   ],
   templateUrl: './main.component.html',
@@ -28,6 +32,8 @@ import { LoadingService } from '../../../shared/services/loading/loading.service
 })
 export class MainComponent {
   public isCollapsed = false;
+
+  public isDrawerVisible = false;
 
   public menuItems = menuItems;
 
