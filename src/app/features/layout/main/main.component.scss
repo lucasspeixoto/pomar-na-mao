@@ -12,6 +12,7 @@
     z-index: 10;
     min-height: 100%;
     box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+    padding: 0 !important;
 
     &-logo {
       position: relative;
@@ -68,6 +69,19 @@
       padding 0s;
 
     &-left {
+      display: none;
+      align-self: start;
+
+      &:hover {
+        color: #1890ff;
+      }
+
+      @media screen and (max-width: 767px) {
+        display: block;
+      }
+    }
+
+    &-center {
       display: block;
 
       &:hover {
@@ -100,10 +114,6 @@
         }
       }
     }
-
-    @media screen and (max-width: 767px) {
-      justify-content: end;
-    }
   }
 }
 
@@ -134,8 +144,33 @@ nz-content {
   nz-content {
     margin: 0;
   }
-
-  nz-sider {
-    padding: 0;
-  }
 }
+
+/* .layout {
+  min-height: 100vh;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 24px 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+} */
