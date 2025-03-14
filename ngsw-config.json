@@ -7,7 +7,6 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
           "/favicon.ico",
           "/index.csr.html",
           "/index.html",
@@ -23,7 +22,7 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": ["/assets/images/**", "/assets/sounds/*.(mp3|wav)"]
+        "files": ["/assets/**"]
       }
     },
     {
