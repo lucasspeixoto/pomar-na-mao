@@ -108,17 +108,19 @@ export class AuthenticationService {
 
     this.isLoading.set(false);
 
-    const { data, error: userDataError } = await this.supabase
-      .from('users')
-      .select('*')
-      .eq('id', session?.user.id)
-      .single();
+    if (session?.user.id) {
+      const { data, error: userDataError } = await this.supabase
+        .from('users')
+        .select('*')
+        .eq('id', session?.user.id)
+        .single();
 
-    if (userDataError) {
-      this.isLoading.set(false);
+      if (userDataError) {
+        this.isLoading.set(false);
+      }
+
+      this.currentUser.set(data as unknown as iUser);
     }
-
-    this.currentUser.set(data as unknown as iUser);
 
     this.listenForNetworkChanges();
   }

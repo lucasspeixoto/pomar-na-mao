@@ -41,7 +41,7 @@
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
 
           <div class="header__trigger-right">
-            <span nz-typography nzType="secondary">Olá! <strong>{{
+            <span nz-typography>Olá! <strong>{{
                 currentUser()?.full_name!.split(' ')[0] }}</strong></span>
             <nz-icon
               class="header__trigger-right_logout"
@@ -73,7 +73,7 @@
   nzWidth="200px"
   (nzOnClose)="isDrawerVisible = false">
   <ng-container *nzDrawerContent>
-    <ul nz-menu nzMode="inline">
+    <ul nz-menu nzTheme="dark" nzMode="inline">
       @for (menuItem of menuItems; track menuItem.title) {
       <li nz-submenu nzOpen [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
         <ul>
