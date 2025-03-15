@@ -33,7 +33,6 @@
       h1 {
         display: inline-block;
         margin: 0 0 0 20px;
-        color: #fff;
         font-weight: 600;
         font-size: 14px;
         font-family:
@@ -52,7 +51,7 @@
   position: relative;
   height: 64px;
   padding: 0;
-  background: #fff;
+  background: #1f1f1f;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   &__trigger {
@@ -103,6 +102,14 @@
         font-size: 14px;
         display: block;
 
+        > strong {
+          font-style: italic;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
         @media screen and (max-width: 300px) {
           display: none;
         }
@@ -119,7 +126,7 @@
 
 .content {
   padding: 20px;
-  background: #fff;
+  background: #1f1f1f;
   height: 100%;
   overflow-y: auto;
 }
@@ -145,32 +152,3 @@ nz-content {
     margin: 0;
   }
 }
-
-/* .layout {
-  min-height: 100vh;
-}
-
-.logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
-}
-
-nz-header {
-  background: #fff;
-  padding: 0;
-}
-
-nz-content {
-  margin: 24px 16px 0;
-}
-
-.inner-content {
-  padding: 24px;
-  background: #fff;
-  min-height: 360px;
-}
-
-nz-footer {
-  text-align: center;
-} */

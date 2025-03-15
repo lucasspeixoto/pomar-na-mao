@@ -53,6 +53,7 @@
 
   &__data {
     width: 100%;
+    margin-left: 20px;
 
     @media screen and (max-width: 576px) {
       > p {
@@ -73,6 +74,11 @@ nz-card {
   @media screen and (max-width: 576px) {
     height: auto;
   }
+}
+
+nz-skeleton {
+  margin: 0 20px;
+  width: 90%;
 }
 
 div.ant-card-body {
