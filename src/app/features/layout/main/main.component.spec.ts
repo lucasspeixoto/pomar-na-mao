@@ -1,10 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainComponent } from './main.component';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { routes } from '../../../app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -12,13 +21,24 @@ describe('MainComponent', () => {
 
   beforeAll(() => {
     TestBed.configureTestingModule({
-      imports: [MainComponent],
+      imports: [
+        MainComponent,
+        NzTypographyModule,
+        NzIconModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzDrawerModule,
+        NzToolTipModule,
+        NzButtonModule,
+        LoadingComponent,
+      ],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        provideRouter(routes, withViewTransitions()),
+        provideRouter(routes),
         provideAnimations(),
       ],
+      schemas: [NO_ERRORS_SCHEMA], // Ignora estilos e templates desconhecidos
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainComponent);

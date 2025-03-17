@@ -20,7 +20,6 @@
     border-radius: 10px;
     cursor: pointer;
     width: 80%;
-    /*  height: 200px; */
 
     @media screen and (max-width: 576px) {
       width: 100%;
@@ -28,7 +27,7 @@
     }
 
     &-text {
-      font-weight: 300;
+      font-weight: bold;
     }
 
     &-image-container {

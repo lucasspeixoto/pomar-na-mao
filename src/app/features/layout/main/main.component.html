@@ -15,7 +15,8 @@
     <ul nz-menu nzTheme="dark" nzMode="inline"
       [nzInlineCollapsed]="isCollapsed">
       @for (menuItem of menuItems; track menuItem.title) {
-      <li nz-submenu nzOpen [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
+      <li [nzOpen]="false" nz-submenu [nzTitle]="menuItem.title"
+        [nzIcon]="menuItem.icon">
         <ul>
           @for (route of menuItem.routes; track route.routerLink) {
           <li nz-menu-item nzMatchRouter>
@@ -75,7 +76,8 @@
   <ng-container *nzDrawerContent>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       @for (menuItem of menuItems; track menuItem.title) {
-      <li nz-submenu nzOpen [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
+      <li nz-submenu [nzOpen]="false" [nzTitle]="menuItem.title"
+        [nzIcon]="menuItem.icon">
         <ul>
           @for (route of menuItem.routes; track route.routerLink) {
           <li (click)="isDrawerVisible = false" nz-menu-item nzMatchRouter>

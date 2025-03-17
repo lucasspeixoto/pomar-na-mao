@@ -1,0 +1,21 @@
+<nz-card [nzBordered]="true" nzTitle="Dados coleta">
+  <div class="container">
+    <div class="container__items">
+      <span>Dia: <strong>{{ currentDate | date: 'dd/MM/YYY' }}</strong></span>
+      <span>Registros: <strong>123</strong></span>
+      <span>Conexão:
+        <strong
+          [ngClass]="{ active: connectivityService.isOnline(), off: !connectivityService.isOnline() }">{{
+          connectivityService.isOnline() ? 'Online' : 'Offline'
+          }}</strong></span>
+      <span>Geolocalização:
+        <strong
+          [ngClass]="{ active: isLocationAvailable(), off: !isLocationAvailable() }">{{
+          isLocationAvailable() ? 'Ativa' : 'Não ativa' }}
+        </strong>
+      </span>
+    </div>
+
+    <div id="map" class="container__map"></div>
+  </div>
+</nz-card>

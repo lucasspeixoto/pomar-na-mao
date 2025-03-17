@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  width: 100%;
+
+  @media screen and (max-width: 1150px) {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+  }
+
+  &__items {
+    width: 60%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__map {
+    height: 150px;
+    width: 90%;
+    margin: 0 20px;
+    border-radius: 10px;
+  }
+}
+
+nz-card {
+  height: 250px;
+
+  @media screen and (max-width: 1150px) {
+    height: auto;
+  }
+}
+
+.active {
+  color: #49cc49;
+}
+
+.off {
+  color: #cf4747;
+}

@@ -2,14 +2,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeolocationComponent } from './geolocation.component';
-import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
+import { GeolocationService } from '../../services/geolocation/geolocation.service';
 import { FormsModule } from '@angular/forms';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { EpochToTimePipe } from '../../../../shared/pipes/epoch-to-time/epoch-to-time.pipe';
+import { EpochToTimePipe } from '../../pipes/epoch-to-time/epoch-to-time.pipe';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { signal } from '@angular/core';

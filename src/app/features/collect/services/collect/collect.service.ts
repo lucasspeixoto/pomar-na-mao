@@ -2,22 +2,24 @@ import { inject, Injectable, signal } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
 import { LoadingService } from '../../../../shared/services/loading/loading.service';
-import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
-import { PlantFileService } from '../plant-file/plant-file.service';
+import { PlantUploadService } from '../../../../shared/services/plant-upload/plant-upload.service';
 import { PlantData } from '../../models/collect.model';
 import { injectSupabase } from '../../../../shared/utils/inject-supabase';
+import { ComplementDataService } from '../../../../shared/services/complement-data/complement-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CollectService {
-  public plantFileService = inject(PlantFileService);
+  public plantUploadService = inject(PlantUploadService);
 
   public geolocationService = inject(GeolocationService);
 
   public messageService = inject(NzMessageService);
 
   public loadingService = inject(LoadingService);
+
+  public complementDataService = inject(ComplementDataService);
 
   public plantData = signal<PlantData[]>([]);
 
@@ -43,10 +45,31 @@ export class CollectService {
     }, 2000);
   }
 
-  public async insertAPlantCollectHandler(
-    complementData: CollectComplementDataFormValue
-  ): Promise<void> {
+  public async insertAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
+
+    /* Validações */
+    /**
+     * Dados complementares
+     */
+    const complementData = this.complementDataService.getCollectComplementDataFormValue();
+
+    if (!complementData) {
+      this.loadingService.isLoading.set(false);
+      this.messageService.error('Dados complementares não foram salvos!');
+      return;
+    }
+
+    /**
+     * Dados de geolocalização
+     */
+    //this.geolocationService.getLocaltionCoordinate(); // Atualiza a posição
+
+    if (!this.geolocationService.isCoordinatesAvailable()) {
+      this.loadingService.isLoading.set(false);
+      this.messageService.error('Não foi possível obter as coordenadas!');
+      return;
+    }
 
     const {
       mass,
@@ -67,7 +90,7 @@ export class CollectService {
       mites,
       thrips,
       emptyCollectionBoxNear,
-    } = complementData;
+    } = this.complementDataService.getCollectComplementDataFormValue()!;
 
     const { longitude, latitude } = this.geolocationService.coordinates()!;
 
@@ -76,7 +99,7 @@ export class CollectService {
       longitude,
       latitude,
       gps_timestamp: this.geolocationService.coordinatesTimestamp(),
-      plant_photo: this.plantFileService.plantPhotoString(),
+      plant_photo: this.plantUploadService.plantPhotoString(),
       mass,
       harvest,
       description,

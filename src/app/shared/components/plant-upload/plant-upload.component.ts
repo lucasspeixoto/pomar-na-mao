@@ -9,7 +9,7 @@ import {
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { PlantFileService } from '../../services/plant-file/plant-file.service';
+import { PlantUploadService } from '../../services/plant-upload/plant-upload.service';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
 @Component({
@@ -20,6 +20,10 @@ import { NzCardModule } from 'ng-zorro-antd/card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlantUploadComponent {
+  public messageService = inject(NzMessageService);
+
+  public plantUploadService = inject(PlantUploadService);
+
   public imageName = signal('');
 
   public fileSize = signal(0);
@@ -35,10 +39,6 @@ export class PlantUploadComponent {
   public uploadSuccess: boolean = false;
 
   public uploadError: boolean = false;
-
-  public messageService = inject(NzMessageService);
-
-  public plantFileService = inject(PlantFileService);
 
   public onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -71,7 +71,7 @@ export class PlantUploadComponent {
       const reader = new FileReader();
 
       reader.onload = (e): void => {
-        this.plantFileService.plantPhotoString.set(e.target?.result as string);
+        this.plantUploadService.plantPhotoString.set(e.target?.result as string);
       };
 
       reader.readAsDataURL(file);
