@@ -11,7 +11,7 @@
   &__sidebar {
     z-index: 10;
     min-height: 100%;
-    box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+    box-shadow: 2px 0 6px rgba(177, 177, 177, 0.35);
     padding: 0 !important;
 
     &-logo {
@@ -20,7 +20,6 @@
       padding-left: 24px;
       overflow: hidden;
       line-height: 64px;
-      background: #001529;
       transition: all 0.3s;
 
       img {

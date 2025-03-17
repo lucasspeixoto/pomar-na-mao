@@ -1,37 +1,37 @@
-/* eslint-disable prefer-const */
-import { ChangeDetectionStrategy, Component, inject, AfterViewInit } from '@angular/core';
-import { PlantUploadComponent } from '../../../../shared/components/plant-upload/plant-upload.component';
-import { GeolocationComponent } from '../../../../shared/components/geolocation/geolocation.component';
+import { ConnectivityService } from './../../../../shared/services/connectivity/connectivity.service';
+import { DatePipe, NgClass } from '@angular/common';
+import { Component, inject, AfterViewInit, signal } from '@angular/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { ComplementDataComponent } from '../../../../shared/components/complement-data/complement-data.component';
+import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
 
 import type * as Leaflet from 'leaflet';
 
-import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { CollectService } from '../../services/collect/collect.service';
-
 declare let L: typeof Leaflet;
 
-const ZORRO = [NzGridModule, NzButtonModule];
+const ZORRO = [NzGridModule, NzButtonModule, NzCardModule];
 
-const COMPONENTS = [PlantUploadComponent, GeolocationComponent, ComplementDataComponent];
+const COMMON = [DatePipe, NgClass];
 
 @Component({
-  selector: 'app-collect',
-  imports: [...COMPONENTS, ...ZORRO],
-  templateUrl: './collect.component.html',
-  styleUrl: './collect.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-offline-collect-statistics',
+  imports: [...ZORRO, ...COMMON],
+  templateUrl: './offline-collect-statistics.component.html',
+  styleUrls: ['./offline-collect-statistics.component.scss'],
 })
-export class CollectComponent implements AfterViewInit {
-  private geolocationService = inject(GeolocationService);
+export class OfflineCollectStatisticsComponent implements AfterViewInit {
+  public currentDate = new Date();
 
-  private collectService = inject(CollectService);
+  public geolocationService = inject(GeolocationService);
+
+  public connectivityService = inject(ConnectivityService);
 
   public userMarker!: Leaflet.Marker;
 
   public map!: Leaflet.Map;
+
+  public isLocationAvailable = signal(false);
 
   public ngAfterViewInit(): void {
     if (!navigator.geolocation) {
@@ -43,6 +43,8 @@ export class CollectComponent implements AfterViewInit {
 
     navigator.geolocation.getCurrentPosition(
       position => {
+        this.isLocationAvailable.set(true);
+
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
         this.map.setView([latitude, longitude], 13); // Move o mapa para a nova posição
@@ -54,22 +56,26 @@ export class CollectComponent implements AfterViewInit {
           maxZoom: 19,
         }).addTo(this.map);
       },
-      this.geolocationService.handleGeolocationError,
+      error => {
+        this.isLocationAvailable.set(false);
+        this.geolocationService.handleGeolocationError(error);
+      },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 
     navigator.geolocation.watchPosition(
       position => {
+        this.isLocationAvailable.set(true);
+
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
         this.userMarker.setLatLng([latitude, longitude]); // Atualiza a posição do marcador
       },
-      this.geolocationService.handleGeolocationError,
+      error => {
+        this.isLocationAvailable.set(false);
+        this.geolocationService.handleGeolocationError(error);
+      },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
-  }
-
-  public collectHandler(): void {
-    this.collectService.insertAPlantCollectHandler();
   }
 }

@@ -5,8 +5,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
-import { EpochToTimePipe } from '../../../../shared/pipes/epoch-to-time/epoch-to-time.pipe';
+import { GeolocationService } from '../../services/geolocation/geolocation.service';
+import { EpochToTimePipe } from '../../pipes/epoch-to-time/epoch-to-time.pipe';
 
 @Component({
   selector: 'app-geolocation',

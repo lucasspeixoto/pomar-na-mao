@@ -53,11 +53,22 @@
           }
         </button>
       </form>
+      <button
+        (click)="router.navigateByUrl('/offline-collect')"
+        type="button"
+        style="width: 100%; margin: 0.2rem 0 0.5rem 0"
+        nz-button
+        nz-button nzSize="large" nzType="dashed">
+        Modo Offline
+      </button>
       <p>
         Esqueceu a senha ?
         <a (click)="router.navigateByUrl('/forgot-password')" nz-button
           nzType="link">Lembrar</a>
       </p>
+
     </div>
+
   </div>
+
 </div>

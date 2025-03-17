@@ -2,13 +2,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CollectService } from './collect.service';
-import { PlantFileService } from '../plant-file/plant-file.service';
+import { PlantUploadService } from '../../../../shared/services/plant-upload/plant-upload.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
 import { LoadingService } from '../../../../shared/services/loading/loading.service';
 import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MOCKED_COMPLEMENTS_DATA, MOCKED_PLANT, MOCKED_PLANTS } from '../../../../__mocks__/plant';
+import { ComplementDataService } from '../../../../shared/services/complement-data/complement-data.service';
+import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
 
 // Mock the injectSupabase function
 jest.mock('../../../../shared/utils/inject-supabase', () => ({
@@ -32,14 +34,13 @@ const mockSupabaseClient = {
 
 describe.only('CollectService', () => {
   let service: CollectService;
-  let plantFileService: jest.Mocked<PlantFileService>;
+  let plantFileService: jest.Mocked<PlantUploadService>;
   let geolocationService: jest.Mocked<GeolocationService>;
   let nzMessageService: jest.Mocked<NzMessageService>;
   let loadingService: jest.Mocked<LoadingService>;
+  let complementDataService: jest.Mocked<ComplementDataService>;
 
   const mockedPlantData = MOCKED_PLANTS;
-
-  const mockedComplementData = MOCKED_COMPLEMENTS_DATA;
 
   const mockedPlant = MOCKED_PLANT;
 
@@ -61,10 +62,13 @@ describe.only('CollectService', () => {
 
     service = TestBed.inject(CollectService);
 
-    plantFileService = TestBed.inject(PlantFileService) as jest.Mocked<PlantFileService>;
+    plantFileService = TestBed.inject(PlantUploadService) as jest.Mocked<PlantUploadService>;
     geolocationService = TestBed.inject(GeolocationService) as jest.Mocked<GeolocationService>;
     loadingService = TestBed.inject(LoadingService) as jest.Mocked<LoadingService>;
     nzMessageService = TestBed.inject(NzMessageService) as jest.Mocked<NzMessageService>;
+    complementDataService = TestBed.inject(
+      ComplementDataService
+    ) as jest.Mocked<ComplementDataService>;
 
     // External services mocks
     geolocationService.coordinates.set({
@@ -74,7 +78,13 @@ describe.only('CollectService', () => {
 
     geolocationService.coordinatesTimestamp.set(1709308800);
 
+    geolocationService.permissionStatus.set({ state: 'granted' } as PermissionStatus);
+
     plantFileService.plantPhotoString.set('https://example.com/plant1.jpg');
+
+    const collectComplementDataFormValue: CollectComplementDataFormValue = MOCKED_COMPLEMENTS_DATA;
+
+    complementDataService.setCollectComplementDataFormValue(collectComplementDataFormValue);
   });
 
   afterEach(() => {
@@ -158,7 +168,7 @@ describe.only('CollectService', () => {
       });
 
       // Act
-      const promise = service.insertAPlantCollectHandler(mockedComplementData);
+      const promise = service.insertAPlantCollectHandler();
       await promise;
 
       // Assert
@@ -180,7 +190,7 @@ describe.only('CollectService', () => {
       });
 
       // Act
-      const promise = service.insertAPlantCollectHandler(mockedComplementData);
+      const promise = service.insertAPlantCollectHandler();
       await promise;
 
       // Assert

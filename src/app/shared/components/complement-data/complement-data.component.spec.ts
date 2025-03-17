@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ComplementDataComponent } from './complement-data.component';
-import { CollectService } from '../../services/collect/collect.service';
+import { CollectService } from '../../../features/collect/services/collect/collect.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -12,14 +12,20 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ComplementDataService } from '../../services/complement-data/complement-data.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 describe('ComplementDataComponent', () => {
   let component: ComplementDataComponent;
   let fixture: ComponentFixture<ComplementDataComponent>;
-  let collectService: jest.Mocked<CollectService>;
+  let complementDataService: jest.Mocked<ComplementDataService>;
+  let notificationService: jest.Mocked<NzNotificationService>;
 
   beforeEach(() => {
     const collectServiceMock = { insertAPlantCollectHandler: jest.fn() };
+    const complementDataServiceMock = { setCollectComplementDataFormValue: jest.fn() };
+    const notificationServiceMock = { success: jest.fn() };
 
     TestBed.configureTestingModule({
       imports: [
@@ -34,14 +40,23 @@ describe('ComplementDataComponent', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
+        provideAnimations(),
         { provide: CollectService, useValue: collectServiceMock },
+        { provide: ComplementDataService, useValue: complementDataServiceMock },
+        { provide: NzNotificationService, useValue: notificationServiceMock },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ComplementDataComponent);
     component = fixture.componentInstance;
 
-    collectService = TestBed.inject(CollectService) as jest.Mocked<CollectService>;
+    complementDataService = TestBed.inject(
+      ComplementDataService
+    ) as jest.Mocked<ComplementDataService>;
+
+    notificationService = TestBed.inject(
+      NzNotificationService
+    ) as jest.Mocked<NzNotificationService>;
 
     fixture.detectChanges();
   });
@@ -55,7 +70,7 @@ describe('ComplementDataComponent', () => {
       const registerButtonElement = fixture.nativeElement.querySelector('#registerButton');
       expect(registerButtonElement).toBeTruthy();
       expect(registerButtonElement.disabled).toBe(true);
-      expect(registerButtonElement.textContent).toContain('Registrar');
+      expect(registerButtonElement.textContent).toContain('Salvar');
     });
   });
 
@@ -135,9 +150,13 @@ describe('ComplementDataComponent', () => {
 
       fixture.detectChanges();
 
-      component.collectDataHandler();
+      component.saveComplementCollectDataHandler();
 
-      expect(collectService.insertAPlantCollectHandler).toHaveBeenCalled();
+      expect(complementDataService.setCollectComplementDataFormValue).toHaveBeenCalled();
+      expect(notificationService.success).toHaveBeenCalledWith(
+        'Success',
+        'Dados complementares salvos com sucesso! Faça a coleta'
+      );
     });
   });
 });

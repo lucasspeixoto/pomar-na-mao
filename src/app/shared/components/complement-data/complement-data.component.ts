@@ -7,12 +7,13 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import {
   createCollectComplementDataForm,
   type CollectComplementDataFormValue,
-} from '../../constants/collect-complement-data-form';
-import { CustomValidationMessageComponent } from '../../../../shared/components/custom-validation-message/custom-validation-message';
+} from '../../../features/collect/constants/collect-complement-data-form';
+import { CustomValidationMessageComponent } from '../custom-validation-message/custom-validation-message';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { CollectService } from '../../services/collect/collect.service';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { ComplementDataService } from '../../services/complement-data/complement-data.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-complement-data',
@@ -32,15 +33,22 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplementDataComponent {
-  public collectService = inject(CollectService);
+  public complementDataService = inject(ComplementDataService);
+
+  public notificationService = inject(NzNotificationService);
 
   public collectComplementDataForm = createCollectComplementDataForm();
 
-  public collectDataHandler(): void {
+  public saveComplementCollectDataHandler(): void {
     const complementData = {
       ...this.collectComplementDataForm.value,
     } as CollectComplementDataFormValue;
 
-    this.collectService.insertAPlantCollectHandler(complementData);
+    this.complementDataService.setCollectComplementDataFormValue(complementData);
+
+    this.notificationService.success(
+      'Success',
+      'Dados complementares salvos com sucesso! Faça a coleta'
+    );
   }
 }
