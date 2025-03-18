@@ -1,16 +1,20 @@
 import { ConnectivityService } from './../../../../shared/services/connectivity/connectivity.service';
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, inject, AfterViewInit, signal } from '@angular/core';
+import { Component, inject, AfterViewInit, signal, OnInit } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
-
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import type * as Leaflet from 'leaflet';
+import { IndexDbCollectService } from '../../services/index-db-collect.service';
+import type { PlantData } from '../../../collect/models/collect.model';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { Router } from '@angular/router';
 
 declare let L: typeof Leaflet;
 
-const ZORRO = [NzGridModule, NzButtonModule, NzCardModule];
+const ZORRO = [NzGridModule, NzButtonModule, NzCardModule, NzIconModule, NzToolTipModule];
 
 const COMMON = [DatePipe, NgClass];
 
@@ -20,18 +24,39 @@ const COMMON = [DatePipe, NgClass];
   templateUrl: './offline-collect-statistics.component.html',
   styleUrls: ['./offline-collect-statistics.component.scss'],
 })
-export class OfflineCollectStatisticsComponent implements AfterViewInit {
+export class OfflineCollectStatisticsComponent implements OnInit, AfterViewInit {
   public currentDate = new Date();
 
   public geolocationService = inject(GeolocationService);
 
   public connectivityService = inject(ConnectivityService);
 
+  public indexDbCollectService = inject(IndexDbCollectService);
+
+  public router = inject(Router);
+
   public userMarker!: Leaflet.Marker;
 
   public map!: Leaflet.Map;
 
   public isLocationAvailable = signal(false);
+
+  public collectedData = signal<PlantData[]>([]);
+
+  public totalCollectedData = this.indexDbCollectService.totalCollectedData;
+
+  public ngOnInit(): void {
+    this.loadGeolocationData();
+
+    this.indexDbCollectService.listAllCollects().subscribe(data => {
+      this.collectedData.set(data);
+    });
+  }
+
+  public loadGeolocationData(): void {
+    this.geolocationService.getLocaltionPermission();
+    this.geolocationService.getLocaltionCoordinate();
+  }
 
   public ngAfterViewInit(): void {
     if (!navigator.geolocation) {

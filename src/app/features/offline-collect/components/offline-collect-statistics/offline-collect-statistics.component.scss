@@ -16,6 +16,25 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-self: flex-start;
+      gap: 2px;
+
+      nz-icon {
+        margin-left: 10px;
+        color: #1890ff;
+        font-size: 18px;
+        opacity: 0.8;
+
+        &:hover {
+          font-weight: bold;
+          opacity: 1;
+        }
+      }
+    }
   }
 
   &__map {

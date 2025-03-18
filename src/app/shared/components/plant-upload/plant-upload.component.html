@@ -1,7 +1,5 @@
-<div class="container" (drop)="onFileDrop($event)"
-  (dragover)="onDragOver($event)">
-  <input type="file" accept="image/*" (change)="onFileChange($event)" hidden
-    #fileInput />
+<div class="container" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+  <input type="file" accept="image/*" (change)="onFileChange($event)" hidden #fileInput />
   <div
     [class.success]="uploadSuccess"
     [class.error]="uploadError"
@@ -11,14 +9,13 @@
     <p class="container__dropper-text">Foto Planta</p>
     <div class="container__dropper-image-container">
       @if (selectedFile || plantUploadService.plantPhotoString()) {
-      <img [src]="plantUploadService.plantPhotoString()" alt="Foto planta" />
+        <img [src]="plantUploadService.plantPhotoString()" alt="Foto planta" />
 
-      <p>
-        <span>{{ imageName() }}</span> ({{ fileSize() }} KB)
-      </p>
+        <p>
+          <span>{{ imageName() }}</span> ({{ fileSize() }} KB)
+        </p>
       } @else {
-      <img src="assets/images/empty-photo.jpg" width="150px" height="150px"
-        alt="Sem foto" />
+        <img src="assets/images/empty-photo.jpg" width="150px" height="150px" alt="Sem foto" />
       }
     </div>
   </div>

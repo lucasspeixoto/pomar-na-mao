@@ -1,6 +1,17 @@
 <div class="container">
-  <h2>Coleta Offline <a (click)="router.navigateByUrl('/login')"> (Acessar
-      online)</a> </h2>
+  <h2>Coleta Offline <a (click)="router.navigateByUrl('/login')"> (Acessar online)</a></h2>
+
+  <nz-alert
+    nzShowIcon
+    nzType="info"
+    nzMessage="Aviso"
+    [nzDescription]="descriptionTemplate2"></nz-alert>
+  <ng-template #descriptionTemplate2>
+    <p>
+      Os dados de coletas precisam ser sincronizados para efetuar o registro de todas observações!
+      Para isso acesse a internet, faça login e buscar por 'Sincronização'.
+    </p>
+  </ng-template>
 
   <div nz-row class="container__data_photo">
     <div nz-col nzSpan="24" [nzSm]="12">
@@ -18,12 +29,6 @@
   </div>
 
   <div class="container__action">
-    <button
-      (click)="collectHandler()"
-      nz-button
-      nzType="primary">
-      Coletar
-    </button>
+    <button (click)="collectHandler()" nz-button nzType="primary">Coletar</button>
   </div>
-
 </div>

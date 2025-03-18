@@ -2,8 +2,10 @@
   <nz-sider
     class="main__sidebar"
     nzCollapsible
-    nzWidth="200px" [nzCollapsedWidth]="0"
-    nzBreakpoint="md" nzOverlay="true"
+    nzWidth="200px"
+    [nzCollapsedWidth]="0"
+    nzBreakpoint="md"
+    nzOverlay="true"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
     <div class="main__sidebar-logo">
@@ -12,19 +14,17 @@
         <h1>Pomar na mão</h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       @for (menuItem of menuItems; track menuItem.title) {
-      <li [nzOpen]="false" nz-submenu [nzTitle]="menuItem.title"
-        [nzIcon]="menuItem.icon">
-        <ul>
-          @for (route of menuItem.routes; track route.routerLink) {
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="route.routerLink">{{ route.title }}</a>
-          </li>
-          }
-        </ul>
-      </li>
+        <li [nzOpen]="false" nz-submenu [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
+          <ul>
+            @for (route of menuItem.routes; track route.routerLink) {
+              <li nz-menu-item nzMatchRouter>
+                <a [routerLink]="route.routerLink">{{ route.title }}</a>
+              </li>
+            }
+          </ul>
+        </li>
       }
     </ul>
   </nz-sider>
@@ -32,18 +32,20 @@
     <nz-header>
       <div class="header">
         <span class="header__trigger">
-
-          <nz-icon (click)="isDrawerVisible = !isDrawerVisible"
+          <nz-icon
+            (click)="isDrawerVisible = !isDrawerVisible"
             class="header__trigger-left"
             nzType="menu-unfold" />
 
-          <nz-icon (click)="isCollapsed = !isCollapsed"
+          <nz-icon
+            (click)="isCollapsed = !isCollapsed"
             class="header__trigger-center"
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" />
 
           <div class="header__trigger-right">
-            <span nz-typography>Olá! <strong>{{
-                currentUser()?.full_name!.split(' ')[0] }}</strong></span>
+            <span nz-typography
+              >Olá! <strong>{{ currentUser()?.full_name!.split(' ')[0] }}</strong></span
+            >
             <nz-icon
               class="header__trigger-right_logout"
               nzType="logout"
@@ -76,16 +78,15 @@
   <ng-container *nzDrawerContent>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       @for (menuItem of menuItems; track menuItem.title) {
-      <li nz-submenu [nzOpen]="false" [nzTitle]="menuItem.title"
-        [nzIcon]="menuItem.icon">
-        <ul>
-          @for (route of menuItem.routes; track route.routerLink) {
-          <li (click)="isDrawerVisible = false" nz-menu-item nzMatchRouter>
-            <a [routerLink]="route.routerLink">{{ route.title }}</a>
-          </li>
-          }
-        </ul>
-      </li>
+        <li nz-submenu [nzOpen]="false" [nzTitle]="menuItem.title" [nzIcon]="menuItem.icon">
+          <ul>
+            @for (route of menuItem.routes; track route.routerLink) {
+              <li (click)="isDrawerVisible = false" nz-menu-item nzMatchRouter>
+                <a [routerLink]="route.routerLink">{{ route.title }}</a>
+              </li>
+            }
+          </ul>
+        </li>
       }
     </ul>
   </ng-container>
