@@ -32,7 +32,7 @@
     }
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     padding: 20px;
   }
 
@@ -41,7 +41,7 @@
   }
 
   &__data_photo {
-    margin-bottom: 20px;
+    margin: 10px 0;
 
     @media screen and (max-width: 576px) {
       gap: 20px;

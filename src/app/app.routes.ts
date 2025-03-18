@@ -5,7 +5,7 @@ import { isLoggedGuard } from './features/authentication/guards/is-logged.guard'
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'offline-collect',
+    path: 'coleta-offline',
     loadComponent: () =>
       import('./features/offline-collect/views/offline-collect/offline-collect.component').then(
         c => c.OfflineCollectComponent

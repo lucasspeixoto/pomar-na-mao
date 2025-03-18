@@ -5,7 +5,6 @@ import { routes } from '../../../app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -38,7 +37,6 @@ describe('MainComponent', () => {
         provideRouter(routes),
         provideAnimations(),
       ],
-      schemas: [NO_ERRORS_SCHEMA], // Ignora estilos e templates desconhecidos
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainComponent);

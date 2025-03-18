@@ -2,6 +2,7 @@
 
 # Envs
 .env
+src/assets/env.js
 
 #cache
 ./angular

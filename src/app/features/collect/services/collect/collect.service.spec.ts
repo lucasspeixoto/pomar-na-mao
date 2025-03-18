@@ -11,6 +11,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MOCKED_COMPLEMENTS_DATA, MOCKED_PLANT, MOCKED_PLANTS } from '../../../../__mocks__/plant';
 import { ComplementDataService } from '../../../../shared/services/complement-data/complement-data.service';
 import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
+import { IndexDbCollectService } from '../../../offline-collect/services/index-db-collect.service';
 
 // Mock the injectSupabase function
 jest.mock('../../../../shared/utils/inject-supabase', () => ({
@@ -39,6 +40,8 @@ describe.only('CollectService', () => {
   let nzMessageService: jest.Mocked<NzMessageService>;
   let loadingService: jest.Mocked<LoadingService>;
   let complementDataService: jest.Mocked<ComplementDataService>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let indexDbCollectService: jest.Mocked<IndexDbCollectService>;
 
   const mockedPlantData = MOCKED_PLANTS;
 
@@ -50,12 +53,15 @@ describe.only('CollectService', () => {
 
     const nzMessageServiceSpy = { success: jest.fn(), error: jest.fn() };
 
+    const indexDbCollectServiceSpy = { addCollect: jest.fn() };
+
     TestBed.configureTestingModule({
       providers: [
         provideAnimationsAsync(),
         provideAnimations(),
         provideNoopAnimations(),
         CollectService,
+        { provide: IndexDbCollectService, useValue: indexDbCollectServiceSpy },
         { provide: NzMessageService, useValue: nzMessageServiceSpy },
       ],
     });
@@ -69,6 +75,10 @@ describe.only('CollectService', () => {
     complementDataService = TestBed.inject(
       ComplementDataService
     ) as jest.Mocked<ComplementDataService>;
+
+    indexDbCollectService = TestBed.inject(
+      IndexDbCollectService
+    ) as jest.Mocked<IndexDbCollectService>;
 
     // External services mocks
     geolocationService.coordinates.set({

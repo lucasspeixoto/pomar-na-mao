@@ -8,8 +8,9 @@ import { CollectService } from '../../../collect/services/collect/collect.servic
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { OfflineCollectStatisticsComponent } from '../../components/offline-collect-statistics/offline-collect-statistics.component';
 import { Router } from '@angular/router';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
-const ZORRO = [NzGridModule, NzButtonModule, NzCardModule];
+const ZORRO = [NzGridModule, NzButtonModule, NzCardModule, NzAlertModule];
 
 const COMPONENTS = [
   OfflineCollectStatisticsComponent,
@@ -30,6 +31,6 @@ export class OfflineCollectComponent {
   public router = inject(Router);
 
   public collectHandler(): void {
-    this.collectService.insertAPlantCollectHandler();
+    this.collectService.storageAPlantCollectHandler();
   }
 }
