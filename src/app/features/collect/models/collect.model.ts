@@ -8,6 +8,7 @@ export interface PlantData {
   gps_timestamp: number;
   plant_photo: string;
   mass: string;
+  variety: string;
   harvest: string;
   description: string;
   planting_date: string;

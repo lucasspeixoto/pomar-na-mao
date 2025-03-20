@@ -4,6 +4,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '064472fa-b4de-4738-84f7-19e347af7270',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.614786,
     latitude: -21.079854,
     gps_timestamp: 1741783500883,
@@ -34,6 +35,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'bd655b81-8c5e-4983-81d7-8d1054af6389',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.645157,
     latitude: -21.038396,
     gps_timestamp: 1741783500883,
@@ -64,6 +66,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '823a11ab-3d86-4e4e-8afe-ea23932e08e3',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.632647,
     latitude: -21.047662,
     gps_timestamp: 1741783500883,
@@ -94,6 +97,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '9434639f-9c83-4f75-93a4-0374c3add2c2',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.630243,
     latitude: -21.017015,
     gps_timestamp: 1741783500883,
@@ -124,6 +128,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'd8e9f204-d852-4d05-8900-bdfbae1e7ac5',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.633076,
     latitude: -21.019801,
     gps_timestamp: 1741783500883,
@@ -154,6 +159,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '1642a5f0-e9a6-40b1-9160-11be078c175a',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.662395,
     latitude: -21.009636,
     gps_timestamp: 1741783500883,
@@ -184,6 +190,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '9b6a0554-980e-4ee8-8273-bcdb1fba66b6',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.696051,
     latitude: -21.027421,
     gps_timestamp: 1741783500883,
@@ -214,6 +221,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'f5439afb-e022-4e58-a4fe-923f228a5253',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.623468,
     latitude: -21.042971,
     gps_timestamp: 1741783500883,
@@ -244,6 +252,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '0c83b9f7-9c8c-43d6-8232-6868adf29065',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.653958,
     latitude: -21.03548,
     gps_timestamp: 1741783500883,
@@ -274,6 +283,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'acf8914e-d4e9-4398-9b3d-51b103e47448',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.602085,
     latitude: -21.026745,
     gps_timestamp: 1741783500883,
@@ -304,6 +314,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'cb883673-acbe-42ec-b344-4a9d5989eeff',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.687739,
     latitude: -21.015796,
     gps_timestamp: 1741783500883,
@@ -334,6 +345,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '8844e0cc-b461-4c92-a3d9-d5e654dbdb54',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.699847,
     latitude: -21.092932,
     gps_timestamp: 1741783500883,
@@ -364,6 +376,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'c32870dd-df15-4cef-9dcd-5d2f65bb5fcd',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.626317,
     latitude: -21.061283,
     gps_timestamp: 1741783500883,
@@ -394,6 +407,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '3e87b025-28b6-439a-a6af-3bc8e0142c68',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.607932,
     latitude: -21.08225,
     gps_timestamp: 1741783500883,
@@ -424,6 +438,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '5c3d85f9-e9ce-4703-a0d7-29bccab8157f',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.671711,
     latitude: -21.062674,
     gps_timestamp: 1741783500883,
@@ -454,6 +469,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ff31155b-e603-4e92-b7b7-680ccc742067',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.693652,
     latitude: -21.099428,
     gps_timestamp: 1741783500883,
@@ -484,6 +500,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ad5549b9-7e46-41c0-8938-45fbc619a350',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.658694,
     latitude: -21.095728,
     gps_timestamp: 1741783500883,
@@ -514,6 +531,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'f3a89e69-12db-4846-9d73-6b7593817b5d',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.607716,
     latitude: -21.033412,
     gps_timestamp: 1741783500883,
@@ -544,6 +562,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'b31c8929-0310-4aeb-8ebc-0a21c2959d7e',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.611467,
     latitude: -21.031297,
     gps_timestamp: 1741783500883,
@@ -574,6 +593,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '09b9bf05-559f-4081-8de7-d74ebb1bd1f2',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.697364,
     latitude: -21.001461,
     gps_timestamp: 1741783500883,
@@ -604,6 +624,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ea625fab-c74b-45f4-86d0-204bb00ba014',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.681356,
     latitude: -21.034369,
     gps_timestamp: 1741783500883,
@@ -634,6 +655,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '002ac059-5817-4f24-b7de-69c7c89ded37',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.643226,
     latitude: -21.085078,
     gps_timestamp: 1741783500883,
@@ -664,6 +686,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '74b66faa-fab4-4e70-81a7-3d2d78611c59',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.605769,
     latitude: -21.018414,
     gps_timestamp: 1741783500883,
@@ -694,6 +717,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '7db78cdc-b837-4b2e-8aae-8eb0cc0b8e21',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.613325,
     latitude: -21.000586,
     gps_timestamp: 1741783500883,
@@ -724,6 +748,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'd7c78fed-e8aa-4993-a55f-fa68b99866b4',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.659368,
     latitude: -21.023454,
     gps_timestamp: 1741783500883,
@@ -754,6 +779,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '5cf8cb26-4e08-40b4-a915-21aec9b72d67',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.611842,
     latitude: -21.017044,
     gps_timestamp: 1741783500883,
@@ -784,6 +810,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'fd2c790d-cd5a-420a-a762-12b902490357',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.614595,
     latitude: -21.000351,
     gps_timestamp: 1741783500883,
@@ -814,6 +841,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '126cdead-0633-4113-817c-3b484a5a6c73',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.680084,
     latitude: -21.06498,
     gps_timestamp: 1741783500883,
@@ -844,6 +872,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'dafbe1e4-2ce6-475a-abfd-2deb1d906740',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.683311,
     latitude: -21.027589,
     gps_timestamp: 1741783500883,
@@ -874,6 +903,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'd84e15eb-bb20-4b9b-954c-4ef374530245',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.695127,
     latitude: -21.08283,
     gps_timestamp: 1741783500883,
@@ -904,6 +934,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '718a6836-8ef6-4205-bf91-14ea59c552db',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.616597,
     latitude: -21.080527,
     gps_timestamp: 1741783500883,
@@ -934,6 +965,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '67bfbdb5-b117-43d1-9285-c100678f2f49',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.619158,
     latitude: -21.082542,
     gps_timestamp: 1741783500883,
@@ -964,6 +996,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '5def5cc7-eea1-4a35-a5e7-735202ac14ec',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.683009,
     latitude: -21.067461,
     gps_timestamp: 1741783500883,
@@ -994,6 +1027,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'e2a25359-3fa4-4fa7-95b4-16946713e7f0',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.677713,
     latitude: -21.063294,
     gps_timestamp: 1741783500883,
@@ -1024,6 +1058,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '1e01ed0f-cf46-4aee-9763-35288dcdfa74',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.696341,
     latitude: -21.055737,
     gps_timestamp: 1741783500883,
@@ -1054,6 +1089,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ce64f288-801c-4527-aaed-61042f8a7d9a',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.611242,
     latitude: -21.057294,
     gps_timestamp: 1741783500883,
@@ -1084,6 +1120,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '0fc467de-e590-4ab4-820d-15d213a3848e',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.665634,
     latitude: -21.051708,
     gps_timestamp: 1741783500883,
@@ -1114,6 +1151,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ae3113ed-5ce9-4938-b1e7-f8ce5dae0faf',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.604599,
     latitude: -21.067975,
     gps_timestamp: 1741783500883,
@@ -1144,6 +1182,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '2616b94f-8b41-4cc4-9fe7-2afd8e437690',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.674053,
     latitude: -21.017463,
     gps_timestamp: 1741783500883,
@@ -1174,6 +1213,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '9a30b46e-51ac-4b20-9fb5-22ac1be70fcb',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.642456,
     latitude: -21.02578,
     gps_timestamp: 1741783500883,
@@ -1204,6 +1244,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ab0a55d3-63f3-473d-bd2a-0d7e26f1cb7d',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.633175,
     latitude: -21.042696,
     gps_timestamp: 1741783500883,
@@ -1234,6 +1275,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '614ab044-82e5-474e-b5af-77d81bac7175',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.669399,
     latitude: -21.082141,
     gps_timestamp: 1741783500883,
@@ -1264,6 +1306,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '8471fa0f-9794-450b-86e4-863066c83481',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.678534,
     latitude: -21.047745,
     gps_timestamp: 1741783500883,
@@ -1294,6 +1337,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '72a9a1fa-f111-4fc8-b664-7e08b64ae465',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.642941,
     latitude: -21.033848,
     gps_timestamp: 1741783500884,
@@ -1324,6 +1368,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'd3e54dde-1cd8-474b-8ae2-f096845d5a26',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.669033,
     latitude: -21.039337,
     gps_timestamp: 1741783500884,
@@ -1354,6 +1399,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '6b0f4e45-15da-4e2c-af39-0396b644a13d',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.674119,
     latitude: -21.047093,
     gps_timestamp: 1741783500884,
@@ -1384,6 +1430,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'cddb8b43-647a-4cc3-9eb9-526d042731e8',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.667232,
     latitude: -21.043978,
     gps_timestamp: 1741783500884,
@@ -1414,6 +1461,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '20712d20-0da3-416b-b639-808d75a6a518',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.622159,
     latitude: -21.085574,
     gps_timestamp: 1741783500884,
@@ -1444,6 +1492,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'dddea0e5-fb12-471a-ac50-c664218deb48',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.660202,
     latitude: -21.071398,
     gps_timestamp: 1741783500884,
@@ -1474,6 +1523,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '8c0f1c27-45eb-4ab5-adfe-eca5454b1203',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.662879,
     latitude: -21.002538,
     gps_timestamp: 1741783500884,
@@ -1504,6 +1554,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '05e2e578-15b7-4bbf-bc73-13dccb286e3e',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.686391,
     latitude: -21.096349,
     gps_timestamp: 1741783500884,
@@ -1534,6 +1585,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '39eedc34-7892-48b2-b04d-aacb2c667455',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.641631,
     latitude: -21.07611,
     gps_timestamp: 1741783500884,
@@ -1564,6 +1616,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '5c9a8073-d9cc-4a23-8cdf-8e59b7a1be83',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.680868,
     latitude: -21.063233,
     gps_timestamp: 1741783500884,
@@ -1594,6 +1647,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'f6618d32-93b2-4d10-b9a8-2e7747769fda',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.647404,
     latitude: -21.094964,
     gps_timestamp: 1741783500884,
@@ -1624,6 +1678,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '0c9b1e06-0e1e-4307-9e90-6a7b3d6034b5',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.676187,
     latitude: -21.033619,
     gps_timestamp: 1741783500884,
@@ -1654,6 +1709,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '82ddcdfb-5f73-4acf-9eb4-67518037a395',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.607627,
     latitude: -21.075828,
     gps_timestamp: 1741783500884,
@@ -1684,6 +1740,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '7be55830-85ba-4baf-9a60-a0d9d7708bac',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.654381,
     latitude: -21.068957,
     gps_timestamp: 1741783500884,
@@ -1714,6 +1771,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'bf3c55da-09f0-4086-8bac-ae04a2f0ffa5',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.693714,
     latitude: -21.048918,
     gps_timestamp: 1741783500884,
@@ -1744,6 +1802,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '12eaa1b5-ae54-4658-9530-3d9c7cfc4529',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.622226,
     latitude: -21.083016,
     gps_timestamp: 1741783500884,
@@ -1774,6 +1833,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'd95de910-f614-45f1-8a43-499395dcd0e2',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.661483,
     latitude: -21.043411,
     gps_timestamp: 1741783500884,
@@ -1804,6 +1864,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '1e76bae0-c326-4cbd-827d-432256c66356',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.642221,
     latitude: -21.016265,
     gps_timestamp: 1741783500884,
@@ -1834,6 +1895,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'ace2f47c-4b79-49b1-9f11-6e33b319c37f',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.623368,
     latitude: -21.07076,
     gps_timestamp: 1741783500884,
@@ -1864,6 +1926,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '22868c5a-4165-4c47-ae03-7af41da82fcc',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.606919,
     latitude: -21.027113,
     gps_timestamp: 1741783500884,
@@ -1894,6 +1957,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '2106f7ac-d435-4942-bda2-5d245147ffb1',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.630782,
     latitude: -21.096153,
     gps_timestamp: 1741783500884,
@@ -1924,6 +1988,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '07a5547a-f5e8-462f-87ec-cacae54e358a',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.615873,
     latitude: -21.092808,
     gps_timestamp: 1741783500884,
@@ -1954,6 +2019,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'fe6ba157-c456-4d9d-9e77-a7426e1195f7',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.636162,
     latitude: -21.075358,
     gps_timestamp: 1741783500884,
@@ -1984,6 +2050,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '739a77f0-0d85-4833-a033-e3a9f00d0a31',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.629097,
     latitude: -21.050885,
     gps_timestamp: 1741783500884,
@@ -2014,6 +2081,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '4f1a3a67-484a-4b49-adfc-c90c5b2a91c1',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.659876,
     latitude: -21.048597,
     gps_timestamp: 1741783500884,
@@ -2044,6 +2112,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '20e75061-d330-4622-991a-fdd9f01aaf61',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.695262,
     latitude: -21.025522,
     gps_timestamp: 1741783500884,
@@ -2074,6 +2143,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '13fb2385-2061-4789-b5b1-edbaa9d7b147',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.693637,
     latitude: -21.087258,
     gps_timestamp: 1741783500884,
@@ -2104,6 +2174,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '26010c01-ed03-42f6-bf98-48f69170d08d',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.671739,
     latitude: -21.041836,
     gps_timestamp: 1741783500884,
@@ -2134,6 +2205,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '9f53024e-aac2-45a5-b1a4-bbb62f511aa8',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.635827,
     latitude: -21.060057,
     gps_timestamp: 1741783500884,
@@ -2164,6 +2236,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '42cb841c-91a9-4efc-96dc-9a6f573bcac1',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.625363,
     latitude: -21.088837,
     gps_timestamp: 1741783500884,
@@ -2194,6 +2267,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'c306dd79-7c1d-4a2d-bdba-dce99cc43374',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.676001,
     latitude: -21.040187,
     gps_timestamp: 1741783500884,
@@ -2224,6 +2298,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '4958023d-b26b-405e-a923-4e2c025a4b4f',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.694054,
     latitude: -21.021219,
     gps_timestamp: 1741783500884,
@@ -2254,6 +2329,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '22eb9c54-3c4a-4714-90c4-a6e3bddf475b',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.663011,
     latitude: -21.085733,
     gps_timestamp: 1741783500884,
@@ -2284,6 +2360,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '967a5da1-3c11-473a-9b44-1bc78619663f',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.640222,
     latitude: -21.031435,
     gps_timestamp: 1741783500884,
@@ -2314,6 +2391,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '25c49024-2563-462c-b06f-eb306824021c',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.68665,
     latitude: -21.066969,
     gps_timestamp: 1741783500884,
@@ -2344,6 +2422,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '0854adc6-a78f-4b22-95ef-f9e5f9128c79',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.607449,
     latitude: -21.057468,
     gps_timestamp: 1741783500884,
@@ -2374,6 +2453,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '5b32d1e4-0caf-4ebd-9705-e51bb21f3797',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.692477,
     latitude: -21.049335,
     gps_timestamp: 1741783500884,
@@ -2404,6 +2484,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '1fb08654-f0ec-4309-b31f-2afedf2c985e',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.664928,
     latitude: -21.013438,
     gps_timestamp: 1741783500884,
@@ -2434,6 +2515,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'f4c0bcc3-b4b0-44c0-a44b-5834a7f3e758',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.645128,
     latitude: -21.050307,
     gps_timestamp: 1741783500884,
@@ -2464,6 +2546,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '27cdc76a-2254-4141-9963-b6477e3f7dc2',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.607253,
     latitude: -21.089225,
     gps_timestamp: 1741783500884,
@@ -2494,6 +2577,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '8f21d56c-c4ad-42f9-a59b-ebb24392b459',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.640529,
     latitude: -21.097884,
     gps_timestamp: 1741783500884,
@@ -2524,6 +2608,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'a94cafb7-a948-403c-b33a-9ad63e052d32',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.645836,
     latitude: -21.041313,
     gps_timestamp: 1741783500884,
@@ -2554,6 +2639,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '3d9e39a6-cafd-4acd-a0d1-89676bff1645',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.659332,
     latitude: -21.055943,
     gps_timestamp: 1741783500884,
@@ -2584,6 +2670,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '7f092413-ad9e-44e2-a6d4-955c9d833e3c',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.642127,
     latitude: -21.039067,
     gps_timestamp: 1741783500884,
@@ -2614,6 +2701,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '04d3be9f-8df1-4a53-9b0a-bf9013f6cfcc',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.687316,
     latitude: -21.035074,
     gps_timestamp: 1741783500884,
@@ -2644,6 +2732,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '130b171c-e66b-425f-8577-850fc38c6a65',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.629549,
     latitude: -21.04127,
     gps_timestamp: 1741783500884,
@@ -2674,6 +2763,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '61cbabe9-52fe-46b0-b0be-0a3a4feb67e9',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.604544,
     latitude: -21.064507,
     gps_timestamp: 1741783500884,
@@ -2704,6 +2794,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '98596618-df6b-485d-b1e9-b9e8a6ae85f5',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.611734,
     latitude: -21.0344,
     gps_timestamp: 1741783500884,
@@ -2734,6 +2825,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '32af081d-f364-4ff5-9abb-311d463f5d84',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.686009,
     latitude: -21.069051,
     gps_timestamp: 1741783500884,
@@ -2764,6 +2856,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '8deb34e7-90c0-4602-bb02-e2739eff97e6',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.646828,
     latitude: -21.025039,
     gps_timestamp: 1741783500884,
@@ -2794,6 +2887,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '5ccc0010-0992-4da1-abb0-ee78384c15b5',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.669158,
     latitude: -21.038771,
     gps_timestamp: 1741783500884,
@@ -2824,6 +2918,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '2418e0d6-b3b5-48c1-904e-635952483ac5',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.609854,
     latitude: -21.011383,
     gps_timestamp: 1741783500884,
@@ -2854,6 +2949,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '44627eab-cd88-48b2-9ff2-43b48e3d5eca',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.681349,
     latitude: -21.001345,
     gps_timestamp: 1741783500884,
@@ -2884,6 +2980,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '9d3c9109-5df5-45a9-8441-ccf0783693e2',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.640963,
     latitude: -21.095161,
     gps_timestamp: 1741783500884,
@@ -2914,6 +3011,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'a9db1ef5-e35a-4f08-9f02-52ae43f28d2e',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.651544,
     latitude: -21.025735,
     gps_timestamp: 1741783500884,
@@ -2944,6 +3042,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: '46b67ffc-1b0e-425d-a85f-79411fb12f05',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.629749,
     latitude: -21.014953,
     gps_timestamp: 1741783500884,
@@ -2974,6 +3073,7 @@ export const MOCKED_COLLECT_DATA: PlantData[] = [
   {
     id: 'd9051306-5610-47de-af55-2b9967ab1182',
     created_at: '2025-03-12T12:45:00.884Z',
+    variety: 'Bengal',
     longitude: -47.606549,
     latitude: -21.04464,
     gps_timestamp: 1741783500884,

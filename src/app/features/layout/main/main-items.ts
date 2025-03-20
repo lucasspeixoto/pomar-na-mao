@@ -16,6 +16,7 @@ export const menuItems: MenuItem[] = [
     routes: [
       { routerLink: '/collect/register', title: 'Cadastrar' },
       { routerLink: '/collect/base', title: 'Base' },
+      { routerLink: '/collect/sincronizar', title: 'Sincronizar' },
     ],
   },
   {

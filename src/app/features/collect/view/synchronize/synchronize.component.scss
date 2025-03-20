@@ -1,0 +1,61 @@
+.container {
+  &__table {
+    display: block;
+
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+
+    button {
+      align-self: flex-end;
+      margin: 20px 0;
+    }
+  }
+
+  &__cards {
+    display: none;
+    gap: 5px;
+    width: 100%;
+
+    &-icons {
+      text-align: end;
+      margin-right: 8px;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      gap: 8px;
+    }
+
+    @media screen and (max-width: 900px) {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    @media screen and (max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.expand-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+}
+
+nz-card {
+  border-radius: 10px;
+}

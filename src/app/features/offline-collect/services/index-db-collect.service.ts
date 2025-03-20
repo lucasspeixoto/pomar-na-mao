@@ -7,6 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 import * as CryptoJS from 'crypto-js';
 import { PlantData } from '../../collect/models/collect.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { LoadingService } from '../../../shared/services/loading/loading.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,8 @@ export class IndexDbCollectService {
   public messageService = inject(NzMessageService);
 
   private platformId = inject(PLATFORM_ID);
+
+  public loadingService = inject(LoadingService);
 
   private readonly store = { name: 'collects', key: 'id' };
 
@@ -25,6 +28,8 @@ export class IndexDbCollectService {
   private readonly secretKey = environment.INDEXDB_KEY;
 
   public totalCollectedData = signal(0);
+
+  public collectedData = signal<PlantData[]>([]);
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
@@ -84,6 +89,8 @@ export class IndexDbCollectService {
   public addCollect(plantData: PlantData): Observable<PlantData> {
     return this.waitForDB().pipe(
       switchMap(() => {
+        this.loadingService.isLoading.set(true);
+
         return new Observable<PlantData>(obs => {
           const encryptedTask = {
             id: plantData.id,
@@ -106,21 +113,28 @@ export class IndexDbCollectService {
               'Falha ao aidicionar este registro de coleta no dispositivo!'
             );
           };
+
+          this.loadingService.isLoading.set(false);
         });
       })
     );
   }
 
-  public deleteCollect(id: string): Observable<void> {
+  public deleteCollect(id: string, showMessages: boolean): Observable<void> {
     return this.waitForDB().pipe(
       switchMap(() => {
+        this.loadingService.isLoading.set(true);
+
         return new Promise<void>((resolve, reject) => {
           const checkRequest = this.store$.get(id);
 
           checkRequest.onsuccess = () => {
             if (!checkRequest.result) {
               reject('Registro não encontrado!');
-              this.messageService.error('Registro não encontrado no dispositivo!');
+
+              if (showMessages)
+                this.messageService.error('Registro não encontrado no dispositivo!');
+
               return;
             }
           };
@@ -129,14 +143,17 @@ export class IndexDbCollectService {
 
           request.onsuccess = () => {
             this.totalCollectedData.update(current => current - 1);
+            this.collectedData.update(items => items.filter(item => item.id !== id));
+            if (showMessages) this.messageService.success('Coleta pendente excluída da listagem!');
             resolve();
-            this.messageService.success('Coleta excluída com sucesso!');
           };
 
           request.onerror = () => {
             reject('Falha ao excluir este registro de coleta no dispositivo!');
             this.messageService.error('Falha ao excluir este registro de coleta no dispositivo!');
           };
+
+          this.loadingService.isLoading.set(false);
         });
       })
     );
@@ -145,6 +162,8 @@ export class IndexDbCollectService {
   public listAllCollects(): Observable<PlantData[]> {
     return this.waitForDB().pipe(
       switchMap(() => {
+        this.loadingService.isLoading.set(true);
+
         return new Observable<PlantData[]>(obs => {
           const request = this.store$.getAll();
 
@@ -157,6 +176,7 @@ export class IndexDbCollectService {
               });
 
               obs.next(decryptedTasks);
+              this.collectedData.set(decryptedTasks);
               this.totalCollectedData.set(decryptedTasks.length);
               obs.complete();
             } catch {
@@ -169,6 +189,8 @@ export class IndexDbCollectService {
             obs.error('Listagem de coletas falhou!');
             this.messageService.error('Listagem de coletas falhou!');
           };
+
+          this.loadingService.isLoading.set(false);
         });
       })
     );
