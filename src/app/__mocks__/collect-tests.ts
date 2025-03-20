@@ -1,6 +1,7 @@
 export const MOCKED_COLLECT = [
   {
     created_at: '2024-05-21T08:23:48Z',
+    variety: 'Bengal',
     longitude: -73.9751944,
     latitude: 40.765728,
     gps_timestamp: 1742058828222,
@@ -26,6 +27,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-03-16T13:01:16Z',
+    variety: 'Bengal',
     longitude: -73.9630734,
     latitude: 40.7704804,
     gps_timestamp: 1742054485558,
@@ -51,6 +53,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-01-28T22:33:41Z',
+    variety: 'Bengal',
     longitude: -73.9795966,
     latitude: 40.7908711,
     gps_timestamp: 1742059487592,
@@ -76,6 +79,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-04-22T19:40:51Z',
+    variety: 'Bengal',
     longitude: -73.9603274,
     latitude: 40.7796154,
     gps_timestamp: 1742052791953,
@@ -101,6 +105,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2022-10-05T12:16:24Z',
+    variety: 'Bengal',
     longitude: -73.9813563,
     latitude: 40.7781155,
     gps_timestamp: 1742046136641,
@@ -126,6 +131,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-08-10T11:57:57Z',
+    variety: 'Bengal',
     longitude: -73.9799368,
     latitude: 40.7754363,
     gps_timestamp: 1742048605115,
@@ -151,6 +157,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2020-09-13T15:30:21Z',
+    variety: 'Bengal',
     longitude: -73.9633433,
     latitude: 40.7678542,
     gps_timestamp: 1742055587926,
@@ -176,6 +183,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2025-01-16T12:21:34Z',
+    variety: 'Bengal',
     longitude: -73.9526589,
     latitude: 40.7776596,
     gps_timestamp: 1742049278435,
@@ -201,6 +209,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2020-02-05T03:12:47Z',
+    variety: 'Bengal',
     longitude: -73.9579914,
     latitude: 40.7950504,
     gps_timestamp: 1742047243563,
@@ -226,6 +235,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-08-01T19:41:47Z',
+    variety: 'Bengal',
     longitude: -73.9699079,
     latitude: 40.7932854,
     gps_timestamp: 1742052262144,
@@ -251,6 +261,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2020-10-28T00:02:39Z',
+    variety: 'Bengal',
     longitude: -73.9524704,
     latitude: 40.7886055,
     gps_timestamp: 1742056755026,
@@ -276,6 +287,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-01-22T20:34:58Z',
+    variety: 'Bengal',
     longitude: -73.9795832,
     latitude: 40.779766,
     gps_timestamp: 1742057433681,
@@ -301,6 +313,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2023-02-15T08:21:27Z',
+    variety: 'Bengal',
     longitude: -73.9638577,
     latitude: 40.7810995,
     gps_timestamp: 1742046952591,
@@ -326,6 +339,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2020-09-29T15:41:26Z',
+    variety: 'Bengal',
     longitude: -73.9576841,
     latitude: 40.7667301,
     gps_timestamp: 1742042921653,
@@ -351,6 +365,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2022-07-01T23:08:08Z',
+    variety: 'Bengal',
     longitude: -73.9601846,
     latitude: 40.7837535,
     gps_timestamp: 1742048409511,
@@ -376,6 +391,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-12-20T14:58:57Z',
+    variety: 'Bengal',
     longitude: -73.9569957,
     latitude: 40.7980642,
     gps_timestamp: 1742051607939,
@@ -401,6 +417,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2021-07-26T11:52:23Z',
+    variety: 'Bengal',
     longitude: -73.9530974,
     latitude: 40.7835532,
     gps_timestamp: 1742057291845,
@@ -426,6 +443,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-04-06T00:41:37Z',
+    variety: 'Bengal',
     longitude: -73.9652425,
     latitude: 40.7696374,
     gps_timestamp: 1742050729807,
@@ -451,6 +469,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2024-03-24T22:28:47Z',
+    variety: 'Bengal',
     longitude: -73.9695427,
     latitude: 40.783057,
     gps_timestamp: 1742056316455,
@@ -476,6 +495,7 @@ export const MOCKED_COLLECT = [
   },
   {
     created_at: '2025-02-05T09:07:32Z',
+    variety: 'Bengal',
     longitude: -73.9724736,
     latitude: 40.7937009,
     gps_timestamp: 1742050101963,

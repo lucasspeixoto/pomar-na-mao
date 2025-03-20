@@ -94,6 +94,7 @@ export class CollectService {
       mites,
       thrips,
       emptyCollectionBoxNear,
+      variety,
     } = this.complementDataService.getCollectComplementDataFormValue()!;
 
     const { longitude, latitude } = this.geolocationService.coordinates()!;
@@ -106,6 +107,7 @@ export class CollectService {
       plant_photo: this.plantUploadService.plantPhotoString(),
       mass,
       harvest,
+      variety,
       description,
       planting_date: plantingDate,
       life_of_the_tree: lifeOfTheTree,
@@ -137,6 +139,40 @@ export class CollectService {
     }, 2000);
   }
 
+  public async syncAllCollectPlantHandler(plantDatas: PlantData[]): Promise<void> {
+    this.loadingService.isLoading.set(true);
+
+    for (const plantData of plantDatas) {
+      const { error } = await this.supabase.from('plant_collect').insert([plantData]);
+
+      setTimeout(() => {
+        this.loadingService.isLoading.set(false);
+
+        if (!error) {
+          this.indexDbCollectService.deleteCollect(plantData.id, false).subscribe();
+          this.messageService.success('Dados sincronizados com sucesso!');
+        }
+      }, 2000);
+    }
+  }
+
+  public async syncCollectPlantHandler(plantData: PlantData): Promise<void> {
+    this.loadingService.isLoading.set(true);
+
+    const { error } = await this.supabase.from('plant_collect').insert([plantData]);
+
+    setTimeout(() => {
+      this.loadingService.isLoading.set(false);
+
+      if (error) {
+        this.messageService.error('Erro ao sincronizar registro!');
+      } else {
+        this.indexDbCollectService.deleteCollect(plantData.id, true).subscribe();
+        this.messageService.success('Registro sincronizado com sucesso!');
+      }
+    }, 2000);
+  }
+
   public async storageAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
 
@@ -157,7 +193,10 @@ export class CollectService {
      */
     //this.geolocationService.getLocaltionCoordinate(); // Atualiza a posição
 
-    if (!this.geolocationService.isCoordinatesAvailable()) {
+    if (
+      !this.geolocationService.isCoordinatesAvailable() ||
+      !this.geolocationService.coordinates()
+    ) {
       this.loadingService.isLoading.set(false);
       this.messageService.error('Não foi possível obter as coordenadas!');
       return;
@@ -165,6 +204,7 @@ export class CollectService {
 
     const {
       mass,
+      variety,
       harvest,
       description,
       plantingDate,
@@ -194,6 +234,7 @@ export class CollectService {
       gps_timestamp: this.geolocationService.coordinatesTimestamp(),
       plant_photo: this.plantUploadService.plantPhotoString(),
       mass,
+      variety,
       harvest,
       description,
       planting_date: plantingDate,

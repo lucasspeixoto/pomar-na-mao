@@ -1,0 +1,100 @@
+<div class="container">
+  <h2>Sincronizar</h2>
+
+  @if (collectedData$ | async) {
+    <app-sync-data-alert [totalCollectedData]="totalCollectedData()" />
+
+    <div class="container__buttons">
+      <button
+        [disabled]="totalCollectedData() === 0"
+        nz-button
+        nzType="primary"
+        (click)="syncAllCollectedData()">
+        Sincronizar
+      </button>
+    </div>
+
+    <section class="container__table">
+      <nz-table #editRowTable nzBordered [nzData]="collectedData()" nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Tempo Gps</th>
+            <th>Massa (kg)</th>
+            <th>Safra</th>
+            <th>Data plantio</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (data of collectedData(); track data.id) {
+            <tr>
+              <td>{{ data.longitude }}</td>
+              <td>{{ data.latitude }}</td>
+              <td>{{ data.gps_timestamp | timestamp }}</td>
+              <td>{{ data.mass }}</td>
+              <td>{{ data.harvest }}</td>
+              <td>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</td>
+              <td>
+                <app-sync-actions
+                  [data]="data"
+                  (updateCollectData)="updateCollectData($event)"
+                  (syncCollectData)="syncCollectData($event)"
+                  (deleteCollectData)="deleteCollectData($event)">
+                </app-sync-actions>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </nz-table>
+    </section>
+
+    <section class="container__cards">
+      @if (totalCollectedData() > 0) {
+        @for (data of collectedData(); track data.id) {
+          <nz-card>
+            <div class="container__cards-data">
+              <p>
+                Latitude: <strong>{{ data.latitude }}</strong>
+              </p>
+              <p>
+                Longitude: <strong>{{ data.longitude }}</strong>
+              </p>
+              <p>
+                Tempo Gps: <strong>{{ data.gps_timestamp | timestamp }}</strong>
+              </p>
+              <p>
+                Safra: <strong>{{ data.harvest }}</strong>
+              </p>
+              <p>
+                Data: <strong>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</strong>
+              </p>
+            </div>
+            <div class="container__cards-icons">
+              <app-sync-actions
+                [data]="data"
+                (updateCollectData)="updateCollectData($event)"
+                (syncCollectData)="syncCollectData($event)"
+                (deleteCollectData)="deleteCollectData($event)">
+              </app-sync-actions>
+            </div>
+          </nz-card>
+        }
+      } @else {
+        <app-no-sync-data />
+      }
+    </section>
+  }
+</div>
+
+<nz-modal
+  [(nzVisible)]="isUpdateModalVisible"
+  nzTitle="Coleta"
+  nzOkText="Sincronizar"
+  (nzOnCancel)="isUpdateModalVisible = false"
+  (nzOnOk)="confirmUpdateCollectData()">
+  <ng-container *nzModalContent>
+    <app-sync-data-detail [selectedCollect]="selectedCollect" />
+  </ng-container>
+</nz-modal>

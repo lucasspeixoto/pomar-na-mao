@@ -1,5 +1,5 @@
-import type { CollectComplementDataFormValue } from '../features/collect/constants/collect-complement-data-form';
-import type { PlantData } from '../features/collect/models/collect.model';
+import { CollectComplementDataFormValue } from '../features/collect/constants/collect-complement-data-form';
+import { PlantData } from '../features/collect/models/collect.model';
 
 export const MOCKED_COMPLEMENTS_DATA: CollectComplementDataFormValue = {
   mass: '12',
@@ -26,6 +26,7 @@ export const MOCKED_COMPLEMENTS_DATA: CollectComplementDataFormValue = {
 export const MOCKED_PLANT: PlantData = {
   id: '064472fa-b4de-4738-84f7-19e347af7270',
   created_at: '2025-03-12T12:45:00.883Z',
+  variety: 'Bengal',
   longitude: -47.614786,
   latitude: -21.079854,
   gps_timestamp: 1741783500883,
@@ -58,6 +59,7 @@ export const MOCKED_PLANTS: PlantData[] = [
   {
     id: '064472fa-b4de-4738-84f7-19e347af7270',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.614786,
     latitude: -21.079854,
     gps_timestamp: 1741783500883,
@@ -88,6 +90,7 @@ export const MOCKED_PLANTS: PlantData[] = [
   {
     id: 'bd655b81-8c5e-4983-81d7-8d1054af6389',
     created_at: '2025-03-12T12:45:00.883Z',
+    variety: 'Bengal',
     longitude: -47.645157,
     latitude: -21.038396,
     gps_timestamp: 1741783500883,

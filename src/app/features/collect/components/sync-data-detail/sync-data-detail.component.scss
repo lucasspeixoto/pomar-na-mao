@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__form {
+    &-box {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 5px;
+    }
+  }
+}
+
+nz-form-item {
+  width: 100%;
+}
