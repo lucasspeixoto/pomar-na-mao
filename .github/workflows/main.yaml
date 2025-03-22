@@ -23,8 +23,11 @@ jobs:
       - name: 🧹 Linting
         run: npm run lint
 
-      - name: 🧪 Testing
+      - name: 🧪 Unit Testing
         run: npm run test
+
+      - name: 🧪 e2e Testins
+        run: npm run cypress:headless
 
       - name: 🏗️ Building
         run: npm run build
