@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["node_modules/*", ".angular/*"],
+  "ignorePatterns": ["node_modules/*", ".angular/*", "cypress/e2e/*"],
   "overrides": [
     {
       "files": ["*.ts"],
