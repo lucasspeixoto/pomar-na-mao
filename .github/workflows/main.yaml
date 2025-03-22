@@ -23,8 +23,17 @@ jobs:
       - name: 🧹 Linting
         run: npm run lint
 
-      - name: 🧪 Testing
+      - name: 🧪 Unit Testing
         run: npm run test
+
+      - name: Start Angular app
+        run: npm start &
+
+      - name: Wait for Angular to be ready
+        run: npx wait-on http://localhost:4200
+
+      - name: 🧫 e2e Testing
+        run: npm run cypress:headless
 
       - name: 🏗️ Building
         run: npm run build
