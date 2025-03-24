@@ -1,36 +1,5 @@
 import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps';
-
-class LoginForm {
-  elements = {
-    emailInput: () => cy.get('#emailField'),
-    passwordInput: () => cy.get('#passwordField'),
-
-    emailErrorMessageSpan: () => cy.get('#email'),
-    passwordErrorMessageSpan: () => cy.get('#minLength'),
-
-    loginButton: () => cy.get('#loginButton'),
-  };
-
-  typeEmail(text: string) {
-    if (!text) return;
-
-    this.elements.emailInput().type(text);
-  }
-
-  typePassword(text: string) {
-    if (!text) return;
-
-    this.elements.passwordInput().type(text);
-  }
-
-  clearEmail() {
-    this.elements.emailInput().clear();
-  }
-
-  clearPassword() {
-    this.elements.passwordInput().clear();
-  }
-}
+import LoginForm from '../../../support/forms/login';
 
 const loginForm = new LoginForm();
 
