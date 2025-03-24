@@ -1,14 +1,23 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { defineConfig } from 'cypress';
+
+const cucumber = require('cypress-cucumber-preprocessor').default;
+const browserify = require('@cypress/browserify-preprocessor');
+const resolve = require('resolve');
 
 export default defineConfig({
   chromeWebSecurity: false,
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      const options = {
+        ...browserify.defaultOptions,
+        typescript: resolve.sync('typescript', { baseDir: config.projectRoot }),
+      };
+      on('file:preprocessor', cucumber(options));
     },
     baseUrl: 'http://localhost:4200',
-    supportFile: 'cypress/support/e2e.ts',
-    testIsolation: false, // Don`t cleanup the page after each test
+    specPattern: '**/*.feature',
+    excludeSpecPattern: '*.js',
+    testIsolation: false,
   },
 });
