@@ -1,14 +1,8 @@
 .container {
-  padding: 50px 150px;
-  position: absolute;
-  z-index: 0;
+  padding: 0;
 
-  @media screen and (max-width: 600px) {
-    padding: 20px;
-  }
-
-  @media screen and (max-width: 450px) {
-    padding: 0px;
+  @media screen and (min-width: 750px) {
+    padding: 50px 150px;
   }
 
   &__alert {
@@ -30,7 +24,7 @@
   }
 
   &__steps {
-    margin: 20px 10px;
+    margin: 20px;
   }
 
   &__statistics {
