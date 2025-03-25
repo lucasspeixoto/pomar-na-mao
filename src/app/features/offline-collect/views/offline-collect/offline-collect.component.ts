@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
@@ -44,11 +44,20 @@ export class OfflineCollectComponent {
 
   public collectStep = this.collectService.collectStep;
 
+  public isMobile = window.innerWidth < 450;
+
+  @HostListener('window:resize', ['$event'])
+  public onResize(event: Event): void {
+    this.isMobile = (event.target as Window).innerWidth < 450;
+  }
+
   public onCollectStepChange(collectStep: number): void {
     this.collectService.collectStep.set(collectStep);
   }
 
   public collectHandler(): void {
     this.collectService.storageAPlantCollectHandler();
+
+    this.collectService.collectStep.set(0);
   }
 }

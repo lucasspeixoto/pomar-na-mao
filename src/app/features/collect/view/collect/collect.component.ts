@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ComplementDataComponent } from '../../../collect/components/complement-data/complement-data.component';
 import { PlantUploadComponent } from '../../../collect/components/plant-upload/plant-upload.component';
 import { CollectService } from '../../../collect/services/collect/collect.service';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { Router } from '@angular/router';
-import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { ObservationDataComponent } from '../../../collect/components/observation-data/observation-data.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { GeolocationComponent } from '../../../../shared/components/geolocation/geolocation.component';
 
 const ZORRO = [
@@ -44,11 +44,20 @@ export class CollectComponent {
 
   public collectStep = this.collectService.collectStep;
 
+  public isMobile = window.innerWidth < 450;
+
+  @HostListener('window:resize', ['$event'])
+  public onResize(event: Event): void {
+    this.isMobile = (event.target as Window).innerWidth < 450;
+  }
+
   public onCollectStepChange(collectStep: number): void {
     this.collectService.collectStep.set(collectStep);
   }
 
   public collectHandler(): void {
     this.collectService.insertAPlantCollectHandler();
+
+    this.collectService.collectStep.set(0);
   }
 }
