@@ -1,32 +1,28 @@
 <nz-card [nzBordered]="true" nzTitle="Geolocalização">
   <div class="container">
     <div class="container__items">
-
-      <span class="container__items-item">Latitude:
-        <strong
-          id="latitude"
-          class="color-primary">{{
-          geolocationService.coordinates()?.latitude }}
+      <span class="container__items-item"
+        >Latitude:
+        <strong id="latitude" class="color-primary"
+          >{{ geolocationService.coordinates()?.latitude }}
         </strong>
       </span>
 
       <nz-divider />
 
-      <span class="container__items-item">Longitude:
-        <strong
-          id="longitude"
-          class="color-primary">{{
-          geolocationService.coordinates()?.longitude }}
+      <span class="container__items-item"
+        >Longitude:
+        <strong id="longitude" class="color-primary"
+          >{{ geolocationService.coordinates()?.longitude }}
         </strong>
       </span>
 
       <nz-divider />
 
-      <span class="container__items-item">Tempo:
-        <strong
-          id="timestamp"
-          class="color-primary">{{
-          geolocationService.coordinatesTimestamp()! | epochToTime }}
+      <span class="container__items-item"
+        >Tempo:
+        <strong id="timestamp" class="color-primary"
+          >{{ geolocationService.coordinatesTimestamp()! | epochToTime }}
         </strong>
       </span>
     </div>
