@@ -1,5 +1,4 @@
 <div class="container">
-  <h2>Coleta Offline <a (click)="router.navigateByUrl('/login')"> (Acessar online)</a></h2>
 
   <nz-alert
     nzShowIcon
@@ -7,28 +6,56 @@
     nzMessage="Aviso"
     [nzDescription]="descriptionTemplate2"></nz-alert>
   <ng-template #descriptionTemplate2>
-    <p>
-      Os dados de coletas precisam ser sincronizados para efetuar o registro de todas observações!
-      Para isso acesse a internet, faça login e buscar por 'Sincronização'.
-    </p>
+    <div class="container__alert">
+      <p>
+        Os dados de coletas precisam ser sincronizados para efetuar o registro
+        de
+        todas observações!
+        Para isso acesse a internet, faça login e buscar por 'Sincronização'.
+      </p>
+      <a nz-button nzType="link" (click)="router.navigateByUrl('/login')">Login
+        ></a>
+    </div>
   </ng-template>
 
-  <div nz-row class="container__data_photo">
-    <div nz-col nzSpan="24" [nzSm]="12">
-      <app-offline-collect-statistics />
-    </div>
-    <div nz-col nzSpan="24" [nzSm]="12">
-      <app-plant-upload />
-    </div>
+  <div class="container__steps">
+    <nz-steps nzSize="small" [nzCurrent]="collectStep()"
+      (nzIndexChange)="onCollectStepChange($event)">
+      <nz-step nzTitle="GPS"></nz-step>
+      <nz-step nzTitle="Imagem"></nz-step>
+      <nz-step nzTitle="Dados"></nz-step>
+      <nz-step nzTitle="Ocorrências"></nz-step>
+    </nz-steps>
   </div>
 
-  <div nz-row class="container__complement">
-    <div nz-col nzSpan="24">
-      <app-complement-data />
-    </div>
+  @if(collectStep() === 0) {
+  <div class="container__statistics">
+    <app-geolocation />
   </div>
+  }
 
-  <div class="container__action">
-    <button (click)="collectHandler()" nz-button nzType="primary">Coletar</button>
+  @if(collectStep() === 1) {
+  <div class="container__image">
+    <app-plant-upload />
   </div>
+  }
+
+  @if(collectStep() === 2) {
+  <div class="container__complement-data">
+    <app-complement-data />
+  </div>
+  }
+
+  @if(collectStep() === 3) {
+  <div class="container__observation-data">
+    <app-observation-data />
+  </div>
+  }
+
+  <button class="container__action" (click)="collectHandler()" nz-button
+    nzType="primary" nzSize="large"
+    nzShape="circle">
+    <nz-icon nzType="plus-circle" />
+  </button>
+
 </div>

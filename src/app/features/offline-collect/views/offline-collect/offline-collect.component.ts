@@ -1,21 +1,33 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { ComplementDataComponent } from '../../../../shared/components/complement-data/complement-data.component';
-import { PlantUploadComponent } from '../../../../shared/components/plant-upload/plant-upload.component';
-import { CollectService } from '../../../collect/services/collect/collect.service';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { OfflineCollectStatisticsComponent } from '../../components/offline-collect-statistics/offline-collect-statistics.component';
-import { Router } from '@angular/router';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ComplementDataComponent } from '../../../collect/components/complement-data/complement-data.component';
+import { PlantUploadComponent } from '../../../collect/components/plant-upload/plant-upload.component';
+import { CollectService } from '../../../collect/services/collect/collect.service';
+import { ObservationDataComponent } from '../../../collect/components/observation-data/observation-data.component';
+import { GeolocationComponent } from '../../../../shared/components/geolocation/geolocation.component';
 
-const ZORRO = [NzGridModule, NzButtonModule, NzCardModule, NzAlertModule];
+const ZORRO = [
+  NzDividerModule,
+  NzStepsModule,
+  NzGridModule,
+  NzButtonModule,
+  NzCardModule,
+  NzAlertModule,
+  NzIconModule,
+];
 
 const COMPONENTS = [
-  OfflineCollectStatisticsComponent,
   PlantUploadComponent,
   ComplementDataComponent,
+  ObservationDataComponent,
+  GeolocationComponent,
 ];
 
 @Component({
@@ -29,6 +41,12 @@ export class OfflineCollectComponent {
   private collectService = inject(CollectService);
 
   public router = inject(Router);
+
+  public collectStep = this.collectService.collectStep;
+
+  public onCollectStepChange(collectStep: number): void {
+    this.collectService.collectStep.set(collectStep);
+  }
 
   public collectHandler(): void {
     this.collectService.storageAPlantCollectHandler();

@@ -1,23 +1,47 @@
 <div class="container">
-  <h2>Cadastrar</h2>
 
-  <div id="map"></div>
+  <div class="container__header">
+    <h2>Coletar</h2>
 
-  <div nz-row class="container__photo_geolocalization">
-    <div nz-col nzSpan="24" [nzSm]="12">
-      <app-geolocation />
-    </div>
-    <div nz-col nzSpan="24" [nzSm]="12">
-      <app-plant-upload />
-    </div>
-  </div>
-  <div nz-row class="container__complement">
-    <div nz-col nzSpan="24">
-      <app-complement-data />
-    </div>
+    <button (click)="collectHandler()" nz-button
+      nzType="primary" nzSize="large"
+      nzShape="circle">
+      <nz-icon nzType="plus-circle" />
+    </button>
   </div>
 
-  <div class="container__action">
-    <button (click)="collectHandler()" nz-button nzType="primary">Coletar</button>
+  <div class="container__steps">
+    <nz-steps nzSize="small" [nzCurrent]="collectStep()"
+      (nzIndexChange)="onCollectStepChange($event)">
+      <nz-step nzTitle="GPS"></nz-step>
+      <nz-step nzTitle="Imagem"></nz-step>
+      <nz-step nzTitle="Dados"></nz-step>
+      <nz-step nzTitle="Ocorrências"></nz-step>
+    </nz-steps>
   </div>
+
+  @if(collectStep() === 0) {
+  <div class="container__statistics">
+    <app-geolocation />
+  </div>
+  }
+
+  @if(collectStep() === 1) {
+  <div class="container__image">
+    <app-plant-upload />
+  </div>
+  }
+
+  @if(collectStep() === 2) {
+  <div class="container__complement-data">
+    <app-complement-data />
+  </div>
+  }
+
+  @if(collectStep() === 3) {
+  <div class="container__observation-data">
+    <app-observation-data />
+  </div>
+  }
+
 </div>

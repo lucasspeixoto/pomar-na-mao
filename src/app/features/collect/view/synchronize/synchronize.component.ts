@@ -4,7 +4,7 @@ import { AsyncPipe, DatePipe } from '@angular/common';
 import { TimestampPipe } from '../../../../shared/pipes/timestamp/timestamp.pipe';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { IndexDbCollectService } from '../../../offline-collect/services/index-db-collect.service';
+import { IndexDbCollectService } from '../../../../shared/services/index-db/index-db-collect.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { PlantData } from '../../models/collect.model';

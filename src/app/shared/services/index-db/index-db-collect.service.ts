@@ -5,9 +5,9 @@ import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, filter, first, Observable, switchMap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import * as CryptoJS from 'crypto-js';
-import { PlantData } from '../../collect/models/collect.model';
+import { PlantData } from '../../../features/collect/models/collect.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { LoadingService } from '../../../shared/services/loading/loading.service';
+import { LoadingService } from '../loading/loading.service';
 
 @Injectable({
   providedIn: 'root',

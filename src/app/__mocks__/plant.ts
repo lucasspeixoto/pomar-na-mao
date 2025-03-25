@@ -1,4 +1,5 @@
 import { CollectComplementDataFormValue } from '../features/collect/constants/collect-complement-data-form';
+import type { CollectObservationDataFormValue } from '../features/collect/constants/collect-observation-data-form';
 import { PlantData } from '../features/collect/models/collect.model';
 
 export const MOCKED_COMPLEMENTS_DATA: CollectComplementDataFormValue = {
@@ -8,6 +9,22 @@ export const MOCKED_COMPLEMENTS_DATA: CollectComplementDataFormValue = {
   harvest: '2024-07-10',
   description: 'Árvore saudável, boa produtividade.',
   lifeOfTheTree: '4 anos',
+  stick: true,
+  brokenBranch: false,
+  vineGrowing: true,
+  burntBranch: false,
+  struckByLightning: false,
+  drill: true,
+  anthill: false,
+  inExperiment: false,
+  weedsInTheBasin: true,
+  fertilizationOrManuring: false,
+  mites: false,
+  thrips: true,
+  emptyCollectionBoxNear: false,
+};
+
+export const MOCKED_OBSERVATION_DATA: CollectObservationDataFormValue = {
   stick: true,
   brokenBranch: false,
   vineGrowing: true,
