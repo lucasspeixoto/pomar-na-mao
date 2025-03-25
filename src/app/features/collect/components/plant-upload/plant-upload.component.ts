@@ -9,8 +9,9 @@ import {
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { PlantUploadService } from '../../services/plant-upload/plant-upload.service';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { PlantUploadService } from '../../services/plant-upload/plant-upload.service';
+import { CollectService } from '../../services/collect/collect.service';
 
 @Component({
   selector: 'app-plant-upload',
@@ -23,6 +24,8 @@ export class PlantUploadComponent {
   public messageService = inject(NzMessageService);
 
   public plantUploadService = inject(PlantUploadService);
+
+  private collectService = inject(CollectService);
 
   public imageName = signal('');
 
@@ -79,6 +82,10 @@ export class PlantUploadComponent {
       this.uploadSuccess = true;
       this.uploadError = false;
       this.imageName.set(file.name);
+
+      setTimeout(() => {
+        this.collectService.collectStep.set(2);
+      }, 1000);
     } else {
       this.uploadSuccess = false;
       this.uploadError = true;

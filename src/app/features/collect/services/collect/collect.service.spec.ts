@@ -1,17 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { TestBed } from '@angular/core/testing';
 
 import { CollectService } from './collect.service';
-import { PlantUploadService } from '../../../../shared/services/plant-upload/plant-upload.service';
+import { PlantUploadService } from '../plant-upload/plant-upload.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
+import { GeolocationService } from '../geolocation/geolocation.service';
 import { LoadingService } from '../../../../shared/services/loading/loading.service';
 import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MOCKED_COMPLEMENTS_DATA, MOCKED_PLANT, MOCKED_PLANTS } from '../../../../__mocks__/plant';
-import { ComplementDataService } from '../../../../shared/services/complement-data/complement-data.service';
-import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
-import { IndexDbCollectService } from '../../../offline-collect/services/index-db-collect.service';
+import {
+  MOCKED_COMPLEMENTS_DATA,
+  MOCKED_OBSERVATION_DATA,
+  MOCKED_PLANT,
+  MOCKED_PLANTS,
+} from '../../../../__mocks__/plant';
+import { ComplementDataService } from '../complement-data/complement-data.service';
+import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
+import { IndexDbCollectService } from '../../../../shared/services/index-db/index-db-collect.service';
+import { ObservationDataService } from '../observation-data/observation-data.service';
+import type { CollectObservationDataFormValue } from '../../constants/collect-observation-data-form';
 
 // Mock the injectSupabase function
 jest.mock('../../../../shared/utils/inject-supabase', () => ({
@@ -40,7 +48,7 @@ describe.only('CollectService', () => {
   let nzMessageService: jest.Mocked<NzMessageService>;
   let loadingService: jest.Mocked<LoadingService>;
   let complementDataService: jest.Mocked<ComplementDataService>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let observationDataService: jest.Mocked<ObservationDataService>;
   let indexDbCollectService: jest.Mocked<IndexDbCollectService>;
 
   const mockedPlantData = MOCKED_PLANTS;
@@ -76,6 +84,10 @@ describe.only('CollectService', () => {
       ComplementDataService
     ) as jest.Mocked<ComplementDataService>;
 
+    observationDataService = TestBed.inject(
+      ObservationDataService
+    ) as jest.Mocked<ObservationDataService>;
+
     indexDbCollectService = TestBed.inject(
       IndexDbCollectService
     ) as jest.Mocked<IndexDbCollectService>;
@@ -94,7 +106,11 @@ describe.only('CollectService', () => {
 
     const collectComplementDataFormValue: CollectComplementDataFormValue = MOCKED_COMPLEMENTS_DATA;
 
+    const collectObservationDataFormValue: CollectObservationDataFormValue =
+      MOCKED_OBSERVATION_DATA;
+
     complementDataService.setCollectComplementDataFormValue(collectComplementDataFormValue);
+    observationDataService.setCollectObservationDataFormValue(collectObservationDataFormValue);
   });
 
   afterEach(() => {

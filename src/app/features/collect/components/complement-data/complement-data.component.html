@@ -1,0 +1,77 @@
+<nz-card style="width: 100%" nzTitle="Dados complementares">
+  <form [formGroup]="collectComplementDataForm" class="form">
+    <div nz-row>
+      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="solution">
+            <input nz-input formControlName="mass" placeholder="Massa (kg)" />
+          </nz-input-group>
+          <app-custom-validation-message controlName="mass" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
+        <nz-form-control>
+          <nz-date-picker
+            [nzFormat]="'dd/MM/yyyy'"
+            formControlName="plantingDate"
+            nzPlaceHolder="Data plantio"></nz-date-picker>
+          <app-custom-validation-message controlName="plantingDate" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="field-number">
+            <input nz-input formControlName="variety" placeholder="Variedade" />
+          </nz-input-group>
+          <app-custom-validation-message controlName="variety" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="calendar">
+            <input nz-input type="text" formControlName="harvest" placeholder="Safra" />
+          </nz-input-group>
+          <app-custom-validation-message controlName="harvest" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-row>
+      <nz-form-item nz-col nzSpan="24" [nzMd]="8">
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="solution">
+            <input nz-input formControlName="lifeOfTheTree" placeholder="Vida do pé" />
+          </nz-input-group>
+          <app-custom-validation-message controlName="lifeOfTheTree" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-row>
+      <nz-form-item nz-col nzSpan="24" [nzMd]="8">
+        <nz-form-control>
+          <nz-textarea-count [nzMaxCharacterCount]="150">
+            <textarea
+              formControlName="description"
+              placeholder="Descrição"
+              rows="4"
+              nz-input></textarea>
+            <app-custom-validation-message controlName="description" />
+          </nz-textarea-count>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </form>
+  <div class="action">
+    <button
+      id="save"
+      nz-button
+      nzType="primary"
+      (click)="saveComplementCollectDataHandler()"
+      [disabled]="collectComplementDataForm.invalid">
+      Salvar
+    </button>
+  </div>
+</nz-card>

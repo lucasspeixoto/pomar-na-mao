@@ -1,59 +1,11 @@
-<nz-card style="width: 100%" nzTitle="Dados complementares">
-  <form [formGroup]="collectComplementDataForm" class="form">
+<nz-card style="width: 100%" nzTitle="Observações">
+  <form [formGroup]="collectObservationDataForm" class="form">
     <div nz-row>
-      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="solution">
-            <input nz-input formControlName="mass" placeholder="Massa (kg)" />
-          </nz-input-group>
-          <app-custom-validation-message controlName="mass" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
-        <nz-form-control>
-          <nz-date-picker
-            [nzFormat]="'dd/MM/yyyy'"
-            formControlName="plantingDate"
-            nzPlaceHolder="Data plantio"></nz-date-picker>
-          <app-custom-validation-message controlName="plantingDate" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="field-number">
-            <input nz-input formControlName="variety" placeholder="Variedade" />
-          </nz-input-group>
-          <app-custom-validation-message controlName="variety" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item nz-col nzSpan="24" [nzMd]="6">
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="calendar">
-            <input nz-input type="text" formControlName="harvest" placeholder="Safra" />
-          </nz-input-group>
-          <app-custom-validation-message controlName="harvest" />
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-    <div nz-row>
-      <nz-form-item nz-col nzSpan="24" [nzMd]="8">
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="solution">
-            <input nz-input formControlName="lifeOfTheTree" placeholder="Vida do pé" />
-          </nz-input-group>
-          <app-custom-validation-message controlName="lifeOfTheTree" />
-        </nz-form-control>
-      </nz-form-item>
-
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="stick">
           <label for="stick" nz-checkbox formControlName="stick">Galho Seco</label>
         </nz-form-control>
       </nz-form-item>
-
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="brokenBranch">
           <label for="brokenBranch" nz-checkbox formControlName="brokenBranch"
@@ -61,8 +13,6 @@
           >
         </nz-form-control>
       </nz-form-item>
-    </div>
-    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="vineGrowing">
           <label for="vineGrowing" nz-checkbox formControlName="vineGrowing"
@@ -70,13 +20,14 @@
           >
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="burntBranch">
           <label for="burntBranch" nz-checkbox formControlName="burntBranch">Queimado</label>
         </nz-form-control>
       </nz-form-item>
-
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="struckByLightning">
           <label for="struckByLightning" nz-checkbox formControlName="struckByLightning"
@@ -84,21 +35,18 @@
           >
         </nz-form-control>
       </nz-form-item>
-    </div>
-
-    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="drill">
           <label for="drill" nz-checkbox formControlName="drill">Broca</label>
         </nz-form-control>
       </nz-form-item>
-
+    </div>
+    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="anthill">
           <label for="anthill" nz-checkbox formControlName="anthill">Formigueiro próximo</label>
         </nz-form-control>
       </nz-form-item>
-
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="inExperiment">
           <label for="inExperiment" nz-checkbox formControlName="inExperiment"
@@ -106,9 +54,6 @@
           >
         </nz-form-control>
       </nz-form-item>
-    </div>
-    <!-- Mato na bacia/Para de pulverização/Presença de ácaro -->
-    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="weedsInTheBasin">
           <label for="weedsInTheBasin" nz-checkbox formControlName="weedsInTheBasin"
@@ -116,7 +61,9 @@
           >
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="fertilizationOrManuring">
           <label for="fertilizationOrManuring" nz-checkbox formControlName="fertilizationOrManuring"
@@ -124,22 +71,19 @@
           >
         </nz-form-control>
       </nz-form-item>
-
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="mites">
           <label for="mites" nz-checkbox formControlName="mites">Presença de ácaro</label>
         </nz-form-control>
       </nz-form-item>
-    </div>
-
-    <!-- Alta presença de trupes/caixa vazia -->
-    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="thrips">
           <label for="thrips" nz-checkbox formControlName="thrips">Alta presença de tripes</label>
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div nz-row>
       <nz-form-item nz-col nzSpan="24" [nzMd]="8">
         <nz-form-control id="emptyCollectionBoxNear">
           <label for="emptyCollectionBoxNear" nz-checkbox formControlName="emptyCollectionBoxNear"
@@ -148,30 +92,9 @@
         </nz-form-control>
       </nz-form-item>
     </div>
-
-    <!-- Descrição -->
-    <div nz-row>
-      <nz-form-item nz-col nzSpan="24" [nzMd]="8">
-        <nz-form-control>
-          <nz-textarea-count [nzMaxCharacterCount]="150">
-            <textarea
-              formControlName="description"
-              placeholder="Descrição"
-              rows="4"
-              nz-input></textarea>
-            <app-custom-validation-message controlName="description" />
-          </nz-textarea-count>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
   </form>
   <div class="action">
-    <button
-      id="registerButton"
-      nz-button
-      nzType="primary"
-      (click)="saveComplementCollectDataHandler()"
-      [disabled]="collectComplementDataForm.invalid">
+    <button id="save" nz-button nzType="primary" (click)="saveObservationCollectDataHandler()">
       Salvar
     </button>
   </div>

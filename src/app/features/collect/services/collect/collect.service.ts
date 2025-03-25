@@ -1,13 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
+import { GeolocationService } from '../geolocation/geolocation.service';
 import { LoadingService } from '../../../../shared/services/loading/loading.service';
-import { PlantUploadService } from '../../../../shared/services/plant-upload/plant-upload.service';
+import { PlantUploadService } from '../plant-upload/plant-upload.service';
 import { PlantData } from '../../models/collect.model';
 import { injectSupabase } from '../../../../shared/utils/inject-supabase';
-import { ComplementDataService } from '../../../../shared/services/complement-data/complement-data.service';
-import { IndexDbCollectService } from '../../../offline-collect/services/index-db-collect.service';
+import { ComplementDataService } from '../complement-data/complement-data.service';
+import { IndexDbCollectService } from '../../../../shared/services/index-db/index-db-collect.service';
 import { v4 as uuidv4 } from 'uuid';
+import { ObservationDataService } from '../../../../features/collect/services/observation-data/observation-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,13 @@ export class CollectService {
 
   public complementDataService = inject(ComplementDataService);
 
+  public observationDataService = inject(ObservationDataService);
+
   public indexDbCollectService = inject(IndexDbCollectService);
 
   public plantData = signal<PlantData[]>([]);
+
+  public collectStep = signal(0);
 
   private supabase = injectSupabase();
 
@@ -75,12 +80,10 @@ export class CollectService {
       return;
     }
 
+    const { mass, harvest, description, plantingDate, lifeOfTheTree, variety } =
+      this.complementDataService.getCollectComplementDataFormValue()!;
+
     const {
-      mass,
-      harvest,
-      description,
-      plantingDate,
-      lifeOfTheTree,
       stick,
       brokenBranch,
       vineGrowing,
@@ -94,8 +97,7 @@ export class CollectService {
       mites,
       thrips,
       emptyCollectionBoxNear,
-      variety,
-    } = this.complementDataService.getCollectComplementDataFormValue()!;
+    } = this.observationDataService.getCollectObservationDataFormValue()!;
 
     const { longitude, latitude } = this.geolocationService.coordinates()!;
 
@@ -202,13 +204,12 @@ export class CollectService {
       return;
     }
 
+    const { mass, variety, harvest, description, plantingDate, lifeOfTheTree } =
+      this.complementDataService.getCollectComplementDataFormValue()!;
+
+    const { longitude, latitude } = this.geolocationService.coordinates()!;
+
     const {
-      mass,
-      variety,
-      harvest,
-      description,
-      plantingDate,
-      lifeOfTheTree,
       stick,
       brokenBranch,
       vineGrowing,
@@ -222,9 +223,7 @@ export class CollectService {
       mites,
       thrips,
       emptyCollectionBoxNear,
-    } = this.complementDataService.getCollectComplementDataFormValue()!;
-
-    const { longitude, latitude } = this.geolocationService.coordinates()!;
+    } = this.observationDataService.getCollectObservationDataFormValue()!;
 
     const newCollectData = {
       id: uuidv4(),

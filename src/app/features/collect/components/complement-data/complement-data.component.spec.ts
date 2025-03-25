@@ -2,7 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ComplementDataComponent } from './complement-data.component';
-import { CollectService } from '../../../features/collect/services/collect/collect.service';
+import { CollectService } from '../../services/collect/collect.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -66,11 +66,11 @@ describe('ComplementDataComponent', () => {
   });
 
   describe('visibility', () => {
-    it('should render register button title and disabled', () => {
-      const registerButtonElement = fixture.nativeElement.querySelector('#registerButton');
-      expect(registerButtonElement).toBeTruthy();
-      expect(registerButtonElement.disabled).toBe(true);
-      expect(registerButtonElement.textContent).toContain('Salvar');
+    it('should render save button title and disabled', () => {
+      const saveButtonElement = fixture.nativeElement.querySelector('#save');
+      expect(saveButtonElement).toBeTruthy();
+      expect(saveButtonElement.disabled).toBe(true);
+      expect(saveButtonElement.textContent).toContain('Salvar');
     });
   });
 
@@ -126,10 +126,10 @@ describe('ComplementDataComponent', () => {
       expect(descriptionControl?.errors).toBeFalsy();
     });
 
-    it('should enable register button when form is valid', () => {
-      const registerButtonElement = fixture.nativeElement.querySelector('#registerButton');
+    it('should enable save button when form is valid', () => {
+      const saveButtonElement = fixture.nativeElement.querySelector('#save');
 
-      expect(registerButtonElement.disabled).toBe(true);
+      expect(saveButtonElement.disabled).toBe(true);
 
       component.collectComplementDataForm.patchValue({
         mass: '12',
@@ -138,7 +138,7 @@ describe('ComplementDataComponent', () => {
       fixture.detectChanges();
 
       expect(component.collectComplementDataForm.valid).toBeTruthy();
-      expect(registerButtonElement.disabled).toBe(false);
+      expect(saveButtonElement.disabled).toBe(false);
     });
   });
 
@@ -155,7 +155,7 @@ describe('ComplementDataComponent', () => {
       expect(complementDataService.setCollectComplementDataFormValue).toHaveBeenCalled();
       expect(notificationService.success).toHaveBeenCalledWith(
         'Success',
-        'Dados complementares salvos com sucesso! Faça a coleta'
+        'Dados complementares salvos com sucesso!'
       );
     });
   });

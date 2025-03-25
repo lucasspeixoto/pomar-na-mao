@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { CollectComplementDataFormValue } from '../../../features/collect/constants/collect-complement-data-form';
+import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
 
 @Injectable({
   providedIn: 'root',

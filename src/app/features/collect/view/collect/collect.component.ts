@@ -1,21 +1,34 @@
-/* eslint-disable prefer-const */
-import { ChangeDetectionStrategy, Component, inject, AfterViewInit } from '@angular/core';
-import { PlantUploadComponent } from '../../../../shared/components/plant-upload/plant-upload.component';
-import { GeolocationComponent } from '../../../../shared/components/geolocation/geolocation.component';
-import { NzGridModule } from 'ng-zorro-antd/grid';
-import { ComplementDataComponent } from '../../../../shared/components/complement-data/complement-data.component';
-
-import type * as Leaflet from 'leaflet';
-
-import { GeolocationService } from '../../../../shared/services/geolocation/geolocation.service';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { CollectService } from '../../services/collect/collect.service';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { ComplementDataComponent } from '../../../collect/components/complement-data/complement-data.component';
+import { PlantUploadComponent } from '../../../collect/components/plant-upload/plant-upload.component';
+import { CollectService } from '../../../collect/services/collect/collect.service';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { Router } from '@angular/router';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { ObservationDataComponent } from '../../../collect/components/observation-data/observation-data.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { GeolocationComponent } from '../../../../shared/components/geolocation/geolocation.component';
 
-declare let L: typeof Leaflet;
+const ZORRO = [
+  NzDividerModule,
+  NzStepsModule,
+  NzGridModule,
+  NzButtonModule,
+  NzCardModule,
+  NzAlertModule,
+  NzIconModule,
+];
 
-const ZORRO = [NzGridModule, NzButtonModule];
-
-const COMPONENTS = [PlantUploadComponent, GeolocationComponent, ComplementDataComponent];
+const COMPONENTS = [
+  PlantUploadComponent,
+  ComplementDataComponent,
+  ObservationDataComponent,
+  GeolocationComponent,
+];
 
 @Component({
   selector: 'app-collect',
@@ -24,49 +37,15 @@ const COMPONENTS = [PlantUploadComponent, GeolocationComponent, ComplementDataCo
   styleUrl: './collect.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectComponent implements AfterViewInit {
-  private geolocationService = inject(GeolocationService);
-
+export class CollectComponent {
   private collectService = inject(CollectService);
 
-  public userMarker!: Leaflet.Marker;
+  public router = inject(Router);
 
-  public map!: Leaflet.Map;
+  public collectStep = this.collectService.collectStep;
 
-  public ngAfterViewInit(): void {
-    if (!navigator.geolocation) {
-      console.warn('Localização indisponível neste dispositivo!');
-      this.geolocationService.showUnavailableGeolocation();
-    }
-
-    this.map = L.map('map');
-
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
-
-        this.map.setView([latitude, longitude], 13); // Move o mapa para a nova posição
-
-        this.userMarker = L.marker([latitude, longitude]).addTo(this.map); // Cria um marcador para o usuário
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap contributors',
-          maxZoom: 19,
-        }).addTo(this.map);
-      },
-      this.geolocationService.handleGeolocationError,
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
-
-    navigator.geolocation.watchPosition(
-      position => {
-        const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
-
-        this.userMarker.setLatLng([latitude, longitude]); // Atualiza a posição do marcador
-      },
-      this.geolocationService.handleGeolocationError,
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-    );
+  public onCollectStepChange(collectStep: number): void {
+    this.collectService.collectStep.set(collectStep);
   }
 
   public collectHandler(): void {

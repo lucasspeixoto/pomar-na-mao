@@ -1,62 +1,32 @@
-<div class="container">
-  <nz-card [nzBordered]="true" nzTitle="Geolocalização">
-    @if (geolocationService.isLoading()) {
-      <nz-skeleton></nz-skeleton>
-    } @else {
-      <div class="content">
-        <div class="content__data">
-          <p>
-            Longitude:
-            @if (geolocationService.isCoordinatesAvailable()) {
-              <strong id="longitude">{{ geolocationService.coordinates()?.longitude }}</strong>
-            } @else {
-              <img
-                id="longitudeEmptyImg"
-                alt="Empty text logo"
-                src="assets/images/empty-text.png"
-                width="30px"
-                height="25px" />
-            }
-          </p>
-          <p>
-            Latitude:
-            @if (geolocationService.isCoordinatesAvailable()) {
-              <strong id="latitude">{{ geolocationService.coordinates()?.latitude }}</strong>
-            } @else {
-              <img
-                id="latitudeEmptyImg"
-                alt="Empty text logo"
-                src="assets/images/empty-text.png"
-                width="30px"
-                height="25px" />
-            }
-          </p>
-          <p>
-            Tempo:
-            @if (geolocationService.isCoordinatesAvailable()) {
-              <strong id="timestamp">{{
-                geolocationService.coordinatesTimestamp()! | epochToTime
-              }}</strong>
-            } @else {
-              <img
-                id="timestampEmptyImg"
-                alt="Empty text logo"
-                src="assets/images/empty-text.png"
-                width="30px"
-                height="25px" />
-            }
-          </p>
-        </div>
+<nz-card [nzBordered]="true" nzTitle="Geolocalização">
+  <div class="container">
+    <div class="container__items">
+      <span class="container__items-item"
+        >Latitude:
+        <strong id="latitude" class="color-primary"
+          >{{ geolocationService.coordinates()?.latitude }}
+        </strong>
+      </span>
 
-        <div class="content__action" (click)="loadGeolocationData()">
-          <img alt="Gps logo" src="assets/images/gps.png" />
-          @if (geolocationService.isCoordinatesAvailable()) {
-            <span id="gpsUpdate">Atualizar</span>
-          } @else {
-            <span id="gpsActive">Ative o Gps e atualize</span>
-          }
-        </div>
-      </div>
-    }
-  </nz-card>
-</div>
+      <nz-divider />
+
+      <span class="container__items-item"
+        >Longitude:
+        <strong id="longitude" class="color-primary"
+          >{{ geolocationService.coordinates()?.longitude }}
+        </strong>
+      </span>
+
+      <nz-divider />
+
+      <span class="container__items-item"
+        >Tempo:
+        <strong id="timestamp" class="color-primary"
+          >{{ geolocationService.coordinatesTimestamp()! | epochToTime }}
+        </strong>
+      </span>
+    </div>
+
+    <div id="map" class="container__map"></div>
+  </div>
+</nz-card>
