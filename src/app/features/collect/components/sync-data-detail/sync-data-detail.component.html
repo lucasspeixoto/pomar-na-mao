@@ -5,8 +5,9 @@
     <div class="container__form-box">
       <nz-form-item>
         <nz-form-control>
+          <label for="latitude">Latitude</label>
           <nz-input-group nzPrefixIcon="field-number">
-            <input nz-input formControlName="latitude" placeholder="Latitude" />
+            <input id="latitude" nz-input formControlName="latitude" placeholder="Latitude" />
           </nz-input-group>
           <app-custom-validation-message controlName="latitude" />
         </nz-form-control>
@@ -14,19 +15,11 @@
 
       <nz-form-item>
         <nz-form-control>
+          <label for="longitude">Longitude</label>
           <nz-input-group nzPrefixIcon="field-number">
-            <input nz-input formControlName="longitude" placeholder="Longitude" />
+            <input id="latitude" nz-input formControlName="longitude" placeholder="Longitude" />
           </nz-input-group>
           <app-custom-validation-message controlName="longitude" />
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="field-number">
-            <input nz-input formControlName="gpsTimestamp" placeholder="Tempo GPS" />
-          </nz-input-group>
-          <app-custom-validation-message controlName="gpsTimestamp" />
         </nz-form-control>
       </nz-form-item>
     </div>
@@ -34,54 +27,85 @@
     <div class="container__form-box">
       <nz-form-item>
         <nz-form-control>
-          <nz-input-group nzPrefixIcon="solution">
-            <input nz-input formControlName="mass" placeholder="Massa (kg)" />
+          <label for="gpsTimestamp">Tempo GPS</label>
+          <nz-input-group nzPrefixIcon="field-time">
+            <input
+              id="gpsTimestamp"
+              nz-input
+              formControlName="gpsTimestamp"
+              placeholder="Tempo GPS" />
           </nz-input-group>
-          <app-custom-validation-message controlName="mass" />
+          <app-custom-validation-message controlName="gpsTimestamp" />
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
         <nz-form-control>
+          <label for="mass">Massa (kg)</label>
+          <nz-input-group nzPrefixIcon="shopping">
+            <input id="mass" nz-input formControlName="mass" placeholder="Massa (kg)" />
+          </nz-input-group>
+          <app-custom-validation-message controlName="mass" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="container__form-box">
+      <nz-form-item>
+        <nz-form-control>
+          <label for="plantingDate">Data plantio</label>
           <nz-date-picker
+            id="plantingDate"
             [nzFormat]="'dd/MM/yyyy'"
             formControlName="plantingDate"
             nzPlaceHolder="Data plantio"></nz-date-picker>
           <app-custom-validation-message controlName="plantingDate" />
         </nz-form-control>
       </nz-form-item>
-    </div>
 
-    <div class="container__form-box">
       <nz-form-item>
         <nz-form-control>
-          <nz-input-group nzPrefixIcon="field-number">
-            <input nz-input formControlName="variety" placeholder="Variedade" />
+          <label for="variety">Variedade</label>
+          <nz-input-group nzPrefixIcon="exception">
+            <input id="variety" nz-input formControlName="variety" placeholder="Variedade" />
           </nz-input-group>
           <app-custom-validation-message controlName="variety" />
         </nz-form-control>
       </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="calendar">
-            <input nz-input type="text" formControlName="harvest" placeholder="Safra" />
-          </nz-input-group>
-          <app-custom-validation-message controlName="harvest" />
-        </nz-form-control>
-      </nz-form-item>
     </div>
 
     <div class="container__form-box">
       <nz-form-item>
         <nz-form-control>
-          <nz-input-group nzPrefixIcon="solution">
-            <input nz-input formControlName="lifeOfTheTree" placeholder="Vida do pé" />
+          <label for="harvest">Safra</label>
+          <nz-input-group nzPrefixIcon="calendar">
+            <input
+              id="harvest"
+              nz-input
+              type="text"
+              formControlName="harvest"
+              placeholder="Safra" />
+          </nz-input-group>
+          <app-custom-validation-message controlName="harvest" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <label for="lifeOfTheTree">Vida do pé</label>
+          <nz-input-group nzPrefixIcon="partition">
+            <input
+              id="lifeOfTheTree"
+              nz-input
+              formControlName="lifeOfTheTree"
+              placeholder="Vida do pé" />
           </nz-input-group>
           <app-custom-validation-message controlName="lifeOfTheTree" />
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div class="container__form-box">
       <nz-form-item>
         <nz-form-control id="stick">
           <label for="stick" nz-checkbox formControlName="stick">Galho Seco</label>
@@ -101,7 +125,7 @@
       <nz-form-item>
         <nz-form-control id="vineGrowing">
           <label for="vineGrowing" nz-checkbox formControlName="vineGrowing"
-            >Presença de cipó crescendo no pé</label
+            >Cipó crescendo no pé</label
           >
         </nz-form-control>
       </nz-form-item>
@@ -111,7 +135,9 @@
           <label for="burntBranch" nz-checkbox formControlName="burntBranch">Queimado</label>
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div class="container__form-box">
       <nz-form-item>
         <nz-form-control id="struckByLightning">
           <label for="struckByLightning" nz-checkbox formControlName="struckByLightning"
@@ -119,15 +145,15 @@
           >
         </nz-form-control>
       </nz-form-item>
-    </div>
 
-    <div class="container__form-box">
       <nz-form-item>
         <nz-form-control id="drill">
           <label for="drill" nz-checkbox formControlName="drill">Broca</label>
         </nz-form-control>
       </nz-form-item>
+    </div>
 
+    <div class="container__form-box">
       <nz-form-item>
         <nz-form-control id="anthill">
           <label for="anthill" nz-checkbox formControlName="anthill">Formigueiro próximo</label>
@@ -137,7 +163,7 @@
       <nz-form-item>
         <nz-form-control id="inExperiment">
           <label for="inExperiment" nz-checkbox formControlName="inExperiment"
-            >Em experimento/teste</label
+            >Experimento/teste</label
           >
         </nz-form-control>
       </nz-form-item>
@@ -153,31 +179,33 @@
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-control id="fertilizationOrManuring">
-          <label for="fertilizationOrManuring" nz-checkbox formControlName="fertilizationOrManuring"
-            >Parada de pulverização/adubação no final do dia</label
+        <nz-form-control id="emptyCollectionBoxNear">
+          <label for="emptyCollectionBoxNear" nz-checkbox formControlName="emptyCollectionBoxNear"
+            >Caixa de colheita vazia perto</label
           >
-        </nz-form-control>
-      </nz-form-item>
-
-      <nz-form-item>
-        <nz-form-control id="mites">
-          <label for="mites" nz-checkbox formControlName="mites">Presença de ácaro</label>
         </nz-form-control>
       </nz-form-item>
     </div>
 
     <div class="container__form-box">
       <nz-form-item>
-        <nz-form-control id="thrips">
-          <label for="thrips" nz-checkbox formControlName="thrips">Alta presença de tripes</label>
+        <nz-form-control id="mites">
+          <label for="mites" nz-checkbox formControlName="mites">Presença de ácaro</label>
         </nz-form-control>
       </nz-form-item>
 
       <nz-form-item>
-        <nz-form-control id="emptyCollectionBoxNear">
-          <label for="emptyCollectionBoxNear" nz-checkbox formControlName="emptyCollectionBoxNear"
-            >Caixa de colheita vazia perto</label
+        <nz-form-control id="thrips">
+          <label for="thrips" nz-checkbox formControlName="thrips">Alta presença de tripes</label>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="container__form-box">
+      <nz-form-item>
+        <nz-form-control id="fertilizationOrManuring">
+          <label for="fertilizationOrManuring" nz-checkbox formControlName="fertilizationOrManuring"
+            >Parada de pulverização/adubação no final do dia</label
           >
         </nz-form-control>
       </nz-form-item>

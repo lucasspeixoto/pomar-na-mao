@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { TimestampPipe } from '../../../../shared/pipes/timestamp/timestamp.pipe';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { IndexDbCollectService } from '../../../../shared/services/index-db/index-db-collect.service';
@@ -16,8 +15,19 @@ import { SyncActionsComponent } from '../../components/sync-actions/sync-actions
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { SyncDataDetailComponent } from '../../components/sync-data-detail/sync-data-detail.component';
 import { SynchronizeService } from '../../services/synchronize/synchronize.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { ShortTimestampPipe } from 'src/app/shared/pipes/short-timestamp/short-timestamp.pipe';
 
-const ZORRO = [NzModalModule, NzTableModule, NzAvatarModule, NzCardModule, NzButtonModule];
+const ZORRO = [
+  NzDividerModule,
+  NzIconModule,
+  NzModalModule,
+  NzTableModule,
+  NzAvatarModule,
+  NzCardModule,
+  NzButtonModule,
+];
 
 const COMPONENTS = [
   NoSyncDataComponent,
@@ -26,7 +36,7 @@ const COMPONENTS = [
   SyncDataDetailComponent,
 ];
 
-const COMMON = [DatePipe, TimestampPipe, AsyncPipe];
+const COMMON = [DatePipe, ShortTimestampPipe, AsyncPipe];
 
 @Component({
   selector: 'app-synchronize',

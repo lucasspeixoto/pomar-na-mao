@@ -1,6 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { PlantData } from '../../models/collect.model';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, tap } from 'rxjs';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -8,14 +9,14 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
+
+import { PlantData } from '../../models/collect.model';
 import { CustomValidationMessageComponent } from '../../../../shared/components/custom-validation-message/custom-validation-message';
 import {
   createSyncronizeDataForm,
   SyncronizeDataFormValue,
 } from '../../constants/syncronize-data-form';
 import { SynchronizeService } from '../../services/synchronize/synchronize.service';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { debounceTime, tap } from 'rxjs';
 import { convertKeysToSnakeCase } from '../../../../shared/utils/convert-keyts-to-snake-case';
 
 const COMMON = [NgIf, AsyncPipe, ReactiveFormsModule, CustomValidationMessageComponent];

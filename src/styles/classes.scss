@@ -1,14 +1,23 @@
+@import '../node_modules/ng-zorro-antd/ng-zorro-antd.dark.min.css';
+
 .update-icon {
   margin: 0 5px;
-  color: #4c72c5;
+  color: var(--ant-primary-color);
 }
 
 .sync-icon {
   margin: 0 5px;
-  color: #eeeb57;
+  color: var(--ant-warning-color);
 }
 
 .delete-icon {
   margin: 0 5px;
-  color: #cc5e5e;
+  color: var(--ant-error-color);
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
