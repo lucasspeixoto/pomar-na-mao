@@ -1,18 +1,20 @@
 <div class="container">
-  <h2>Sincronizar</h2>
+  <div class="container__header">
+    <h2>Sincronizar</h2>
+
+    <button
+      [disabled]="totalCollectedData() === 0"
+      (click)="syncAllCollectedData()"
+      nz-button
+      nzType="primary"
+      nzSize="large"
+      nzShape="circle">
+      <nz-icon nzType="cloud-upload" />
+    </button>
+  </div>
 
   @if (collectedData$ | async) {
     <app-sync-data-alert [totalCollectedData]="totalCollectedData()" />
-
-    <div class="container__buttons">
-      <button
-        [disabled]="totalCollectedData() === 0"
-        nz-button
-        nzType="primary"
-        (click)="syncAllCollectedData()">
-        Sincronizar
-      </button>
-    </div>
 
     <section class="container__table">
       <nz-table #editRowTable nzBordered [nzData]="collectedData()" nzTableLayout="fixed">
@@ -23,7 +25,7 @@
             <th>Tempo Gps</th>
             <th>Massa (kg)</th>
             <th>Safra</th>
-            <th>Data plantio</th>
+            <th>Plantio</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -32,7 +34,7 @@
             <tr>
               <td>{{ data.longitude }}</td>
               <td>{{ data.latitude }}</td>
-              <td>{{ data.gps_timestamp | timestamp }}</td>
+              <td>{{ data.gps_timestamp | shortTimestamp }}</td>
               <td>{{ data.mass }}</td>
               <td>{{ data.harvest }}</td>
               <td>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</td>
@@ -50,28 +52,12 @@
       </nz-table>
     </section>
 
-    <section class="container__cards">
+    <section class="no-select container__cards">
       @if (totalCollectedData() > 0) {
         @for (data of collectedData(); track data.id) {
-          <nz-card>
-            <div class="container__cards-data">
-              <p>
-                Latitude: <strong>{{ data.latitude }}</strong>
-              </p>
-              <p>
-                Longitude: <strong>{{ data.longitude }}</strong>
-              </p>
-              <p>
-                Tempo Gps: <strong>{{ data.gps_timestamp | timestamp }}</strong>
-              </p>
-              <p>
-                Safra: <strong>{{ data.harvest }}</strong>
-              </p>
-              <p>
-                Data: <strong>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</strong>
-              </p>
-            </div>
-            <div class="container__cards-icons">
+          <div class="container__cards-card">
+            <div class="container__cards-card_actions">
+              <span (click)="updateCollectData(data.id)">#{{ data.id.split('-')[0] }}...</span>
               <app-sync-actions
                 [data]="data"
                 (updateCollectData)="updateCollectData($event)"
@@ -79,7 +65,25 @@
                 (deleteCollectData)="deleteCollectData($event)">
               </app-sync-actions>
             </div>
-          </nz-card>
+
+            <div class="container__cards-card_data">
+              <p>
+                Latitude: <strong>{{ data.latitude }}</strong>
+              </p>
+              <p>
+                Longitude: <strong>{{ data.longitude }}</strong>
+              </p>
+              <p>
+                Tempo Gps: <strong>{{ data.gps_timestamp | shortTimestamp }}</strong>
+              </p>
+              <p>
+                Safra: <strong>{{ data.harvest }}</strong>
+              </p>
+              <p>
+                Plantio: <strong>{{ data.planting_date | date: 'dd/MM/yyyy' : '' : 'pt' }}</strong>
+              </p>
+            </div>
+          </div>
         }
       } @else {
         <app-no-sync-data />
