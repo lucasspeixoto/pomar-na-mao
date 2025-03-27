@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -15,6 +15,7 @@ import {
 import { CustomValidationMessageComponent } from '../../../../shared/components/custom-validation-message/custom-validation-message';
 import { ComplementDataService } from '../../services/complement-data/complement-data.service';
 import { CollectService } from '../../services/collect/collect.service';
+import { CollectStepService } from '../../services/collect-step/collect-step.service';
 
 @Component({
   selector: 'app-complement-data',
@@ -33,14 +34,24 @@ import { CollectService } from '../../services/collect/collect.service';
   styleUrls: ['./complement-data.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComplementDataComponent {
+export class ComplementDataComponent implements OnInit {
   public complementDataService = inject(ComplementDataService);
 
   public notificationService = inject(NzNotificationService);
 
   public collectService = inject(CollectService);
 
+  private collectStepService = inject(CollectStepService);
+
   public collectComplementDataForm = createCollectComplementDataForm();
+
+  public ngOnInit(): void {
+    const complementData = this.complementDataService.getCollectComplementDataFormValue();
+
+    if (complementData) {
+      this.collectComplementDataForm.setValue(complementData);
+    }
+  }
 
   public saveComplementCollectDataHandler(): void {
     const complementData = {
@@ -52,7 +63,7 @@ export class ComplementDataComponent {
     this.notificationService.success('Success', 'Dados complementares salvos com sucesso!');
 
     setTimeout(() => {
-      this.collectService.collectStep.set(3);
+      this.collectStepService.setCollectStep(3);
     }, 1000);
   }
 }

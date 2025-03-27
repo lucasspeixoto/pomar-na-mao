@@ -11,7 +11,7 @@ export class ComplementDataService {
     return this.collectComplementDataFormValue();
   }
 
-  public setCollectComplementDataFormValue(value: CollectComplementDataFormValue): void {
+  public setCollectComplementDataFormValue(value: CollectComplementDataFormValue | null): void {
     this.collectComplementDataFormValue.set(value);
   }
 }

@@ -12,7 +12,7 @@
         <img [src]="plantUploadService.plantPhotoString()" alt="Foto planta" />
 
         <p>
-          <span>{{ imageName() }}</span> ({{ fileSize() }} KB)
+          <span>{{ plantUploadService.imageName() }}</span> ({{ plantUploadService.fileSize() }} KB)
         </p>
       } @else {
         <img src="assets/images/empty-photo.jpg" width="150px" height="150px" alt="Sem foto" />
