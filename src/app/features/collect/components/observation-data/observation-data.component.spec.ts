@@ -24,7 +24,10 @@ describe('ObservationDataComponent', () => {
 
   beforeEach(() => {
     const collectServiceMock = { insertAPlantCollectHandler: jest.fn() };
-    const observationDataServiceMock = { setCollectObservationDataFormValue: jest.fn() };
+    const observationDataServiceMock = {
+      getCollectObservationDataFormValue: jest.fn(),
+      setCollectObservationDataFormValue: jest.fn(),
+    };
     const notificationServiceMock = { success: jest.fn() };
 
     TestBed.configureTestingModule({

@@ -4,14 +4,14 @@ import {
   inject,
   signal,
   ViewChild,
-  type ElementRef,
+  ElementRef,
 } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { PlantUploadService } from '../../services/plant-upload/plant-upload.service';
-import { CollectService } from '../../services/collect/collect.service';
+import { CollectStepService } from '../../services/collect-step/collect-step.service';
 
 @Component({
   selector: 'app-plant-upload',
@@ -25,15 +25,9 @@ export class PlantUploadComponent {
 
   public plantUploadService = inject(PlantUploadService);
 
-  private collectService = inject(CollectService);
-
-  public imageName = signal('');
-
-  public fileSize = signal(0);
+  private collectStepService = inject(CollectStepService);
 
   public uploadProgress = signal(0);
-
-  public plantPhotoString = signal('');
 
   @ViewChild('fileInput') fileInput: ElementRef | undefined;
 
@@ -69,7 +63,7 @@ export class PlantUploadComponent {
     if (file && file.type.startsWith('image/')) {
       this.selectedFile = file;
 
-      this.fileSize.set(Math.round(file.size / 1024));
+      this.plantUploadService.fileSize.set(Math.round(file.size / 1024));
 
       const reader = new FileReader();
 
@@ -81,10 +75,10 @@ export class PlantUploadComponent {
 
       this.uploadSuccess = true;
       this.uploadError = false;
-      this.imageName.set(file.name);
+      this.plantUploadService.imageName.set(file.name);
 
       setTimeout(() => {
-        this.collectService.collectStep.set(2);
+        this.collectStepService.setCollectStep(2);
       }, 1000);
     } else {
       this.uploadSuccess = false;

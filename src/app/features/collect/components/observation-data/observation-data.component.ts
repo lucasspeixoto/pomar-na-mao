@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -30,12 +30,20 @@ import {
   styleUrls: ['./observation-data.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ObservationDataComponent {
+export class ObservationDataComponent implements OnInit {
   public observationDataService = inject(ObservationDataService);
 
   public notificationService = inject(NzNotificationService);
 
   public collectObservationDataForm = createCollectObservationDataForm();
+
+  public ngOnInit(): void {
+    const observationData = this.observationDataService.getCollectObservationDataFormValue();
+
+    if (observationData) {
+      this.collectObservationDataForm.patchValue(observationData);
+    }
+  }
 
   public saveObservationCollectDataHandler(): void {
     const observationData = {

@@ -15,6 +15,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ComplementDataService } from '../../services/complement-data/complement-data.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { CollectStepService } from '../../services/collect-step/collect-step.service';
 
 describe('ComplementDataComponent', () => {
   let component: ComplementDataComponent;
@@ -24,8 +25,12 @@ describe('ComplementDataComponent', () => {
 
   beforeEach(() => {
     const collectServiceMock = { insertAPlantCollectHandler: jest.fn() };
-    const complementDataServiceMock = { setCollectComplementDataFormValue: jest.fn() };
+    const complementDataServiceMock = {
+      getCollectComplementDataFormValue: jest.fn(),
+      setCollectComplementDataFormValue: jest.fn(),
+    };
     const notificationServiceMock = { success: jest.fn() };
+    const collectStepServiceMock = { setCollectStep: jest.fn() };
 
     TestBed.configureTestingModule({
       imports: [
@@ -41,6 +46,7 @@ describe('ComplementDataComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideAnimations(),
+        { provide: CollectStepService, useValue: collectStepServiceMock },
         { provide: CollectService, useValue: collectServiceMock },
         { provide: ComplementDataService, useValue: complementDataServiceMock },
         { provide: NzNotificationService, useValue: notificationServiceMock },

@@ -12,6 +12,7 @@ import { PlantUploadComponent } from '../../../collect/components/plant-upload/p
 import { CollectService } from '../../../collect/services/collect/collect.service';
 import { ObservationDataComponent } from '../../../collect/components/observation-data/observation-data.component';
 import { GeolocationComponent } from '../../../../shared/components/geolocation/geolocation.component';
+import { CollectStepService } from 'src/app/features/collect/services/collect-step/collect-step.service';
 
 const ZORRO = [
   NzDividerModule,
@@ -40,9 +41,15 @@ const COMPONENTS = [
 export class OfflineCollectComponent {
   private collectService = inject(CollectService);
 
+  public collectStepService = inject(CollectStepService);
+
   public router = inject(Router);
 
-  public collectStep = this.collectService.collectStep;
+  public collectStep = this.collectStepService.getCollectStep();
+
+  public collectMobileSteps = this.collectStepService.getCollectMobileSteps();
+
+  public collectDesktopSteps = this.collectStepService.getCollectDesktopSteps();
 
   public isMobile = window.innerWidth < 450;
 
@@ -52,12 +59,10 @@ export class OfflineCollectComponent {
   }
 
   public onCollectStepChange(collectStep: number): void {
-    this.collectService.collectStep.set(collectStep);
+    this.collectStepService.setCollectStep(collectStep);
   }
 
   public collectHandler(): void {
     this.collectService.storageAPlantCollectHandler();
-
-    this.collectService.collectStep.set(0);
   }
 }

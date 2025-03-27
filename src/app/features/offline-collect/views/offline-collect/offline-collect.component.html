@@ -20,15 +20,13 @@
       [nzCurrent]="collectStep()"
       (nzIndexChange)="onCollectStepChange($event)">
       @if (isMobile) {
-        <nz-step nzIcon="user"></nz-step>
-        <nz-step nzIcon="file-image"></nz-step>
-        <nz-step nzIcon="database"></nz-step>
-        <nz-step nzIcon="form"></nz-step>
+        @for (step of collectMobileSteps(); track step.icon) {
+          <nz-step [nzIcon]="step.icon"></nz-step>
+        }
       } @else {
-        <nz-step nzTitle="GPS"></nz-step>
-        <nz-step nzTitle="Imagem"></nz-step>
-        <nz-step nzTitle="Dados"></nz-step>
-        <nz-step nzTitle="Ocorrências"></nz-step>
+        @for (step of collectDesktopSteps(); track step.title) {
+          <nz-step [nzTitle]="step.title"></nz-step>
+        }
       }
     </nz-steps>
   </div>

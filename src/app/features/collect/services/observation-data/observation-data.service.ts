@@ -11,7 +11,7 @@ export class ObservationDataService {
     return this.collectObservationDataFormValue();
   }
 
-  public setCollectObservationDataFormValue(value: CollectObservationDataFormValue): void {
+  public setCollectObservationDataFormValue(value: CollectObservationDataFormValue | null): void {
     this.collectObservationDataFormValue.set(value);
   }
 }
