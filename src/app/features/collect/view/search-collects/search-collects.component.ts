@@ -8,13 +8,13 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
-  selector: 'app-base',
+  selector: 'app-search-collects',
   imports: [NzTableModule, DatePipe, TimestampPipe, NzAvatarModule, NzCardModule, NzIconModule],
-  templateUrl: './base.component.html',
-  styleUrl: './base.component.scss',
+  templateUrl: './search-collects.component.html',
+  styleUrl: './search-collects.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BaseComponent implements OnInit {
+export class SearchCollectsComponent implements OnInit {
   public collectService = inject(CollectService);
 
   public expandSet = new Set<string>();

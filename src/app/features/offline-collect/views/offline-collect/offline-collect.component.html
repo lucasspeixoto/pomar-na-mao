@@ -19,14 +19,8 @@
       nzSize="small"
       [nzCurrent]="collectStep()"
       (nzIndexChange)="onCollectStepChange($event)">
-      @if (isMobile) {
-        @for (step of collectMobileSteps(); track step.icon) {
-          <nz-step [nzIcon]="step.icon"></nz-step>
-        }
-      } @else {
-        @for (step of collectDesktopSteps(); track step.title) {
-          <nz-step [nzTitle]="step.title"></nz-step>
-        }
+      @for (step of collectDesktopSteps(); track step.title) {
+        <nz-step [nzTitle]="step.title"></nz-step>
       }
     </nz-steps>
   </div>

@@ -79,7 +79,7 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       position => {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        this.userMarker?.setLatLng([latitude, longitude]); // Atualiza a posição do marcador
+        this.userMarker?.setLatLng([latitude, longitude]);
       },
       error => {
         this.geolocationService.handleGeolocationError(error);
