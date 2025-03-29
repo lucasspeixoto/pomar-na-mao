@@ -1,4 +1,4 @@
-import type { CypressQueryElement } from '../models/cypress';
+import { CypressQueryElement } from '../models/cypress';
 
 class LoginForm {
   elements = {

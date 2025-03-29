@@ -33,3 +33,17 @@ textarea.ant-input {
     padding: 15px 2px;
   }
 }
+
+.ant-steps-item-content,
+.ant-steps-item-title,
+.ant-steps-item-title {
+  font-size: 14px !important;
+
+  @media screen and (max-width: 418px) {
+    font-size: 11px !important;
+  }
+
+  @media screen and (max-width: 300px) {
+    font-size: 8px !important;
+  }
+}
