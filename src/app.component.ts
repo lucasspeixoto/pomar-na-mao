@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LayoutService } from './app/layout/service/layout.service';
@@ -17,6 +18,9 @@ import { UpdateService } from './app/services/update/update.service';
     <router-outlet />
     <app-loading [isLoading]="loadingService.isLoading()" />
     <app-connectivity />
+    @if (showInstallButton) {
+      <button (click)="installPWA()">📥 Instalar Pomar na Mão</button>
+    }
   </div>`,
 })
 export class AppComponent implements OnInit {
@@ -30,6 +34,9 @@ export class AppComponent implements OnInit {
 
   private platformId = inject(PLATFORM_ID);
 
+  deferredPrompt: any;
+  showInstallButton = false;
+
   public async ngOnInit(): Promise<void> {
     if (isPlatformBrowser(this.platformId)) {
       this.layoutService.startAppConfig();
@@ -40,6 +47,26 @@ export class AppComponent implements OnInit {
     if (hasUpdateAvailable) {
       this.notificationService.showNotification('Atualização', {
         body: 'Existe uma atualização disponível!',
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault();
+      this.deferredPrompt = event;
+      this.showInstallButton = true; // Show your custom Install button
+    });
+  }
+
+  public installPWA(): void {
+    if (this.deferredPrompt) {
+      this.deferredPrompt.prompt();
+      this.deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('Usuário aceitou instalação');
+        } else {
+          console.log('Usuário recusou instalação');
+        }
+        this.deferredPrompt = null;
       });
     }
   }
