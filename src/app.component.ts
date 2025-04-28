@@ -90,16 +90,20 @@ export class AppComponent implements OnInit {
   }
 
   public installPWA(): void {
+    this.loadingService.isLoading.set(true);
+
     if (this.deferredPrompt) {
       this.deferredPrompt.prompt();
-      this.deferredPrompt.userChoice
-        .then((choiceResult: any) => {
-          if (choiceResult.outcome === 'accepted') {
-            this.loadingService.isLoading.set(true);
-          }
-          this.deferredPrompt = null;
-        })
-        .finally(() => this.loadingService.isLoading.set(false));
+      this.deferredPrompt.userChoice.then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.warn('Instalação aceita!');
+        } else {
+          console.warn('Instalação rejeitada!');
+        }
+        this.deferredPrompt = null;
+      });
     }
+
+    this.loadingService.isLoading.set(false);
   }
 }
