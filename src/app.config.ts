@@ -3,7 +3,8 @@ import {
   ApplicationConfig,
   importProvidersFrom,
   inject,
-  provideAppInitializer, isDevMode,
+  provideAppInitializer,
+  isDevMode,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -35,12 +36,10 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       translation: ptBrTranslation,
       theme: { preset: Lara, options: { darkModeSelector: '.app-dark' } },
-    }), provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          }), provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          }),
+    }),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };

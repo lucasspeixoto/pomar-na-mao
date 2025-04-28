@@ -6,6 +6,8 @@ import { LoadingComponent } from './app/pages/loading/loading.component';
 import { LoadingService } from './app/services/loading/loading.service';
 import { ToastModule } from 'primeng/toast';
 import { ConnectivityComponent } from './app/components/connectivity/connectivity.component';
+import { NotificationService } from './app/services/notification/notification.service';
+import { UpdateService } from './app/services/update/update.service';
 
 @Component({
   selector: 'app-root',
@@ -22,11 +24,23 @@ export class AppComponent implements OnInit {
 
   public loadingService = inject(LoadingService);
 
+  public updateService = inject(UpdateService);
+
+  public notificationService = inject(NotificationService);
+
   private platformId = inject(PLATFORM_ID);
 
-  public ngOnInit(): void {
+  public async ngOnInit(): Promise<void> {
     if (isPlatformBrowser(this.platformId)) {
       this.layoutService.startAppConfig();
+    }
+
+    const hasUpdateAvailable = await this.updateService.checkForUpdate();
+
+    if (hasUpdateAvailable) {
+      this.notificationService.showNotification('Atualização', {
+        body: 'Existe uma atualização disponível!',
+      });
     }
   }
 }
