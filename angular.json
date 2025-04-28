@@ -15,7 +15,7 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@ngx-env/builder:application",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "outputPath": "dist/pomar-na-mao",
                         "index": "src/index.html",
@@ -28,12 +28,7 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/manifest.webmanifest",
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                                "output": "/assets/"
-                            }
+                            "src/manifest.webmanifest"
                         ],
                         "styles": [
                             "src/styles.scss"
