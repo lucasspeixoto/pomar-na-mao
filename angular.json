@@ -32,7 +32,7 @@
                             {
                                 "glob": "**/*",
                                 "input": "./node_modules/primeicons/",
-                                "output": "/assets/primeicons/"
+                                "output": "/assets/"
                             }
                         ],
                         "styles": [
