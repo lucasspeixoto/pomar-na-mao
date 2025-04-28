@@ -85,14 +85,21 @@ export class AppComponent implements OnInit {
     window.addEventListener('beforeinstallprompt', event => {
       event.preventDefault();
       this.deferredPrompt = event;
-      this.showInstallButton = true;
+      this.showInstallButton = true; // Show your custom Install button
     });
   }
 
   public installPWA(): void {
     if (this.deferredPrompt) {
       this.deferredPrompt.prompt();
-      this.deferredPrompt.userChoice.then(() => (this.deferredPrompt = null));
+      this.deferredPrompt.userChoice
+        .then((choiceResult: any) => {
+          if (choiceResult.outcome === 'accepted') {
+            this.loadingService.isLoading.set(true);
+          }
+          this.deferredPrompt = null;
+        })
+        .finally(() => this.loadingService.isLoading.set(false));
     }
   }
 }
