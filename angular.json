@@ -31,7 +31,12 @@
                             "src/manifest.webmanifest",
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/primeicons/raw-svg/",
+                                "input": "./node_modules/primeicons/",
+                                "output": "/assets/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/primeng/",
                                 "output": "/assets/"
                             }
                         ],
@@ -111,7 +116,17 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/manifest.webmanifest"
+                            "src/manifest.webmanifest",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/primeicons/",
+                                "output": "/assets/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/primeng/",
+                                "output": "/assets/"
+                            }
                         ],
                         "styles": [
                             "src/styles.scss"
