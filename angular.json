@@ -31,7 +31,7 @@
                             "src/manifest.webmanifest",
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/primeicons/",
+                                "input": "./node_modules/primeicons/raw-svg/",
                                 "output": "/assets/"
                             }
                         ],
