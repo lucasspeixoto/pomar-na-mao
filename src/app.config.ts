@@ -3,7 +3,7 @@ import {
   ApplicationConfig,
   importProvidersFrom,
   inject,
-  provideAppInitializer,
+  provideAppInitializer, isDevMode,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ptBrTranslation } from './app/utils/pt-br';
 import { LayoutService } from './app/layout/service/layout.service';
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,6 +35,12 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       translation: ptBrTranslation,
       theme: { preset: Lara, options: { darkModeSelector: '.app-dark' } },
-    }),
+    }), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 };

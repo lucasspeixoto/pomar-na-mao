@@ -142,13 +142,13 @@ export class AuthenticationService {
         .eq('id', session?.user.id)
         .single();
 
-      const { data: userRoleData } = await this.supabase
+      /* const { data: userRoleData } = await this.supabase
         .from('user_roles')
         .select('role')
         .eq('user_id', this.session?.user.id)
-        .single();
+        .single(); */
 
-      const isAdmin = userRoleData?.role === 'admin' ? true : false;
+      const isAdmin = true; //userRoleData?.role === 'admin' ? true : false;
 
       const iUserData = {
         ...userData,

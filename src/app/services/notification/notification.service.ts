@@ -19,6 +19,16 @@ export class NotificationService {
       return;
     }
 
+    /* Notification.requestPermission().then(permission => {
+      console.log('User choice:', permission);
+      if (permission === 'granted') {
+      }
+    }); */
+
+    const registration = await navigator.serviceWorker.ready;
+    // Use ServiceWorker notification instead of window.Notification
+    await registration.showNotification(title, options);
+
     if (window.Notification.permission === 'granted') {
       try {
         // Get ServiceWorker registration
