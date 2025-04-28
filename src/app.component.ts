@@ -34,8 +34,8 @@ import { ButtonModule } from 'primeng/button';
       .installer {
         > p-button {
           position: fixed;
-          top: 15px;
-          right: 15px;
+          top: 17px;
+          right: 17px;
           width: 40px;
           height: 40px;
           cursor: pointer;
