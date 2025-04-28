@@ -8,6 +8,19 @@ import { providePrimeNG } from 'primeng/config';
 import { LayoutService } from './app/layout/service/layout.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { SwUpdate } from '@angular/service-worker';
+import { UpdateService } from './app/services/update/update.service';
+
+// Add mock SwUpdate
+const swUpdateMock = {
+  available: {
+    subscribe: () => {},
+  },
+  activated: {
+    subscribe: () => {},
+  },
+  checkForUpdate: () => Promise.resolve(),
+};
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -22,9 +35,11 @@ describe('AppComponent', () => {
       providers: [
         ToastModule,
         MessageService,
+        UpdateService,
         provideAnimationsAsync(),
         providePrimeNG(),
         { provide: LayoutService, useValue: layoutServiceMock },
+        { provide: SwUpdate, useValue: swUpdateMock },
       ],
     }).compileComponents();
 
