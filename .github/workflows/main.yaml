@@ -22,9 +22,6 @@ jobs:
           touch .env
           echo VERCEL_TOKEN=${{ secrets.VERCEL_TOKEN }} >> .env
           echo VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }} >> .env
-          echo NG_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }} >> .env
-          echo NG_APP_SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} >> .env
-          echo NG_APP_INDEXDB_KEY=${{ secrets.INDEXDB_KEY }} >> .env
 
       - name: 📥 Install Dependencies
         run: npm install
@@ -61,10 +58,6 @@ jobs:
       - name: 📩 Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: 🏗️ Build Project Artifacts
-        env:
-          NG_APP_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          NG_APP_SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          NG_APP_INDEXDB_KEY: ${{ secrets.INDEXDB_KEY }}
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: 🚀 Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
