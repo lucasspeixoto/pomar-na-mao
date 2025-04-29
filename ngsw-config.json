@@ -3,11 +3,15 @@
     "index": "/index.html",
     "assetGroups": [
         {
-            "name": "fonts",
+            "name": "cdn-assets",
             "installMode": "prefetch",
+            "updateMode": "prefetch",
             "resources": {
-                "files": [
-                    "/assets/fonts/**"
+                "urls": [
+                    "https://unpkg.com/primeicons@latest/primeicons.css",
+                    "https://unpkg.com/primeicons@latest/fonts/primeicons.woff2",
+                    "https://unpkg.com/primeicons@latest/fonts/primeicons.woff",
+                    "https://unpkg.com/primeicons@latest/fonts/primeicons.ttf"
                 ]
             }
         },
