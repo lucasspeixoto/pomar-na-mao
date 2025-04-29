@@ -31,12 +31,7 @@
                             "src/manifest.webmanifest",
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/primeicons/",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/primeng/",
+                                "input": "./node_modules/primeicons/raw-svg/*",
                                 "output": "/assets/"
                             }
                         ],
@@ -119,12 +114,7 @@
                             "src/manifest.webmanifest",
                             {
                                 "glob": "**/*",
-                                "input": "./node_modules/primeicons/",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/primeng/",
+                                "input": "./node_modules/primeicons/raw-svg/*",
                                 "output": "/assets/"
                             }
                         ],
