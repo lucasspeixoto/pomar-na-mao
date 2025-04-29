@@ -18,7 +18,7 @@ export class CacheInspectorService {
           console.log('Assets in cache:');
 
           cachedRequests
-            /* .filter(request => new URL(request.url).pathname.startsWith('/assets/')) */
+            .filter(request => new URL(request.url).pathname.startsWith('/cdn-assets/'))
             .forEach(request => {
               console.log(`- ${request.url}`);
             });
