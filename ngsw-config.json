@@ -4,14 +4,12 @@
     "assetGroups": [
         {
             "name": "cdn-assets",
-            "installMode": "prefetch",
+            "installMode": "lazy",
             "updateMode": "prefetch",
             "resources": {
-                "urls": [
-                    "https://unpkg.com/primeicons@latest/primeicons.css",
-                    "https://unpkg.com/primeicons@latest/fonts/primeicons.woff2",
-                    "https://unpkg.com/primeicons@latest/fonts/primeicons.woff",
-                    "https://unpkg.com/primeicons@latest/fonts/primeicons.ttf"
+                "files": [
+                    "/assets/primeicons/raw-svg/*.(svg|jpg|jpeg|png|webp|avif|icon)",
+                    "/assets/primeicons/fonts/*.(svg|eot|ttf|woff|woff2)"
                 ]
             }
         },
