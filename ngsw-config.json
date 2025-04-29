@@ -3,6 +3,15 @@
     "index": "/index.html",
     "assetGroups": [
         {
+            "name": "fonts",
+            "installMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/assets/fonts/**"
+                ]
+            }
+        },
+        {
             "name": "app",
             "installMode": "prefetch",
             "resources": {
@@ -44,6 +53,18 @@
             "resources": {
                 "urls": [
                     "https://tile.openstreetmap.org/*"
+                ]
+            }
+        },
+        {
+            "name": "fonts",
+            "installMode": "prefetch",
+            "resources": {
+                "files": [
+                    "node_modules/primeicons/primeicons.css",
+                    "node_modules/primeicons/fonts/*.woff2",
+                    "node_modules/primeicons/fonts/*.woff",
+                    "node_modules/primeicons/fonts/*.ttf"
                 ]
             }
         }

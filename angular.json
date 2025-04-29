@@ -15,7 +15,7 @@
             "prefix": "app",
             "architect": {
                 "build": {
-                    "builder": "@ngx-env/builder:application",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "outputPath": "dist/pomar-na-mao",
                         "index": "src/index.html",
@@ -28,7 +28,12 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/manifest.webmanifest"
+                            "src/manifest.webmanifest",
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/primeicons/fonts",
+                                "output": "/assets/fonts/"
+                            }
                         ],
                         "styles": [
                             "src/styles.scss"
@@ -77,7 +82,7 @@
                     "defaultConfiguration": "production"
                 },
                 "serve": {
-                    "builder": "@ngx-env/builder:dev-server",
+                    "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
                             "buildTarget": "pomar-na-mao:build:production"
@@ -92,10 +97,10 @@
                     }
                 },
                 "extract-i18n": {
-                    "builder": "@ngx-env/builder:extract-i18n"
+                    "builder": "@angular-devkit/build-angular:extract-i18n"
                 },
                 "test": {
-                    "builder": "@ngx-env/builder:karma",
+                    "builder": "@angular-devkit/build-angular:karma",
                     "options": {
                         "polyfills": [
                             "zone.js",
