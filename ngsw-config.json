@@ -46,6 +46,16 @@
                     "https://tile.openstreetmap.org/*"
                 ]
             }
+        },
+        {
+            "name": "primeicons",
+            "installMode": "lazy",
+            "updateMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/assets/primeicons/**"
+                ]
+            }
         }
     ],
     "dataGroups": [
