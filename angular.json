@@ -37,7 +37,7 @@
                         ],
                         "styles": [
                             "src/styles.scss",
-                            "node_modules/primeicons/primeicons.css"
+                            "src/assets/primeicons/primeicons.css"
                         ],
                         "stylePreprocessorOptions": {
                             "sass": {
