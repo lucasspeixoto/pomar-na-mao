@@ -28,16 +28,10 @@
                         "assets": [
                             "src/favicon.ico",
                             "src/assets",
-                            "src/manifest.webmanifest",
-                            {
-                                "glob": "**/*",
-                                "input": "./node_modules/primeicons/",
-                                "output": "/assets/primeicons/"
-                            }
+                            "src/manifest.webmanifest"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "src/assets/primeicons/primeicons.css"
+                            "src/styles.scss"
                         ],
                         "stylePreprocessorOptions": {
                             "sass": {
