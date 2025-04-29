@@ -3,6 +3,15 @@
     "index": "/index.html",
     "assetGroups": [
         {
+            "name": "fonts",
+            "installMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/assets/fonts/**"
+                ]
+            }
+        },
+        {
             "name": "app",
             "installMode": "prefetch",
             "resources": {
