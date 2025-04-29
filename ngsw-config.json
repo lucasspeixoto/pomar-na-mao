@@ -24,8 +24,7 @@
             "resources": {
                 "files": [
                     "/assets/images/*.(jpg|jpeg|png|webp|avif|icon)",
-                    "/assets/sounds/*.(mp3|wav)",
-                    "/assets/primeicons/*"
+                    "/assets/sounds/*.(mp3|wav)"
                 ]
             }
         },
