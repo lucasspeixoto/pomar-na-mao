@@ -2,7 +2,7 @@
     "name": "Pomar na mão",
     "short_name": "Pomar na mão",
     "theme_color": "#1976d2",
-    "background_color": "#a7fca8",
+    "background_color": "#fafafa",
     "display": "standalone",
     "version": "0.0.0",
     "start_url": "./",

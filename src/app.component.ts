@@ -15,13 +15,13 @@ import { CacheInspectorService } from './app/services/cache-inspector/cache-insp
 @Component({
   selector: 'app-root',
   imports: [RouterModule, ButtonModule, LoadingComponent, ConnectivityComponent, ToastModule],
-  template: `<div>
-    <p-toast />
-    <router-outlet />
-    <app-loading [isLoading]="loadingService.isLoading()" />
-    <app-connectivity />
-  </div>`,
-  styles: [],
+  template: ` <p-toast styleClass="hidden md:block" position="top-right" />
+    <p-toast styleClass="md:hidden block" position="top-center" />
+    <div>
+      <router-outlet />
+      <app-loading [isLoading]="loadingService.isLoading()" />
+      <app-connectivity />
+    </div>`,
 })
 export class AppComponent implements OnInit {
   public layoutService = inject(LayoutService);
@@ -51,7 +51,6 @@ export class AppComponent implements OnInit {
       this.notificationService.showNotification('Atualização', {
         body: 'Existe uma atualização disponível!',
         icon: '/assets/icons/icon-72x72.png',
-        badge: '/assets/images/notification-badge.png',
       });
     }
 
