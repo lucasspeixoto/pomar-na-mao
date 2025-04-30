@@ -16,6 +16,7 @@ import {
   createResetPasswordForm,
   ResetPasswordFormValue,
 } from '../../constants/reset-password-form';
+import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -78,6 +79,7 @@ import {
             </form>
             <div class="w-full text-center">
               <p-button
+                [disabled]="!connectivityService.isOnline()"
                 (click)="resetPasswordHandler()"
                 id="resetPasswordButton"
                 label="Gerar"
@@ -98,6 +100,8 @@ export class ResetPasswordComponent {
   public loadingService = inject(LoadingService);
 
   public messageService = inject(MessageService);
+
+  public connectivityService = inject(ConnectivityService);
 
   public resetPasswordForm = createResetPasswordForm();
 

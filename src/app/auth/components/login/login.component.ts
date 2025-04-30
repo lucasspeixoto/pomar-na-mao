@@ -11,8 +11,8 @@ import { messages } from '../../../utils/messages';
 import { createLoginForm, LoginFormValue } from '../../constants/login-form';
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoadingService } from '../../../services/loading/loading.service';
-
 import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message';
+import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-login',
@@ -94,6 +94,7 @@ import { CustomValidationMessageComponent } from '../../../components/custom-val
             </form>
             <div class="w-full text-center">
               <p-button
+                [disabled]="!connectivityService.isOnline()"
                 (click)="loginHandler()"
                 id="loginButton"
                 label="Entrar"
@@ -114,6 +115,8 @@ export class LoginComponent {
   public loadingService = inject(LoadingService);
 
   public messageService = inject(MessageService);
+
+  public connectivityService = inject(ConnectivityService);
 
   public loginForm = createLoginForm();
 

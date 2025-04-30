@@ -16,6 +16,7 @@ import {
   createForgotPasswordForm,
   ForgotPasswordFormValue,
 } from '../../constants/forgot-password-form';
+import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -73,6 +74,7 @@ import {
             </form>
             <div class="w-full text-center">
               <p-button
+                [disabled]="!connectivityService.isOnline()"
                 (click)="forgotPasswordHandler()"
                 id="forgotPasswordButton"
                 label="Lembrar"
@@ -93,6 +95,8 @@ export class ForgotPasswordComponent {
   public loadingService = inject(LoadingService);
 
   public messageService = inject(MessageService);
+
+  public connectivityService = inject(ConnectivityService);
 
   public forgotPasswordForm = createForgotPasswordForm();
 
