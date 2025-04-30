@@ -130,7 +130,7 @@ export class LoginComponent {
         severity: 'info',
         summary: 'Info',
         detail: 'Preenchas os campos corretamente',
-        life: 3000,
+        life: 300000,
       });
 
       this.loadingService.isLoading.set(false);
