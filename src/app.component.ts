@@ -51,25 +51,10 @@ export class AppComponent implements OnInit {
       this.notificationService.showNotification('Atualização', {
         body: 'Existe uma atualização disponível!',
         icon: '/assets/icons/icon-72x72.png',
+        badge: '/assets/icons/icon-72x72.png',
       });
     }
 
-    /* window.addEventListener('beforeinstallprompt', event => {
-      event.preventDefault();
-      this.installPrompt = event;
-      this.showInstallButton = true;
-    }); */
-
     this.cacheInspector.checkAssetsCache();
   }
-
-  /* public async installPWA(): Promise<void> {
-    this.loadingService.isLoading.set(true);
-
-    if (this.installPrompt) {
-      await this.installPrompt.prompt();
-    }
-
-    this.loadingService.isLoading.set(false);
-  } */
 }
