@@ -17,6 +17,7 @@ export class ConnectivityComponent {
       if (!this.connectivityService.isOnline()) {
         this.notificationService.showNotification('Acesso a internet', {
           body: 'Você está offline',
+          icon: '/assets/icons/icon-72x72.png',
         });
 
         return;
@@ -24,6 +25,7 @@ export class ConnectivityComponent {
 
       this.notificationService.showNotification('Acesso a internet', {
         body: 'Você está online!',
+        icon: '/assets/icons/icon-72x72.png',
       });
     });
   }

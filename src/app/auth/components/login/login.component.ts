@@ -91,12 +91,14 @@ import { CustomValidationMessageComponent } from '../../../components/custom-val
                   >Esqueceu a senha?</span
                 >
               </div>
+            </form>
+            <div class="w-full text-center">
               <p-button
                 (click)="loginHandler()"
                 id="loginButton"
                 label="Entrar"
-                styleClass="w-full"></p-button>
-            </form>
+                styleClass="w-auto sm:w-1/2 md:w-2/3 lg:w-full"></p-button>
+            </div>
           </div>
         </div>
       </div>
