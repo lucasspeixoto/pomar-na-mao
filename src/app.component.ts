@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       this.notificationService.showNotification('Atualização', {
         body: 'Existe uma atualização disponível!',
         icon: '/assets/icons/icon-72x72.png',
-        badge: '/assets/icons/icon-72x72.png',
+        badge: '/assets/icons/notification-badge.png',
       });
     }
 
