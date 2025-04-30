@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { LoadingService } from '../loading/loading.service';
 
 type Coordinate = {
   latitude: number;
@@ -9,6 +10,8 @@ type Coordinate = {
   providedIn: 'root',
 })
 export class GeolocationService {
+  public isLoadingService = inject(LoadingService);
+
   public geolocationErrorMessage = signal<string>('');
 
   public permissionStatus = signal<PermissionStatus | null>(null);
@@ -20,9 +23,7 @@ export class GeolocationService {
    *  - 'prompt': User hasn't made a choice yet
    *  - 'denied': User has blocked geolocation access
    */
-  public permissionStatusState = computed(() => {
-    return this.permissionStatus() ? this.permissionStatus()!.state : 'denied';
-  });
+  public permissionStatusState = computed(() => this.permissionStatus()!.state);
 
   public coordinates = signal<Coordinate | null>(null);
 
@@ -31,15 +32,11 @@ export class GeolocationService {
   public isLoading = signal(false);
 
   public isCoordinatesAvailable = computed(() => {
-    return this.coordinates() ? true : false;
-  });
-
-  public isPermissionGranted = computed(() => {
-    return this.permissionStatusState() === 'granted' ? true : false;
+    return this.permissionStatusState() === 'granted' && this.coordinates;
   });
 
   public async getLocaltionPermission(): Promise<void> {
-    this.isLoading.set(true);
+    this.isLoadingService.isLoading.set(true);
 
     await navigator.permissions
       .query({ name: 'geolocation' })
@@ -53,17 +50,15 @@ export class GeolocationService {
       });
 
     setTimeout(() => {
-      this.isLoading.set(false);
+      this.isLoadingService.isLoading.set(false);
     }, 2000);
   }
 
   public getLocaltionCoordinate(): void {
-    this.isLoading.set(true);
+    this.isLoadingService.isLoading.set(true);
 
     navigator.geolocation.watchPosition(
       position => {
-        console.log(position);
-
         const coordinates = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -77,7 +72,7 @@ export class GeolocationService {
     );
 
     setTimeout(() => {
-      this.isLoading.set(false);
+      this.isLoadingService.isLoading.set(false);
     }, 2000);
   }
 

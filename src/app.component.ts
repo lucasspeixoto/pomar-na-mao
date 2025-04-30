@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
     if (hasUpdateAvailable) {
       this.notificationService.showNotification('Atualização', {
         body: 'Existe uma atualização disponível!',
+        icon: '/assets/icons/icon-72x72.png',
       });
     }
 

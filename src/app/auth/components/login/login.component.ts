@@ -11,8 +11,8 @@ import { messages } from '../../../utils/messages';
 import { createLoginForm, LoginFormValue } from '../../constants/login-form';
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoadingService } from '../../../services/loading/loading.service';
-
 import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message';
+import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-login',
@@ -91,12 +91,15 @@ import { CustomValidationMessageComponent } from '../../../components/custom-val
                   >Esqueceu a senha?</span
                 >
               </div>
+            </form>
+            <div class="w-full text-center">
               <p-button
+                [disabled]="!connectivityService.isOnline()"
                 (click)="loginHandler()"
                 id="loginButton"
                 label="Entrar"
-                styleClass="w-full"></p-button>
-            </form>
+                styleClass="w-auto sm:w-1/2 md:w-2/3 lg:w-full"></p-button>
+            </div>
           </div>
         </div>
       </div>
@@ -112,6 +115,8 @@ export class LoginComponent {
   public loadingService = inject(LoadingService);
 
   public messageService = inject(MessageService);
+
+  public connectivityService = inject(ConnectivityService);
 
   public loginForm = createLoginForm();
 

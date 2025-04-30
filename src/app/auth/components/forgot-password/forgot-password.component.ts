@@ -16,6 +16,7 @@ import {
   createForgotPasswordForm,
   ForgotPasswordFormValue,
 } from '../../constants/forgot-password-form';
+import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -40,7 +41,7 @@ import {
           <div class="bg-surface-0 dark:bg-surface-900 py-12 px-4 sm:px-10 rounded-2xl">
             <div class="text-center mb-8">
               <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">
-                Bem vindo a IPR
+                Bem vindo
               </div>
               <span class="text-muted-color font-medium">Recuperar senha</span>
             </div>
@@ -70,12 +71,15 @@ import {
                   >Login</span
                 >
               </div>
+            </form>
+            <div class="w-full text-center">
               <p-button
+                [disabled]="!connectivityService.isOnline()"
                 (click)="forgotPasswordHandler()"
                 id="forgotPasswordButton"
                 label="Lembrar"
-                styleClass="w-full"></p-button>
-            </form>
+                styleClass="w-auto sm:w-1/2 md:w-2/3 lg:w-full"></p-button>
+            </div>
           </div>
         </div>
       </div>
@@ -91,6 +95,8 @@ export class ForgotPasswordComponent {
   public loadingService = inject(LoadingService);
 
   public messageService = inject(MessageService);
+
+  public connectivityService = inject(ConnectivityService);
 
   public forgotPasswordForm = createForgotPasswordForm();
 

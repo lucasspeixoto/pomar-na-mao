@@ -206,6 +206,7 @@ export class IndexDbCollectService {
               obs.next(decryptedTasks);
               this.collectedData.set(decryptedTasks);
               this.totalCollectedData.set(decryptedTasks.length);
+              console.log(decryptedTasks.length);
               obs.complete();
             } catch {
               obs.error('Descriptografia falhou!');
