@@ -52,7 +52,7 @@ export class AuthenticationService {
 
       this.messageService.add({
         severity: 'success',
-        summary: 'Graça e Paz',
+        summary: 'Olá',
         detail: 'Bem-vindo!',
         life: 3000,
       });

@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 
 type CollectObservationDataFormControl = {
+  id: FormControl<string>;
   stick: FormControl<boolean>;
   brokenBranch: FormControl<boolean>;
   vineGrowing: FormControl<boolean>;
@@ -21,6 +22,10 @@ export function createCollectObservationDataForm(): FormGroup<CollectObservation
   const formBuilder = inject(NonNullableFormBuilder);
 
   return formBuilder.group({
+    id: new FormControl('', {
+      validators: [],
+      nonNullable: true,
+    }),
     stick: new FormControl(false, {
       validators: [],
       nonNullable: true,
@@ -81,3 +86,20 @@ export type CollectObservationDataFormGroup = ReturnType<typeof createCollectObs
 export type CollectObservationDataFormValue = ReturnType<
   CollectObservationDataFormGroup['getRawValue']
 >;
+
+export const initialCollectObservationData = {
+  id: '',
+  stick: false,
+  brokenBranch: false,
+  vineGrowing: false,
+  burntBranch: false,
+  struckByLightning: false,
+  drill: false,
+  anthill: false,
+  inExperiment: false,
+  weedsInTheBasin: false,
+  fertilizationOrManuring: false,
+  mites: false,
+  thrips: false,
+  emptyCollectionBoxNear: false,
+} as CollectObservationDataFormValue;

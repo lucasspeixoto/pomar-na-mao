@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 type CollectComplementDataFormControl = {
+  id: FormControl<string>;
   mass: FormControl<string>;
   variety: FormControl<string>;
   plantingDate: FormControl<string>;
@@ -14,6 +15,10 @@ export function createCollectComplementDataForm(): FormGroup<CollectComplementDa
   const formBuilder = inject(NonNullableFormBuilder);
 
   return formBuilder.group({
+    id: new FormControl('', {
+      validators: [],
+      nonNullable: true,
+    }),
     mass: new FormControl('', {
       validators: [Validators.required, Validators.min(0)],
       nonNullable: true,

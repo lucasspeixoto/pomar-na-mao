@@ -10,6 +10,7 @@ import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collec
 import { injectSupabase } from 'src/app/utils/inject-supabase';
 import { checkCurrencStorageStep } from '../../utils/localstorage';
 import { MessageService } from 'primeng/api';
+import { initialCollectObservationData } from '../../constants/collect-observation-data-form';
 
 @Injectable({
   providedIn: 'root',
@@ -56,10 +57,6 @@ export class CollectService {
   public async insertAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    /* Validações */
-    /**
-     * Dados complementares
-     */
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
     if (!complementData) {
@@ -73,10 +70,7 @@ export class CollectService {
       return;
     }
 
-    /**
-     * Dados de geolocalização
-     */
-    this.geolocationService.getLocaltionCoordinate(); // Atualiza a posição
+    this.geolocationService.getLocaltionCoordinate();
 
     if (!this.geolocationService.isCoordinatesAvailable()) {
       this.loadingService.isLoading.set(false);
@@ -163,76 +157,50 @@ export class CollectService {
   public async syncAllCollectPlantHandler(plantDatas: PlantData[]): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    for (const plantData of plantDatas) {
-      const { error } = await this.supabase.from('plant_collect').insert([plantData]);
+    const { error } = await this.supabase.from('plant_collect').insert(plantDatas);
 
-      setTimeout(() => {
-        this.loadingService.isLoading.set(false);
+    const plantDataIds = plantDatas.map(item => item.id);
 
-        if (!error) {
-          this.indexDbCollectService.deleteCollect(plantData.id, false).subscribe();
-          this.resetCollectData();
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Sincronizado',
-            detail: 'Dados sincronizados com sucesso!',
-            life: 3000,
-          });
-        }
-      }, 2000);
+    if (!error) {
+      this.indexDbCollectService.deleteManyCollects(plantDataIds, false).subscribe();
+      this.resetCollectData();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Sincronizado',
+        detail: 'Dados sincronizados com sucesso!',
+        life: 3000,
+      });
     }
-  }
 
-  public async syncCollectPlantHandler(plantData: PlantData): Promise<void> {
-    this.loadingService.isLoading.set(true);
-
-    const { error } = await this.supabase.from('plant_collect').insert([plantData]);
-
-    setTimeout(() => {
-      this.loadingService.isLoading.set(false);
-
-      if (error) {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Erro ao sincronizar registro!',
-          life: 3000,
-        });
-      } else {
-        this.indexDbCollectService.deleteCollect(plantData.id, true).subscribe();
-        this.resetCollectData();
-        //this.messageService.success('Registro sincronizado com sucesso!');
-      }
-    }, 2000);
+    this.loadingService.isLoading.set(false);
   }
 
   public async storageAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    /* Validações */
-    /**
-     * Dados complementares
-     */
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
     if (!complementData) {
       this.loadingService.isLoading.set(false);
-      //this.messageService.error('Dados complementares não foram salvos!');
-      //this.collectStepService.setCollectStep(2);
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail: 'Dados complementares não foram salvos!',
+        life: 3000,
+      });
       return;
     }
 
-    /**
-     * Dados de geolocalização
-     */
-    //this.geolocationService.getLocaltionCoordinate(); // Atualiza a posição
+    this.geolocationService.getLocaltionCoordinate();
 
-    if (
-      !this.geolocationService.isCoordinatesAvailable() ||
-      !this.geolocationService.coordinates()
-    ) {
+    if (!this.geolocationService.isCoordinatesAvailable()) {
       this.loadingService.isLoading.set(false);
-      //this.messageService.error('Não foi possível obter as coordenadas!');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail: 'Não foi possível obter as coordenadas!',
+        life: 3000,
+      });
       return;
     }
 
@@ -291,6 +259,6 @@ export class CollectService {
 
   public resetCollectData(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
-    this.observationDataService.setCollectObservationDataFormValue(null);
+    this.observationDataService.setCollectObservationDataFormValue(initialCollectObservationData);
   }
 }

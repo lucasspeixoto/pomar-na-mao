@@ -47,16 +47,16 @@ export class AppMenuComponent implements OnInit {
                 routerLink: ['/inicio/coleta/cadastrar'],
               },
               {
-                label: 'Consultar',
-                visible: this.isAdmin,
-                icon: 'pi pi-fw pi-search-plus',
-                routerLink: ['/inicio/coleta/consultar'],
-              },
-              {
                 label: 'Sincronizar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-sync',
                 routerLink: ['/inicio/coleta/sincronizar'],
+              },
+              {
+                label: 'Consultar',
+                visible: this.isAdmin,
+                icon: 'pi pi-fw pi-search-plus',
+                routerLink: ['/inicio/coleta/consultar'],
               },
             ],
           },
