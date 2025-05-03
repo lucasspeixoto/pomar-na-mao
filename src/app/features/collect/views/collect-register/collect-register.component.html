@@ -1,1 +1,23 @@
-<h3>Coletar</h3>
+<div class="w-full mt-2">
+
+    <div class="flex w-full justify-between items-start">
+        <p-steps class="w-full" [model]="items" [readonly]="false"
+            [activeIndex]="activeIndex"
+            (activeIndexChange)="onActiveIndexChange($event)" />
+
+        <p-button class="h-full" icon="pi pi-plus-circle" [rounded]="true"
+            size="large"
+            (click)="collectService.insertAPlantCollectHandler()"></p-button>
+    </div>
+
+    <section class="mt-6">
+        @if(activeIndex === 0) {
+        <app-collect-geolocation />
+        } @if (activeIndex === 1) {
+        <app-collect-complement-data />
+        } @if (activeIndex === 2) {
+        <app-collect-observation-data />
+        }
+    </section>
+
+</div>

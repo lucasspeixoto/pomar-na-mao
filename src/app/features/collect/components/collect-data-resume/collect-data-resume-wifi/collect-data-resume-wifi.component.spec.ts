@@ -8,9 +8,8 @@ describe('CollectDataResumeWifiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CollectDataResumeWifiComponent]
-    })
-    .compileComponents();
+      imports: [CollectDataResumeWifiComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CollectDataResumeWifiComponent);
     component = fixture.componentInstance;
