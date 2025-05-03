@@ -1,7 +1,7 @@
 export const OCCURRENCES: { label: string; value: string }[] = [
   { label: 'Galho Seco', value: 'stick' },
   { label: 'Galho Quebrado', value: 'brokenBranch' },
-  { label: 'Cipó crescendo no pé', value: 'vineGrowing' },
+  { label: 'Cipó no pé', value: 'vineGrowing' },
   { label: 'Queimado', value: 'burntBranch' },
   { label: 'Atingido por raio', value: 'struckByLightning' },
   { label: 'Broca', value: 'drill' },
@@ -11,5 +11,5 @@ export const OCCURRENCES: { label: string; value: string }[] = [
   { label: 'Pulverização/adubação no final do dia', value: 'fertilizationOrManuring' },
   { label: 'Presença de ácaro', value: 'mites' },
   { label: 'Presença de tripes', value: 'thrips' },
-  { label: 'Caixa de colheita vazia perto', value: 'emptyCollectionBoxNear' },
+  { label: 'Caixa vazia perto', value: 'emptyCollectionBoxNear' },
 ];

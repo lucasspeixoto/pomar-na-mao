@@ -1,17 +1,22 @@
 import { Injectable, signal } from '@angular/core';
-import { CollectObservationDataFormValue } from '../../../../features/collect/constants/collect-observation-data-form';
+import {
+  CollectObservationDataFormValue,
+  initialCollectObservationData,
+} from '../../../../features/collect/constants/collect-observation-data-form';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ObservationDataService {
-  private collectObservationDataFormValue = signal<CollectObservationDataFormValue | null>(null);
+  private collectObservationDataFormValue = signal<CollectObservationDataFormValue>(
+    initialCollectObservationData
+  );
 
-  public getCollectObservationDataFormValue(): CollectObservationDataFormValue | null {
+  public getCollectObservationDataFormValue(): CollectObservationDataFormValue {
     return this.collectObservationDataFormValue();
   }
 
-  public setCollectObservationDataFormValue(value: CollectObservationDataFormValue | null): void {
+  public setCollectObservationDataFormValue(value: CollectObservationDataFormValue): void {
     this.collectObservationDataFormValue.set(value);
   }
 }

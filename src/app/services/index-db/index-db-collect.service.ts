@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-
-import { BehaviorSubject, filter, first, Observable, switchMap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-import * as CryptoJS from 'crypto-js';
-import { LoadingService } from '../loading/loading.service';
+import { BehaviorSubject, filter, first, Observable, switchMap } from 'rxjs';
 import { MessageService } from 'primeng/api';
-import { environment } from 'src/environments/environment';
-import type { PlantData } from 'src/app/features/collect/models/collect.model';
+import * as CryptoJS from 'crypto-js';
+
+import { LoadingService } from '../loading/loading.service';
+import { environment } from '../../../environments/environment';
+import { PlantData } from '../../features/collect/models/collect.model';
 
 @Injectable({
   providedIn: 'root',
@@ -87,6 +87,53 @@ export class IndexDbCollectService {
     );
   }
 
+  public listAllCollects(): Observable<PlantData[]> {
+    return this.waitForDB().pipe(
+      switchMap(() => {
+        this.loadingService.isLoading.set(true);
+
+        return new Observable<PlantData[]>(obs => {
+          const request = this.store$.getAll();
+
+          request.onsuccess = () => {
+            try {
+              const decryptedTasks = request.result.map(encryptedTask => {
+                const decryptedData = encryptedTask.encryptedData; //this.decrypt(encryptedTask.encryptedData) as Object;
+
+                return decryptedData as PlantData;
+              });
+
+              obs.next(decryptedTasks);
+              this.collectedData.set(decryptedTasks);
+              this.totalCollectedData.set(decryptedTasks.length);
+              obs.complete();
+            } catch {
+              obs.error('Descriptografia falhou!');
+              this.messageService.add({
+                severity: 'warn',
+                summary: 'Erro',
+                detail: 'Descriptografia falhou!',
+                life: 3000,
+              });
+            }
+          };
+
+          request.onerror = () => {
+            obs.error('Listagem de coletas falhou!');
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Erro',
+              detail: 'Listagem de coletas falhou!',
+              life: 3000,
+            });
+          };
+
+          this.loadingService.isLoading.set(false);
+        });
+      })
+    );
+  }
+
   public addCollect(plantData: PlantData): Observable<PlantData> {
     return this.waitForDB().pipe(
       switchMap(() => {
@@ -95,7 +142,7 @@ export class IndexDbCollectService {
         return new Observable<PlantData>(obs => {
           const encryptedTask = {
             id: plantData.id,
-            encryptedData: this.encrypt({ ...plantData }),
+            encryptedData: plantData,
           };
 
           const request = this.store$.add(encryptedTask);
@@ -121,6 +168,54 @@ export class IndexDbCollectService {
               detail: 'Falha ao aidicionar este registro de coleta no dispositivo!',
               life: 3000,
             });
+          };
+
+          this.loadingService.isLoading.set(false);
+        });
+      })
+    );
+  }
+
+  public updateCollect(plantData: PlantData, showMessages: boolean): Observable<void> {
+    return this.waitForDB().pipe(
+      switchMap(() => {
+        this.loadingService.isLoading.set(true);
+
+        return new Observable<void>(obs => {
+          const request = this.store$.put({
+            id: plantData.id,
+            encryptedData: plantData,
+          });
+
+          request.onsuccess = () => {
+            this.collectedData.update(items =>
+              items.map(item => (item.id === plantData.id ? plantData : item))
+            );
+
+            if (showMessages) {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Sucesso',
+                detail: 'Coleta atualizada com sucesso!',
+                life: 3000,
+              });
+            }
+
+            obs.next();
+            obs.complete();
+          };
+
+          request.onerror = () => {
+            if (showMessages) {
+              this.messageService.add({
+                severity: 'warn',
+                summary: 'Erro',
+                detail: 'Falha ao atualizar este registro de coleta no dispositivo!',
+                life: 3000,
+              });
+            }
+
+            obs.error('Falha ao atualizar este registro de coleta no dispositivo!');
           };
 
           this.loadingService.isLoading.set(false);
@@ -187,48 +282,83 @@ export class IndexDbCollectService {
     );
   }
 
-  public listAllCollects(): Observable<PlantData[]> {
+  public deleteManyCollects(ids: string[], showMessages: boolean): Observable<void> {
     return this.waitForDB().pipe(
       switchMap(() => {
         this.loadingService.isLoading.set(true);
 
-        return new Observable<PlantData[]>(obs => {
-          const request = this.store$.getAll();
+        return new Observable<void>(() => {
+          const transaction = this.store$.transaction;
+          const store = transaction.objectStore(this.store.name);
 
-          request.onsuccess = () => {
-            try {
-              const decryptedTasks = request.result.map(encryptedTask => {
-                const decryptedData = this.decrypt(encryptedTask.encryptedData) as Object;
+          let successCount = 0;
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          let errorCount = 0;
 
-                return decryptedData as PlantData;
-              });
+          ids.forEach(id => {
+            const deleteRequest = store.delete(id);
 
-              obs.next(decryptedTasks);
-              this.collectedData.set(decryptedTasks);
-              this.totalCollectedData.set(decryptedTasks.length);
-              obs.complete();
-            } catch {
-              obs.error('Descriptografia falhou!');
+            deleteRequest.onsuccess = () => {
+              successCount++;
+              this.totalCollectedData.update(current => current - 1);
+              this.collectedData.update(items => items.filter(item => item.id !== id));
+            };
+
+            deleteRequest.onerror = () => {
+              errorCount++;
+            };
+          });
+
+          transaction.oncomplete = () => {
+            if (showMessages) {
               this.messageService.add({
-                severity: 'warn',
-                summary: 'Erro',
-                detail: 'Descriptografia falhou!',
+                severity: 'success',
+                summary: 'Success',
+                detail: `${successCount} items deleted successfully`,
                 life: 3000,
               });
             }
           };
 
+          this.loadingService.isLoading.set(false);
+        });
+      })
+    );
+  }
+
+  public findCollectById(id: string): Observable<PlantData | null> {
+    return this.waitForDB().pipe(
+      switchMap(() => {
+        this.loadingService.isLoading.set(true);
+
+        return new Observable<PlantData | null>(obs => {
+          const request = this.store$.get(id);
+
+          request.onsuccess = () => {
+            const result = request.result;
+
+            if (result) {
+              const decryptedData = result.encryptedData; // Decrypt if needed
+              obs.next(decryptedData as PlantData);
+            } else {
+              obs.next(null); // Return null if no record is found
+            }
+
+            obs.complete();
+            this.loadingService.isLoading.set(false);
+          };
+
           request.onerror = () => {
-            obs.error('Listagem de coletas falhou!');
+            obs.error('Falha ao buscar o registro de coleta no dispositivo!');
             this.messageService.add({
               severity: 'warn',
               summary: 'Erro',
-              detail: 'Listagem de coletas falhou!',
+              detail: 'Falha ao buscar o registro de coleta no dispositivo!',
               life: 3000,
             });
-          };
 
-          this.loadingService.isLoading.set(false);
+            this.loadingService.isLoading.set(false);
+          };
         });
       })
     );

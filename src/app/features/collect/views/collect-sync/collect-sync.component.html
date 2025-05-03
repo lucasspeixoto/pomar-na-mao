@@ -1,1 +1,67 @@
-<h3>Sincronizar</h3>
+<p-toolbar styleClass="mt-4 mb-6">
+    <ng-template #start>
+        <p-button label="Exportar" icon="pi pi-upload" severity="success" (click)="exportCSV()" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-button severity="danger" label="Excluir" icon="pi pi-trash" class="mr-2"
+            [disabled]="!selectedCollects || !selectedCollects.length" (click)="deleteSelectedCollects()" />
+
+        <p-button [disabled]="!selectedCollects || !selectedCollects.length" label="Sincronizar" icon="pi pi-sync"
+            severity="info" (click)="syncSelectedCollects()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table #dt [value]="collectedData()" [rows]="10" [paginator]="true" [globalFilterFields]="['mass', 'harverst']"
+    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedCollects" [scrollable]="true" [rowHover]="true"
+    dataKey="id" currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} coletas"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 20, 30, 50, 100]">
+    <ng-template #caption>
+        <div class="flex items-center justify-between flex-wrap gap-4">
+            <h5 class="m-0">Coletas para Sincronizar</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input class="w-full sm:w-auto" pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                    placeholder="Pesquisar..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th> Massa</th>
+            <th style="min-width: 10rem">Latitude</th>
+            <th style="min-width: 10rem">Longitude</th>
+            <th style="min-width: 10rem">Tempo GPS </th>
+            <th>Complementares</th>
+            <th>Observação</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-collect>
+        <tr>
+            <td style="width: 3rem">
+                <p-tableCheckbox [value]="collect" />
+            </td>
+            <td>{{ collect.mass }}</td>
+            <td style="min-width: 10rem">{{ collect.latitude}}</td>
+            <td style="min-width: 10rem">{{ collect.longitude}}</td>
+            <td style="min-width: 10rem">{{ collect.gps_timestamp |
+                shortTimestamp}}</td>
+            <td>
+                <p-button icon="pi pi-search-plus" severity="info" [rounded]="true" [text]="true" (click)="showComplementDialog(collect)" />
+            </td>
+            <td>
+                <p-button icon="pi pi-eye" severity="warn" [rounded]="true" [text]="true" (click)="showObservationDialog(collect)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<app-complement-dialog [isVisible]="complementDialog" (dialogClosed)="hideComplementDialog()" />
+
+<app-observation-dialog [isVisible]="observationDialog" (dialogClosed)="hideObservationDialog()" />
+
+<p-confirmdialog [style]="{ width: '450px' }" />

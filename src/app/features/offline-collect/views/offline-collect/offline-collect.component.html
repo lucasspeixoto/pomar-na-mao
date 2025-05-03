@@ -1,0 +1,27 @@
+<div
+    class="py-8 px-2 sm:px-10 lg:px-32 xl:px-48 bg-surface-50 dark:bg-surface-950 overflow-hidden">
+    <div class="w-full mt-2 flex flex-col justify-start">
+        <div class="flex w-full justify-between items-start">
+            <p-steps class="w-full" [model]="items" [readonly]="false"
+                [activeIndex]="activeIndex"
+                (activeIndexChange)="onActiveIndexChange($event)" />
+            <p-button class="h-full" icon="pi pi-plus-circle" [rounded]="true"
+                size="large"
+                (click)="insertOfflineCollectHandler()"></p-button>
+        </div>
+
+        <section class="mt-6">
+            @if(activeIndex === 0) {
+            <app-collect-geolocation />
+            } @if (activeIndex === 1) {
+            <app-collect-complement-data />
+            } @if (activeIndex === 2) {
+            <app-collect-observation-data />
+            }
+        </section>
+
+        <p-button class="self-end mt-4" label="Login" routerLink="/login" />
+
+    </div>
+
+</div>

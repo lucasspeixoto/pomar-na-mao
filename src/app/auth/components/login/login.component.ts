@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -31,8 +31,16 @@ import { ConnectivityService } from '../../../services/connectivity/connectivity
     <div
       class="container bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
       <div class="w-full flex flex-col items-center justify-center">
-        <div class="w-[95%] sm:w-[400px] ">
-          <div class="bg-surface-0 dark:bg-surface-900 py-12 px-4 sm:px-10 rounded-2xl">
+        <div class="w-[95%] sm:w-[400px]">
+          <div class="bg-surface-0 dark:bg-surface-900 pt-2 pb-6 px-4 sm:px-10 rounded-2xl">
+            <div class="mb-4 w-full flex justify-end">
+              <p-button
+                routerLink="/coleta-offline"
+                class="items-end"
+                icon="pi pi-file-plus"
+                [rounded]="true"
+                severity="contrast" />
+            </div>
             <div class="text-center mb-8">
               <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">
                 Bem vindo
@@ -123,6 +131,11 @@ export class LoginComponent {
 
   public messages = messages;
 
+  @HostListener('document:keydown.enter')
+  public handleEnterKey(): void {
+    this.loginHandler();
+  }
+
   public async loginHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
 
@@ -131,7 +144,7 @@ export class LoginComponent {
         severity: 'info',
         summary: 'Info',
         detail: 'Preenchas os campos corretamente',
-        life: 300000,
+        life: 3000,
       });
 
       this.loadingService.isLoading.set(false);
@@ -143,6 +156,6 @@ export class LoginComponent {
 
     this.authenticationService.loginUserHandler(email, password);
 
-    this.loginForm.reset();
+    this.loginForm.controls.password.reset();
   }
 }

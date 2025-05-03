@@ -38,4 +38,10 @@ export class CollectRegisterComponent {
     this.activeIndex = event;
     localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
   }
+
+  public insertOnlineCollectHandler(): void {
+    this.collectService.insertAPlantCollectHandler();
+    this.activeIndex = 0;
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+  }
 }

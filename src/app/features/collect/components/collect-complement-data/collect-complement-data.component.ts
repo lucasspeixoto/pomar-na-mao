@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -13,13 +13,14 @@ import { ToastModule } from 'primeng/toast';
 import { CustomValidationMessageComponent } from 'src/app/components/custom-validation-message/custom-validation-message';
 import {
   createCollectComplementDataForm,
-  type CollectComplementDataFormValue,
+  CollectComplementDataFormValue,
 } from '../../constants/collect-complement-data-form';
 import { CollectService } from '../../services/collect/collect.service';
 import { ComplementDataService } from '../../services/complement-data/complement-data.service';
 import { MessageModule } from 'primeng/message';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { debounceTime, tap } from 'rxjs';
+import { lycheeVarieties } from '../../constants/lychee-varieties';
 
 const PRIMENG = [
   InputMaskModule,
@@ -82,6 +83,8 @@ export class CollectComplementDataComponent implements OnInit {
   public collectService = inject(CollectService);
 
   public collectComplementDataForm = createCollectComplementDataForm();
+
+  public lycheeVarieties = lycheeVarieties;
 
   public ngOnInit(): void {
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
