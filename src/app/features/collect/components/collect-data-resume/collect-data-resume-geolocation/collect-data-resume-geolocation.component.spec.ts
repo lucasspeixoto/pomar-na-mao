@@ -8,9 +8,8 @@ describe('CollectDataResumeGeolocationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CollectDataResumeGeolocationComponent]
-    })
-    .compileComponents();
+      imports: [CollectDataResumeGeolocationComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CollectDataResumeGeolocationComponent);
     component = fixture.componentInstance;

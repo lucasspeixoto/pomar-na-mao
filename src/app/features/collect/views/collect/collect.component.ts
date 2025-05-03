@@ -6,7 +6,7 @@ import { CollectDataResumeComponent } from '../../components/collect-data-resume
   selector: 'app-collect',
   imports: [RouterModule, CollectDataResumeComponent],
   template: ` <section>
-    <div class="grid grid-cols-12 gap-2 md:gap-12">
+    <div class="grid grid-cols-12 gap-1 md:gap-8">
       <app-collect-data-resume class="contents" />
       <div class="col-span-12">
         <router-outlet />

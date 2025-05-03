@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { CollectDataResumeSyncComponent } from '../collect-data-resume-sync/collect-data-resume-sync.component';
-import { CollectDataResumeGeolocationComponent } from '../collect-data-resume-geolocation/collect-data-resume-geolocation.component';
-import { CollectDataResumeWifiComponent } from '../collect-data-resume-wifi/collect-data-resume-wifi.component';
-import { CollectDataResumeCollectsComponent } from '../collect-data-resume-collects/collect-data-resume-collects.component';
+import { CollectDataResumeSyncComponent } from './collect-data-resume-sync/collect-data-resume-sync.component';
+import { CollectDataResumeGeolocationComponent } from './collect-data-resume-geolocation/collect-data-resume-geolocation.component';
+import { CollectDataResumeWifiComponent } from './collect-data-resume-wifi/collect-data-resume-wifi.component';
+import { CollectDataResumeCollectsComponent } from './collect-data-resume-collects/collect-data-resume-collects.component';
 
 const PRIMENG = [ButtonModule];
 
@@ -22,6 +22,7 @@ const COMPONENTS = [
     `
       ::ng-deep .card {
         padding: 15px 5px 15px 8px;
+        min-height: 130px;
       }
     `,
   ],

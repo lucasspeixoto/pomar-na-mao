@@ -1,0 +1,50 @@
+<div
+    class="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-4">
+
+    <div class="w-full flex flex-col sm:w-1/3 gap-1">
+        <p-message class="h-full mb-4" severity="info">
+            <div class="flex flex-col gap-1">
+                <span class="text-justify font-semibold">Os dados de localicação
+                    são obtidos
+                    automaticamente
+                    através do
+                    dispositivo.
+                    Caso não seja exibido ative a localicação e recarregue a
+                    página.</span>
+                <p-button variant="text" [raised]="true" severity="help"
+                    class="self-end" label="Recarregar"
+                    [link]="true"
+                    (click)="reloadPage()" />
+            </div>
+        </p-message>
+
+        <p-card header="Coordenadas">
+            <div class="mt-2 flex flex-col items-start gap-8">
+                <span class="font-semibold">Latitude:
+                    <strong id="latitude" class="text-primary">{{
+                        geolocationService.coordinates()?.latitude }}
+                    </strong>
+                </span>
+
+                <span class="font-semibold">Longitude:
+                    <strong id="longitude" class="text-primary">{{
+                        geolocationService.coordinates()?.longitude }}
+                    </strong>
+                </span>
+
+                <span class="font-semibold">Tempo:
+                    <strong id="timestamp" class="text-primary">{{
+                        geolocationService.coordinatesTimestamp()! | epochToTime
+                        }}
+                    </strong>
+                </span>
+            </div>
+
+        </p-card>
+    </div>
+
+    <div class="w-full sm:w-2/3">
+        <div id="map" class="mb-4"></div>
+    </div>
+
+</div>

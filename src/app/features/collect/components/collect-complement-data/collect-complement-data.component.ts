@@ -1,0 +1,104 @@
+import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DatePickerModule } from 'primeng/datepicker';
+import { DialogModule } from 'primeng/dialog';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
+import { TextareaModule } from 'primeng/textarea';
+import { ToastModule } from 'primeng/toast';
+import { CustomValidationMessageComponent } from 'src/app/components/custom-validation-message/custom-validation-message';
+import {
+  createCollectComplementDataForm,
+  type CollectComplementDataFormValue,
+} from '../../constants/collect-complement-data-form';
+import { CollectService } from '../../services/collect/collect.service';
+import { ComplementDataService } from '../../services/complement-data/complement-data.service';
+import { MessageModule } from 'primeng/message';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { debounceTime, tap } from 'rxjs';
+
+const PRIMENG = [
+  InputMaskModule,
+  DatePickerModule,
+  ButtonModule,
+  ToastModule,
+  TextareaModule,
+  SelectModule,
+  InputTextModule,
+  DialogModule,
+  MessageModule,
+];
+
+const COMMON = [
+  CardModule,
+  FormsModule,
+  ReactiveFormsModule,
+  CustomValidationMessageComponent,
+  AsyncPipe,
+  NgIf,
+];
+
+const PROVIDERS = [MessageService];
+
+@Component({
+  selector: 'app-collect-complement-data',
+  imports: [...PRIMENG, ...COMMON],
+  templateUrl: './collect-complement-data.component.html',
+  styleUrl: './collect-complement-data.component.scss',
+  styles: [
+    `
+      :host ::ng-deep .p-frozen-column {
+        font-weight: bold;
+      }
+
+      :host ::ng-deep .p-datatable-frozen-tbody {
+        font-weight: bold;
+      }
+
+      ::ng-deep {
+        .p-inputmask,
+        .p-datepicker {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 450px) {
+        .p-iconfield {
+          width: 100%;
+        }
+      }
+    `,
+  ],
+  providers: [...PROVIDERS],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class CollectComplementDataComponent implements OnInit {
+  public complementDataService = inject(ComplementDataService);
+
+  public collectService = inject(CollectService);
+
+  public collectComplementDataForm = createCollectComplementDataForm();
+
+  public ngOnInit(): void {
+    const complementData = this.complementDataService.getCollectComplementDataFormValue();
+
+    if (complementData) {
+      this.collectComplementDataForm.setValue(complementData);
+    }
+  }
+
+  public collectComplementDataFormChange$ = this.collectComplementDataForm.valueChanges.pipe(
+    debounceTime(400),
+    tap(value => {
+      if (this.collectComplementDataForm.valid) {
+        this.complementDataService.setCollectComplementDataFormValue(
+          value as CollectComplementDataFormValue
+        );
+      }
+    })
+  );
+}
