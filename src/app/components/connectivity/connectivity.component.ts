@@ -12,13 +12,13 @@ export class ConnectivityComponent {
 
   public notificationService = inject(NotificationService);
 
-  constructor() {
-    let previousStatus: boolean | null = null;
+  public previousStatus: boolean | null = null;
 
+  constructor() {
     effect(() => {
       const currentStatus = this.connectivityService.isOnline();
 
-      if (currentStatus !== previousStatus) {
+      if (currentStatus !== this.previousStatus) {
         if (!currentStatus) {
           this.notificationService.showNotification('Acesso a internet', {
             body: 'Você está offline',
@@ -30,7 +30,7 @@ export class ConnectivityComponent {
             icon: '/assets/icons/icon-72x72.png',
           });
         }
-        previousStatus = currentStatus; // Update the previous status
+        this.previousStatus = currentStatus;
       }
     });
   }
