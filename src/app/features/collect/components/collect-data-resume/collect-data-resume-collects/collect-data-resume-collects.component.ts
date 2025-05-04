@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FarmRegionService } from '../../../services/farm-region/farm-region.service';
+import { CollectService } from '../../../services/collect/collect.service';
 
 @Component({
   selector: 'app-collect-data-resume-collects',
@@ -11,7 +12,7 @@ import { FarmRegionService } from '../../../services/farm-region/farm-region.ser
         <div>
           <span class="block text-muted-color font-medium mb-4 text-md md:text-xl">Coletas</span>
           <div class="text-surface-900 dark:text-surface-0 font-medium text-sm md:text-lg">
-            12311
+            {{ collectService.numberOfCollectedData() }}
           </div>
         </div>
         <div
@@ -29,9 +30,22 @@ import { FarmRegionService } from '../../../services/farm-region/farm-region.ser
       </div>
     </div>
   `,
+  styles: [
+    `
+      .card {
+        padding: 2rem 0.8rem;
+
+        @media (max-width: 400px) {
+          padding: 0.8rem;
+        }
+      }
+    `,
+  ],
 })
 export class CollectDataResumeCollectsComponent implements OnInit {
   public farmRegionService = inject(FarmRegionService);
+
+  public collectService = inject(CollectService);
 
   public ngOnInit(): void {
     this.farmRegionService.getAllFarmRegionsHandler();

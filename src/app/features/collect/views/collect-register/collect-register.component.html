@@ -4,13 +4,9 @@
         <p-steps class="w-full" [model]="items" [readonly]="false"
             [activeIndex]="activeIndex"
             (activeIndexChange)="onActiveIndexChange($event)" />
-
-        <p-button class="h-full" icon="pi pi-plus-circle" [rounded]="true"
-            size="large"
-            (click)="insertOnlineCollectHandler()"></p-button>
     </div>
 
-    <section class="mt-6">
+    <section class="my-6">
         @if(activeIndex === 0) {
         <app-collect-geolocation />
         } @if (activeIndex === 1) {
@@ -19,5 +15,11 @@
         <app-collect-observation-data />
         }
     </section>
+
+    <div class="w-full flex justify-end">
+        <p-button label="Coletar"
+            size="large"
+            (click)="insertOnlineCollectHandler()"></p-button>
+    </div>
 
 </div>

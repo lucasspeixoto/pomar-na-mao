@@ -19,25 +19,12 @@ export class NotificationService {
       return;
     }
 
-    /* Notification.requestPermission().then(permission => {
-      console.log('User choice:', permission);
-      if (permission === 'granted') {
-      }
-    }); */
-
-    const registration = await navigator.serviceWorker.ready;
-    // Use ServiceWorker notification instead of window.Notification
-    await registration.showNotification(title, options);
-
     if (window.Notification.permission === 'granted') {
       try {
-        // Get ServiceWorker registration
         const registration = await navigator.serviceWorker.ready;
-        // Use ServiceWorker notification instead of window.Notification
         await registration.showNotification(title, options);
       } catch (error) {
-        console.warn('Error showing notification:', error);
-        // Fallback to window.Notification for desktop
+        console.warn('Error ao enviar notificação:', error);
         new window.Notification(title, options);
       }
     } else {

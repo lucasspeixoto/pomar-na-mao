@@ -57,7 +57,6 @@ import { ConnectivityService } from '../../../services/connectivity/connectivity
                 <app-custom-validation-message id="emailErrorMessage" controlName="email" />
               </div>
 
-              <!-- Password -->
               <div class="my-4">
                 <label
                   for="passwordField"
@@ -93,17 +92,13 @@ import { ConnectivityService } from '../../../services/connectivity/connectivity
               </div>
             </form>
             <div class="w-full flex justify-between text-center">
-              <p-button
-                routerLink="/coleta-offline"
-                label="Offline"
-                class="items-end"
-                severity="contrast" />
+              <p-button routerLink="/coleta-offline" label="Coletar" severity="warn" />
               <p-button
                 [disabled]="!connectivityService.isOnline()"
                 (click)="loginHandler()"
                 id="loginButton"
-                label="Entrar"
-                styleClass="w-auto sm:w-1/2 md:w-2/3 lg:w-full"></p-button>
+                label="Entrar">
+              </p-button>
             </div>
           </div>
         </div>

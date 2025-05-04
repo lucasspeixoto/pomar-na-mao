@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CollectDataResumeComponent } from '../../components/collect-data-resume/collect-data-resume.component';
+import { CollectService } from '../../services/collect/collect.service';
 
 @Component({
   selector: 'app-collect',
@@ -14,4 +15,10 @@ import { CollectDataResumeComponent } from '../../components/collect-data-resume
     </div>
   </section>`,
 })
-export class CollectComponent {}
+export class CollectComponent implements OnInit {
+  public collectService = inject(CollectService);
+
+  public ngOnInit(): void {
+    this.collectService.getAllCollectsDataHandler();
+  }
+}
