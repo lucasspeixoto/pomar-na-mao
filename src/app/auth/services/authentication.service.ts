@@ -1,11 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { Session } from '@supabase/supabase-js';
+import { MessageService } from 'primeng/api';
 import { injectSupabase } from '../../utils/inject-supabase';
 import { messages } from '../../utils/messages';
 import { iUser } from '../models/user.model';
 import { LoadingService } from '../../services/loading/loading.service';
+import { CollectService } from '../../features/collect/services/collect/collect.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,8 @@ export class AuthenticationService {
   public messageService = inject(MessageService);
 
   public loadingService = inject(LoadingService);
+
+  public collectService = inject(CollectService);
 
   public messages = messages;
 
@@ -47,6 +50,8 @@ export class AuthenticationService {
 
     setTimeout(() => {
       this.router.navigateByUrl('/inicio/coleta/cadastrar');
+
+      this.collectService.resetCollectData(); // Reset para não ter interferência nos steps de coleta online e offline
 
       this.loadingService.isLoading.set(false);
 
@@ -191,6 +196,8 @@ export class AuthenticationService {
 
   public async logoutAndRedirect(): Promise<void> {
     this.router.navigate(['/login']);
+
+    this.collectService.resetCollectData(); // Reset para não ter interferência nos steps de coleta online e offline
 
     await this.supabase.auth.signOut();
   }

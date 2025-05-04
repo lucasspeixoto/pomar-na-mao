@@ -18,13 +18,5 @@ const COMPONENTS = [
   selector: 'app-collect-data-resume',
   imports: [...PRIMENG, ...COMPONENTS],
   templateUrl: './collect-data-resume.component.html',
-  styles: [
-    `
-      ::ng-deep .card {
-        padding: 15px 5px 15px 8px;
-        min-height: 130px;
-      }
-    `,
-  ],
 })
 export class CollectDataResumeComponent {}

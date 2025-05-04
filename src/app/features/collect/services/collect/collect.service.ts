@@ -1,5 +1,5 @@
 import { ObservationDataService } from './../observation-data/observation-data.service';
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { GeolocationService } from '../geolocation/geolocation.service';
 import { PlantData } from '../../models/collect.model';
@@ -32,6 +32,8 @@ export class CollectService {
 
   public plantData = signal<PlantData[]>([]);
 
+  public numberOfCollectedData = computed(() => this.plantData().length);
+
   public currentCollectStep = signal<number>(checkCurrencStorageStep());
 
   public async getAllCollectsDataHandler(): Promise<void> {
@@ -49,7 +51,7 @@ export class CollectService {
 
       if (error) {
         this.plantData.set([]);
-        //this.messageService.error('Erro ao carregar base de coletas, tente novamente mais tarde!');
+        console.warn('Erro ao carregar base de coletas, tente novamente mais tarde!');
       }
     }, 2000);
   }
@@ -163,7 +165,11 @@ export class CollectService {
 
     if (!error) {
       this.indexDbCollectService.deleteManyCollects(plantDataIds, false).subscribe();
+
       this.resetCollectData();
+
+      this.getAllCollectsDataHandler();
+
       this.messageService.add({
         severity: 'success',
         summary: 'Sincronizado',
@@ -260,5 +266,7 @@ export class CollectService {
   public resetCollectData(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
     this.observationDataService.setCollectObservationDataFormValue(initialCollectObservationData);
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', '0');
+    this.currentCollectStep.set(0);
   }
 }

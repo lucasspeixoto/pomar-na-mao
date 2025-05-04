@@ -1,8 +1,8 @@
 {
     "name": "Pomar na mão",
     "short_name": "Pomar na mão",
-    "theme_color": "#aefcb3",
-    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "background_color": "#fafafa",
     "display": "standalone",
     "version": "0.0.0",
     "scope": "./",

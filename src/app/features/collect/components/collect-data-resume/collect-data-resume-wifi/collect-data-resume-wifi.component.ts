@@ -33,6 +33,17 @@ import { Component, inject } from '@angular/core';
       </span>
     </div>
   `,
+  styles: [
+    `
+      .card {
+        padding: 2rem 0.8rem;
+
+        @media (max-width: 400px) {
+          padding: 0.8rem;
+        }
+      }
+    `,
+  ],
 })
 export class CollectDataResumeWifiComponent {
   public connectivityService = inject(ConnectivityService);

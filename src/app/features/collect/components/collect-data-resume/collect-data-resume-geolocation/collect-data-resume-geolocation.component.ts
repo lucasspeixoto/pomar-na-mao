@@ -33,6 +33,17 @@ import { GeolocationService } from '../../../services/geolocation/geolocation.se
       }
     </div>
   `,
+  styles: [
+    `
+      .card {
+        padding: 2rem 0.8rem;
+
+        @media (max-width: 400px) {
+          padding: 0.8rem;
+        }
+      }
+    `,
+  ],
 })
 export class CollectDataResumeGeolocationComponent implements OnInit {
   public geolocationService = inject(GeolocationService);

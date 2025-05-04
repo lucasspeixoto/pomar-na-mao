@@ -31,6 +31,17 @@ import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collec
       </span>
     </section>
   `,
+  styles: [
+    `
+      .card {
+        padding: 2rem 0.8rem;
+
+        @media (max-width: 400px) {
+          padding: 0.8rem;
+        }
+      }
+    `,
+  ],
 })
 export class CollectDataResumeSyncComponent {
   public indexDbCollectService = inject(IndexDbCollectService);
