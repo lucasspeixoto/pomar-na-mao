@@ -1,12 +1,12 @@
 {
     "name": "Pomar na mão",
     "short_name": "Pomar na mão",
-    "theme_color": "#1976d2",
+    "theme_color": "#aefcb3",
     "background_color": "#ffffff",
     "display": "standalone",
-    "version": "1.0.0",
-    "start_url": "./",
+    "version": "0.0.0",
     "scope": "./",
+    "start_url": "./",
     "icons": [
         {
             "src": "assets/icons/icon-72x72.png",
