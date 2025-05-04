@@ -32,15 +32,7 @@ import { ConnectivityService } from '../../../services/connectivity/connectivity
       class="container bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
       <div class="w-full flex flex-col items-center justify-center">
         <div class="w-[95%] sm:w-[400px]">
-          <div class="bg-surface-0 dark:bg-surface-900 pt-2 pb-6 px-4 sm:px-10 rounded-2xl">
-            <div class="mb-4 w-full flex justify-end">
-              <p-button
-                routerLink="/coleta-offline"
-                class="items-end"
-                icon="pi pi-file-plus"
-                [rounded]="true"
-                severity="contrast" />
-            </div>
+          <div class="bg-surface-0 dark:bg-surface-900 py-6 px-4 sm:px-10 rounded-2xl">
             <div class="text-center mb-8">
               <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">
                 Bem vindo
@@ -100,7 +92,12 @@ import { ConnectivityService } from '../../../services/connectivity/connectivity
                 >
               </div>
             </form>
-            <div class="w-full text-center">
+            <div class="w-full flex justify-between text-center">
+              <p-button
+                routerLink="/coleta-offline"
+                label="Offline"
+                class="items-end"
+                severity="contrast" />
               <p-button
                 [disabled]="!connectivityService.isOnline()"
                 (click)="loginHandler()"

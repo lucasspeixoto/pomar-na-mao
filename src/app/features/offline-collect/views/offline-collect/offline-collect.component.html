@@ -5,9 +5,7 @@
             <p-steps class="w-full" [model]="items" [readonly]="false"
                 [activeIndex]="activeIndex"
                 (activeIndexChange)="onActiveIndexChange($event)" />
-            <p-button class="h-full" icon="pi pi-plus-circle" [rounded]="true"
-                size="large"
-                (click)="insertOfflineCollectHandler()"></p-button>
+
         </div>
 
         <section class="mt-6">
@@ -20,7 +18,11 @@
             }
         </section>
 
-        <p-button class="self-end mt-4" label="Login" routerLink="/login" />
+        <div class="self-end flex mt-4 gap-2">
+            <p-button label="Login" routerLink="/login" severity="warn" />
+            <p-button label="Coletar"
+                (click)="insertOfflineCollectHandler()"></p-button>
+        </div>
 
     </div>
 
