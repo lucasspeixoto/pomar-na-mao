@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { MessageService } from 'primeng/api';
-import { interval, tap, filter, first } from 'rxjs';
+import { interval, tap, filter } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,7 @@ export class UpdateService {
   constructor() {
     this.initializeUpdateChecks();
   }
+
   public initializeUpdateChecks(): void {
     if (!this.swUpdate.isEnabled) return;
 
@@ -21,7 +22,6 @@ export class UpdateService {
 
     this.swUpdate.versionUpdates
       .pipe(
-        first(),
         tap(event => console.log(`Evento de atualização: ${event.type}`)),
         filter(event => event.type === 'VERSION_READY')
       )

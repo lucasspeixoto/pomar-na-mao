@@ -12,21 +12,26 @@ export class ConnectivityComponent {
 
   public notificationService = inject(NotificationService);
 
+  public previousStatus: boolean | null = null;
+
   constructor() {
     effect(() => {
-      if (!this.connectivityService.isOnline()) {
-        this.notificationService.showNotification('Acesso a internet', {
-          body: 'Você está offline',
-          icon: '/assets/icons/icon-72x72.png',
-        });
+      const currentStatus = this.connectivityService.isOnline();
 
-        return;
+      if (currentStatus !== this.previousStatus) {
+        if (!currentStatus) {
+          this.notificationService.showNotification('Acesso a internet', {
+            body: 'Você está offline',
+            icon: '/assets/icons/icon-72x72.png',
+          });
+        } else {
+          this.notificationService.showNotification('Acesso a internet', {
+            body: 'Você está online!',
+            icon: '/assets/icons/icon-72x72.png',
+          });
+        }
+        this.previousStatus = currentStatus;
       }
-
-      this.notificationService.showNotification('Acesso a internet', {
-        body: 'Você está online!',
-        icon: '/assets/icons/icon-72x72.png',
-      });
     });
   }
 }
