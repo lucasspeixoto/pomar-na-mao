@@ -10,18 +10,24 @@ import { InstallPwaServiceService } from 'src/app/services/install-pwa/install-p
   styleUrl: './install-pwa-button.component.scss',
 })
 export class InstallPwaButtonComponent implements OnInit {
-  showButton = false;
-  showiOSInstructions = false;
+  public showButton = false;
+
+  public showiOSInstructions = false;
 
   public pwaService = inject(InstallPwaServiceService);
 
   public ngOnInit(): void {
     this.pwaService.promptEvent$.subscribe(() => {
-      this.showButton = this.pwaService.shouldShowInstallButton();
+      this.updateButtonVisibility();
     });
 
     // Initial check
-    this.showButton = this.pwaService.shouldShowInstallButton();
+    this.updateButtonVisibility();
+  }
+
+  private updateButtonVisibility(): void {
+    const isStandalone = this.pwaService.isInStandaloneMode();
+    this.showButton = !isStandalone && this.pwaService.shouldShowInstallButton();
   }
 
   async addToHomeScreen(): Promise<void> {
