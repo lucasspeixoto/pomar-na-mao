@@ -1,0 +1,34 @@
+<!-- install-pwa-button.component.html -->
+<button *ngIf="showButton"
+        (click)="addToHomeScreen()"
+        class="install-button"
+        aria-label="Install app">
+  {{ pwaService.isiOSDevice ? 'Adicionar ao Inicio' : 'Instalar' }}
+</button>
+
+<!-- iOS Instructions Modal -->
+<div *ngIf="showiOSInstructions" class="ios-instructions-modal" (click)="closeiOSInstructions()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeiOSInstructions()">&times;</button>
+
+    <h3>Instalar</h3>
+
+    <div class="instructions">
+      <div class="step">
+        <div class="step-number">1</div>
+        <p>Tap the <strong>Share</strong> button <span class="icon">📤</span></p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <p>Select <strong>"Add to Home Screen"</strong></p>
+      </div>
+    </div>
+
+    <div class="safari-screenshot">
+      <!-- Optional: Add an image or illustration here -->
+    </div>
+
+    <button class="got-it-button" (click)="closeiOSInstructions()">Got it!</button>
+  </div>
+</div>
