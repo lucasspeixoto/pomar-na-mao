@@ -1,10 +1,12 @@
 <!-- install-pwa-button.component.html -->
-<button *ngIf="showButton"
+<!-- <button *ngIf="showButton"
         (click)="addToHomeScreen()"
         class="install-button"
         aria-label="Install app">
   {{ pwaService.isiOSDevice ? 'Adicionar ao Inicio' : 'Instalar' }}
-</button>
+</button> -->
+
+<p-button size="small" class="install-button" *ngIf="showButton" (click)="addToHomeScreen()" [label]="pwaService.isiOSDevice ? 'Adicionar ao Inicio' : 'Instalar'" severity="info" />
 
 <!-- iOS Instructions Modal -->
 <div *ngIf="showiOSInstructions" class="ios-instructions-modal" (click)="closeiOSInstructions()">

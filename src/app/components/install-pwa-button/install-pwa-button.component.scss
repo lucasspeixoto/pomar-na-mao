@@ -1,25 +1,12 @@
 /* install-pwa-button.component.css */
 .install-button {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 12px 24px;
-  background-color: #1976d2;
-  color: white;
-  border: none;
-  border-radius: 30px;
+  top: 5px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(132, 204, 22, 0.15);
-  font-weight: 500;
-  font-size: 16px;
   z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.install-button:hover {
-  background-color: #1565c0;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* iOS Instructions Modal */

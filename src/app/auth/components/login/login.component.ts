@@ -13,6 +13,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { LoadingService } from '../../../services/loading/loading.service';
 import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message';
 import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
+import { InstallPwaButtonComponent } from 'src/app/components/install-pwa-button/install-pwa-button.component';
 
 @Component({
   selector: 'app-login',
@@ -26,84 +27,90 @@ import { ConnectivityService } from '../../../services/connectivity/connectivity
     RippleModule,
     ReactiveFormsModule,
     CustomValidationMessageComponent,
+    InstallPwaButtonComponent,
   ],
   template: `
-    <div
-      class="container bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
-      <div class="w-full flex flex-col items-center justify-center">
-        <div class="w-[95%] sm:w-[400px]">
-          <div class="bg-surface-0 dark:bg-surface-900 py-6 px-4 sm:px-10 rounded-2xl">
-            <div class="text-center mb-8">
-              <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">
-                Bem vindo
-              </div>
-              <span class="text-muted-color font-medium">Faça login para continuar</span>
-            </div>
-
-            <form [formGroup]="loginForm">
-              <div class="my-4">
-                <label
-                  for="emailField"
-                  class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
-                  >Email</label
-                >
-                <input
-                  pInputText
-                  id="emailField"
-                  type="text"
-                  placeholder="Endereço de Email"
-                  class="w-full mb-2"
-                  formControlName="email" />
-                <app-custom-validation-message id="emailErrorMessage" controlName="email" />
-              </div>
-
-              <div class="my-4">
-                <label
-                  for="passwordField"
-                  class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
-                  >Senha
-                </label>
-                <p-password
-                  id="passwordField"
-                  formControlName="password"
-                  placeholder="Senha"
-                  [toggleMask]="true"
-                  styleClass="mb-2"
-                  [fluid]="true"
-                  [feedback]="false">
-                </p-password>
-
-                <app-custom-validation-message
-                  id="passwordErrorMessage"
-                  controlName="password"
-                  [minLength]="3" />
-              </div>
-
-              <div class="flex items-center justify-between mt-2 mb-8 gap-8">
-                <div class="flex items-center">
-                  <p-checkbox id="remembermeId" binary class="mr-2"></p-checkbox>
-                  <label for="remembermeId">Lembrar</label>
+    <section>
+      @if (connectivityService.isOnline()) {
+        <app-install-pwa-button />
+      }
+      <div
+        class="container bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
+        <div class="w-full flex flex-col items-center justify-center">
+          <div class="w-[95%] sm:w-[400px]">
+            <div class="bg-surface-0 dark:bg-surface-900 py-6 px-4 sm:px-10 rounded-2xl">
+              <div class="text-center mb-8">
+                <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">
+                  Bem vindo
                 </div>
-                <span
-                  routerLink="/lembrar-senha"
-                  class="text-sm sm:text-base font-medium hover:underline no-underline ml-2 text-right cursor-pointer text-primary"
-                  >Esqueceu a senha?</span
-                >
+                <span class="text-muted-color font-medium">Faça login para continuar</span>
               </div>
-            </form>
-            <div class="w-full flex justify-between text-center">
-              <p-button routerLink="/coleta-offline" label="Coletar" severity="warn" />
-              <p-button
-                [disabled]="!connectivityService.isOnline()"
-                (click)="loginHandler()"
-                id="loginButton"
-                label="Entrar">
-              </p-button>
+
+              <form [formGroup]="loginForm">
+                <div class="my-4">
+                  <label
+                    for="emailField"
+                    class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
+                    >Email</label
+                  >
+                  <input
+                    pInputText
+                    id="emailField"
+                    type="text"
+                    placeholder="Endereço de Email"
+                    class="w-full mb-2"
+                    formControlName="email" />
+                  <app-custom-validation-message id="emailErrorMessage" controlName="email" />
+                </div>
+
+                <div class="my-4">
+                  <label
+                    for="passwordField"
+                    class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
+                    >Senha
+                  </label>
+                  <p-password
+                    id="passwordField"
+                    formControlName="password"
+                    placeholder="Senha"
+                    [toggleMask]="true"
+                    styleClass="mb-2"
+                    [fluid]="true"
+                    [feedback]="false">
+                  </p-password>
+
+                  <app-custom-validation-message
+                    id="passwordErrorMessage"
+                    controlName="password"
+                    [minLength]="3" />
+                </div>
+
+                <div class="flex items-center justify-between mt-2 mb-8 gap-8">
+                  <div class="flex items-center">
+                    <p-checkbox id="remembermeId" binary class="mr-2"></p-checkbox>
+                    <label for="remembermeId">Lembrar</label>
+                  </div>
+                  <span
+                    routerLink="/lembrar-senha"
+                    class="text-sm sm:text-base font-medium hover:underline no-underline ml-2 text-right cursor-pointer text-primary"
+                    >Esqueceu a senha?</span
+                  >
+                </div>
+              </form>
+              <div class="w-full flex justify-between text-center">
+                <p-button routerLink="/coleta-offline" label="Coletar" severity="warn" />
+                <p-button
+                  [disabled]="!connectivityService.isOnline()"
+                  (click)="loginHandler()"
+                  id="loginButton"
+                  label="Entrar">
+                </p-button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   `,
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

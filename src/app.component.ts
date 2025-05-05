@@ -10,22 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { ConnectivityComponent } from './app/components/connectivity/connectivity.component';
 import { NotificationService } from './app/services/notification/notification.service';
 import { UpdateService } from './app/services/update/update.service';
-import { InstallPwaButtonComponent } from './app/components/install-pwa-button/install-pwa-button.component';
-//import { CacheInspectorService } from './app/services/cache-inspector/cache-inspector.service';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterModule,
-    ButtonModule,
-    LoadingComponent,
-    InstallPwaButtonComponent,
-    ConnectivityComponent,
-    ToastModule,
-  ],
+  imports: [RouterModule, ButtonModule, LoadingComponent, ConnectivityComponent, ToastModule],
   template: ` <p-toast styleClass="hidden md:block" position="top-right" />
     <p-toast styleClass="md:hidden block" position="top-center" />
-    <app-install-pwa-button />
     <div>
       <router-outlet />
       <app-loading [isLoading]="loadingService.isLoading()" />
@@ -40,8 +30,6 @@ export class AppComponent implements OnInit {
   public updateService = inject(UpdateService);
 
   public notificationService = inject(NotificationService);
-
-  //private cacheInspector = inject(CacheInspectorService);
 
   private platformId = inject(PLATFORM_ID);
 
@@ -62,7 +50,5 @@ export class AppComponent implements OnInit {
         icon: '/assets/icons/icon-72x72.png',
       });
     }
-
-    //this.cacheInspector.checkAssetsCache();
   }
 }
