@@ -10,7 +10,6 @@ import { ButtonModule } from 'primeng/button';
 import { ConnectivityComponent } from './app/components/connectivity/connectivity.component';
 import { NotificationService } from './app/services/notification/notification.service';
 import { UpdateService } from './app/services/update/update.service';
-//import { CacheInspectorService } from './app/services/cache-inspector/cache-inspector.service';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +31,6 @@ export class AppComponent implements OnInit {
 
   public notificationService = inject(NotificationService);
 
-  //private cacheInspector = inject(CacheInspectorService);
-
   private platformId = inject(PLATFORM_ID);
 
   public installPrompt!: any;
@@ -53,7 +50,5 @@ export class AppComponent implements OnInit {
         icon: '/assets/icons/icon-72x72.png',
       });
     }
-
-    //this.cacheInspector.checkAssetsCache();
   }
 }
