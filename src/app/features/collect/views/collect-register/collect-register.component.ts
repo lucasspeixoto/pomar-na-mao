@@ -43,6 +43,16 @@ export class CollectRegisterComponent implements OnInit {
     localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
   }
 
+  public goToPreviousStep(): void {
+    this.activeIndex = this.activeIndex - 1;
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+  }
+
+  public goToNextStep(): void {
+    this.activeIndex = this.activeIndex + 1;
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+  }
+
   public insertOnlineCollectHandler(): void {
     this.collectService.insertAPlantCollectHandler();
     this.activeIndex = 0;

@@ -2,7 +2,7 @@
 .install-button {
   position: fixed;
   top: 5px;
-  right: 30px;
+  right: 5px;
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -16,7 +16,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +24,6 @@
 }
 
 .modal-content {
-  background: white;
   padding: 24px;
   border-radius: 12px;
   max-width: 90%;
@@ -63,8 +61,6 @@ h3 {
 }
 
 .step-number {
-  background: #1976d2;
-  color: white;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -84,28 +80,20 @@ h3 {
 .safari-screenshot {
   margin: 20px 0;
   height: 150px;
-  background-color: #f5f5f5;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #666;
 }
 
 .got-it-button {
   margin-top: 20px;
   padding: 10px 20px;
-  background: #1976d2;
-  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
   transition: background 0.2s;
-}
-
-.got-it-button:hover {
-  background: #1565c0;
 }
 
 @keyframes fadeIn {

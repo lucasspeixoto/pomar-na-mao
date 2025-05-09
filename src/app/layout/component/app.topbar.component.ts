@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { MenuItem } from 'primeng/api';
 import { StyleClassModule } from 'primeng/styleclass';
 import { TooltipModule } from 'primeng/tooltip';
+import { AvatarModule } from 'primeng/avatar';
 import { AuthenticationService } from './../../auth/services/authentication.service';
 import { LayoutService } from '../service/layout.service';
 
 @Component({
   selector: 'app-topbar',
-  imports: [RouterModule, CommonModule, StyleClassModule, TooltipModule],
+  imports: [RouterModule, CommonModule, StyleClassModule, TooltipModule, AvatarModule],
   template: ` <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
       <button
@@ -37,6 +38,14 @@ import { LayoutService } from '../service/layout.service';
               'pi-sun': !layoutService.isDarkTheme(),
             }"></i>
         </button>
+        <p-avatar
+          class="inline-block lg:hidden"
+          [size]="'large'"
+          [image]="authenticationService.currentUser()?.avatar_url"
+          shape="circle"
+          data-pc-name="avatar"
+          class="ring-2 ring-primary-500/50 shadow-lg shadow-primary-500/50 p-avatar p-component p-avatar-circle p-avatar-image">
+        </p-avatar>
       </div>
 
       <button
@@ -52,10 +61,6 @@ import { LayoutService } from '../service/layout.service';
 
       <div class="layout-topbar-menu hidden lg:block">
         <div class="layout-topbar-menu-content">
-          <!-- <button type="button" class="layout-topbar-action">
-            <i class="pi pi-user"></i>
-            <span>Perfil</span>
-          </button> -->
           <button
             pTooltip="Sair"
             tooltipPosition="bottom"

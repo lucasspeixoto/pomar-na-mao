@@ -38,6 +38,10 @@
     &:focus-visible {
       @include focused();
     }
+
+    @media (max-width: 350px) {
+      display: none;
+    }
   }
 
   .layout-topbar-action {

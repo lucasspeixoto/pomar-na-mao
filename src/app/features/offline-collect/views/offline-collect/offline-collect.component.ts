@@ -43,6 +43,16 @@ export class OfflineCollectComponent {
     localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
   }
 
+  public goToPreviousStep(): void {
+    this.activeIndex = this.activeIndex - 1;
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+  }
+
+  public goToNextStep(): void {
+    this.activeIndex = this.activeIndex + 1;
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+  }
+
   public insertOfflineCollectHandler(): void {
     this.collectService.storageAPlantCollectHandler();
     this.activeIndex = 0;

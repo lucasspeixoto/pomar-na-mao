@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AppLayoutComponent } from './app/layout/component/app.layout.component';
 import { NotfoundComponent } from './app/pages/notfound/notfound';
-//import { isLoggedGuard } from './app/auth/guards/is-logged/is-logged.guard';
+import { isLoggedGuard } from './app/auth/guards/is-logged/is-logged.guard';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -34,7 +34,7 @@ export const appRoutes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
-    /* canActivate: [isLoggedGuard], */
+    canActivate: [isLoggedGuard],
     children: [{ path: 'inicio', loadChildren: () => import('./app/features/features.routes') }],
   },
   { path: 'notfound', component: NotfoundComponent },

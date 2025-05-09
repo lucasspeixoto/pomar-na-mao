@@ -2,10 +2,11 @@ import { NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { InstallPwaServiceService } from 'src/app/services/install-pwa/install-pwa-service.service';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-install-pwa-button',
-  imports: [NgIf, ButtonModule],
+  imports: [NgIf, ButtonModule, TooltipModule],
   templateUrl: './install-pwa-button.component.html',
   styleUrl: './install-pwa-button.component.scss',
 })

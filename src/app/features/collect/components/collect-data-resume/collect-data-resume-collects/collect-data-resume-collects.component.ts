@@ -33,11 +33,7 @@ import { CollectService } from '../../../services/collect/collect.service';
   styles: [
     `
       .card {
-        padding: 2rem 0.8rem;
-
-        @media (max-width: 400px) {
-          padding: 0.8rem;
-        }
+        padding: 0.5rem;
       }
     `,
   ],
