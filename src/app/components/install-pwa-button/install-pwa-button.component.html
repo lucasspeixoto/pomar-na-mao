@@ -1,33 +1,32 @@
-<div [pTooltip]="pwaService.isiOSDevice ? 'Adicionar ao Inicio' : 'Instalar'" tooltipPosition="left" class="install-button" *ngIf="showButton" (click)="addToHomeScreen()">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
+<div *ngIf="showButton" (click)="addToHomeScreen()"
+    [pTooltip]="pwaService.isiOSDevice ? 'Adicionar ao Inicio' : 'Instalar'"
+    tooltipPosition="left" class="install-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+        stroke="white" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
 </div>
-<!-- iOS Instructions Modal -->
-<div *ngIf="showiOSInstructions" class="ios-instructions-modal" (click)="closeiOSInstructions()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="close-button" (click)="closeiOSInstructions()">&times;</button>
 
-    <h3>Instalar</h3>
-
-    <div class="instructions">
-      <div class="step">
-        <div class="step-number">1</div>
-        <p>Tap the <strong>Share</strong> button <span class="icon">📤</span></p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">2</div>
-        <p>Select <strong>"Add to Home Screen"</strong></p>
-      </div>
-    </div>
-
-    <div class="safari-screenshot">
-      <!-- Optional: Add an image or illustration here -->
-    </div>
-
-    <button class="got-it-button" (click)="closeiOSInstructions()">Got it!</button>
-  </div>
-</div>
+<p-dialog
+    header="Instalar Pomar na mão 🌳"
+    [breakpoints]="{
+        '1024px': '40vw',
+        '768px': '60vw',
+        '550px': '80vw',
+        '375px': '95vw'
+    }"
+    [style]="{ width: '30vw' }"
+    [(visible)]="showiOSInstructions"
+    [modal]="true"
+    [closable]="true"
+    (onHide)="closeiOSInstructions()">
+    <p>
+        Para instalar este aplicativo no seu dispositivo iOS, abra-o no Safari e
+        toque no
+        botão <strong>Compartilhar</strong> e selecione <strong>Adicionar à Tela
+            Inicial</strong>.
+    </p>
+</p-dialog>

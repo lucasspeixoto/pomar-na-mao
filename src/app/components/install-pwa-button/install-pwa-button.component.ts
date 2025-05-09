@@ -1,3 +1,4 @@
+import { DialogModule } from 'primeng/dialog';
 import { NgIf } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
@@ -6,14 +7,14 @@ import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-install-pwa-button',
-  imports: [NgIf, ButtonModule, TooltipModule],
+  imports: [NgIf, ButtonModule, TooltipModule, DialogModule],
   templateUrl: './install-pwa-button.component.html',
   styleUrl: './install-pwa-button.component.scss',
 })
 export class InstallPwaButtonComponent implements OnInit {
   public showButton = false;
 
-  public showiOSInstructions = false;
+  public showiOSInstructions = true; //false;
 
   public pwaService = inject(InstallPwaServiceService);
 
