@@ -14,7 +14,7 @@ import { TooltipModule } from 'primeng/tooltip';
 export class InstallPwaButtonComponent implements OnInit {
   public showButton = false;
 
-  public showiOSInstructions = true; //false;
+  public showiOSInstructions = false;
 
   public pwaService = inject(InstallPwaServiceService);
 
