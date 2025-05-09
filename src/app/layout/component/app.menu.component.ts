@@ -21,14 +21,14 @@ export class AppMenuComponent implements OnInit {
 
   private authenticationService = inject(AuthenticationService);
 
-  public isAdmin = true; //false
+  public isAdmin = false;
 
-  public isLogged = true; //false
+  public isLogged = false;
 
   public ngOnInit(): void {
-    //this.isAdmin = this.authenticationService.isAdminCheckHandler();
+    this.isAdmin = this.authenticationService.isAdminCheckHandler();
 
-    //this.isLogged = this.authenticationService.isLoggedCheckHandler();
+    this.isLogged = this.authenticationService.isLoggedCheckHandler();
 
     this.menuItems = [
       {

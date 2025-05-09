@@ -86,10 +86,11 @@ import { InstallPwaButtonComponent } from 'src/app/components/install-pwa-button
                 </div>
 
                 <div class="flex items-center justify-between mt-2 mb-8 gap-8">
-                  <div class="flex items-center">
-                    <p-checkbox id="remembermeId" binary class="mr-2"></p-checkbox>
-                    <label for="remembermeId">Lembrar</label>
-                  </div>
+                  <span
+                    class="text-sm sm:text-base font-semibold hover:underline no-underline text-right cursor-pointer text-blue-500"
+                    routerLink="/coleta-offline"
+                    >Coletar</span
+                  >
                   <span
                     routerLink="/lembrar-senha"
                     class="text-sm sm:text-base font-medium hover:underline no-underline ml-2 text-right cursor-pointer text-primary"
@@ -97,8 +98,7 @@ import { InstallPwaButtonComponent } from 'src/app/components/install-pwa-button
                   >
                 </div>
               </form>
-              <div class="w-full flex justify-between text-center">
-                <p-button routerLink="/coleta-offline" label="Coletar" severity="warn" />
+              <div class="w-full flex justify-center text-center">
                 <p-button
                   [disabled]="!connectivityService.isOnline()"
                   (click)="loginHandler()"

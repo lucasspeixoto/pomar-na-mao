@@ -7,7 +7,17 @@
                 (activeIndexChange)="onActiveIndexChange($event)" />
         </div>
 
-        <section class="mt-6">
+        <div class="justify-between flex items-center mt-2 gap-2">
+            <span
+                    class="text-sm sm:text-base font-semibold hover:underline no-underline text-right cursor-pointer text-blue-500"
+                    routerLink="/login"
+                    >Login</span
+                  >
+            <p-button label="Salvar" icon="pi pi-database" iconPos="right"
+                (click)="insertOfflineCollectHandler()"></p-button>
+        </div>
+
+        <section class="my-2">
             @if(activeIndex === 0) {
             <app-collect-geolocation />
             } @if (activeIndex === 1) {
@@ -17,10 +27,13 @@
             }
         </section>
 
-        <div class="self-end flex mt-4 gap-2">
-            <p-button label="Login" routerLink="/login" severity="warn" />
-            <p-button label="Armazenar"
-                (click)="insertOfflineCollectHandler()"></p-button>
+        <div class="self-end flex my-2 gap-2">
+            @if(activeIndex !== 0) {
+                <p-button (click)="goToPreviousStep()" severity="contrast" label="Voltar" icon="pi pi-angle-left" iconPos="left" />
+            }
+            @if(activeIndex !== 2) {
+                <p-button (click)="goToNextStep()" severity="contrast" label="Próximo" icon="pi pi-angle-right" iconPos="right" />
+            }
         </div>
     </div>
 </div>
