@@ -32,7 +32,7 @@ export class InstallPwaButtonComponent implements OnInit {
     this.showButton = !isStandalone && this.pwaService.shouldShowInstallButton();
   }
 
-  async addToHomeScreen(): Promise<void> {
+  public async addToHomeScreen(): Promise<void> {
     if (this.pwaService.isiOSDevice && this.pwaService.isSafariBrowser) {
       this.showiOSInstructions = true;
     } else {
