@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, AfterViewInit, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CardModule } from 'primeng/card';
 
 import type * as Leaflet from 'leaflet';
@@ -21,10 +27,12 @@ const PIPES = [EpochToTimePipe];
   styleUrl: './collect-geolocation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectGeolocationComponent implements OnInit, AfterViewInit {
+export class CollectGeolocationComponent implements OnInit {
   public currentDate = new Date();
 
   public geolocationService = inject(GeolocationService);
+
+  public cd = inject(ChangeDetectorRef);
 
   public userMarker!: Leaflet.Marker;
 
@@ -33,15 +41,16 @@ export class CollectGeolocationComponent implements OnInit, AfterViewInit {
   public geolocationTextInfo = GEOLOCATION_INFO_TEXT;
 
   public ngOnInit(): void {
+    this.startMapRender();
     this.loadGeolocationData();
   }
 
-  public loadGeolocationData(): void {
-    this.geolocationService.getLocaltionPermission();
+  public async loadGeolocationData(): Promise<void> {
+    await this.geolocationService.getLocaltionPermission();
     this.geolocationService.getLocaltionCoordinate();
   }
 
-  public ngAfterViewInit(): void {
+  public startMapRender(): void {
     if (!navigator.geolocation) {
       console.warn('Localização indisponível neste dispositivo!');
       this.geolocationService.showUnavailableGeolocation();
@@ -73,6 +82,8 @@ export class CollectGeolocationComponent implements OnInit, AfterViewInit {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
         this.userMarker?.setLatLng([latitude, longitude]);
+
+        this.cd.markForCheck();
       },
       error => {
         this.geolocationService.handleGeolocationError(error);

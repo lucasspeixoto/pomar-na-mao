@@ -46,7 +46,7 @@ export class AuthenticationService {
       return;
     }
 
-    this.loadUserData();
+    //this.loadUserData(); Load desnecessário visto que ocorre no isLoggedGuard
 
     setTimeout(() => {
       this.router.navigateByUrl('/inicio/coleta/cadastrar');

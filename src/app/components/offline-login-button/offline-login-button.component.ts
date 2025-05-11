@@ -7,4 +7,4 @@ import { RouterLink } from '@angular/router';
   templateUrl: './offline-login-button.component.html',
   styleUrls: ['./offline-login-button.component.scss'],
 })
-export class OffilineLoginButtonComponent {}
+export class OfflineLoginButtonComponent {}

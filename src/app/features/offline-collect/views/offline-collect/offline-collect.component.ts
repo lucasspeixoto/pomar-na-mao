@@ -7,7 +7,7 @@ import { CollectComplementDataComponent } from '../../../collect/components/coll
 import { CollectGeolocationComponent } from '../../../collect/components/collect-geolocation/collect-geolocation.component';
 import { CollectService } from '../../../collect/services/collect/collect.service';
 import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
-import { OffilineLoginButtonComponent } from 'src/app/components/offline-login-button/offline-login-button.component';
+import { OfflineLoginButtonComponent } from '../../../../components/offline-login-button/offline-login-button.component';
 
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];
 
@@ -15,7 +15,7 @@ const COMPONENTS = [
   CollectGeolocationComponent,
   CollectComplementDataComponent,
   CollectObservationDataComponent,
-  OffilineLoginButtonComponent,
+  OfflineLoginButtonComponent,
 ];
 
 @Component({

@@ -11,8 +11,9 @@ dispositivo. Caso não seja exibido ative a localização e recarregue a página
 `;
 
 export const OBSERVARTION_INFO_TEXT = `
-Os dados complementares são dados gerais referente a observação
-da planta em questão. A única informação obrigatória é a massa, os outros
-são opcionais mas é recomendado que seja inserido para futuras avaliações e
+Os dados de observação são dados gerais referente a observação de pontos
+da planta como ocorrências prejudiciais que precisam de correção ou
+observações importantes para futuras operações. Todos os campos são
+opcionais mas é recomendado que seja inserido para futuras avaliações e
 levantamentos estatisticos
 `;
