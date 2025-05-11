@@ -1,20 +1,11 @@
+<app-offline-login-button />
 <div
     class="py-8 px-2 sm:px-10 lg:px-32 xl:px-48 bg-surface-50 dark:bg-surface-950 overflow-hidden">
     <div class="w-full mt-2 flex flex-col justify-start">
-        <div class="flex w-full justify-between items-start">
+        <div class="mb-4 flex w-full justify-between items-start">
             <p-steps class="w-full" [model]="items" [readonly]="false"
                 [activeIndex]="activeIndex"
                 (activeIndexChange)="onActiveIndexChange($event)" />
-        </div>
-
-        <div class="justify-between flex items-center mt-2 gap-2">
-            <span
-                    class="text-sm sm:text-base font-semibold hover:underline no-underline text-right cursor-pointer text-blue-500"
-                    routerLink="/login"
-                    >Login</span
-                  >
-            <p-button label="Salvar" iconPos="right"
-                (click)="insertOfflineCollectHandler()"></p-button>
         </div>
 
         <section class="my-2">
@@ -29,11 +20,20 @@
 
         <div class="self-end flex my-2 gap-2">
             @if(activeIndex !== 0) {
-                <p-button (click)="goToPreviousStep()" severity="contrast" label="Voltar" iconPos="left" />
+            <p-button (click)="goToPreviousStep()" severity="contrast"
+                label="Voltar" iconPos="left" />
             }
             @if(activeIndex !== 2) {
-                <p-button (click)="goToNextStep()" severity="contrast" label="Próximo" iconPos="right" />
+            <p-button (click)="goToNextStep()" severity="contrast"
+                label="Próximo" iconPos="right" />
             }
         </div>
+
+        @if(activeIndex === 2) {
+        <div class="justify-center flex mt-4 gap-2">
+            <p-button label="Salvar"
+                (click)="insertOfflineCollectHandler()"></p-button>
+        </div>
+        }
     </div>
 </div>

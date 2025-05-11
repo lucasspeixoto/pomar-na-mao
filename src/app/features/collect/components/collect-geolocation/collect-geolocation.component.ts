@@ -6,6 +6,7 @@ import { GeolocationService } from '../../services/geolocation/geolocation.servi
 import { EpochToTimePipe } from 'src/app/pipes/epoch-to-time/epoch-to-time.pipe';
 import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
+import { GEOLOCATION_INFO_TEXT } from '../../constants/texts';
 
 declare let L: typeof Leaflet;
 
@@ -28,6 +29,8 @@ export class CollectGeolocationComponent implements OnInit, AfterViewInit {
   public userMarker!: Leaflet.Marker;
 
   public map!: Leaflet.Map;
+
+  public geolocationTextInfo = GEOLOCATION_INFO_TEXT;
 
   public ngOnInit(): void {
     this.loadGeolocationData();

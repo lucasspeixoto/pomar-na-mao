@@ -2,10 +2,11 @@
   height: 100%;
   width: 100%;
   border-radius: 10px;
+  z-index: 0;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   #map {
-    height: 250px;
+    height: calc(100vh - 100px);
   }
 }

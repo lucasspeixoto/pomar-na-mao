@@ -21,6 +21,8 @@ import { MessageModule } from 'primeng/message';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { debounceTime, tap } from 'rxjs';
 import { lycheeVarieties } from '../../constants/lychee-varieties';
+import { COMPLEMENT_INFO_TEXT } from '../../constants/texts';
+import { PopoverModule } from 'primeng/popover';
 
 const PRIMENG = [
   InputMaskModule,
@@ -32,6 +34,7 @@ const PRIMENG = [
   InputTextModule,
   DialogModule,
   MessageModule,
+  PopoverModule,
 ];
 
 const COMMON = [
@@ -52,6 +55,10 @@ const PROVIDERS = [MessageService];
   styleUrl: './collect-complement-data.component.scss',
   styles: [
     `
+      :host ::ng-deep .p-card {
+        margin-top: 0;
+      }
+
       :host ::ng-deep .p-frozen-column {
         font-weight: bold;
       }
@@ -85,6 +92,8 @@ export class CollectComplementDataComponent implements OnInit {
   public collectComplementDataForm = createCollectComplementDataForm();
 
   public lycheeVarieties = lycheeVarieties;
+
+  public complementDataText = COMPLEMENT_INFO_TEXT;
 
   public ngOnInit(): void {
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
