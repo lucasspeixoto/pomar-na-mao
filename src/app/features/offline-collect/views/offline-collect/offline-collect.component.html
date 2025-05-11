@@ -1,6 +1,6 @@
 <app-offline-login-button />
 <div
-    class="py-8 px-2 sm:px-10 lg:px-32 xl:px-48 bg-surface-50 dark:bg-surface-950 overflow-hidden">
+    class="py-8 px-2 sm:px-10 md:px-36 lg:px-56 bg-surface-50 dark:bg-surface-950 overflow-hidden">
     <div class="w-full mt-2 flex flex-col justify-start">
         <div class="mb-4 flex w-full justify-between items-start">
             <p-steps class="w-full" [model]="items" [readonly]="false"
@@ -31,11 +31,11 @@
             </div>
         </section>
 
-        <!-- @if(activeIndex === 2) {
+        @if(activeIndex === 2) {
         <div class="justify-center flex mt-4 gap-2">
             <p-button label="Salvar"
                 (click)="insertOfflineCollectHandler()"></p-button>
         </div>
-        } -->
+        }
     </div>
 </div>

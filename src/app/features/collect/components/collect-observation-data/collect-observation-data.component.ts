@@ -44,7 +44,35 @@ const PROVIDERS = [MessageService];
   selector: 'app-collect-observation-data',
   imports: [...PRIMENG, ...COMMON],
   templateUrl: './collect-observation-data.component.html',
-  styleUrl: './collect-observation-data.component.scss',
+  styles: [
+    `
+      :host ::ng-deep .p-card {
+        margin-top: 0;
+        height: auto;
+      }
+
+      :host ::ng-deep .p-frozen-column {
+        font-weight: bold;
+      }
+
+      :host ::ng-deep .p-datatable-frozen-tbody {
+        font-weight: bold;
+      }
+
+      ::ng-deep {
+        .p-inputmask,
+        .p-datepicker {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 450px) {
+        .p-iconfield {
+          width: 100%;
+        }
+      }
+    `,
+  ],
   providers: [...PROVIDERS],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

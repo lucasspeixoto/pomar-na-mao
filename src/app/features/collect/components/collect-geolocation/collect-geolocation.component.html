@@ -1,4 +1,4 @@
-<div class="h-full">
+<div class="min-h-[450px]">
     <section class="inline-block md:hidden">
         <div
             class="card z-50 fixed bottom-2 left-4 right-4 bg-surface-50 rounded-xl shadow-lg py-4 px-8 flex justify-between items-center font-medium">
@@ -23,11 +23,11 @@
     <div
         class="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-4">
         <div class="hidden md:inline-block w-full md:w-1/3">
-            <div class="w-full flex flex-col gap-1">
-                <p-message class="h-full mb-4" severity="info">
+            <div class="w-full flex flex-col justify-between h-full">
+                <p-message severity="info">
                     <div class="flex flex-col gap-1">
                         <span
-                            class="text-justify font-semibold">{{geolocationTextInfo}}</span>
+                            class="text-md lg:text-lg xl:text-xl text-justify font-semibold">{{geolocationTextInfo}}</span>
                         <p-button variant="text" [raised]="true" severity="help"
                             class="self-end" label="Recarregar"
                             [link]="true"
@@ -35,38 +35,37 @@
                     </div>
                 </p-message>
 
-                <p-card header="Coordenadas">
-                    <div class="mt-2 flex flex-col items-start gap-8">
-                        <span class="font-semibold">Latitude:
-                            <strong id="latitude" class="text-primary">{{
-                                geolocationService.coordinates()?.latitude }}
-                            </strong>
-                        </span>
+                <div>
+                    <p-card header="Coordenadas">
+                        <div class="mt-2 flex flex-col items-start gap-8">
+                            <span class="font-semibold">Latitude:
+                                <strong id="latitude" class="text-primary">{{
+                                    geolocationService.coordinates()?.latitude }}
+                                </strong>
+                            </span>
 
-                        <span class="font-semibold">Longitude:
-                            <strong id="longitude" class="text-primary">{{
-                                geolocationService.coordinates()?.longitude }}
-                            </strong>
-                        </span>
+                            <span class="font-semibold">Longitude:
+                                <strong id="longitude" class="text-primary">{{
+                                    geolocationService.coordinates()?.longitude }}
+                                </strong>
+                            </span>
 
-                        <span class="font-semibold">Tempo:
-                            <strong id="timestamp" class="text-primary">{{
-                                geolocationService.coordinatesTimestamp()! |
-                                epochToTime
-                                }}
-                            </strong>
-                        </span>
-                    </div>
+                            <span class="font-semibold">Tempo:
+                                <strong id="timestamp" class="text-primary">{{
+                                    geolocationService.coordinatesTimestamp()! |
+                                    epochToTime
+                                    }}
+                                </strong>
+                            </span>
+                        </div>
 
-                </p-card>
+                    </p-card>
+                </div>
             </div>
         </div>
 
-        <div class="w-full md:2/3 mb-20">
-            <div id="map" class="mb-4"></div>
+        <div class="w-full md:2/3 mb-20 md:mb-0">
+            <div id="map"></div>
         </div>
     </div>
-
-
-
 </div>
