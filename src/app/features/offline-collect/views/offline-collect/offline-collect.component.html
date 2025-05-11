@@ -18,22 +18,24 @@
             }
         </section>
 
-        <div class="self-end flex my-2 gap-2">
-            @if(activeIndex !== 0) {
-            <p-button (click)="goToPreviousStep()" severity="contrast"
-                label="Voltar" iconPos="left" />
-            }
-            @if(activeIndex !== 2) {
-            <p-button (click)="goToNextStep()" severity="contrast"
-                label="Próximo" iconPos="right" />
-            }
-        </div>
+        <section class="hidden md:flex md:justify-end">
+            <div class="self-end flex my-2 gap-2">
+                @if(activeIndex !== 0) {
+                <p-button (click)="goToPreviousStep()" severity="contrast"
+                    label="Voltar" iconPos="left" />
+                }
+                @if(activeIndex !== 2) {
+                <p-button (click)="goToNextStep()" severity="contrast"
+                    label="Próximo" iconPos="right" />
+                }
+            </div>
+        </section>
 
-        @if(activeIndex === 2) {
+        <!-- @if(activeIndex === 2) {
         <div class="justify-center flex mt-4 gap-2">
             <p-button label="Salvar"
                 (click)="insertOfflineCollectHandler()"></p-button>
         </div>
-        }
+        } -->
     </div>
 </div>

@@ -20,7 +20,7 @@
 
     <section class="inline-block md:hidden">
         <span (click)="op.toggle($event)"
-            class="font-semibold cursor-pointer opacity-80 text-md underline text-surface-500">Como
+            class="font-semibold cursor-pointer text-md underline text-surface-300">Como
             preencher ?</span>
 
         <p-popover #op>
@@ -85,7 +85,7 @@
             <div class="mt-2">
                 <label for="description"
                     class="block font-bold mb-3">Descrição</label>
-                <textarea class="w-full" rows="8" pTextarea
+                <textarea class="w-full" rows="10" pTextarea
                     formControlName="description"
                     id="description"></textarea>
                 <app-custom-validation-message controlName="description"
