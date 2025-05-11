@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
-import { CollectObservationDataComponent } from 'src/app/features/collect/components/collect-observation-data/collect-observation-data.component';
-import { CollectComplementDataComponent } from 'src/app/features/collect/components/collect-complement-data/collect-complement-data.component';
-import { CollectGeolocationComponent } from 'src/app/features/collect/components/collect-geolocation/collect-geolocation.component';
-import { CollectService } from 'src/app/features/collect/services/collect/collect.service';
-import { checkCurrencStorageStep } from 'src/app/features/collect/utils/localstorage';
-import { RouterLink } from '@angular/router';
+import { CollectObservationDataComponent } from '../../../collect/components/collect-observation-data/collect-observation-data.component';
+import { CollectComplementDataComponent } from '../../../collect/components/collect-complement-data/collect-complement-data.component';
+import { CollectGeolocationComponent } from '../../../collect/components/collect-geolocation/collect-geolocation.component';
+import { CollectService } from '../../../collect/services/collect/collect.service';
+import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
+import { OffilineLoginButtonComponent } from 'src/app/components/offline-login-button/offline-login-button.component';
 
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];
 
@@ -15,13 +15,12 @@ const COMPONENTS = [
   CollectGeolocationComponent,
   CollectComplementDataComponent,
   CollectObservationDataComponent,
+  OffilineLoginButtonComponent,
 ];
-
-const COMMON = [RouterLink];
 
 @Component({
   selector: 'app-offline-collect',
-  imports: [...PRIMENG, ...COMPONENTS, ...COMMON],
+  imports: [...PRIMENG, ...COMPONENTS],
   templateUrl: './offline-collect.component.html',
   styles: [
     `

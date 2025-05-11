@@ -19,6 +19,8 @@ import {
   CollectObservationDataFormValue,
 } from '../../constants/collect-observation-data-form';
 import { ObservationDataService } from './../../services/observation-data/observation-data.service';
+import { OBSERVARTION_INFO_TEXT } from '../../constants/texts';
+import { PopoverModule } from 'primeng/popover';
 
 const PRIMENG = [
   InputMaskModule,
@@ -31,6 +33,7 @@ const PRIMENG = [
   DialogModule,
   MessageModule,
   CheckboxModule,
+  PopoverModule,
 ];
 
 const COMMON = [CardModule, FormsModule, ReactiveFormsModule, AsyncPipe, NgIf];
@@ -49,6 +52,8 @@ export class CollectObservationDataComponent implements OnInit {
   public observationDataService = inject(ObservationDataService);
 
   public collectObservationDataForm = createCollectObservationDataForm();
+
+  public observationInfoText = OBSERVARTION_INFO_TEXT;
 
   public ngOnInit(): void {
     const observationData = this.observationDataService.getCollectObservationDataFormValue();
