@@ -10,7 +10,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { FluidModule } from 'primeng/fluid';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { DatePipe } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { IndexDbCollectService } from './../../../../services/index-db/index-db-collect.service';
 import { ExcelService } from '../../../../services/excel/excel.service';
 import { PlantData } from '../../models/collect.model';
@@ -21,6 +21,10 @@ import { ComplementDataService } from '../../services/complement-data/complement
 import { ObservationDataService } from '../../services/observation-data/observation-data.service';
 import { initialCollectObservationData } from '../../constants/collect-observation-data-form';
 import { CollectService } from '../../services/collect/collect.service';
+import { DataViewModule } from 'primeng/dataview';
+import { GeolocationDialogComponent } from '../../components/collect-sync/geolocation-dialog/geolocation-dialog.component';
+import { GeolocationFormService } from '../../services/geolocation-form/geolocation-form.service';
+import { CheckboxModule, type CheckboxChangeEvent } from 'primeng/checkbox';
 
 const PRIMENG = [
   TableModule,
@@ -33,13 +37,19 @@ const PRIMENG = [
   IconFieldModule,
   ConfirmDialogModule,
   FluidModule,
+  DataViewModule,
+  CheckboxModule,
 ];
 
-const COMPONENTS = [ComplementDialogComponent, ObservationDialogComponent];
+const COMPONENTS = [
+  ComplementDialogComponent,
+  ObservationDialogComponent,
+  GeolocationDialogComponent,
+];
 
-const PROVIDERS = [MessageService, ConfirmationService, DatePipe];
+const PROVIDERS = [MessageService, ConfirmationService, ShortTimestampPipe];
 
-const PIPES = [ShortTimestampPipe];
+const PIPES = [ShortTimestampPipe, NgFor, NgClass];
 
 @Component({
   selector: 'app-collect-sync',
@@ -87,17 +97,23 @@ export class CollectSyncComponent implements OnInit {
 
   private observationDataService = inject(ObservationDataService);
 
+  private geolocationFormService = inject(GeolocationFormService);
+
   private excelService = inject(ExcelService);
 
   private confirmationService = inject(ConfirmationService);
 
   public collectedData = this.indexDbCollectService.collectedData;
 
-  public selectedCollects!: PlantData[] | null;
+  public totalCollectedData = this.indexDbCollectService.totalCollectedData;
+
+  public selectedCollects: PlantData[] | null = [];
 
   public complementDialog = false;
 
   public observationDialog = false;
+
+  public geolocationDialog = false;
 
   public ngOnInit(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
@@ -106,12 +122,47 @@ export class CollectSyncComponent implements OnInit {
     this.indexDbCollectService.listAllCollects();
   }
 
+  public selectCollectHandler(event: CheckboxChangeEvent, id: string): void {
+    if (event.checked) {
+      const selectedCollect = this.collectedData().find(item => item.id === id) as PlantData;
+
+      this.selectedCollects = [...this.selectedCollects!, selectedCollect];
+    } else {
+      const collectsWithNonSelected = this.selectedCollects!.filter(item => item.id !== id);
+
+      this.selectedCollects = collectsWithNonSelected;
+    }
+  }
+
+  public async syncAllCollects(): Promise<void> {
+    this.selectedCollects = this.collectedData();
+
+    await this.syncSelectedCollects();
+  }
+
   public exportCSV(): void {
     this.excelService.exportToExcel(this.collectedData(), 'Coletas Offline');
   }
 
   public onGlobalFilter(table: Table, event: Event): void {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  public showGeolocationDialog(collect: PlantData): void {
+    const { id, latitude, longitude, gps_timestamp } = collect;
+
+    const geolocationFormData = {
+      id,
+      latitude,
+      longitude,
+      gpsTimestamp: gps_timestamp,
+    };
+
+    console.log(geolocationFormData);
+
+    this.geolocationFormService.setCollectGeolocationDataFormValue(geolocationFormData);
+
+    this.geolocationDialog = true;
   }
 
   public showComplementDialog(collect: PlantData): void {
@@ -130,10 +181,6 @@ export class CollectSyncComponent implements OnInit {
     this.complementDataService.setCollectComplementDataFormValue(complementDataForm);
 
     this.complementDialog = true;
-  }
-
-  public hideComplementDialog(): void {
-    this.complementDialog = false;
   }
 
   public showObservationDialog(collect: PlantData): void {
@@ -174,10 +221,6 @@ export class CollectSyncComponent implements OnInit {
     this.observationDataService.setCollectObservationDataFormValue(observationDataForm);
 
     this.observationDialog = true;
-  }
-
-  public hideObservationDialog(): void {
-    this.observationDialog = false;
   }
 
   public async syncSelectedCollects(): Promise<void> {

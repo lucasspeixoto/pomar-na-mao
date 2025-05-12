@@ -7,7 +7,7 @@ import { CollectService } from '../../services/collect/collect.service';
   selector: 'app-collect',
   imports: [RouterModule, CollectDataResumeComponent],
   template: ` <section>
-    <div class="grid grid-cols-12 gap-1 md:gap-8">
+    <div class="grid grid-cols-12 gap-2">
       <app-collect-data-resume class="hidden md:contents" />
       <div class="col-span-12">
         <router-outlet />

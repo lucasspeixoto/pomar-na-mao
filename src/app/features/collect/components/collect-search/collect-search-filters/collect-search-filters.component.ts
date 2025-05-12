@@ -8,7 +8,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { FarmRegionService } from '../../../services/farm-region/farm-region.service';
 import { SelectModule } from 'primeng/select';
-import { CollectSearchFiltersService } from '../../../services/collect-search-filters.service';
+import { CollectSearchFiltersService } from '../../../services/collect-search/collect-search-filters.service';
 
 const PRIMENG = [
   SelectModule,
