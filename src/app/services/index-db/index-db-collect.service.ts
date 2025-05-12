@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { computed, inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, filter, first, Observable, switchMap } from 'rxjs';
 import { MessageService } from 'primeng/api';
@@ -28,9 +28,9 @@ export class IndexDbCollectService {
 
   private readonly secretKey = environment.INDEXDB_KEY;
 
-  public totalCollectedData = signal(0);
-
   public collectedData = signal<PlantData[]>([]);
+
+  public totalCollectedData = computed(() => this.collectedData().length);
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
@@ -105,7 +105,7 @@ export class IndexDbCollectService {
 
               obs.next(decryptedTasks);
               this.collectedData.set(decryptedTasks);
-              this.totalCollectedData.set(decryptedTasks.length);
+              //this.totalCollectedData.set(decryptedTasks.length);
               obs.complete();
             } catch {
               obs.error('Descriptografia falhou!');
@@ -149,7 +149,7 @@ export class IndexDbCollectService {
 
           request.onsuccess = () => {
             obs.next(plantData);
-            this.totalCollectedData.update(current => current + 1);
+            //this.totalCollectedData.update(current => current + 1);
             obs.complete();
 
             this.messageService.add({
@@ -252,7 +252,7 @@ export class IndexDbCollectService {
           const request = this.store$.delete(id);
 
           request.onsuccess = () => {
-            this.totalCollectedData.update(current => current - 1);
+            //this.totalCollectedData.update(current => current - 1);
             this.collectedData.update(items => items.filter(item => item.id !== id));
             if (showMessages) {
               this.messageService.add({
@@ -300,7 +300,7 @@ export class IndexDbCollectService {
 
             deleteRequest.onsuccess = () => {
               successCount++;
-              this.totalCollectedData.update(current => current - 1);
+              //this.totalCollectedData.update(current => current - 1);
               this.collectedData.update(items => items.filter(item => item.id !== id));
             };
 

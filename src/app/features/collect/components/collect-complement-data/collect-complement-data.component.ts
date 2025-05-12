@@ -23,6 +23,7 @@ import { debounceTime, tap } from 'rxjs';
 import { lycheeVarieties } from '../../constants/lychee-varieties';
 import { COMPLEMENT_INFO_TEXT } from '../../constants/texts';
 import { PopoverModule } from 'primeng/popover';
+import { InputNumber } from 'primeng/inputnumber';
 
 const PRIMENG = [
   InputMaskModule,
@@ -35,6 +36,7 @@ const PRIMENG = [
   DialogModule,
   MessageModule,
   PopoverModule,
+  InputNumber,
 ];
 
 const COMMON = [

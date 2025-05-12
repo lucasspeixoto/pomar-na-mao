@@ -1,21 +1,30 @@
-<p-toolbar styleClass="mt-4 mb-6">
+<p-toolbar styleClass="mb-4 md:my-4">
     <ng-template #start>
-        <p-button label="Exportar" icon="pi pi-upload" severity="success" (click)="exportCSV()" />
+        <p-button [disabled]="totalCollectedData() === 0" label="Exportar" icon="pi pi-upload" severity="success"
+            (click)="exportCSV()" />
+
     </ng-template>
 
     <ng-template #end>
-        <p-button severity="danger" label="Excluir" icon="pi pi-trash" class="mr-2"
+        <p-button severity="danger" label="Excluir" icon="pi pi-trash" class="hidden md:block mr-2"
             [disabled]="!selectedCollects || !selectedCollects.length" (click)="deleteSelectedCollects()" />
 
+        <p-button [disabled]="!selectedCollects || !selectedCollects.length" class="block md:hidden" [rounded]="true"
+            [text]="true" icon="pi pi-trash" severity="danger" (click)="deleteSelectedCollects()" />
+
         <p-button [disabled]="!selectedCollects || !selectedCollects.length" label="Sincronizar" icon="pi pi-sync"
-            severity="info" (click)="syncSelectedCollects()" />
+            class="hidden md:block" severity="info" (click)="syncSelectedCollects()" />
+
+        <p-button [disabled]="!selectedCollects || !selectedCollects.length" class="block md:hidden" [rounded]="true"
+            [text]="true" icon="pi pi-sync" severity="info" (click)="syncSelectedCollects()" />
     </ng-template>
 </p-toolbar>
 
-<p-table #dt [value]="collectedData()" [rows]="10" [paginator]="true" [globalFilterFields]="['mass', 'harverst']"
-    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedCollects" [scrollable]="true" [rowHover]="true"
-    dataKey="id" currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} coletas"
-    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 20, 30, 50, 100]">
+<p-table class="hidden md:block" #dt [value]="collectedData()" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['mass', 'harverst']" [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedCollects"
+    [scrollable]="true" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} coletas" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30, 50, 100]">
     <ng-template #caption>
         <div class="flex items-center justify-between flex-wrap gap-4">
             <h5 class="m-0">Coletas para Sincronizar</h5>
@@ -35,6 +44,7 @@
             <th style="min-width: 10rem">Latitude</th>
             <th style="min-width: 10rem">Longitude</th>
             <th style="min-width: 10rem">Tempo GPS </th>
+            <th>Geolocalização</th>
             <th>Complementares</th>
             <th>Observação</th>
         </tr>
@@ -50,18 +60,82 @@
             <td style="min-width: 10rem">{{ collect.gps_timestamp |
                 shortTimestamp}}</td>
             <td>
-                <p-button icon="pi pi-search-plus" severity="info" [rounded]="true" [text]="true" (click)="showComplementDialog(collect)" />
+                <p-button icon="pi pi-map-marker" severity="danger" [rounded]="true" [text]="true"
+                    (click)="showGeolocationDialog(collect)" />
             </td>
             <td>
-                <p-button icon="pi pi-eye" severity="warn" [rounded]="true" [text]="true" (click)="showObservationDialog(collect)" />
+                <p-button icon="pi pi-search-plus" severity="info" [rounded]="true" [text]="true"
+                    (click)="showComplementDialog(collect)" />
+            </td>
+            <td>
+                <p-button icon="pi pi-eye" severity="warn" [rounded]="true" [text]="true"
+                    (click)="showObservationDialog(collect)" />
             </td>
         </tr>
     </ng-template>
 </p-table>
 
+<div class="flex flex-col gap-2 justify-end w-full">
+    @if(totalCollectedData() > 0) {
+    <p-button [disabled]="totalCollectedData() === 0" label="Sincronizar Todos" icon="pi pi-sync"
+        class="self-end md:hidden block" severity="info" (click)="syncAllCollects()" />
+    }
 
-<app-complement-dialog [isVisible]="complementDialog" (dialogClosed)="hideComplementDialog()" />
+    <p-dataview class="block md:hidden" #dv [value]="collectedData()" emptyMessage="Nenhuma Coleta">
+        <ng-template #header>
+            <span class="text-md md:text-lg text-muted-color leading-7 font-medium">Mostrando
+                {{totalCollectedData()}} resultados</span>
+        </ng-template>
+        <ng-template #list let-collects>
+            <div class="grid grid-cols-12 gap-4 grid-nogutter">
+                <div class="col-span-12" *ngFor="let collect of collects; let first = first" class="col-span-12">
+                    <div class="flex flex-col sm:flex-row sm:items-center p-6 gap-4"
+                        [ngClass]="{ 'border-t border-surface-200 dark:border-surface-700': !first }">
 
-<app-observation-dialog [isVisible]="observationDialog" (dialogClosed)="hideObservationDialog()" />
+                        <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-6">
+                            <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                                <div>
+                                    <span class="font-medium text-secondary text-sm">Coleta
+                                        #{{ collect.id }}</span>
+                                    <div class="text-lg font-medium text-surface-900 dark:text-surface-0 mt-2">{{
+                                        collect.mass }} Kg</div>
+                                </div>
+                                <div class="bg-surface-100 dark:bg-surface-700 p-1" style="border-radius: 30px">
+                                    <div class="shadow-[0_8px_20px_rgba(132,204,22,0.35)] flex items-center gap-2 justify-center py-1 px-2"
+                                        style="border-radius: 30px">
+                                        A
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center sm:justify-start items-center gap-8">
+                                <span class="text-sm font-semibold text-surface-900 dark:text-surface-0">Latitude:
+                                    {{collect.latitude}}</span>
+                                <span class="text-sm font-semibold text-surface-900 dark:text-surface-0">Longitude:
+                                    {{collect.longitude}}</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <p-checkbox [binary]="true" (onChange)="selectCollectHandler($event, collect.id)" />
+                                <div class="flex justify-end">
+                                    <p-button icon="pi pi-map-marker" severity="danger" [rounded]="true" [text]="true"
+                                        (click)="showGeolocationDialog(collect)" />
+                                    <p-button icon="pi pi-search-plus" severity="info" [rounded]="true" [text]="true"
+                                        (click)="showComplementDialog(collect)" />
+                                    <p-button icon="pi pi-eye" severity="warn" [rounded]="true" [text]="true"
+                                        (click)="showObservationDialog(collect)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataview>
+</div>
+
+<app-geolocation-dialog [isVisible]="geolocationDialog" (dialogClosed)="geolocationDialog = false" />
+
+<app-complement-dialog [isVisible]="complementDialog" (dialogClosed)="complementDialog = false" />
+
+<app-observation-dialog [isVisible]="observationDialog" (dialogClosed)="observationDialog = false" />
 
 <p-confirmdialog [style]="{ width: '450px' }" />

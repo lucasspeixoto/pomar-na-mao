@@ -1,0 +1,17 @@
+import { Injectable, signal } from '@angular/core';
+import { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class GeolocationFormService {
+  private collectGeolocationDataFormValue = signal<CollectGeolocationDataFormValue | null>(null);
+
+  public getCollectGeolocationDataFormValue(): CollectGeolocationDataFormValue | null {
+    return this.collectGeolocationDataFormValue();
+  }
+
+  public setCollectGeolocationDataFormValue(value: CollectGeolocationDataFormValue | null): void {
+    this.collectGeolocationDataFormValue.set(value);
+  }
+}

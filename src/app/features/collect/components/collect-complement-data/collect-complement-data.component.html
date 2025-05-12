@@ -38,8 +38,8 @@
                 <div class="my-2">
                     <label for="mass" class="block font-bold mb-3">Massa
                         (kg)</label>
-                    <input class="w-full" type="text" formControlName="mass"
-                        pInputText id="mass" fluid />
+                    <p-inputnumber class="w-full" mode="decimal" formControlName="mass"
+                    [useGrouping]="false" fluid />
                     <app-custom-validation-message controlName="mass" />
                 </div>
 
