@@ -172,9 +172,9 @@
 
     <!-- Action -->
     <div class="flex md:justify-between justify-end gap-2 my-4">
-        <p-button label="Limpar" icon="pi pi-eraser"
-            severity="info" (click)="clearFilters()" />
-        <p-button label="Aplicar" icon="pi pi-filter" severity="primary"
+        <p-button [disabled]="collectSearchFiltersService.isFiltersDisabled()" label="Limpar" icon="pi pi-eraser"
+            severity="secondary" (click)="clearFilters()" />
+        <p-button [disabled]="collectSearchFiltersService.isFiltersDisabled()" label="Aplicar" icon="pi pi-filter" severity="primary"
             (click)="applyFilters()" />
     </div>
 </div>
