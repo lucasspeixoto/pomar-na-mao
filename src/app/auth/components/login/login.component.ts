@@ -88,7 +88,7 @@ import { InstallPwaButtonComponent } from 'src/app/components/install-pwa-button
                 <div class="flex items-center justify-between mt-2 mb-8 gap-8">
                   <span>
                     <span
-                      class="text-sm sm:text-base underline font-semibold text-right cursor-pointer text-primary"
+                      class="text-sm sm:text-base underline font-bold text-right cursor-pointer text-blue-400"
                       routerLink="/coleta-offline"
                       >Coletar
                     </span>

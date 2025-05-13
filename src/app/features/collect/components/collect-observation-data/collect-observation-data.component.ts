@@ -49,6 +49,7 @@ const PROVIDERS = [MessageService];
       :host ::ng-deep .p-card {
         margin-top: 0;
         height: auto;
+        padding: 0;
       }
 
       :host ::ng-deep .p-frozen-column {

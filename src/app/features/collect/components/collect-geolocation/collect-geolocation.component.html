@@ -1,14 +1,20 @@
 <div class="overflow-hidden min-h-[450px]">
+    @let coordinates = geolocationService.coordinates();
+
     <section class="inline-block md:hidden">
         <div
-            class="card z-50 fixed bottom-2 left-4 right-4 bg-surface-50 rounded-xl shadow-lg py-4 px-8 flex justify-between items-center font-medium">
+            class="card z-50 fixed bottom-2 left-4 right-4 bg-surface-50 rounded-xl shadow-lg p-4 flex justify-between items-center font-medium">
             <div class="text-md flex flex-col justify-center items-center gap-2">
-                <span>Latitude:</span>
-                <span>{{geolocationService.coordinates()?.latitude }}</span>
+                <span>Latitude</span>
+                <span>{{coordinates?.latitude }}</span>
             </div>
             <div class="text-md flex flex-col justify-center items-center gap-2">
-                <span>Longitude:</span>
-                <span>{{geolocationService.coordinates()?.longitude}}</span>
+                <span>Tempo</span>
+                <span>{{geolocationService.coordinatesTimestamp()! |  epochToTime}}</span>
+            </div>
+            <div class="text-md flex flex-col justify-center items-center gap-2">
+                <span>Longitude</span>
+                <span>{{coordinates?.longitude}}</span>
             </div>
         </div>
     </section>
