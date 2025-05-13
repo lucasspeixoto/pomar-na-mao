@@ -80,6 +80,15 @@
                         controlName="lifeOfTheTree" [maxLength]="10" />
                 </div>
 
+                <div class="my-2">
+                    <label for="region" class="block font-bold mb-3">Região</label>
+                    <input class="w-full" type="text"
+                        formControlName="region"
+                        pInputText id="region" fluid />
+                    <app-custom-validation-message
+                        controlName="region" />
+                </div>
+
             </div>
 
             <div class="mt-2">

@@ -2,7 +2,6 @@
     <ng-template #start>
         <p-button [disabled]="totalCollectedData() === 0" label="Exportar" icon="pi pi-upload" severity="success"
             (click)="exportCSV()" />
-
     </ng-template>
 
     <ng-template #end>
@@ -21,8 +20,8 @@
 </p-toolbar>
 
 <p-table class="hidden md:block" #dt [value]="collectedData()" [rows]="10" [paginator]="true"
-    [globalFilterFields]="['mass', 'harverst']" [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedCollects"
-    [scrollable]="true" [rowHover]="true" dataKey="id"
+    [globalFilterFields]="['mass', 'region']" [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedCollects" [scrollable]="true" [rowHover]="true" dataKey="id"
     currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} coletas" [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10, 20, 30, 50, 100]">
     <ng-template #caption>
@@ -40,7 +39,14 @@
             <th style="width: 3rem">
                 <p-tableHeaderCheckbox />
             </th>
-            <th> Massa</th>
+            <th pSortableColumn="mass" >
+                Mass
+                <p-sortIcon field="mass" />
+            </th>
+            <th pSortableColumn="region" >
+                Região
+                <p-sortIcon field="region" />
+            </th>
             <th style="min-width: 10rem">Latitude</th>
             <th style="min-width: 10rem">Longitude</th>
             <th style="min-width: 10rem">Tempo GPS </th>
@@ -55,6 +61,7 @@
                 <p-tableCheckbox [value]="collect" />
             </td>
             <td>{{ collect.mass }}</td>
+            <td>{{ collect?.region }}</td>
             <td style="min-width: 10rem">{{ collect.latitude}}</td>
             <td style="min-width: 10rem">{{ collect.longitude}}</td>
             <td style="min-width: 10rem">{{ collect.gps_timestamp |
@@ -100,12 +107,14 @@
                                     <div class="text-lg font-medium text-surface-900 dark:text-surface-0 mt-2">{{
                                         collect.mass }} Kg</div>
                                 </div>
-                                <div class="bg-surface-100 dark:bg-surface-700 p-1" style="border-radius: 30px">
-                                    <div class="shadow-[0_8px_20px_rgba(132,204,22,0.35)] flex items-center gap-2 justify-center py-1 px-2"
-                                        style="border-radius: 30px">
-                                        A
+                                @if(collect?.region) {
+                                <div
+                                    class="shadow-lg shadow-violet-500/50 inline-flex items-center justify-center rounded-full w-10 h-10 bg-violet-200 hover:bg-violet-300 transition-all duration-200 text-sm dark:bg-violet-800 dark:hover:bg-violet-700">
+                                    <div class="text-violet-900 dark:text-violet-50 font-medium text-center px-1">
+                                        {{collect.region}}
                                     </div>
                                 </div>
+                                }
                             </div>
                             <div class="flex justify-center sm:justify-start items-center gap-8">
                                 <span class="text-sm font-semibold text-surface-900 dark:text-surface-0">Latitude:

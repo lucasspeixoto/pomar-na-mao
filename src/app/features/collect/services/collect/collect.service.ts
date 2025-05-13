@@ -210,7 +210,7 @@ export class CollectService {
       return;
     }
 
-    const { mass, variety, harvest, description, plantingDate, lifeOfTheTree } =
+    const { mass, variety, harvest, description, plantingDate, lifeOfTheTree, region } =
       this.complementDataService.getCollectComplementDataFormValue()!;
 
     const { longitude, latitude } = this.geolocationService.coordinates()!;
@@ -256,6 +256,7 @@ export class CollectService {
       mites,
       thrips,
       empty_collection_box_near: emptyCollectionBoxNear,
+      region,
     } as PlantData;
 
     this.indexDbCollectService.addCollect(newCollectData).subscribe();

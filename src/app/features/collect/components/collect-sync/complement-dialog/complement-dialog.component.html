@@ -1,5 +1,5 @@
 <p-dialog  [(visible)]="isVisible"
-    [breakpoints]="{ '450px': '90vw' }"
+    [breakpoints]="{ '450px': '100vw' }"
     [style]="{ width: '50vw' }"
     [draggable]="false" [resizable]="false"
     header="Dados complementares" [modal]="true" (onHide)="hideDialog()">
@@ -52,6 +52,15 @@
                         pInputText id="lifeOfTheTree" fluid />
                     <app-custom-validation-message
                         controlName="lifeOfTheTree" [maxLength]="10" />
+                </div>
+
+                <div class="my-2">
+                    <label for="region" class="block font-bold mb-3">Região</label>
+                    <input class="w-full" type="text"
+                        formControlName="region"
+                        pInputText id="region" fluid />
+                    <app-custom-validation-message
+                        controlName="region" />
                 </div>
 
             </div>

@@ -26,6 +26,7 @@ export interface PlantData {
   fertilization_or_manuring: boolean;
   mites: boolean;
   thrips: boolean;
+  region: string;
   empty_collection_box_near: boolean;
   users: Partial<User>;
 }
