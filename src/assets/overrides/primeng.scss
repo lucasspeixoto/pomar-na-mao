@@ -3,3 +3,9 @@
     padding: 1rem;
   }
 }
+
+.p-button {
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

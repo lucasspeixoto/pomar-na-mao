@@ -26,7 +26,15 @@ const COMMON = [FormsModule];
   selector: 'app-collect-search-filters',
   imports: [...PRIMENG, ...COMMON],
   templateUrl: './collect-search-filters.component.html',
-  styleUrl: './collect-search-filters.component.scss',
+  styles: [
+    `
+      :host ::ng-deep .p-button {
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+    `,
+  ],
 })
 export class CollectSearchFiltersComponent {
   public farmRegionService = inject(FarmRegionService);
