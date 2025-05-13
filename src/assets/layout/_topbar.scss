@@ -90,6 +90,7 @@
   .layout-topbar-actions {
     margin-left: auto;
     display: flex;
+    align-items: center;
     gap: 1rem;
   }
 
@@ -100,13 +101,15 @@
 
   .layout-config-menu {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
   }
 }
 
 @media (max-width: 991px) {
   .layout-topbar {
-    padding: 0 2rem;
+    padding: 0;
 
     .layout-topbar-logo-container {
       width: auto;

@@ -7,6 +7,7 @@ type CollectComplementDataFormControl = {
   variety: FormControl<string>;
   plantingDate: FormControl<string>;
   harvest: FormControl<string>;
+  region: FormControl<string>;
   description: FormControl<string>;
   lifeOfTheTree: FormControl<string>;
 };
@@ -32,6 +33,10 @@ export function createCollectComplementDataForm(): FormGroup<CollectComplementDa
       nonNullable: true,
     }),
     harvest: new FormControl('', {
+      validators: [],
+      nonNullable: true,
+    }),
+    region: new FormControl('', {
       validators: [],
       nonNullable: true,
     }),

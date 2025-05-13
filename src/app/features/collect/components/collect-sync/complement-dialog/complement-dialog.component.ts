@@ -94,7 +94,7 @@ export class ComplementDialogComponent {
   }
 
   public updateCollectHandler(): void {
-    const { id, mass, harvest, description, plantingDate, lifeOfTheTree, variety } = this
+    const { id, mass, harvest, description, plantingDate, lifeOfTheTree, variety, region } = this
       .collectComplementDataForm.value as CollectComplementDataFormValue;
 
     this.indexDbCollectService.findCollectById(id!).subscribe(value => {
@@ -106,6 +106,7 @@ export class ComplementDialogComponent {
         planting_date: plantingDate,
         life_of_the_tree: lifeOfTheTree,
         variety,
+        region,
       } as PlantData;
 
       this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();

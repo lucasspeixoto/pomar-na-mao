@@ -166,7 +166,8 @@ export class CollectSyncComponent implements OnInit {
   }
 
   public showComplementDialog(collect: PlantData): void {
-    const { id, mass, variety, harvest, planting_date, description, life_of_the_tree } = collect;
+    const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =
+      collect;
 
     const complementDataForm = {
       id,
@@ -176,6 +177,7 @@ export class CollectSyncComponent implements OnInit {
       harvest,
       description,
       lifeOfTheTree: life_of_the_tree,
+      region,
     };
 
     this.complementDataService.setCollectComplementDataFormValue(complementDataForm);
@@ -228,9 +230,13 @@ export class CollectSyncComponent implements OnInit {
       message: 'Tem certeza que deseja sincronizar as coletas selecionados?',
       header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Não',
+        severity: 'secondary',
+      },
       acceptButtonProps: {
         label: 'Sim',
-        severity: 'danger',
+        severity: 'primary',
       },
       accept: async () => {
         if (this.selectedCollects) {
@@ -247,9 +253,13 @@ export class CollectSyncComponent implements OnInit {
       message: 'Tem certeza que deseja excluir as coletas selecionados?',
       header: 'Confirmar',
       icon: 'pi pi-exclamation-triangle',
+      rejectButtonProps: {
+        label: 'Não',
+        severity: 'secondary',
+      },
       acceptButtonProps: {
         label: 'Sim',
-        severity: 'danger',
+        severity: 'primary',
       },
       accept: () => {
         if (this.selectedCollects) {
