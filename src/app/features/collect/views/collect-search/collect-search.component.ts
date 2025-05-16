@@ -21,6 +21,15 @@ const COMMON = [NgStyle];
   selector: 'app-collect-search',
   imports: [...COMPONENTS, ...COMMON, ...PRIMENG],
   templateUrl: './collect-search.component.html',
+  styles: [
+    `
+      :host ::ng-deep {
+        .p-button:disabled {
+          cursor: not-allowed;
+        }
+      }
+    `,
+  ],
 })
 export class CollectSearchComponent {
   public collectSearchFilterDialog = false;

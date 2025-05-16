@@ -1,102 +1,85 @@
-<p-dialog  [(visible)]="isVisible"
-[breakpoints]="{ '450px': '100vw' }"
-    [style]="{ width: '50vw' }"
-    [draggable]="false" [resizable]="false"
-    header="Dados de observação" [modal]="true" (onHide)="hideDialog()">
+<p-dialog [(visible)]="isVisible" [breakpoints]="{ '450px': '100vw' }" [style]="{ width: '50vw' }" [draggable]="false"
+    [resizable]="false" header="Dados de observação" [modal]="true" (onHide)="hideDialog()">
 
     <ng-container *ngIf="collectObservationDataFormChange$ | async" />
+
     <ng-template #content>
         <p-toast />
         <form [formGroup]="collectObservationDataForm" class="form">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="my-6">
-                    <p-checkbox formControlName="stick" value="Galho Seco"
-                        inputId="stick" [binary]="true" />
+                    <p-checkbox formControlName="stick" value="Galho Seco" inputId="stick" [binary]="true" />
                     <label for="stick" class="ml-2">Galho Seco</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="brokenBranch"
-                        value="Galho Quebrado"
-                        inputId="brokenBranch" [binary]="true" />
+                    <p-checkbox formControlName="brokenBranch" value="Galho Quebrado" inputId="brokenBranch"
+                        [binary]="true" />
                     <label for="brokenBranch" class="ml-2">Galho
                         Quebrado</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="vineGrowing"
-                        value="Cipó no pé"
-                        inputId="vineGrowing" [binary]="true" />
+                    <p-checkbox formControlName="vineGrowing" value="Cipó no pé" inputId="vineGrowing"
+                        [binary]="true" />
                     <label for="vineGrowing" class="ml-2">Cipó crescendo</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="burntBranch" value="Queimado"
-                        inputId="burntBranch" [binary]="true" />
+                    <p-checkbox formControlName="burntBranch" value="Queimado" inputId="burntBranch" [binary]="true" />
                     <label for="burntBranch" class="ml-2">Queimado</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="struckByLightning"
-                        value="Atingido por raio"
+                    <p-checkbox formControlName="struckByLightning" value="Atingido por raio"
                         inputId="struckByLightning" [binary]="true" />
                     <label for="struckByLightning" class="ml-2">Atingido por
                         raio</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="drill" value="Broca"
-                        inputId="drill" [binary]="true" />
+                    <p-checkbox formControlName="drill" value="Broca" inputId="drill" [binary]="true" />
                     <label for="drill" class="ml-2">Broca</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="anthill" value="Formigueiro"
-                        inputId="anthill" [binary]="true" />
+                    <p-checkbox formControlName="anthill" value="Formigueiro" inputId="anthill" [binary]="true" />
                     <label for="anthill" class="ml-2">Formigueiro</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="inExperiment"
-                        value="Em experimento/teste"
-                        inputId="inExperiment" [binary]="true" />
+                    <p-checkbox formControlName="inExperiment" value="Em experimento/teste" inputId="inExperiment"
+                        [binary]="true" />
                     <label for="inExperiment" class="ml-2">Em
                         experimento/teste</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="weedsInTheBasin"
-                        value="Mato na bacia"
-                        inputId="weedsInTheBasin" [binary]="true" />
+                    <p-checkbox formControlName="weedsInTheBasin" value="Mato na bacia" inputId="weedsInTheBasin"
+                        [binary]="true" />
                     <label for="weedsInTheBasin" class="ml-2">Mato na
                         bacia</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="fertilizationOrManuring"
-                        value="Parada de pulverização/adubação"
+                    <p-checkbox formControlName="fertilizationOrManuring" value="Parada de pulverização/adubação"
                         inputId="fertilizationOrManuring" [binary]="true" />
                     <label for="fertilizationOrManuring" class="ml-2">Parada de
                         pulverização/adubação</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="mites"
-                        value="Presença de ácaro"
-                        inputId="mites" [binary]="true" />
+                    <p-checkbox formControlName="mites" value="Presença de ácaro" inputId="mites" [binary]="true" />
                     <label for="mites" class="ml-2">Presença de ácaro</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="thrips"
-                        value="Presença de tripes"
-                        inputId="thrips" [binary]="true" />
+                    <p-checkbox formControlName="thrips" value="Presença de tripes" inputId="thrips" [binary]="true" />
                     <label for="thrips" class="ml-2">Presença de tripes</label>
                 </div>
 
                 <div class="my-6">
-                    <p-checkbox formControlName="emptyCollectionBoxNear"
-                        value="Caixa vazia perto"
+                    <p-checkbox formControlName="emptyCollectionBoxNear" value="Caixa vazia perto"
                         inputId="emptyCollectionBoxNear" [binary]="true" />
                     <label for="emptyCollectionBoxNear" class="ml-2">Caixa de
                         colheita vazia perto</label>

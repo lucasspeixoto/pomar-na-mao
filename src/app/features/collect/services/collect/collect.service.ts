@@ -34,6 +34,10 @@ export class CollectService {
 
   public numberOfCollectedData = computed(() => this.plantData().length);
 
+  public filteredCollectData = signal<PlantData[]>([]);
+
+  public numberOfFilteredCollects = computed(() => this.filteredCollectData().length);
+
   public currentCollectStep = signal<number>(checkCurrencStorageStep());
 
   public async getAllCollectsDataHandler(): Promise<void> {
@@ -134,26 +138,97 @@ export class CollectService {
 
     const { error } = await this.supabase.from('plant_collect').insert([newCollectData]);
 
-    setTimeout(() => {
-      this.loadingService.isLoading.set(false);
+    this.loadingService.isLoading.set(false);
 
-      if (error) {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro',
-          detail: 'Erro ao inserir coleta, verifique as informações e tente novamente!',
-          life: 3000,
-        });
-      } else {
-        this.resetCollectData();
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Registrado',
-          detail: 'Registro de coleta armazenado!',
-          life: 3000,
-        });
-      }
-    }, 2000);
+    if (error) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail: 'Erro ao inserir coleta, verifique as informações e tente novamente!',
+        life: 3000,
+      });
+    } else {
+      this.resetCollectData();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Registrado',
+        detail: 'Registro de coleta armazenado!',
+        life: 3000,
+      });
+    }
+  }
+
+  public async updateAPlantCollectHandler(id: string): Promise<void> {
+    this.loadingService.isLoading.set(true);
+
+    const { mass, harvest, description, plantingDate, lifeOfTheTree, variety } =
+      this.complementDataService.getCollectComplementDataFormValue()!;
+
+    const {
+      stick,
+      brokenBranch,
+      vineGrowing,
+      burntBranch,
+      struckByLightning,
+      drill,
+      anthill,
+      inExperiment,
+      weedsInTheBasin,
+      fertilizationOrManuring,
+      mites,
+      thrips,
+      emptyCollectionBoxNear,
+    } = this.observationDataService.getCollectObservationDataFormValue()!;
+
+    const { longitude, latitude } = this.geolocationService.coordinates()!;
+
+    const gpsTimestamp = this.geolocationService.coordinatesTimestamp();
+
+    const collectData = {
+      longitude,
+      latitude,
+      gps_timestamp: gpsTimestamp,
+      mass,
+      harvest,
+      variety,
+      description,
+      planting_date: plantingDate,
+      life_of_the_tree: lifeOfTheTree,
+      stick,
+      broken_branch: brokenBranch,
+      vine_growing: vineGrowing,
+      burnt_branch: burntBranch,
+      struck_by_lightning: struckByLightning,
+      drill,
+      anthill,
+      in_experiment: inExperiment,
+      weeds_in_the_basin: weedsInTheBasin,
+      fertilization_or_manuring: fertilizationOrManuring,
+      mites,
+      thrips,
+      empty_collection_box_near: emptyCollectionBoxNear,
+    };
+
+    const { error } = await this.supabase.from('plant_collect').update([collectData]).eq('id', id);
+
+    this.loadingService.isLoading.set(false);
+
+    if (error) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail: 'Erro ao inserir coleta, verifique as informações e tente novamente!',
+        life: 3000,
+      });
+    } else {
+      this.resetCollectData();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Registrado',
+        detail: 'Registro de coleta armazenado!',
+        life: 3000,
+      });
+    }
   }
 
   public async syncAllCollectPlantHandler(plantDatas: PlantData[]): Promise<void> {
@@ -269,5 +344,47 @@ export class CollectService {
     this.observationDataService.setCollectObservationDataFormValue(initialCollectObservationData);
     localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', '0');
     this.currentCollectStep.set(0);
+  }
+
+  public clearSelectedCollectsFromFilters(): void {
+    this.filteredCollectData.set([]);
+  }
+
+  public async getAllFilteredCollectsDataHandler(
+    harvest: string | null,
+    region: string | null,
+    occurrence: string | null
+  ): Promise<void> {
+    this.loadingService.isLoading.set(true);
+
+    let query = this.supabase
+      .from('plant_collect')
+      .select('*, users(full_name)')
+      .order('created_at', { ascending: false });
+
+    if (region) {
+      query = query.eq('region', region);
+    }
+
+    if (harvest && harvest.trim() !== '') {
+      query = query.ilike('harvest', `%${harvest}%`);
+    }
+
+    if (occurrence) {
+      query = query.is(`${occurrence}`, true);
+    }
+
+    const { data, error } = await query;
+
+    if (!error) this.filteredCollectData.set(data);
+
+    setTimeout(() => {
+      this.loadingService.isLoading.set(false);
+
+      if (error) {
+        this.filteredCollectData.set([]);
+        console.warn('Erro ao carregar coletas através de filtros, tente novamente mais tarde!');
+      }
+    }, 2000);
   }
 }

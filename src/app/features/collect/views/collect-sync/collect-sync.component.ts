@@ -15,16 +15,21 @@ import { IndexDbCollectService } from './../../../../services/index-db/index-db-
 import { ExcelService } from '../../../../services/excel/excel.service';
 import { PlantData } from '../../models/collect.model';
 import { ShortTimestampPipe } from '../../../../pipes/short-timestamp/short-timestamp.pipe';
-import { ComplementDialogComponent } from '../../components/collect-sync/complement-dialog/complement-dialog.component';
-import { ObservationDialogComponent } from '../../components/collect-sync/observation-dialog/observation-dialog.component';
+import { ComplementDialogComponent } from '../../components/collect-forms-dialog/complement-dialog/complement-dialog.component';
+import { ObservationDialogComponent } from '../../components/collect-forms-dialog/observation-dialog/observation-dialog.component';
 import { ComplementDataService } from '../../services/complement-data/complement-data.service';
 import { ObservationDataService } from '../../services/observation-data/observation-data.service';
-import { initialCollectObservationData } from '../../constants/collect-observation-data-form';
+import {
+  initialCollectObservationData,
+  type CollectObservationDataFormValue,
+} from '../../constants/collect-observation-data-form';
 import { CollectService } from '../../services/collect/collect.service';
 import { DataViewModule } from 'primeng/dataview';
-import { GeolocationDialogComponent } from '../../components/collect-sync/geolocation-dialog/geolocation-dialog.component';
+import { GeolocationDialogComponent } from '../../components/collect-forms-dialog/geolocation-dialog/geolocation-dialog.component';
 import { GeolocationFormService } from '../../services/geolocation-form/geolocation-form.service';
 import { CheckboxModule, type CheckboxChangeEvent } from 'primeng/checkbox';
+import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
+import type { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
 
 const PRIMENG = [
   TableModule,
@@ -158,8 +163,6 @@ export class CollectSyncComponent implements OnInit {
       gpsTimestamp: gps_timestamp,
     };
 
-    console.log(geolocationFormData);
-
     this.geolocationFormService.setCollectGeolocationDataFormValue(geolocationFormData);
 
     this.geolocationDialog = true;
@@ -270,6 +273,83 @@ export class CollectSyncComponent implements OnInit {
           this.selectedCollects = [];
         }
       },
+    });
+  }
+
+  public updateObservationDataHandler(): void {
+    const {
+      id,
+      stick,
+      brokenBranch,
+      vineGrowing,
+      burntBranch,
+      struckByLightning,
+      drill,
+      anthill,
+      inExperiment,
+      weedsInTheBasin,
+      fertilizationOrManuring,
+      mites,
+      thrips,
+      emptyCollectionBoxNear,
+    } =
+      this.observationDataService.getCollectObservationDataFormValue() as CollectObservationDataFormValue;
+
+    this.indexDbCollectService.findCollectById(id!).subscribe(value => {
+      const updatedPlantData = {
+        ...value,
+        stick,
+        broken_branch: brokenBranch,
+        vine_growing: vineGrowing,
+        burnt_branch: burntBranch,
+        struck_by_lightning: struckByLightning,
+        drill,
+        anthill,
+        in_experiment: inExperiment,
+        weeds_in_the_basin: weedsInTheBasin,
+        fertilization_or_manuring: fertilizationOrManuring,
+        mites,
+        thrips,
+        empty_collection_box_near: emptyCollectionBoxNear,
+      } as PlantData;
+
+      this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();
+    });
+  }
+
+  public updateComplementDataHandler(): void {
+    const { id, mass, harvest, description, plantingDate, lifeOfTheTree, variety, region } =
+      this.complementDataService.getCollectComplementDataFormValue() as CollectComplementDataFormValue;
+
+    this.indexDbCollectService.findCollectById(id!).subscribe(value => {
+      const updatedPlantData = {
+        ...value,
+        mass,
+        harvest,
+        description,
+        planting_date: plantingDate,
+        life_of_the_tree: lifeOfTheTree,
+        variety,
+        region,
+      } as PlantData;
+
+      this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();
+    });
+  }
+
+  public updateGeolocationDataHandler(): void {
+    const { id, latitude, longitude, gpsTimestamp } =
+      this.geolocationFormService.getCollectGeolocationDataFormValue() as CollectGeolocationDataFormValue;
+
+    this.indexDbCollectService.findCollectById(id!).subscribe(value => {
+      const updatedPlantData = {
+        ...value,
+        latitude,
+        longitude,
+        gps_timestamp: gpsTimestamp,
+      } as PlantData;
+
+      this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();
     });
   }
 }

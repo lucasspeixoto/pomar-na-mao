@@ -34,7 +34,7 @@ import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collec
   styles: [
     `
       .card {
-        padding: 0.5rem;
+        padding: 0.8rem 1rem;
       }
     `,
   ],

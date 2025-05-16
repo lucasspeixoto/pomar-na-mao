@@ -1,3 +1,78 @@
-<div class="border border-purple-700">
-    Coletas
-</div>
+<section>
+    <p-dataview #dv [value]="filteredCollectData()" [rows]="4"
+    [paginator]="numberOfFilteredCollects() > 0 ? true: false" emptyMessage="Nenhum resultado encontrado. Aplique os filtros para visualizar resultados!">
+    <ng-template #list let-collects>
+        <div
+            *ngFor="let collect of collects; let first = first">
+            <div class="p-6"
+                [ngClass]="{ 'border-t border-surface-200 dark:border-surface-700': !first }">
+                    <div
+                        class="flex flex-row justify-between items-start gap-2">
+                        <div>
+                            <span
+                                class="font-medium text-secondary text-sm md:text-md">Coleta
+                                #{{ collect.id }}</span>
+                            <div
+                                class="text-indigo-900 dark:text-indigo-300 text-lg md:text-xl font-medium mt-2">Masssa:
+                                {{
+                                collect.mass }} Kg</div>
+                        </div>
+                        @if(collect?.region) {
+                        <div
+                            class="shadow-lg shadow-violet-500/50 inline-flex items-center justify-center rounded-full w-10 h-10 bg-violet-200 hover:bg-violet-300 transition-all duration-200 text-sm dark:bg-violet-800 dark:hover:bg-violet-700">
+                            <div
+                                class="text-violet-900 dark:text-violet-50 font-medium text-center px-1">
+                                {{collect.region}}
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    <div
+                        class="mt-4 flex flex-row justify-between">
+
+                        <span
+                            class="flex flex-col justify-center items-center text-sm md:text-lg font-semibold text-surface-900 dark:text-surface-0">
+                            <span
+                                class="light:text-blue-900 text-blue-500">Latitude</span>
+                            <span
+                                class="text-primary font-bold">{{collect.latitude}}</span>
+                        </span>
+                        <span
+                            class="flex flex-col justify-center items-center text-sm md:text-lg font-semibold text-surface-900 dark:text-surface-0">
+                            <span
+                                class="light:text-blue-900 text-blue-500">Tempo</span>
+                            <span
+                                class="text-primary font-bold">{{collect.gps_timestamp
+                                |
+                                shortTimestamp }}</span>
+                        </span>
+                        <span
+                            class="flex flex-col justify-center items-center text-sm md:text-lg font-semibold text-surface-900 dark:text-surface-0">
+                            <span
+                                class="light:text-blue-900 text-blue-500">Longitude</span>
+                            <span
+                                class="text-primary font-bold">{{collect.longitude}}</span>
+                        </span>
+
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <div class="flex justify-end">
+                            <p-button (click)="showComplementDialog(collect)" icon="pi pi-search-plus"
+                                severity="info" [rounded]="true"
+                                [text]="true" />
+                            <p-button (click)="showObservationDialog(collect)" icon="pi pi-eye" severity="warn"
+                                [rounded]="true" [text]="true" />
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataview>
+
+<app-complement-dialog (updateDataHandler)="updateComplementDataHandler()" [isVisible]="complementDialog"
+    (dialogClosed)="complementDialog = false" />
+
+<app-observation-dialog (updateDataHandler)="updateObservationDataHandler()" [isVisible]="observationDialog"
+    (dialogClosed)="observationDialog = false" />
+
+</section>

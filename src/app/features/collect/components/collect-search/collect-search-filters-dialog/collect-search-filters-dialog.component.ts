@@ -50,7 +50,7 @@ const COMMON = [FormsModule];
       [modal]="true"
       (onHide)="hideDialog()">
       <ng-template #content>
-        <app-collect-search-filters />
+        <app-collect-search-filters (hideDialog)="hideDialog()" />
       </ng-template>
     </p-dialog>
   `,
