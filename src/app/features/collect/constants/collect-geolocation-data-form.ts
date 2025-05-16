@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { UntypedFormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 type CollectGeolocationDataFormControl = {
-  id: FormControl<string>;
+  id: FormControl<string | null>;
   latitude: FormControl<number | null>;
   longitude: FormControl<number | null>;
   gpsTimestamp: FormControl<number | null>;
@@ -12,7 +12,7 @@ export function createCollectGeolocationDataForm(): FormGroup<CollectGeolocation
   const formBuilder = inject(UntypedFormBuilder);
 
   return formBuilder.group({
-    id: new FormControl('', {
+    id: new FormControl(null, {
       validators: [Validators.required],
     }),
     latitude: new FormControl(null, {
@@ -33,7 +33,8 @@ export type CollectGeolocationDataFormValue = ReturnType<
   CollectGeolocationDataFormGroup['getRawValue']
 >;
 
-export const initialCollectObservationData = {
+export const initialCollectGeolocationData = {
+  id: null,
   latitude: null,
   longitude: null,
   gpsTimestamp: null,

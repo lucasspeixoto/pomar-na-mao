@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Output } from '@angular/core';
 import { AccordionModule } from 'primeng/accordion';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -37,6 +37,8 @@ const COMMON = [FormsModule];
   ],
 })
 export class CollectSearchFiltersComponent {
+  @Output() hideDialog = new EventEmitter<void>();
+
   public farmRegionService = inject(FarmRegionService);
 
   public collectSearchFiltersService = inject(CollectSearchFiltersService);
@@ -46,10 +48,12 @@ export class CollectSearchFiltersComponent {
   ]);
 
   public applyFilters(): void {
+    this.hideDialog.emit();
     this.collectSearchFiltersService.applyFilters();
   }
 
   public clearFilters(): void {
+    this.hideDialog.emit();
     this.collectSearchFiltersService.clearFilters();
   }
 }

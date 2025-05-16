@@ -6,6 +6,7 @@
 
     <ng-container
         *ngIf="collectComplementDataFormChange$ | async" />
+
     <ng-template #content>
         <p-toast />
         <form [formGroup]="collectComplementDataForm" class="form">

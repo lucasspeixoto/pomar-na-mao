@@ -11,13 +11,11 @@ import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { CustomValidationMessageComponent } from 'src/app/components/custom-validation-message/custom-validation-message';
 import { GeolocationFormService } from '../../../services/geolocation-form/geolocation-form.service';
-import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collect.service';
 import {
   createCollectGeolocationDataForm,
   type CollectGeolocationDataFormValue,
 } from '../../../constants/collect-geolocation-data-form';
 import { debounceTime, tap } from 'rxjs';
-import { PlantData } from '../../../models/collect.model';
 import { InputTextModule } from 'primeng/inputtext';
 
 const PRIMENG = [
@@ -52,9 +50,9 @@ export class GeolocationDialogComponent {
 
   @Output() dialogClosed = new EventEmitter<void>();
 
-  private geolocationDataService = inject(GeolocationFormService);
+  @Output() updateDataHandler = new EventEmitter<void>();
 
-  private indexDbCollectService = inject(IndexDbCollectService);
+  private geolocationDataService = inject(GeolocationFormService);
 
   public collectGeolocationDataForm = createCollectGeolocationDataForm();
 
@@ -86,18 +84,6 @@ export class GeolocationDialogComponent {
   }
 
   public updateGeolocationDataHandler(): void {
-    const { id, latitude, longitude, gpsTimestamp } = this.collectGeolocationDataForm
-      .value as CollectGeolocationDataFormValue;
-
-    this.indexDbCollectService.findCollectById(id!).subscribe(value => {
-      const updatedPlantData = {
-        ...value,
-        latitude,
-        longitude,
-        gps_timestamp: gpsTimestamp,
-      } as PlantData;
-
-      this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();
-    });
+    this.updateDataHandler.emit();
   }
 }

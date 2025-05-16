@@ -36,7 +36,7 @@ import { Component, inject } from '@angular/core';
   styles: [
     `
       .card {
-        padding: 0.5rem;
+        padding: 0.8rem 1rem;
       }
     `,
   ],

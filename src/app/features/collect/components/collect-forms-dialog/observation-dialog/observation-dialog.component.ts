@@ -1,4 +1,3 @@
-import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collect.service';
 import { Component, EventEmitter, inject, Input, Output, effect } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe, NgIf } from '@angular/common';
@@ -22,7 +21,6 @@ import {
   initialCollectObservationData,
   CollectObservationDataFormValue,
 } from '../../../constants/collect-observation-data-form';
-import { PlantData } from '../../../models/collect.model';
 
 const PRIMENG = [
   InputMaskModule,
@@ -53,9 +51,9 @@ export class ObservationDialogComponent {
 
   @Output() dialogClosed = new EventEmitter<void>();
 
-  private observationDataService = inject(ObservationDataService);
+  @Output() updateDataHandler = new EventEmitter<void>();
 
-  private indexDbCollectService = inject(IndexDbCollectService);
+  private observationDataService = inject(ObservationDataService);
 
   public collectObservationDataForm = createCollectObservationDataForm();
 
@@ -89,7 +87,8 @@ export class ObservationDialogComponent {
   }
 
   public updateCollectHandler(): void {
-    const {
+    this.updateDataHandler.emit();
+    /* const {
       id,
       stick,
       brokenBranch,
@@ -125,6 +124,6 @@ export class ObservationDialogComponent {
       } as PlantData;
 
       this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();
-    });
+    }); */
   }
 }

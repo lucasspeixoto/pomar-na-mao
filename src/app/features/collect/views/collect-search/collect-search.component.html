@@ -1,16 +1,15 @@
-<div class="w-full flex flex-col md:flex-row gap-2 mt-2">
+<div class="w-full flex flex-col md:flex-row gap-4 mt-2">
 
     <!-- Filtros -->
     <div
         [ngStyle]="{backgroundColor:'var(--surface-overlay)'}"
-        class="hidden md:block h-full w-full md:w-[30%] rounded-lg p-4">
+        class="hidden md:block h-full w-full md:w-[35%] rounded-lg p-4">
         <app-collect-search-filters  />
     </div>
 
     <!-- Mapa e coletas -->
-    <div class="h-screen w-full md:w-[70%]">
+    <div class="w-full md:w-[65%]">
         <div class="flex flex-col gap-4 justify-start items-start">
-
             <!-- Mobile Filters Button -->
             <div class="flex w-full justify-end md:hidden">
                 <p-button (click)="collectSearchFilterDialog = true" severity="secondary" label="Filtros" icon="pi pi-align-justify" />
@@ -18,7 +17,7 @@
 
             <app-collect-search-map id="mapRef" class="w-full h-full" />
 
-            <app-collect-search-items  class="w-full h-full" />
+            <app-collect-search-items class="w-full h-full"  />
         </div>
     </div>
 </div>
