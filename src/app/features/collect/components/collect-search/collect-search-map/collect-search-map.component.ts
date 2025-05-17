@@ -132,7 +132,7 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
   }
 
   public plotCollectedPoints(): void {
-    if (this.plottedPoints.length !== 0) return;
+    this.removePlottedPoints();
 
     const latLongItems = this.collectService
       .filteredCollectData()

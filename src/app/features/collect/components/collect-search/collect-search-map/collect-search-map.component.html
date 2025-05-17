@@ -1,14 +1,14 @@
 <div id="map2"></div>
-<div class="mt-4 flex flex-wrap w-full items-center justify-between sm:justify-end gap-2">
+<div class="mx-1 mt-4 flex flex-wrap w-full items-center justify-between sm:justify-end gap-2">
     <p-button [disabled]="collectService.numberOfFilteredCollects() === 0"
-     severity="secondary" label="Próxima"
+    variant="outlined" severity="danger" label="Próxima"
     (click)="plotCollectedPoints()" />
     <p-button [disabled]="collectService.numberOfFilteredCollects() === 0"
-         severity="secondary" label="Coletas"
+        variant="outlined" severity="warn" label="Coletas"
         (click)="plotCollectedPoints()" />
     <p-button [disabled]="!collectSearchFiltersService.selectedRegion()"
-         severity="secondary" label="Região"
+        variant="outlined" severity="info" label="Região"
         (click)="plotRegionPolygon()" />
-    <p-button  severity="secondary" label="Posição"
+    <p-button variant="outlined" severity="help" label="Posição"
         (click)="reloadPage()" />
 </div>
