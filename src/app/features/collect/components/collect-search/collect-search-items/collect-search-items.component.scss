@@ -4,3 +4,10 @@
     font-size: 1.1rem;
   }
 }
+
+.background {
+  background-image: url('/assets/images/wave.svg');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
