@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, AfterViewInit, OnInit } from '@angular/core';
-
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  AfterViewInit,
+  OnInit,
+  effect,
+} from '@angular/core';
 import type * as Leaflet from 'leaflet';
 import { GeolocationService } from '../../../services/geolocation/geolocation.service';
 import { ButtonModule } from 'primeng/button';
@@ -31,6 +37,19 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
 
   private polygonLayer!: Leaflet.Polygon | null;
 
+  private plottedPoints: Leaflet.CircleMarker[] = [];
+
+  constructor() {
+    effect(() => {
+      if (this.collectService.filteredCollectData().length === 0) {
+        this.removePlottedPoints();
+        this.removePolygon();
+      } else {
+        this.plotCollectedPoints();
+      }
+    });
+  }
+
   public ngOnInit(): void {
     this.loadGeolocationData();
   }
@@ -52,9 +71,9 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
       position => {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        this.map2.setView([latitude, longitude], 17); // Move o mapa para a nova posição
+        this.map2.setView([latitude, longitude], 17);
 
-        this.userMarker = L.marker([latitude, longitude]).addTo(this.map2); // Cria um marcador para o usuário
+        this.userMarker = L.marker([latitude, longitude]).addTo(this.map2);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; OpenStreetMap contributors',
@@ -117,17 +136,27 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
       .filteredCollectData()
       .map(item => [item.latitude, item.longitude]);
 
-    // Iterate through the array and add markers for each point
     latLongItems.forEach(([latitude, longitude]) => {
-      L.circleMarker([latitude, longitude], {
-        radius: 4, // Size of the circle
-        color: 'orange', // Border color
-        fillColor: 'orange', // Fill color
-        fillOpacity: 0.8, // Fill opacity
+      const marker = L.circleMarker([latitude, longitude], {
+        radius: 4,
+        color: '#a3e635',
+        fillColor: '#a3e635',
+        fillOpacity: 0.8,
       })
         .addTo(this.map2)
         .bindPopup(`Latitude: ${latitude}, Longitude: ${longitude}`); // Optional popup
+
+      this.plottedPoints.push(marker);
     });
+  }
+
+  public removePlottedPoints(): void {
+    this.plottedPoints.forEach(marker => {
+      marker.remove(); // Remove the marker from the map
+    });
+
+    // Clear the array
+    this.plottedPoints = [];
   }
 
   public reloadPage(): void {

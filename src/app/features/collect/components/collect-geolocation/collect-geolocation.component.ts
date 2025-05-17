@@ -62,9 +62,9 @@ export class CollectGeolocationComponent implements OnInit {
       position => {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        this.map.setView([latitude, longitude], 13); // Move o mapa para a nova posição
+        this.map.setView([latitude, longitude], 17);
 
-        this.userMarker = L.marker([latitude, longitude]).addTo(this.map); // Cria um marcador para o usuário
+        this.userMarker = L.marker([latitude, longitude]).addTo(this.map);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; OpenStreetMap contributors',

@@ -1,5 +1,4 @@
 import { ComplementDialogComponent } from './../../collect-forms-dialog/complement-dialog/complement-dialog.component';
-import { NgFor, NgClass } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -14,12 +13,13 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
-import { ShortTimestampPipe } from 'src/app/pipes/short-timestamp/short-timestamp.pipe';
 import { CollectService } from '../../../services/collect/collect.service';
 import { ObservationDialogComponent } from '../../collect-forms-dialog/observation-dialog/observation-dialog.component';
 import { PlantData } from '../../../models/collect.model';
 import { ObservationDataService } from '../../../services/observation-data/observation-data.service';
 import { ComplementDataService } from '../../../services/complement-data/complement-data.service';
+import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
 
 const PRIMENG = [
   TableModule,
@@ -34,17 +34,17 @@ const PRIMENG = [
   FluidModule,
   DataViewModule,
   CheckboxModule,
+  CardModule,
+  TooltipModule,
 ];
 
 const PROVIDERS = [MessageService, ConfirmationService];
-
-const PIPES = [NgFor, NgClass, ShortTimestampPipe];
 
 const COMPONENTS = [ComplementDialogComponent, ObservationDialogComponent];
 
 @Component({
   selector: 'app-collect-search-items',
-  imports: [...PRIMENG, ...PIPES, ...COMPONENTS],
+  imports: [...PRIMENG, ...COMPONENTS],
   templateUrl: './collect-search-items.component.html',
   styleUrl: './collect-search-items.component.scss',
   providers: [...PROVIDERS],
@@ -122,6 +122,8 @@ export class CollectSearchItemsComponent {
       thrips,
       emptyCollectionBoxNear: empty_collection_box_near,
     };
+
+    console.log(observationDataForm);
 
     this.observationDataService.setCollectObservationDataFormValue(observationDataForm);
 
