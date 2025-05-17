@@ -51,7 +51,7 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.loadGeolocationData();
+    this.geolocationService.getLocaltionPermission();
   }
 
   public loadGeolocationData(): void {

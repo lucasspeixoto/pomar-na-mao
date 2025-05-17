@@ -71,13 +71,19 @@ export class ObservationDialogComponent {
   );
 
   constructor() {
-    effect(() => {
-      const complementData = this.observationDataService.getCollectObservationDataFormValue();
+    effect(() => {}, {});
 
-      if (complementData) {
-        this.collectObservationDataForm.setValue(complementData);
-      }
-    });
+    const effectRef = effect(
+      () => {
+        const complementData = this.observationDataService.getCollectObservationDataFormValue();
+
+        if (complementData) {
+          this.collectObservationDataForm.setValue(complementData);
+          effectRef.destroy();
+        }
+      },
+      { manualCleanup: true }
+    );
   }
 
   public hideDialog(): void {

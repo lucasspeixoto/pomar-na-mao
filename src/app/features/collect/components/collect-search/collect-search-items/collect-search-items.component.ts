@@ -70,6 +70,8 @@ export class CollectSearchItemsComponent {
     const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =
       collect;
 
+    console.log(collect);
+
     const complementDataForm = {
       id,
       mass,
@@ -122,8 +124,6 @@ export class CollectSearchItemsComponent {
       thrips,
       emptyCollectionBoxNear: empty_collection_box_near,
     };
-
-    console.log(observationDataForm);
 
     this.observationDataService.setCollectObservationDataFormValue(observationDataForm);
 

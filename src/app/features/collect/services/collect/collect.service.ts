@@ -180,14 +180,14 @@ export class CollectService {
       emptyCollectionBoxNear,
     } = this.observationDataService.getCollectObservationDataFormValue()!;
 
-    const { longitude, latitude } = this.geolocationService.coordinates()!;
+    /* const { longitude, latitude } = this.geolocationService.coordinates()!;
 
-    const gpsTimestamp = this.geolocationService.coordinatesTimestamp();
+    const gpsTimestamp = this.geolocationService.coordinatesTimestamp(); */
 
     const collectData = {
-      longitude,
+      /* longitude,
       latitude,
-      gps_timestamp: gpsTimestamp,
+      gps_timestamp: gpsTimestamp, */
       mass,
       harvest,
       variety,
