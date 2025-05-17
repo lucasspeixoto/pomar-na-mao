@@ -132,6 +132,8 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
   }
 
   public plotCollectedPoints(): void {
+    if (this.plottedPoints.length !== 0) return;
+
     const latLongItems = this.collectService
       .filteredCollectData()
       .map(item => [item.latitude, item.longitude]);
@@ -144,7 +146,7 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
         fillOpacity: 0.8,
       })
         .addTo(this.map2)
-        .bindPopup(`Latitude: ${latitude}, Longitude: ${longitude}`); // Optional popup
+        .bindPopup(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
       this.plottedPoints.push(marker);
     });
@@ -152,10 +154,9 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
 
   public removePlottedPoints(): void {
     this.plottedPoints.forEach(marker => {
-      marker.remove(); // Remove the marker from the map
+      marker.remove();
     });
 
-    // Clear the array
     this.plottedPoints = [];
   }
 
