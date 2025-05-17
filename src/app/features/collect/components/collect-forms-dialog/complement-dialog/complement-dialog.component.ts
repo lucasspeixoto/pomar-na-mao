@@ -5,7 +5,7 @@ import { debounceTime, tap } from 'rxjs';
 import { DialogModule } from 'primeng/dialog';
 import {
   createCollectComplementDataForm,
-  type CollectComplementDataFormValue,
+  CollectComplementDataFormValue,
 } from '../../../constants/collect-complement-data-form';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -76,13 +76,17 @@ export class ComplementDialogComponent {
   );
 
   constructor() {
-    effect(() => {
-      const complementData = this.complementDataService.getCollectComplementDataFormValue();
+    const effectRef = effect(
+      () => {
+        const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
-      if (complementData) {
-        this.collectComplementDataForm.setValue(complementData);
-      }
-    });
+        if (complementData) {
+          this.collectComplementDataForm.setValue(complementData);
+          effectRef.destroy();
+        }
+      },
+      { manualCleanup: true }
+    );
   }
 
   public hideDialog(): void {

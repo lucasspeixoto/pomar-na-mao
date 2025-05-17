@@ -52,9 +52,7 @@ export class GeolocationService {
         throw new Error(`Erro ao obter estado de conexão do dispositivo: ${error.message}`);
       });
 
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 2000);
+    this.isLoading.set(false);
   }
 
   public getLocaltionCoordinate(): void {
