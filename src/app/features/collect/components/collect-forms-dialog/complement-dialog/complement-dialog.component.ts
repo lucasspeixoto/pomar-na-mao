@@ -1,7 +1,5 @@
-import { Component, EventEmitter, inject, Input, Output, effect } from '@angular/core';
+import { Component, inject, Input, effect, output, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { debounceTime, tap } from 'rxjs';
 import { DialogModule } from 'primeng/dialog';
 import {
   createCollectComplementDataForm,
@@ -33,14 +31,7 @@ const PRIMENG = [
   MessageModule,
 ];
 
-const COMMON = [
-  NgIf,
-  AsyncPipe,
-  CardModule,
-  FormsModule,
-  ReactiveFormsModule,
-  CustomValidationMessageComponent,
-];
+const COMMON = [CardModule, FormsModule, ReactiveFormsModule, CustomValidationMessageComponent];
 
 const PROVIDERS = [MessageService];
 
@@ -50,13 +41,14 @@ const PROVIDERS = [MessageService];
   templateUrl: './complement-dialog.component.html',
   styleUrl: './complement-dialog.component.scss',
   providers: [...PROVIDERS],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplementDialogComponent {
   @Input() public isVisible!: boolean;
 
-  @Output() dialogClosed = new EventEmitter<void>();
+  public dialogClosed = output<void>();
 
-  @Output() updateDataHandler = new EventEmitter<void>();
+  public updateDataHandler = output<void>();
 
   private complementDataService = inject(ComplementDataService);
 
@@ -64,38 +56,29 @@ export class ComplementDialogComponent {
 
   public lycheeVarieties = lycheeVarieties;
 
-  public collectComplementDataFormChange$ = this.collectComplementDataForm.valueChanges.pipe(
-    debounceTime(400),
-    tap(value => {
-      if (this.collectComplementDataForm.valid) {
-        this.complementDataService.setCollectComplementDataFormValue(
-          value as CollectComplementDataFormValue
-        );
-      }
-    })
-  );
-
   constructor() {
-    const effectRef = effect(
-      () => {
-        const complementData = this.complementDataService.getCollectComplementDataFormValue();
-
-        if (complementData) {
-          this.collectComplementDataForm.setValue(complementData);
-          effectRef.destroy();
-        }
-      },
-      { manualCleanup: true }
-    );
+    effect(() => {
+      const complementData = this.complementDataService.getCollectComplementDataFormValue();
+      if (complementData) {
+        const updatedData = {
+          ...complementData,
+          plantingDate: new Date(complementData.plantingDate),
+        };
+        this.collectComplementDataForm.setValue(updatedData!);
+      }
+    });
   }
 
   public hideDialog(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
+    this.collectComplementDataForm.reset();
     this.isVisible = false;
     this.dialogClosed.emit();
   }
 
   public updateCollectHandler(): void {
+    const complementData = this.collectComplementDataForm.value as CollectComplementDataFormValue;
+    this.complementDataService.setCollectComplementDataFormValue(complementData);
     this.updateDataHandler.emit();
   }
 }

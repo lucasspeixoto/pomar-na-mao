@@ -1,8 +1,6 @@
 <p-dialog [(visible)]="isVisible" [breakpoints]="{ '450px': '100vw' }" [style]="{ width: '50vw' }" [draggable]="false"
     [resizable]="false" header="Dados de observação" [modal]="true" (onHide)="hideDialog()">
 
-    <ng-container *ngIf="collectObservationDataFormChange$ | async" />
-
     <ng-template #content>
         <p-toast />
         <form [formGroup]="collectObservationDataForm" class="form">

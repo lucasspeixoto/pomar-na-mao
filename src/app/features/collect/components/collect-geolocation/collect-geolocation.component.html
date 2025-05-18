@@ -1,18 +1,22 @@
 <div class="overflow-hidden min-h-[450px]">
     @let coordinates = geolocationService.coordinates();
+    @let gpsTimestamp = geolocationService.coordinatesTimestamp();
 
     <section class="inline-block md:hidden">
         <div
             class="card z-50 fixed bottom-2 left-4 right-4 bg-surface-50 rounded-xl shadow-lg p-4 flex justify-between items-center font-medium">
-            <div class="text-md flex flex-col justify-center items-center gap-2">
+            <div
+                class="text-md flex flex-col justify-center items-center gap-2">
                 <span>Latitude</span>
                 <span>{{coordinates?.latitude }}</span>
             </div>
-            <div class="text-md flex flex-col justify-center items-center gap-2">
+            <div
+                class="text-md flex flex-col justify-center items-center gap-2">
                 <span>Tempo</span>
-                <span>{{geolocationService.coordinatesTimestamp()! |  epochToTime}}</span>
+                <span>{{gpsTimestamp! | epochToTime}}</span>
             </div>
-            <div class="text-md flex flex-col justify-center items-center gap-2">
+            <div
+                class="text-md flex flex-col justify-center items-center gap-2">
                 <span>Longitude</span>
                 <span>{{coordinates?.longitude}}</span>
             </div>
@@ -21,9 +25,9 @@
 
     <div class="inline-block md:hidden my-2">
         <p-button variant="text" [raised]="true" severity="help"
-        label="Recarregar"
-        [link]="true"
-        (click)="reloadPage()" />
+            label="Recarregar"
+            [link]="true"
+            (click)="reloadPage()" />
     </div>
 
     <div
@@ -46,20 +50,19 @@
                         <div class="mt-2 flex flex-col items-start gap-8">
                             <span class="font-semibold">Latitude:
                                 <strong id="latitude" class="text-primary">{{
-                                    geolocationService.coordinates()?.latitude }}
+                                    coordinates?.latitude }}
                                 </strong>
                             </span>
 
                             <span class="font-semibold">Longitude:
                                 <strong id="longitude" class="text-primary">{{
-                                    geolocationService.coordinates()?.longitude }}
+                                    coordinates?.longitude }}
                                 </strong>
                             </span>
 
                             <span class="font-semibold">Tempo:
                                 <strong id="timestamp" class="text-primary">{{
-                                    geolocationService.coordinatesTimestamp()! |
-                                    epochToTime
+                                    gpsTimestamp! | epochToTime
                                     }}
                                 </strong>
                             </span>

@@ -42,12 +42,10 @@ const COMMON = [FormsModule];
   template: `
     <p-dialog
       [(visible)]="isVisible"
-      [breakpoints]="{ '450px': '100vw' }"
-      [style]="{ width: '70vw' }"
+      [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+      [style]="{ width: '50vw' }"
       [draggable]="false"
       [resizable]="false"
-      header="Filtros"
-      [modal]="true"
       (onHide)="hideDialog()">
       <ng-template #content>
         <app-collect-search-filters (hideDialog)="hideDialog()" />

@@ -1,7 +1,5 @@
-import { Component, EventEmitter, inject, Input, Output, effect } from '@angular/core';
+import { Component, inject, Input, effect, output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { debounceTime, tap } from 'rxjs';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -35,7 +33,7 @@ const PRIMENG = [
   CheckboxModule,
 ];
 
-const COMMON = [NgIf, AsyncPipe, CardModule, FormsModule, ReactiveFormsModule];
+const COMMON = [CardModule, FormsModule, ReactiveFormsModule];
 
 const PROVIDERS = [MessageService];
 
@@ -49,9 +47,9 @@ const PROVIDERS = [MessageService];
 export class ObservationDialogComponent {
   @Input() public isVisible!: boolean;
 
-  @Output() dialogClosed = new EventEmitter<void>();
+  public dialogClosed = output<void>();
 
-  @Output() updateDataHandler = new EventEmitter<void>();
+  public updateDataHandler = output<void>();
 
   private observationDataService = inject(ObservationDataService);
 
@@ -59,77 +57,26 @@ export class ObservationDialogComponent {
 
   public lycheeVarieties = lycheeVarieties;
 
-  public collectObservationDataFormChange$ = this.collectObservationDataForm.valueChanges.pipe(
-    debounceTime(400),
-    tap(value => {
-      if (this.collectObservationDataForm.valid) {
-        this.observationDataService.setCollectObservationDataFormValue(
-          value as CollectObservationDataFormValue
-        );
-      }
-    })
-  );
-
   constructor() {
-    effect(() => {}, {});
-
-    const effectRef = effect(
-      () => {
-        const complementData = this.observationDataService.getCollectObservationDataFormValue();
-
-        if (complementData) {
-          this.collectObservationDataForm.setValue(complementData);
-          effectRef.destroy();
-        }
-      },
-      { manualCleanup: true }
-    );
+    effect(() => {
+      const observationData = this.observationDataService.getCollectObservationDataFormValue();
+      if (observationData) {
+        this.collectObservationDataForm.setValue(observationData);
+      }
+    });
   }
 
   public hideDialog(): void {
     this.observationDataService.setCollectObservationDataFormValue(initialCollectObservationData);
+    this.collectObservationDataForm.reset();
     this.isVisible = false;
     this.dialogClosed.emit();
   }
 
   public updateCollectHandler(): void {
+    const observationData = this.collectObservationDataForm
+      .value as CollectObservationDataFormValue;
+    this.observationDataService.setCollectObservationDataFormValue(observationData);
     this.updateDataHandler.emit();
-    /* const {
-      id,
-      stick,
-      brokenBranch,
-      vineGrowing,
-      burntBranch,
-      struckByLightning,
-      drill,
-      anthill,
-      inExperiment,
-      weedsInTheBasin,
-      fertilizationOrManuring,
-      mites,
-      thrips,
-      emptyCollectionBoxNear,
-    } = this.collectObservationDataForm.value as CollectObservationDataFormValue;
-
-    this.indexDbCollectService.findCollectById(id!).subscribe(value => {
-      const updatedPlantData = {
-        ...value,
-        stick,
-        broken_branch: brokenBranch,
-        vine_growing: vineGrowing,
-        burnt_branch: burntBranch,
-        struck_by_lightning: struckByLightning,
-        drill,
-        anthill,
-        in_experiment: inExperiment,
-        weeds_in_the_basin: weedsInTheBasin,
-        fertilization_or_manuring: fertilizationOrManuring,
-        mites,
-        thrips,
-        empty_collection_box_near: emptyCollectionBoxNear,
-      } as PlantData;
-
-      this.indexDbCollectService.updateCollect(updatedPlantData, true).subscribe();
-    }); */
   }
 }

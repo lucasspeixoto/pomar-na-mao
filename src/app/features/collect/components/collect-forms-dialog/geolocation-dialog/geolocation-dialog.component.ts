@@ -1,5 +1,4 @@
-import { NgIf, AsyncPipe } from '@angular/common';
-import { Component, effect, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, effect, inject, Input, output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -15,7 +14,6 @@ import {
   createCollectGeolocationDataForm,
   type CollectGeolocationDataFormValue,
 } from '../../../constants/collect-geolocation-data-form';
-import { debounceTime, tap } from 'rxjs';
 import { InputTextModule } from 'primeng/inputtext';
 
 const PRIMENG = [
@@ -30,14 +28,7 @@ const PRIMENG = [
   MessageModule,
 ];
 
-const COMMON = [
-  NgIf,
-  AsyncPipe,
-  CardModule,
-  FormsModule,
-  ReactiveFormsModule,
-  CustomValidationMessageComponent,
-];
+const COMMON = [CardModule, FormsModule, ReactiveFormsModule, CustomValidationMessageComponent];
 
 @Component({
   selector: 'app-geolocation-dialog',
@@ -48,29 +39,17 @@ const COMMON = [
 export class GeolocationDialogComponent {
   @Input() public isVisible!: boolean;
 
-  @Output() dialogClosed = new EventEmitter<void>();
+  public dialogClosed = output<void>();
 
-  @Output() updateDataHandler = new EventEmitter<void>();
+  public updateDataHandler = output<void>();
 
   private geolocationDataService = inject(GeolocationFormService);
 
   public collectGeolocationDataForm = createCollectGeolocationDataForm();
 
-  public collectGeolocationDataFormChange$ = this.collectGeolocationDataForm.valueChanges.pipe(
-    debounceTime(400),
-    tap(value => {
-      if (this.collectGeolocationDataForm.valid) {
-        this.geolocationDataService.setCollectGeolocationDataFormValue(
-          value as CollectGeolocationDataFormValue
-        );
-      }
-    })
-  );
-
   constructor() {
     effect(() => {
       const geolocationData = this.geolocationDataService.getCollectGeolocationDataFormValue();
-
       if (geolocationData) {
         this.collectGeolocationDataForm.setValue(geolocationData);
       }
@@ -79,11 +58,15 @@ export class GeolocationDialogComponent {
 
   public hideDialog(): void {
     this.geolocationDataService.setCollectGeolocationDataFormValue(null);
+    this.collectGeolocationDataForm.reset();
     this.isVisible = false;
     this.dialogClosed.emit();
   }
 
   public updateGeolocationDataHandler(): void {
+    const geolocationData = this.collectGeolocationDataForm
+      .value as CollectGeolocationDataFormValue;
+    this.geolocationDataService.setCollectGeolocationDataFormValue(geolocationData);
     this.updateDataHandler.emit();
   }
 }

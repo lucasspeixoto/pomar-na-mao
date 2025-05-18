@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 
 type CollectComplementDataFormControl = {
   id: FormControl<string>;
   mass: FormControl<string>;
   variety: FormControl<string>;
-  plantingDate: FormControl<string>;
+  plantingDate: FormControl<Date | string>;
   harvest: FormControl<string>;
   region: FormControl<string>;
   description: FormControl<string>;
@@ -13,40 +13,32 @@ type CollectComplementDataFormControl = {
 };
 
 export function createCollectComplementDataForm(): FormGroup<CollectComplementDataFormControl> {
-  const formBuilder = inject(NonNullableFormBuilder);
+  const formBuilder = inject(UntypedFormBuilder);
 
   return formBuilder.group({
     id: new FormControl('', {
       validators: [],
-      nonNullable: true,
     }),
     mass: new FormControl('', {
       validators: [Validators.required, Validators.min(0)],
-      nonNullable: true,
     }),
     variety: new FormControl('', {
       validators: [Validators.minLength(3)],
-      nonNullable: true,
     }),
-    plantingDate: new FormControl('', {
+    plantingDate: new FormControl(new Date(), {
       validators: [],
-      nonNullable: true,
     }),
     harvest: new FormControl('', {
       validators: [],
-      nonNullable: true,
     }),
     region: new FormControl('', {
       validators: [],
-      nonNullable: true,
     }),
     description: new FormControl('', {
       validators: [Validators.maxLength(150)],
-      nonNullable: true,
     }),
     lifeOfTheTree: new FormControl('', {
       validators: [Validators.maxLength(10)],
-      nonNullable: true,
     }),
   });
 }

@@ -1,9 +1,8 @@
-<div class="flex flex-col">
-    <span class="text-2xl font-semibold opacity-55">Filtros</span>
-    <div
-        class="w-full flex md:flex-col flex-row flex-wrap items-start justify-between gap-2">
+<div class="flex flex-col h-full justify-between" id="container">
 
-        <!-- Safra -->
+    <div
+        class="w-full mt-4 flex md:flex-col flex-row flex-wrap items-start gap-4">
+        <span class="text-2xl font-semibold opacity-55">Filtros</span>
         <div class="my-2 w-full">
             <span
                 class="text-md md:text-xl text-surface-400 mb-0.5">Safra</span>
@@ -21,7 +20,7 @@
             <span
                 class="text-md md:text-xl text-surface-400 mb-0.5">Regiões</span>
             <div class="flex flex-col gap-2">
-                <p-select [options]="regions()"
+                <p-select appendTo="body" [options]="regions()"
                     [(ngModel)]="collectSearchFiltersService.selectedRegion"
                     [checkmark]="true" [showClear]="true"
                     placeholder="Selecione a região" />
@@ -34,147 +33,21 @@
         <div class="my-2 w-full">
             <span
                 class="text-md md:text-xl text-surface-400 mb-0.5">Ocorrências</span>
-            <div
-                class="flex flex-wrap justify-start gap-y-4 gap-x-8 max-w-[90%]">
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences" value="stick"
-                        inputId="stick" />
-                    <label for="stick" class="text-sm md:text-md ml-2">Galho
-                        Seco</label>
-                </div>
 
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="broken_branch"
-                        inputId="brokenBranch" />
-                    <label for="brokenBranch"
-                        class="text-sm md:text-md ml-2">Galho
-                        Quebrado</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="vine_growing"
-                        inputId="vineGrowing" />
-                    <label for="vineGrowing"
-                        class="text-sm md:text-md ml-2">Cipó crescendo</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences" value="burnt_branch"
-                        inputId="burntBranch" />
-                    <label for="burntBranch"
-                        class="text-sm md:text-md ml-2">Queimado</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="struck_by_lightning"
-                        inputId="struckByLightning" />
-                    <label for="struck_by_lightning"
-                        class="text-sm md:text-md ml-2">Atingido por
-                        raio</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences" value="drill"
-                        inputId="drill" />
-                    <label for="drill"
-                        class="text-sm md:text-md ml-2">Broca</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences" value="anthill"
-                        inputId="anthill" />
-                    <label for="anthill"
-                        class="text-sm md:text-md ml-2">Formigueiro</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="in_experiment"
-                        inputId="inExperiment" />
-                    <label for="inExperiment" class="text-sm md:text-md ml-2">Em
-                        experimento/teste</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="weeds_in_the_basin"
-                        inputId="weedsInTheBasin" />
-                    <label for="weedsInTheBasin"
-                        class="text-sm md:text-md ml-2">Mato na
-                        bacia</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="mites"
-                        inputId="mites" />
-                    <label for="mites" class="text-sm md:text-md ml-2">Presença
-                        de ácaro</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="thrips"
-                        inputId="thrips" />
-                    <label for="thrips" class="text-sm md:text-md ml-2">Presença
-                        de tripes</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="empty_collection_box_near"
-                        inputId="emptyCollectionBoxNear" />
-                    <label for="emptyCollectionBoxNear"
-                        class="text-sm md:text-md ml-2">Caixa de
-                        colheita vazia perto</label>
-                </div>
-
-                <div class="my-2 flex items-center">
-                    <p-radiobutton
-                        [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
-                        name="occurrences"
-                        value="fertilization_or_manuring"
-                        inputId="fertilizationOrManuring" />
-                    <label for="fertilizationOrManuring"
-                        class="text-sm md:text-md ml-2">Parada de
-                        pulverização/adubação</label>
-                </div>
-            </div>
+            <p-select appendTo="container" [options]="occurrences" (onChange)="changeOccurrenceHandler($event)"
+                [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
+                placeholder="Selecione a ocorrência" [editable]="true"
+                optionLabel="name" optionValue="code" class="w-full" />
         </div>
     </div>
 
     <!-- Action -->
     <div class="flex md:justify-between justify-end gap-2 my-4">
-        <p-button [disabled]="collectSearchFiltersService.isFiltersDisabled()" label="Limpar" icon="pi pi-eraser"
+        <p-button [disabled]="collectSearchFiltersService.isFiltersDisabled()"
+            label="Limpar" icon="pi pi-eraser"
             severity="secondary" (click)="clearFilters()" />
-        <p-button [disabled]="collectSearchFiltersService.isFiltersDisabled()" label="Aplicar" icon="pi pi-filter" severity="primary"
+        <p-button [disabled]="collectSearchFiltersService.isFiltersDisabled()"
+            label="Aplicar" icon="pi pi-filter" severity="primary"
             (click)="applyFilters()" />
     </div>
 </div>
