@@ -3,7 +3,6 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { GeolocationService } from '../geolocation/geolocation.service';
 import { PlantData } from '../../models/collect.model';
-
 import { ComplementDataService } from '../complement-data/complement-data.service';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collect.service';
@@ -89,7 +88,7 @@ export class CollectService {
       return;
     }
 
-    const { mass, harvest, description, plantingDate, lifeOfTheTree, variety } =
+    const { mass, harvest, description, plantingDate, lifeOfTheTree, variety, region } =
       this.complementDataService.getCollectComplementDataFormValue()!;
 
     const {
@@ -134,6 +133,7 @@ export class CollectService {
       mites,
       thrips,
       empty_collection_box_near: emptyCollectionBoxNear,
+      region,
     };
 
     const { error } = await this.supabase.from('plant_collect').insert([newCollectData]);
@@ -158,11 +158,45 @@ export class CollectService {
     }
   }
 
-  public async updateAPlantCollectHandler(id: string): Promise<void> {
+  public async updateAPlantCollectComplementDataHandler(id: string): Promise<void> {
     this.loadingService.isLoading.set(true);
 
     const { mass, harvest, description, plantingDate, lifeOfTheTree, variety } =
       this.complementDataService.getCollectComplementDataFormValue()!;
+
+    const collectData = {
+      mass,
+      harvest,
+      variety,
+      description,
+      planting_date: plantingDate,
+      life_of_the_tree: lifeOfTheTree,
+    };
+
+    const { error } = await this.supabase.from('plant_collect').update([collectData]).eq('id', id);
+
+    this.loadingService.isLoading.set(false);
+
+    if (error) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Erro',
+        detail:
+          'Erro ao editar dados complementares coleta, verifique as informações e tente novamente!',
+        life: 3000,
+      });
+    } else {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Editado',
+        detail: 'Dados complementares editados com sucesso!',
+        life: 3000,
+      });
+    }
+  }
+
+  public async updateAPlantCollectObservationDataHandler(id: string): Promise<void> {
+    this.loadingService.isLoading.set(true);
 
     const {
       stick,
@@ -180,20 +214,7 @@ export class CollectService {
       emptyCollectionBoxNear,
     } = this.observationDataService.getCollectObservationDataFormValue()!;
 
-    /* const { longitude, latitude } = this.geolocationService.coordinates()!;
-
-    const gpsTimestamp = this.geolocationService.coordinatesTimestamp(); */
-
     const collectData = {
-      /* longitude,
-      latitude,
-      gps_timestamp: gpsTimestamp, */
-      mass,
-      harvest,
-      variety,
-      description,
-      planting_date: plantingDate,
-      life_of_the_tree: lifeOfTheTree,
       stick,
       broken_branch: brokenBranch,
       vine_growing: vineGrowing,
@@ -217,15 +238,14 @@ export class CollectService {
       this.messageService.add({
         severity: 'error',
         summary: 'Erro',
-        detail: 'Erro ao inserir coleta, verifique as informações e tente novamente!',
+        detail: 'Erro ao editar dados de observação, verifique as informações e tente novamente!',
         life: 3000,
       });
     } else {
-      this.resetCollectData();
       this.messageService.add({
         severity: 'success',
-        summary: 'Registrado',
-        detail: 'Registro de coleta armazenado!',
+        summary: 'Editado',
+        detail: 'Dados de observação editados com sucesso!',
         life: 3000,
       });
     }

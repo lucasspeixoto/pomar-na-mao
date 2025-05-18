@@ -27,9 +27,9 @@ import { CollectService } from '../../services/collect/collect.service';
 import { DataViewModule } from 'primeng/dataview';
 import { GeolocationDialogComponent } from '../../components/collect-forms-dialog/geolocation-dialog/geolocation-dialog.component';
 import { GeolocationFormService } from '../../services/geolocation-form/geolocation-form.service';
-import { CheckboxModule, type CheckboxChangeEvent } from 'primeng/checkbox';
-import type { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
-import type { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
+import { CheckboxModule, CheckboxChangeEvent } from 'primeng/checkbox';
+import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
+import { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
 
 const PRIMENG = [
   TableModule,

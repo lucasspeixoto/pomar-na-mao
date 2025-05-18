@@ -9,7 +9,7 @@ import { FarmRegionService } from '../services/farm-region/farm-region.service';
   template: ` <section>
     <div class="grid grid-cols-12 gap-2">
       <app-collect-data-resume class="hidden md:contents" />
-      <div class="col-span-12">
+      <div class="col-span-12 mt-4">
         <router-outlet />
       </div>
     </div>

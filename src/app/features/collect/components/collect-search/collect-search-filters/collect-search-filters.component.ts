@@ -7,8 +7,14 @@ import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
 import { FarmRegionService } from '../../../services/farm-region/farm-region.service';
-import { SelectModule } from 'primeng/select';
+import { SelectModule, type SelectChangeEvent } from 'primeng/select';
 import { CollectSearchFiltersService } from '../../../services/collect-search/collect-search-filters.service';
+import { OCCURRENCES } from '../../../constants/occurrences';
+
+interface SelectField {
+  name: string;
+  code: string;
+}
 
 const PRIMENG = [
   SelectModule,
@@ -46,6 +52,12 @@ export class CollectSearchFiltersComponent {
   public regions = computed(() => [
     ...new Set(this.farmRegionService.farmRegions().map(item => item.region)),
   ]);
+
+  public occurrences: SelectField[] = OCCURRENCES;
+
+  public changeOccurrenceHandler(event: SelectChangeEvent): void {
+    this.collectSearchFiltersService.selectedOccurrences.set(event.value);
+  }
 
   public applyFilters(): void {
     this.hideDialog.emit();

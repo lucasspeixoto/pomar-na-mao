@@ -1,5 +1,5 @@
 import { ComplementDialogComponent } from './../../collect-forms-dialog/complement-dialog/complement-dialog.component';
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -20,6 +20,8 @@ import { ObservationDataService } from '../../../services/observation-data/obser
 import { ComplementDataService } from '../../../services/complement-data/complement-data.service';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
+import { CollectComplementDataFormValue } from '../../../constants/collect-complement-data-form';
+import { CollectSearchFiltersService } from '../../../services/collect-search/collect-search-filters.service';
 
 const PRIMENG = [
   TableModule,
@@ -48,6 +50,7 @@ const COMPONENTS = [ComplementDialogComponent, ObservationDialogComponent];
   templateUrl: './collect-search-items.component.html',
   styleUrl: './collect-search-items.component.scss',
   providers: [...PROVIDERS],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CollectSearchItemsComponent {
   public collectService = inject(CollectService);
@@ -55,6 +58,8 @@ export class CollectSearchItemsComponent {
   public observationDataService = inject(ObservationDataService);
 
   public complementDataService = inject(ComplementDataService);
+
+  public collectSearchFiltersService = inject(CollectSearchFiltersService);
 
   public filteredCollectData = this.collectService.filteredCollectData;
 
@@ -70,8 +75,6 @@ export class CollectSearchItemsComponent {
     const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =
       collect;
 
-    console.log(collect);
-
     const complementDataForm = {
       id,
       mass,
@@ -81,7 +84,7 @@ export class CollectSearchItemsComponent {
       description,
       lifeOfTheTree: life_of_the_tree,
       region,
-    };
+    } as CollectComplementDataFormValue;
 
     this.complementDataService.setCollectComplementDataFormValue(complementDataForm);
 
@@ -133,10 +136,14 @@ export class CollectSearchItemsComponent {
   }
 
   public updateComplementDataHandler(): void {
-    this.collectService.updateAPlantCollectHandler(this.selectedCollectId()!);
+    this.collectService.updateAPlantCollectComplementDataHandler(this.selectedCollectId()!);
+    this.collectSearchFiltersService.applyFilters();
+    this.complementDialog = false;
   }
 
   public updateObservationDataHandler(): void {
-    this.collectService.updateAPlantCollectHandler(this.selectedCollectId()!);
+    this.collectService.updateAPlantCollectObservationDataHandler(this.selectedCollectId()!);
+    this.collectSearchFiltersService.applyFilters();
+    this.observationDialog = false;
   }
 }

@@ -4,9 +4,6 @@
     [draggable]="false" [resizable]="false"
     header="Dados complementares" [modal]="true" (onHide)="hideDialog()">
 
-    <ng-container
-        *ngIf="collectComplementDataFormChange$ | async" />
-
     <ng-template #content>
         <p-toast />
         <form [formGroup]="collectComplementDataForm" class="form">
@@ -63,7 +60,6 @@
                     <app-custom-validation-message
                         controlName="region" />
                 </div>
-
             </div>
 
             <div class="my-2">
@@ -82,4 +78,5 @@
         <p-button label="Cancelar" icon="pi pi-times" text (click)="hideDialog()" />
         <p-button label="Editar" icon="pi pi-check" (click)="updateCollectHandler()" />
     </ng-template>
+
 </p-dialog>
