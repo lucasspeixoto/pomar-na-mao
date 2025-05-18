@@ -135,14 +135,14 @@ export class CollectSearchItemsComponent {
     this.observationDialog = true;
   }
 
-  public updateComplementDataHandler(): void {
-    this.collectService.updateAPlantCollectComplementDataHandler(this.selectedCollectId()!);
+  public async updateComplementDataHandler(): Promise<void> {
+    await this.collectService.updateAPlantCollectComplementDataHandler(this.selectedCollectId()!);
     this.collectSearchFiltersService.applyFilters();
     this.complementDialog = false;
   }
 
-  public updateObservationDataHandler(): void {
-    this.collectService.updateAPlantCollectObservationDataHandler(this.selectedCollectId()!);
+  public async updateObservationDataHandler(): Promise<void> {
+    await this.collectService.updateAPlantCollectObservationDataHandler(this.selectedCollectId()!);
     this.collectSearchFiltersService.applyFilters();
     this.observationDialog = false;
   }
