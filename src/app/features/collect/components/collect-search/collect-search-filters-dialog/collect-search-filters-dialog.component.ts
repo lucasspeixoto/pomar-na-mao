@@ -44,8 +44,9 @@ const COMMON = [FormsModule];
       [(visible)]="isVisible"
       [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
       [style]="{ width: '50vw' }"
-      [draggable]="false"
-      [resizable]="false"
+      [draggable]="true"
+      [showHeader]="false"
+      [closable]="true"
       (onHide)="hideDialog()">
       <ng-template #content>
         <app-collect-search-filters (hideDialog)="hideDialog()" />

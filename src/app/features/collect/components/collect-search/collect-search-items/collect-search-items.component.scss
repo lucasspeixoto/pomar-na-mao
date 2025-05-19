@@ -5,8 +5,15 @@
   }
 }
 
-.background {
-  background-image: url('/assets/images/wave.svg');
+.light-background {
+  background-image: url('/assets/images/light-wave.svg');
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+.dark-background {
+  background-image: url('/assets/images/dark-wave.svg');
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat;

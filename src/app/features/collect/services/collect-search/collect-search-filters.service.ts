@@ -15,6 +15,10 @@ export class CollectSearchFiltersService {
 
   public selectedOccurrences = signal<string | null>(null);
 
+  public selectedVariety = signal<string | null>(null);
+
+  public selectedMassRange = signal<number[]>([0, 1000]);
+
   public isFiltersDisabled = computed(() => {
     return !this.selectedHarvest() && !this.selectedRegion() && !this.selectedOccurrences();
   });
@@ -27,7 +31,9 @@ export class CollectSearchFiltersService {
     this.collectService.getAllFilteredCollectsDataHandler(
       this.selectedHarvest(),
       this.selectedRegion(),
-      this.selectedOccurrences()
+      this.selectedOccurrences(),
+      this.selectedVariety(),
+      this.selectedMassRange()
     );
 
     this.storageFiltersHandler();
@@ -37,6 +43,8 @@ export class CollectSearchFiltersService {
     this.selectedHarvest.set(null);
     this.selectedRegion.set(null);
     this.selectedOccurrences.set(null);
+    this.selectedVariety.set(null);
+    this.selectedMassRange.set([0, 1000]);
 
     this.collectService.clearSelectedCollectsFromFilters();
     localStorage.removeItem('POMAR-NA-MAO:COLLECT-SEARCH-FILTERS');
@@ -47,6 +55,8 @@ export class CollectSearchFiltersService {
       harvest: this.selectedHarvest(),
       region: this.selectedRegion(),
       occurrence: this.selectedOccurrences(),
+      variety: this.selectedVariety(),
+      massRange: this.selectedMassRange(),
     } as CollectFilters;
 
     localStorage.setItem('POMAR-NA-MAO:COLLECT-SEARCH-FILTERS', JSON.stringify(filters));
@@ -56,14 +66,20 @@ export class CollectSearchFiltersService {
     const filters = checkCurrencCollectFilters();
 
     if (filters) {
-      this.selectedHarvest.set(filters.harvest);
-      this.selectedRegion.set(filters.region);
-      this.selectedOccurrences.set(filters.occurrence);
+      const { harvest, region, occurrence, variety, massRange } = filters;
+
+      this.selectedHarvest.set(harvest);
+      this.selectedRegion.set(region);
+      this.selectedOccurrences.set(occurrence);
+      this.selectedVariety.set(variety);
+      this.selectedMassRange.set(massRange);
 
       this.collectService.getAllFilteredCollectsDataHandler(
-        this.selectedHarvest(),
-        this.selectedRegion(),
-        this.selectedOccurrences()
+        harvest,
+        region,
+        occurrence,
+        variety,
+        massRange
       );
     }
   }

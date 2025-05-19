@@ -13,17 +13,18 @@
         @for(collect of collects; track collect.id) {
         <div
             style="box-shadow: 0px 6px 20px rgba(132,204,22,0.2);"
-            class="cursor-pointer w-[150px] background rounded-lg p-1/2 sm:p-1 gap-1 bg-slate-300 dark:bg-slate-800">
+            [ngClass]="{ 'dark-background': layoutService.isDarkTheme(), 'light-background': !layoutService.isDarkTheme()}"
+            class="cursor-pointer w-[150px] rounded-lg p-1/2 sm:p-1 gap-1 bg-slate-300 dark:bg-slate-800">
             <div class="py-2 px-0 flex justify-between items-center">
                 <span
-                    class="label-medium text-surface-500 text-sm md:text-md">
+                    class="label-medium font-bold text-surface-500 text-sm md:text-md">
                     #{{ collect.id.split("-")[0] }}...</span>
                 @if(collect?.region) {
                 <div
-                    class="shadow-lg shadow-violet-500/50 inline-flex items-center justify-center rounded-full w-7 h-7 bg-violet-200 hover:bg-violet-300 transition-all duration-200 text-sm dark:bg-violet-800 dark:hover:bg-violet-700">
+                    class="shadow-lg shadow-green-500/50 inline-flex items-center justify-center rounded-md w-10 h-7 bg-green-200 hover:bg-green-300 transition-all duration-200 text-sm dark:bg-green-800 dark:hover:bg-green-700">
                     <div
-                        class="text-violet-900 dark:text-violet-50 font-medium text-center px-1">
-                        {{collect.region}}
+                        class="text-green-900 dark:text-green-50 font-medium text-center px-1">
+                        R-{{collect.region}}
                     </div>
                 </div>
                 }
