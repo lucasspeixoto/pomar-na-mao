@@ -10,7 +10,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { FluidModule } from 'primeng/fluid';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { IndexDbCollectService } from './../../../../services/index-db/index-db-collect.service';
 import { ExcelService } from '../../../../services/excel/excel.service';
 import { PlantData } from '../../models/collect.model';
@@ -24,12 +24,12 @@ import {
   type CollectObservationDataFormValue,
 } from '../../constants/collect-observation-data-form';
 import { CollectService } from '../../services/collect/collect.service';
-import { DataViewModule } from 'primeng/dataview';
 import { GeolocationDialogComponent } from '../../components/collect-forms-dialog/geolocation-dialog/geolocation-dialog.component';
 import { GeolocationFormService } from '../../services/geolocation-form/geolocation-form.service';
 import { CheckboxModule, CheckboxChangeEvent } from 'primeng/checkbox';
 import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
 import { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
+import { LayoutService } from 'src/app/layout/service/layout.service';
 
 const PRIMENG = [
   TableModule,
@@ -42,7 +42,6 @@ const PRIMENG = [
   IconFieldModule,
   ConfirmDialogModule,
   FluidModule,
-  DataViewModule,
   CheckboxModule,
 ];
 
@@ -54,7 +53,7 @@ const COMPONENTS = [
 
 const PROVIDERS = [MessageService, ConfirmationService, ShortTimestampPipe];
 
-const PIPES = [ShortTimestampPipe, NgFor, NgClass];
+const PIPES = [ShortTimestampPipe, NgClass];
 
 @Component({
   selector: 'app-collect-sync',
@@ -90,6 +89,20 @@ const PIPES = [ShortTimestampPipe, NgFor, NgClass];
           width: 100%;
         }
       }
+
+      .light-background {
+        background-image: url('/assets/images/light-wave.svg');
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+      }
+
+      .dark-background {
+        background-image: url('/assets/images/dark-wave.svg');
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+      }
     `,
   ],
 })
@@ -107,6 +120,8 @@ export class CollectSyncComponent implements OnInit {
   private excelService = inject(ExcelService);
 
   private confirmationService = inject(ConfirmationService);
+
+  public layoutService = inject(LayoutService);
 
   public collectedData = this.indexDbCollectService.collectedData;
 
