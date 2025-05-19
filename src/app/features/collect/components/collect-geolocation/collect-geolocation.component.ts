@@ -4,6 +4,7 @@ import {
   inject,
   OnInit,
   ChangeDetectorRef,
+  type AfterViewInit,
 } from '@angular/core';
 import { CardModule } from 'primeng/card';
 
@@ -27,7 +28,7 @@ const PIPES = [EpochToTimePipe];
   styleUrl: './collect-geolocation.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CollectGeolocationComponent implements OnInit {
+export class CollectGeolocationComponent implements OnInit, AfterViewInit {
   public currentDate = new Date();
 
   public geolocationService = inject(GeolocationService);
@@ -41,8 +42,11 @@ export class CollectGeolocationComponent implements OnInit {
   public geolocationTextInfo = GEOLOCATION_INFO_TEXT;
 
   public ngOnInit(): void {
-    this.startMapRender();
     this.loadGeolocationData();
+  }
+
+  public ngAfterViewInit(): void {
+    this.startMapRender();
   }
 
   public async loadGeolocationData(): Promise<void> {
@@ -90,9 +94,5 @@ export class CollectGeolocationComponent implements OnInit {
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
-  }
-
-  public reloadPage(): void {
-    window.location.reload();
   }
 }

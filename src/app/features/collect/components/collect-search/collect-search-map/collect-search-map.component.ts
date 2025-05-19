@@ -51,15 +51,19 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.geolocationService.getLocaltionPermission();
-  }
-
-  public loadGeolocationData(): void {
-    this.geolocationService.getLocaltionPermission();
-    this.geolocationService.getLocaltionCoordinate();
+    this.loadGeolocationData();
   }
 
   public ngAfterViewInit(): void {
+    this.startMapRender();
+  }
+
+  public async loadGeolocationData(): Promise<void> {
+    await this.geolocationService.getLocaltionPermission();
+    this.geolocationService.getLocaltionCoordinate();
+  }
+
+  public startMapRender(): void {
     if (!navigator.geolocation) {
       console.warn('Localização indisponível neste dispositivo!');
       this.geolocationService.showUnavailableGeolocation();
@@ -158,9 +162,5 @@ export class CollectSearchMapComponent implements OnInit, AfterViewInit {
     });
 
     this.plottedPoints = [];
-  }
-
-  public reloadPage(): void {
-    window.location.reload();
   }
 }
