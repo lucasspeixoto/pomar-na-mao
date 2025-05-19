@@ -34,10 +34,35 @@
             <span
                 class="text-md md:text-xl text-surface-400 mb-0.5">Ocorrências</span>
 
-            <p-select appendTo="container" [options]="occurrences" (onChange)="changeOccurrenceHandler($event)"
+            <p-select appendTo="container" [options]="occurrences"
+                (onChange)="changeOccurrenceHandler($event)"
                 [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
                 placeholder="Selecione a ocorrência" [editable]="true"
                 optionLabel="name" optionValue="code" class="w-full" />
+        </div>
+
+        <div class="my-2 w-full">
+            <span
+                class="text-md md:text-xl text-surface-400 mb-0.5">Variedade</span>
+            <div class="flex flex-col gap-2">
+                <input pInputText id="selectedHarvest"
+                    aria-describedby="selectedHarvestField"
+                    [(ngModel)]="collectSearchFiltersService.selectedVariety" />
+                <small class="font-semibold text-blue-500 dark:text-cyan-300"
+                    id="selectedHarvestField">Filtre por alguma variedade em
+                    específico.</small>
+            </div>
+        </div>
+
+        <div class="my-2 w-full">
+            <span
+                class="text-md md:text-xl text-surface-400 mb-1">Massa (Kg)</span>
+            <p-slider min="0" max="1000" animate="true" styleClass="ml-2 mt-4"
+                [(ngModel)]="collectSearchFiltersService.selectedMassRange"
+                [range]="true" />
+            <p class="ml-3 text-sm md:text-md text-surface-300 mt-2">Faixa: {{
+                collectSearchFiltersService.selectedMassRange()[0] }} - {{
+                collectSearchFiltersService.selectedMassRange()[1] }}</p>
         </div>
     </div>
 

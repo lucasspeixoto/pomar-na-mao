@@ -10,6 +10,7 @@ import { FarmRegionService } from '../../../services/farm-region/farm-region.ser
 import { SelectModule, type SelectChangeEvent } from 'primeng/select';
 import { CollectSearchFiltersService } from '../../../services/collect-search/collect-search-filters.service';
 import { OCCURRENCES } from '../../../constants/occurrences';
+import { SliderModule } from 'primeng/slider';
 
 interface SelectField {
   name: string;
@@ -24,6 +25,7 @@ const PRIMENG = [
   AccordionModule,
   CheckboxModule,
   DividerModule,
+  SliderModule,
 ];
 
 const COMMON = [FormsModule];

@@ -373,7 +373,9 @@ export class CollectService {
   public async getAllFilteredCollectsDataHandler(
     harvest: string | null,
     region: string | null,
-    occurrence: string | null
+    occurrence: string | null,
+    variety: string | null,
+    massRange: number[]
   ): Promise<void> {
     this.loadingService.isLoading.set(true);
 
@@ -392,6 +394,14 @@ export class CollectService {
 
     if (occurrence) {
       query = query.is(`${occurrence}`, true);
+    }
+
+    if (variety && variety.trim() !== '') {
+      query = query.ilike('variety', `%${variety}%`);
+    }
+
+    if (massRange) {
+      query = query.gte('mass', massRange[0]).lte('mass', massRange[1]);
     }
 
     const { data, error } = await query;

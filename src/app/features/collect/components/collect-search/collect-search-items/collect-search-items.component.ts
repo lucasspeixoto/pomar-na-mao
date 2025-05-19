@@ -1,3 +1,4 @@
+import { LayoutService } from './../../../../../layout/service/layout.service';
 import { ComplementDialogComponent } from './../../collect-forms-dialog/complement-dialog/complement-dialog.component';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
@@ -23,6 +24,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CollectComplementDataFormValue } from '../../../constants/collect-complement-data-form';
 import { CollectSearchFiltersService } from '../../../services/collect-search/collect-search-filters.service';
 
+import { NgClass } from '@angular/common';
+
 const PRIMENG = [
   TableModule,
   ButtonModule,
@@ -44,9 +47,11 @@ const PROVIDERS = [MessageService, ConfirmationService];
 
 const COMPONENTS = [ComplementDialogComponent, ObservationDialogComponent];
 
+const COMMON = [NgClass];
+
 @Component({
   selector: 'app-collect-search-items',
-  imports: [...PRIMENG, ...COMPONENTS],
+  imports: [...PRIMENG, ...COMPONENTS, ...COMMON],
   templateUrl: './collect-search-items.component.html',
   styleUrl: './collect-search-items.component.scss',
   providers: [...PROVIDERS],
@@ -60,6 +65,8 @@ export class CollectSearchItemsComponent {
   public complementDataService = inject(ComplementDataService);
 
   public collectSearchFiltersService = inject(CollectSearchFiltersService);
+
+  public layoutService = inject(LayoutService);
 
   public filteredCollectData = this.collectService.filteredCollectData;
 
