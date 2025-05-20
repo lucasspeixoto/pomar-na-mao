@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, Input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -38,7 +38,7 @@ const COMMON = [CardModule, FormsModule, ReactiveFormsModule, CustomValidationMe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeolocationDialogComponent {
-  @Input() public isVisible!: boolean;
+  public isVisible = input.required<boolean>();
 
   public dialogClosed = output<void>();
 
@@ -60,7 +60,6 @@ export class GeolocationDialogComponent {
   public hideDialog(): void {
     this.geolocationDataService.setCollectGeolocationDataFormValue(null);
     this.collectGeolocationDataForm.reset();
-    this.isVisible = false;
     this.dialogClosed.emit();
   }
 

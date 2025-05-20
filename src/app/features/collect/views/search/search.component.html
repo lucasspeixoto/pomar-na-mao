@@ -12,7 +12,7 @@
         <div class="flex flex-col gap-4 justify-start items-start">
             <!-- Mobile Filters Button -->
             <div class="flex w-full justify-end md:hidden">
-                <p-button (click)="collectSearchFilterDialog = true" severity="secondary" label="Filtros" icon="pi pi-align-justify" />
+                <p-button (click)="collectSearchFilterDialog.set(true)" severity="secondary" label="Filtros" icon="pi pi-align-justify" />
             </div>
 
             <app-search-map id="mapRef" class="w-full h-full" />
@@ -22,5 +22,5 @@
     </div>
 </div>
 
-<app-search-filters-dialog [isVisible]="collectSearchFilterDialog" (dialogClosed)="collectSearchFilterDialog = false" />
+<app-search-filters-dialog [isVisible]="collectSearchFilterDialog()" (dialogClosed)="collectSearchFilterDialog.set(false)" />
 

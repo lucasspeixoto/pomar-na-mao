@@ -1,4 +1,4 @@
-import { Component, inject, Input, effect, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, effect, output, ChangeDetectionStrategy, input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
@@ -46,7 +46,7 @@ const PROVIDERS = [MessageService];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ObservationDialogComponent {
-  @Input() public isVisible!: boolean;
+  public isVisible = input.required<boolean>();
 
   public dialogClosed = output<void>();
 
@@ -70,7 +70,6 @@ export class ObservationDialogComponent {
   public hideDialog(): void {
     this.observationDataService.setCollectObservationDataFormValue(initialCollectObservationData);
     this.collectObservationDataForm.reset();
-    this.isVisible = false;
     this.dialogClosed.emit();
   }
 

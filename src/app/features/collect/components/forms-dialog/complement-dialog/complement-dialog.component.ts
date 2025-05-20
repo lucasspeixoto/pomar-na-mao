@@ -1,4 +1,4 @@
-import { Component, inject, Input, effect, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, effect, output, ChangeDetectionStrategy, input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
@@ -13,7 +13,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import {
   createCollectComplementDataForm,
-  type CollectComplementDataFormValue,
+  CollectComplementDataFormValue,
 } from '@collectCs/collect-complement-data-form';
 import { lycheeVarieties } from '@collectCs/lychee-varieties';
 import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
@@ -44,7 +44,7 @@ const PROVIDERS = [MessageService];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplementDialogComponent {
-  @Input() public isVisible!: boolean;
+  public isVisible = input.required<boolean>();
 
   public dialogClosed = output<void>();
 
@@ -72,7 +72,6 @@ export class ComplementDialogComponent {
   public hideDialog(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
     this.collectComplementDataForm.reset();
-    this.isVisible = false;
     this.dialogClosed.emit();
   }
 

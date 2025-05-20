@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { AccordionModule } from 'primeng/accordion';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -41,11 +41,11 @@ const COMMON = [FormsModule];
   imports: [...PRIMENG, ...COMMON, SearchFiltersComponent],
   template: `
     <p-dialog
-      [(visible)]="isVisible"
+      [visible]="isVisible()"
       [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
       [style]="{ width: '50vw' }"
       [draggable]="true"
-      [showHeader]="false"
+      [showHeader]="true"
       [closable]="true"
       (onHide)="hideDialog()">
       <ng-template #content>
@@ -53,15 +53,21 @@ const COMMON = [FormsModule];
       </ng-template>
     </p-dialog>
   `,
+  styles: [
+    `
+      :host ::ng-deep .p-dialog-header {
+        padding: 12px 12px 0 0;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFiltersDialogComponent {
-  @Input() public isVisible!: boolean;
+  public isVisible = input.required<boolean>();
 
-  @Output() dialogClosed = new EventEmitter<void>();
+  public dialogClosed = output<void>();
 
   public hideDialog(): void {
-    this.isVisible = false;
     this.dialogClosed.emit();
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { SearchFiltersDialogComponent } from '@collectC/search/search-filters-dialog/search-filters-dialog.component';
@@ -33,7 +33,7 @@ const COMMON = [NgStyle];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
-  public collectSearchFilterDialog = false;
+  public collectSearchFilterDialog = signal(false);
 
   constructor() {
     setTimeout(() => {

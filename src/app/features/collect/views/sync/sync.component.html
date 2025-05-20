@@ -148,13 +148,19 @@
     </div>
 }
 
-<app-geolocation-dialog (updateDataHandler)="updateGeolocationDataHandler()" [isVisible]="geolocationDialog"
-    (dialogClosed)="geolocationDialog = false" />
+<app-geolocation-dialog
+    [isVisible]="geolocationDialog()"
+    (updateDataHandler)="updateGeolocationDataHandler()"
+    (dialogClosed)="geolocationDialog.set(false);" />
 
-<app-complement-dialog (updateDataHandler)="updateComplementDataHandler()" [isVisible]="complementDialog"
-    (dialogClosed)="complementDialog = false" />
+<app-complement-dialog
+    [isVisible]="complementDialog()"
+    (updateDataHandler)="updateComplementDataHandler()"
+    (dialogClosed)="complementDialog.set(false)" />
 
-<app-observation-dialog (updateDataHandler)="updateObservationDataHandler()" [isVisible]="observationDialog"
-    (dialogClosed)="observationDialog = false" />
+<app-observation-dialog
+    [isVisible]="observationDialog()"
+    (updateDataHandler)="updateObservationDataHandler()"
+    (dialogClosed)="observationDialog.set(false)" />
 
 <p-confirmdialog [style]="{ width: '450px' }" />

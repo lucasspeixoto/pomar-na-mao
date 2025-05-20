@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -130,11 +130,11 @@ export class SyncComponent implements OnInit {
 
   public selectedCollects: PlantData[] | null = [];
 
-  public complementDialog = false;
+  public complementDialog = signal(false);
 
-  public observationDialog = false;
+  public observationDialog = signal(false);
 
-  public geolocationDialog = false;
+  public geolocationDialog = signal(false);
 
   public ngOnInit(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
@@ -181,7 +181,7 @@ export class SyncComponent implements OnInit {
 
     this.geolocationFormService.setCollectGeolocationDataFormValue(geolocationFormData);
 
-    this.geolocationDialog = true;
+    this.geolocationDialog.set(true);
   }
 
   public showComplementDialog(collect: PlantData): void {
@@ -201,7 +201,7 @@ export class SyncComponent implements OnInit {
 
     this.complementDataService.setCollectComplementDataFormValue(complementDataForm);
 
-    this.complementDialog = true;
+    this.complementDialog.set(true);
   }
 
   public showObservationDialog(collect: PlantData): void {
@@ -241,7 +241,7 @@ export class SyncComponent implements OnInit {
 
     this.observationDataService.setCollectObservationDataFormValue(observationDataForm);
 
-    this.observationDialog = true;
+    this.observationDialog.set(true);
   }
 
   public async syncSelectedCollects(): Promise<void> {

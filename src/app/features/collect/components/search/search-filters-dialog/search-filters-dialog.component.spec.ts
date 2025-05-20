@@ -1,20 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SearchFiltersDialogComponent } from './search-filters-dialog.component';
 import { MessageService } from 'primeng/api';
+import { Component } from '@angular/core';
+import { DialogModule } from 'primeng/dialog';
+
+@Component({
+  imports: [DialogModule],
+  template: `<p-dialog [visible]="isVisible" />`,
+})
+class TestHostComponent {
+  isVisible = false;
+}
 
 describe('SearchFiltersDialogComponent', () => {
-  let component: SearchFiltersDialogComponent;
-  let fixture: ComponentFixture<SearchFiltersDialogComponent>;
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchFiltersDialogComponent],
+      imports: [TestHostComponent],
       providers: [MessageService],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchFiltersDialogComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
+    component.isVisible = false;
     fixture.detectChanges();
   });
 
