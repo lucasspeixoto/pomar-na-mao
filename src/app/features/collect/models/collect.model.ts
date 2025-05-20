@@ -1,4 +1,4 @@
-import { User } from 'src/app/models/user.model';
+import { User } from 'src/app/shared/models/user.model';
 
 export interface PlantData {
   id: string;

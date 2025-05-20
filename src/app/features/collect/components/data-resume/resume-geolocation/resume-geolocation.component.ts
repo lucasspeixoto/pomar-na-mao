@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
-import { GeolocationService } from '../../../services/geolocation/geolocation.service';
+import { GeolocationService } from '@collectS/geolocation/geolocation.service';
 
 @Component({
   selector: 'app-resume-geolocation',

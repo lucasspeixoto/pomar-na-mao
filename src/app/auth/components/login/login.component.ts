@@ -7,13 +7,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
 import { MessageService } from 'primeng/api';
-import { messages } from '../../../utils/messages';
-import { createLoginForm, LoginFormValue } from '../../constants/login-form';
-import { AuthenticationService } from '../../services/authentication.service';
-import { LoadingService } from '../../../services/loading/loading.service';
-import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message.component';
-import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
-import { InstallPwaButtonComponent } from '../../../components/install-pwa-button/install-pwa-button.component';
+import { createLoginForm, type LoginFormValue } from '@authCs/login-form';
+import { AuthenticationService } from '@authS/authentication.service';
+import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
+import { InstallPwaButtonComponent } from '@sharedC/install-pwa-button/install-pwa-button.component';
+import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
+import { LoadingService } from '@sharedS/loading/loading.service';
+import { messages } from '@utils/messages';
 
 @Component({
   selector: 'app-login',

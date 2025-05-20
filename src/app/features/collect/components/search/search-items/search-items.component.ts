@@ -1,6 +1,5 @@
-import { LayoutService } from './../../../../../layout/service/layout.service';
-import { ComplementDialogComponent } from './../../forms-dialog/complement-dialog/complement-dialog.component';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -14,17 +13,17 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
-import { CollectService } from '../../../services/collect/collect.service';
-import { ObservationDialogComponent } from '../../forms-dialog/observation-dialog/observation-dialog.component';
-import { PlantData } from '../../../models/collect.model';
-import { ObservationDataService } from '../../../services/observation-data/observation-data.service';
-import { ComplementDataService } from '../../../services/complement-data/complement-data.service';
 import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
-import { CollectComplementDataFormValue } from '../../../constants/collect-complement-data-form';
-
-import { NgClass } from '@angular/common';
-import { SearchFiltersService } from '../../../services/search-filters/search-filters.service';
+import { ComplementDialogComponent } from '@collectC/forms-dialog/complement-dialog/complement-dialog.component';
+import { ObservationDialogComponent } from '@collectC/forms-dialog/observation-dialog/observation-dialog.component';
+import type { CollectComplementDataFormValue } from '@collectCs/collect-complement-data-form';
+import type { PlantData } from '@collectM/collect.model';
+import { CollectService } from '@collectS/collect/collect.service';
+import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
+import { ObservationDataService } from '@collectS/observation-data/observation-data.service';
+import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
+import { LayoutService } from '@layoutS/layout.service';
 
 const PRIMENG = [
   TableModule,

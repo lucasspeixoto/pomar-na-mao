@@ -7,7 +7,7 @@ import { ComplementDataComponent } from '../../../collect/components/complement-
 import { GeolocationComponent } from '../../../collect/components/geolocation/geolocation.component';
 import { CollectService } from '../../../collect/services/collect/collect.service';
 import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
-import { OfflineLoginButtonComponent } from '../../../../components/offline-login-button/offline-login-button.component';
+import { OfflineLoginButtonComponent } from '../../../../shared/components/offline-login-button/offline-login-button.component';
 
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];
 

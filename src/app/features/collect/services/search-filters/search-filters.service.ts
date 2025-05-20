@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { CollectService } from '../collect/collect.service';
-import { checkCurrencCollectFilters } from '../../utils/localstorage';
-import type { CollectFilters } from '../../models/collect-filters.model';
+import { CollectFilters } from '@collectM/collect-filters.model';
+import { CollectService } from '@collectS/collect/collect.service';
+import { checkCurrencCollectFilters } from '@collectU/localstorage';
 
 @Injectable({
   providedIn: 'root',

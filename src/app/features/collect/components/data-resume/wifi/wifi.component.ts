@@ -1,5 +1,5 @@
-import { ConnectivityService } from '../../../../../services/connectivity/connectivity.service';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-wifi',

@@ -5,7 +5,7 @@ import { filter, Subscription } from 'rxjs';
 
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppFooterComponent } from './app.footer.component';
-import { LayoutService } from '../service/layout.service';
+import { LayoutService } from '../services/layout.service';
 import { AppTopbarComponent } from './app.topbar.component';
 
 @Component({

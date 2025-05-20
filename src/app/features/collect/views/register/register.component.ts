@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { ButtonModule } from 'primeng/button';
-import { GeolocationComponent } from '../../components/geolocation/geolocation.component';
-import { ObservationDataComponent } from '../../components/observation-data/observation-data.component';
-import { checkCurrencStorageStep } from '../../utils/localstorage';
-import { CollectService } from '../../services/collect/collect.service';
-import { ComplementDataComponent } from '../../components/complement-data/complement-data.component';
+import { ComplementDataComponent } from '@collectC/complement-data/complement-data.component';
+import { GeolocationComponent } from '@collectC/geolocation/geolocation.component';
+import { ObservationDataComponent } from '@collectC/observation-data/observation-data.component';
+import { CollectService } from '@collectS/collect/collect.service';
+import { checkCurrencStorageStep } from '@collectU/localstorage';
 
 const PRIMENG = [StepsModule, ButtonModule];
 

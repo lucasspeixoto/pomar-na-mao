@@ -1,6 +1,6 @@
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collect.service';
+import { AsyncPipe } from '@angular/common';
+import { IndexDbCollectService } from '@sharedS/index-db/index-db-collect.service';
 
 @Component({
   selector: 'app-available-to-sync',

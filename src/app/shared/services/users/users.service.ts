@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { User } from 'src/app/models/user.model';
-import { injectSupabase } from 'src/app/utils/inject-supabase';
-import { LoadingService } from '../loading/loading.service';
+import { LoadingService } from '@sharedS/loading/loading.service';
+import { User } from '@supabase/supabase-js';
+import { injectSupabase } from '@utils/inject-supabase';
 
 @Injectable({
   providedIn: 'root',

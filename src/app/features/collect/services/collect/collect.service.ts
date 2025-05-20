@@ -1,15 +1,15 @@
 import { ObservationDataService } from './../observation-data/observation-data.service';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
-import { GeolocationService } from '../geolocation/geolocation.service';
-import { PlantData } from '../../models/collect.model';
-import { ComplementDataService } from '../complement-data/complement-data.service';
-import { LoadingService } from 'src/app/services/loading/loading.service';
-import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collect.service';
-import { injectSupabase } from 'src/app/utils/inject-supabase';
-import { checkCurrencStorageStep } from '../../utils/localstorage';
 import { MessageService } from 'primeng/api';
-import { initialCollectObservationData } from '../../constants/collect-observation-data-form';
+import { initialCollectObservationData } from '@collectCs/collect-observation-data-form';
+import { PlantData } from '@collectM/collect.model';
+import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
+import { GeolocationService } from '@collectS/geolocation/geolocation.service';
+import { checkCurrencStorageStep } from '@collectU/localstorage';
+import { IndexDbCollectService } from '@sharedS/index-db/index-db-collect.service';
+import { LoadingService } from '@sharedS/loading/loading.service';
+import { injectSupabase } from '@utils/inject-supabase';
 
 @Injectable({
   providedIn: 'root',

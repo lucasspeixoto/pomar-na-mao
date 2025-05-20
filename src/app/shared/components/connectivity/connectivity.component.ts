@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
-import { ConnectivityService } from '../../services/connectivity/connectivity.service';
-import { NotificationService } from '../../services/notification/notification.service';
+import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
+import { NotificationService } from '@sharedS/notification/notification.service';
 
 @Component({
   selector: 'app-connectivity',

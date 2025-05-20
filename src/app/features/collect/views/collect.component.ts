@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DataResumeComponent } from '../components/data-resume/data-resume.component';
-import { FarmRegionService } from '../services/farm-region/farm-region.service';
+import { DataResumeComponent } from '@collectC/data-resume/data-resume.component';
+import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
 
 @Component({
   selector: 'app-collect',

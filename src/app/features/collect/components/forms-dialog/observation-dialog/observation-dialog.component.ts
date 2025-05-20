@@ -12,13 +12,13 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
-import { lycheeVarieties } from '../../../constants/lychee-varieties';
-import { ObservationDataService } from '../../../services/observation-data/observation-data.service';
 import {
   createCollectObservationDataForm,
   initialCollectObservationData,
   CollectObservationDataFormValue,
-} from '../../../constants/collect-observation-data-form';
+} from '@collectCs/collect-observation-data-form';
+import { lycheeVarieties } from '@collectCs/lychee-varieties';
+import { ObservationDataService } from '@collectS/observation-data/observation-data.service';
 
 const PRIMENG = [
   InputMaskModule,

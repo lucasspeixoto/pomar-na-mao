@@ -2,7 +2,7 @@ import { DialogModule } from 'primeng/dialog';
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { InstallPwaServiceService } from 'src/app/services/install-pwa/install-pwa-service.service';
+import { InstallPwaServiceService } from 'src/app/shared/services/install-pwa/install-pwa-service.service';
 import { TooltipModule } from 'primeng/tooltip';
 
 @Component({

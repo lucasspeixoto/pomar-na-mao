@@ -1,10 +1,6 @@
 import { Component, inject, Input, effect, output, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import {
-  createCollectComplementDataForm,
-  CollectComplementDataFormValue,
-} from '../../../constants/collect-complement-data-form';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -15,9 +11,13 @@ import { MessageModule } from 'primeng/message';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
-import { CustomValidationMessageComponent } from '../../../../../components/custom-validation-message/custom-validation-message.component';
-import { lycheeVarieties } from '../../../constants/lychee-varieties';
-import { ComplementDataService } from '../../../services/complement-data/complement-data.service';
+import {
+  createCollectComplementDataForm,
+  type CollectComplementDataFormValue,
+} from '@collectCs/collect-complement-data-form';
+import { lycheeVarieties } from '@collectCs/lychee-varieties';
+import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
+import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
 
 const PRIMENG = [
   InputMaskModule,
