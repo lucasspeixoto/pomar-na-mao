@@ -14,12 +14,14 @@ export class FarmRegionService {
 
   public messageService = inject(MessageService);
 
-  public farmRegions = signal<FarmRegion[]>([]);
+  private _farmRegions = signal<FarmRegion[]>([]);
 
-  public numberOfFarmRegionPoints = computed(() => this.farmRegions().length);
+  public farmRegions = this._farmRegions.asReadonly();
+
+  public numberOfFarmRegionPoints = computed(() => this._farmRegions().length);
 
   public numberOfRegions = computed(() => {
-    const uniqueRegions = new Set(this.farmRegions().map(item => item.region));
+    const uniqueRegions = new Set(this._farmRegions().map(item => item.region));
 
     return uniqueRegions.size;
   });
@@ -32,12 +34,12 @@ export class FarmRegionService {
       .select('*')
       .order('region', { ascending: true });
 
-    if (!error) this.farmRegions.set(data);
+    if (!error) this._farmRegions.set(data);
 
     this.loadingService.isLoading.set(false);
 
     if (error) {
-      this.farmRegions.set([]);
+      this._farmRegions.set([]);
       this.messageService.add({
         severity: 'warn',
         summary: 'Erro',

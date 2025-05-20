@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LayoutService } from './app/layout/service/layout.service';
@@ -21,6 +22,7 @@ import { UpdateService } from './app/services/update/update.service';
       <app-loading [isLoading]="loadingService.isLoading()" />
       <app-connectivity />
     </div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   public layoutService = inject(LayoutService);

@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
-import { CollectObservationDataComponent } from '../../../collect/components/collect-observation-data/collect-observation-data.component';
-import { CollectComplementDataComponent } from '../../../collect/components/collect-complement-data/collect-complement-data.component';
-import { CollectGeolocationComponent } from '../../../collect/components/collect-geolocation/collect-geolocation.component';
+import { ObservationDataComponent } from '../../../collect/components/observation-data/observation-data.component';
+import { ComplementDataComponent } from '../../../collect/components/complement-data/complement-data.component';
+import { GeolocationComponent } from '../../../collect/components/geolocation/geolocation.component';
 import { CollectService } from '../../../collect/services/collect/collect.service';
 import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
 import { OfflineLoginButtonComponent } from '../../../../components/offline-login-button/offline-login-button.component';
@@ -12,9 +12,9 @@ import { OfflineLoginButtonComponent } from '../../../../components/offline-logi
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];
 
 const COMPONENTS = [
-  CollectGeolocationComponent,
-  CollectComplementDataComponent,
-  CollectObservationDataComponent,
+  GeolocationComponent,
+  ComplementDataComponent,
+  ObservationDataComponent,
   OfflineLoginButtonComponent,
 ];
 
@@ -29,6 +29,7 @@ const COMPONENTS = [
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfflineCollectComponent {
   public collectService = inject(CollectService);

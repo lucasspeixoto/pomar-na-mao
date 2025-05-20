@@ -1,6 +1,6 @@
 import { DialogModule } from 'primeng/dialog';
 import { NgIf } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { InstallPwaServiceService } from 'src/app/services/install-pwa/install-pwa-service.service';
 import { TooltipModule } from 'primeng/tooltip';
@@ -10,6 +10,7 @@ import { TooltipModule } from 'primeng/tooltip';
   imports: [NgIf, ButtonModule, TooltipModule, DialogModule],
   templateUrl: './install-pwa-button.component.html',
   styleUrl: './install-pwa-button.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InstallPwaButtonComponent implements OnInit {
   public showButton = false;
