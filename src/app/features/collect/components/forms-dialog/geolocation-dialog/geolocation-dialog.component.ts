@@ -8,13 +8,13 @@ import { MessageModule } from 'primeng/message';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
-import { CustomValidationMessageComponent } from '../../../../../components/custom-validation-message/custom-validation-message.component';
-import { GeolocationFormService } from '../../../services/geolocation-form/geolocation-form.service';
+import { InputTextModule } from 'primeng/inputtext';
 import {
   createCollectGeolocationDataForm,
   type CollectGeolocationDataFormValue,
-} from '../../../constants/collect-geolocation-data-form';
-import { InputTextModule } from 'primeng/inputtext';
+} from '@collectCs/collect-geolocation-data-form';
+import { GeolocationFormService } from '@collectS/geolocation-form/geolocation-form.service';
+import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
 
 const PRIMENG = [
   InputTextModule,

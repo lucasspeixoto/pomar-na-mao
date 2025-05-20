@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { AppLayoutComponent } from './app/layout/component/app.layout.component';
-import { NotfoundComponent } from './app/pages/notfound/notfound';
-import { isLoggedGuard } from './app/auth/guards/is-logged/is-logged.guard';
+import { AppLayoutComponent } from '@layoutC/app.layout.component';
+import { NotfoundComponent } from '@sharedP/notfound/notfound';
+import { isLoggedGuard } from '@authG/is-logged/is-logged.guard';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

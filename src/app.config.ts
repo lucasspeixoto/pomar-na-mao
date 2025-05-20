@@ -18,7 +18,7 @@ import { appRoutes } from './app.routes';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ptBrTranslation } from './app/utils/pt-br';
-import { LayoutService } from './app/layout/service/layout.service';
+import { LayoutService } from '@layoutS/layout.service';
 import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {

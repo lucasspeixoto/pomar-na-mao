@@ -13,11 +13,11 @@ import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
-import { FarmRegionService } from '../../../services/farm-region/farm-region.service';
-import { SelectModule, type SelectChangeEvent } from 'primeng/select';
-import { OCCURRENCES } from '../../../constants/occurrences';
 import { SliderModule } from 'primeng/slider';
-import { SearchFiltersService } from '../../../services/search-filters/search-filters.service';
+import { SelectModule, SelectChangeEvent } from 'primeng/select';
+import { OCCURRENCES } from '@collectCs/occurrences';
+import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
+import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
 
 interface SelectField {
   name: string;

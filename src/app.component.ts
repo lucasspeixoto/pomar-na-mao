@@ -2,15 +2,15 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Component, inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LayoutService } from './app/layout/service/layout.service';
+import { LayoutService } from './app/layout/services/layout.service';
 import { isPlatformBrowser } from '@angular/common';
-import { LoadingComponent } from './app/pages/loading/loading.component';
-import { LoadingService } from './app/services/loading/loading.service';
+import { LoadingComponent } from './app/shared/pages/loading/loading.component';
+import { LoadingService } from './app/shared/services/loading/loading.service';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
-import { ConnectivityComponent } from './app/components/connectivity/connectivity.component';
-import { NotificationService } from './app/services/notification/notification.service';
-import { UpdateService } from './app/services/update/update.service';
+import { ConnectivityComponent } from './app/shared/components/connectivity/connectivity.component';
+import { NotificationService } from './app/shared/services/notification/notification.service';
+import { UpdateService } from './app/shared/services/update/update.service';
 
 @Component({
   selector: 'app-root',

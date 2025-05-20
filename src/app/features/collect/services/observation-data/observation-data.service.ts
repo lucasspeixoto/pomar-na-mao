@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import {
   CollectObservationDataFormValue,
   initialCollectObservationData,
-} from '../../../../features/collect/constants/collect-observation-data-form';
+} from '@collectCs/collect-observation-data-form';
 
 @Injectable({
   providedIn: 'root',

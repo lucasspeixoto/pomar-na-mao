@@ -1,8 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { FarmRegion } from '@collectM/farm-region.model';
+import { LoadingService } from '@sharedS/loading/loading.service';
+import { injectSupabase } from '@utils/inject-supabase';
 import { MessageService } from 'primeng/api';
-import { LoadingService } from '../../../../services/loading/loading.service';
-import { injectSupabase } from '../../../../utils/inject-supabase';
-import { FarmRegion } from '../../models/farm-region.model';
 
 @Injectable({
   providedIn: 'root',

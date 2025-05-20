@@ -7,8 +7,8 @@ import { MessageService } from 'primeng/api';
 import * as CryptoJS from 'crypto-js';
 
 import { LoadingService } from '../loading/loading.service';
-import { environment } from '../../../environments/environment';
-import { PlantData } from '../../features/collect/models/collect.model';
+import type { PlantData } from '@collectM/collect.model';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root',

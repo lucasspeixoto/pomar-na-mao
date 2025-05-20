@@ -5,11 +5,11 @@ import { AppComponent } from './app.component';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import { LayoutService } from './app/layout/service/layout.service';
+import { LayoutService } from './app/layout/services/layout.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
-import { UpdateService } from './app/services/update/update.service';
+import { UpdateService } from '@sharedS/update/update.service';
 
 // Add mock SwUpdate
 const swUpdateMock = {

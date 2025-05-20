@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
+import { CollectGeolocationDataFormValue } from '@collectCs/collect-geolocation-data-form';
 
 @Injectable({
   providedIn: 'root',

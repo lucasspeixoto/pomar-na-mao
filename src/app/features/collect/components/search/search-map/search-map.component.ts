@@ -6,12 +6,12 @@ import {
   OnInit,
   effect,
 } from '@angular/core';
-import type * as Leaflet from 'leaflet';
-import { GeolocationService } from '../../../services/geolocation/geolocation.service';
 import { ButtonModule } from 'primeng/button';
-import { FarmRegionService } from '../../../services/farm-region/farm-region.service';
-import { CollectService } from '../../../services/collect/collect.service';
-import { SearchFiltersService } from '../../../services/search-filters/search-filters.service';
+import type * as Leaflet from 'leaflet';
+import { CollectService } from '@collectS/collect/collect.service';
+import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
+import { GeolocationService } from '@collectS/geolocation/geolocation.service';
+import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
 
 declare let L: typeof Leaflet;
 

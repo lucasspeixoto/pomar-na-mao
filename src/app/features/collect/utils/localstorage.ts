@@ -1,4 +1,4 @@
-import type { CollectFilters } from '../models/collect-filters.model';
+import { CollectFilters } from '../models/collect-filters.model';
 
 export const checkCurrencStorageStep = (): number => {
   return localStorage.getItem('POMAR-NA-MAO:COLLECT-STEP')

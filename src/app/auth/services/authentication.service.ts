@@ -1,12 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { CollectService } from '@collectS/collect/collect.service';
+import { LoadingService } from '@sharedS/loading/loading.service';
 import { Session } from '@supabase/supabase-js';
+import { injectSupabase } from '@utils/inject-supabase';
+import { messages } from '@utils/messages';
 import { MessageService } from 'primeng/api';
-import { injectSupabase } from '../../utils/inject-supabase';
-import { messages } from '../../utils/messages';
 import { iUser } from '../models/user.model';
-import { LoadingService } from '../../services/loading/loading.service';
-import { CollectService } from '../../features/collect/services/collect/collect.service';
 
 @Injectable({
   providedIn: 'root',

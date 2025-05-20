@@ -6,7 +6,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
 import { AuthenticationService } from './../../auth/services/authentication.service';
-import { LayoutService } from '../service/layout.service';
+import { LayoutService } from '../services/layout.service';
 
 @Component({
   selector: 'app-topbar',

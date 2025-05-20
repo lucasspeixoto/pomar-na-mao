@@ -6,7 +6,7 @@ import { CollectService } from './collect.service';
 import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MessageService } from 'primeng/api';
-import { IndexDbCollectService } from 'src/app/services/index-db/index-db-collect.service';
+import { IndexDbCollectService } from 'src/app/shared/services/index-db/index-db-collect.service';
 
 describe('CollectService', () => {
   let service: CollectService;

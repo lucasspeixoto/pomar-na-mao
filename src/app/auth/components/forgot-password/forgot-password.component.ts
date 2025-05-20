@@ -6,17 +6,14 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
-import { messages } from '../../../utils/messages';
-import { AuthenticationService } from '../../services/authentication.service';
-import { LoadingService } from '../../../services/loading/loading.service';
+import { messages } from '@utils/messages';
+import { AuthenticationService } from '@authS/authentication.service';
+import { LoadingService } from '@sharedS/loading/loading.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message.component';
-import {
-  createForgotPasswordForm,
-  ForgotPasswordFormValue,
-} from '../../constants/forgot-password-form';
-import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
+import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
+import { createForgotPasswordForm, ForgotPasswordFormValue } from '@authCs/forgot-password-form';
+import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
 
 @Component({
   selector: 'app-forgot-password',

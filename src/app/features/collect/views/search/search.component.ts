@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { SearchFiltersDialogComponent } from '../../components/search/search-filters-dialog/search-filters-dialog.component';
-import { SearchFiltersComponent } from '../../components/search/search-filters/search-filters.component';
-import { SearchItemsComponent } from '../../components/search/search-items/search-items.component';
-import { SearchMapComponent } from '../../components/search/search-map/search-map.component';
+import { SearchFiltersDialogComponent } from '@collectC/search/search-filters-dialog/search-filters-dialog.component';
+import { SearchFiltersComponent } from '@collectC/search/search-filters/search-filters.component';
+import { SearchItemsComponent } from '@collectC/search/search-items/search-items.component';
+import { SearchMapComponent } from '@collectC/search/search-map/search-map.component';
 
 const PRIMENG = [ButtonModule];
 

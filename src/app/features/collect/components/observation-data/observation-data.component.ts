@@ -14,13 +14,13 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
+import { PopoverModule } from 'primeng/popover';
 import {
   createCollectObservationDataForm,
   CollectObservationDataFormValue,
-} from '../../constants/collect-observation-data-form';
-import { ObservationDataService } from '../../services/observation-data/observation-data.service';
-import { OBSERVARTION_INFO_TEXT } from '../../constants/texts';
-import { PopoverModule } from 'primeng/popover';
+} from '@collectCs/collect-observation-data-form';
+import { OBSERVARTION_INFO_TEXT } from '@collectCs/texts';
+import { ObservationDataService } from '@collectS/observation-data/observation-data.service';
 
 const PRIMENG = [
   InputMaskModule,

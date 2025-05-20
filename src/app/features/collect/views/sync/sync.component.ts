@@ -8,29 +8,28 @@ import { TagModule } from 'primeng/tag';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { FluidModule } from 'primeng/fluid';
+import { NgClass } from '@angular/common';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgClass } from '@angular/common';
-import { IndexDbCollectService } from '../../../../services/index-db/index-db-collect.service';
-import { ExcelService } from '../../../../services/excel/excel.service';
-import { PlantData } from '../../models/collect.model';
-import { ShortTimestampPipe } from '../../../../pipes/short-timestamp/short-timestamp.pipe';
-
-import { ComplementDataService } from '../../services/complement-data/complement-data.service';
-import { ObservationDataService } from '../../services/observation-data/observation-data.service';
+import { CheckboxModule, CheckboxChangeEvent } from 'primeng/checkbox';
+import { ComplementDialogComponent } from '@collectC/forms-dialog/complement-dialog/complement-dialog.component';
+import { GeolocationDialogComponent } from '@collectC/forms-dialog/geolocation-dialog/geolocation-dialog.component';
+import { ObservationDialogComponent } from '@collectC/forms-dialog/observation-dialog/observation-dialog.component';
+import { CollectComplementDataFormValue } from '@collectCs/collect-complement-data-form';
+import { CollectGeolocationDataFormValue } from '@collectCs/collect-geolocation-data-form';
 import {
   initialCollectObservationData,
   type CollectObservationDataFormValue,
-} from '../../constants/collect-observation-data-form';
-import { CollectService } from '../../services/collect/collect.service';
-import { GeolocationFormService } from '../../services/geolocation-form/geolocation-form.service';
-import { CheckboxModule, CheckboxChangeEvent } from 'primeng/checkbox';
-import { CollectComplementDataFormValue } from '../../constants/collect-complement-data-form';
-import { CollectGeolocationDataFormValue } from '../../constants/collect-geolocation-data-form';
-import { LayoutService } from 'src/app/layout/service/layout.service';
-import { ComplementDialogComponent } from '../../components/forms-dialog/complement-dialog/complement-dialog.component';
-import { GeolocationDialogComponent } from '../../components/forms-dialog/geolocation-dialog/geolocation-dialog.component';
-import { ObservationDialogComponent } from '../../components/forms-dialog/observation-dialog/observation-dialog.component';
+} from '@collectCs/collect-observation-data-form';
+import { PlantData } from '@collectM/collect.model';
+import { CollectService } from '@collectS/collect/collect.service';
+import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
+import { GeolocationFormService } from '@collectS/geolocation-form/geolocation-form.service';
+import { ObservationDataService } from '@collectS/observation-data/observation-data.service';
+import { LayoutService } from '@layoutS/layout.service';
+import { ExcelService } from '@sharedS/excel/excel.service';
+import { IndexDbCollectService } from '@sharedS/index-db/index-db-collect.service';
+import { ShortTimestampPipe } from '@sharedPp/short-timestamp/short-timestamp.pipe';
 
 const PRIMENG = [
   TableModule,

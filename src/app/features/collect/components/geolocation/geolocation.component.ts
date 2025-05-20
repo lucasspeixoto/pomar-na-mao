@@ -7,13 +7,13 @@ import {
   type AfterViewInit,
 } from '@angular/core';
 import { CardModule } from 'primeng/card';
-
-import type * as Leaflet from 'leaflet';
-import { GeolocationService } from '../../services/geolocation/geolocation.service';
-import { EpochToTimePipe } from 'src/app/pipes/epoch-to-time/epoch-to-time.pipe';
 import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
-import { GEOLOCATION_INFO_TEXT } from '../../constants/texts';
+
+import type * as Leaflet from 'leaflet';
+import { GEOLOCATION_INFO_TEXT } from '@collectCs/texts';
+import { GeolocationService } from '@collectS/geolocation/geolocation.service';
+import { EpochToTimePipe } from '@sharedPp/epoch-to-time/epoch-to-time.pipe';
 
 declare let L: typeof Leaflet;
 

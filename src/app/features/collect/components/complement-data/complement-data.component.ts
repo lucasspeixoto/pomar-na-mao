@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { debounceTime, tap } from 'rxjs';
+import { MessageModule } from 'primeng/message';
+import { PopoverModule } from 'primeng/popover';
+import { InputNumber } from 'primeng/inputnumber';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -10,20 +15,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
-import { CustomValidationMessageComponent } from '../../../../components/custom-validation-message/custom-validation-message.component';
 import {
   createCollectComplementDataForm,
-  CollectComplementDataFormValue,
-} from '../../constants/collect-complement-data-form';
-import { CollectService } from '../../services/collect/collect.service';
-import { ComplementDataService } from '../../services/complement-data/complement-data.service';
-import { MessageModule } from 'primeng/message';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { debounceTime, tap } from 'rxjs';
-import { lycheeVarieties } from '../../constants/lychee-varieties';
-import { COMPLEMENT_INFO_TEXT } from '../../constants/texts';
-import { PopoverModule } from 'primeng/popover';
-import { InputNumber } from 'primeng/inputnumber';
+  type CollectComplementDataFormValue,
+} from '@collectCs/collect-complement-data-form';
+import { lycheeVarieties } from '@collectCs/lychee-varieties';
+import { COMPLEMENT_INFO_TEXT } from '@collectCs/texts';
+import { CollectService } from '@collectS/collect/collect.service';
+import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
+import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
 
 const PRIMENG = [
   InputMaskModule,
