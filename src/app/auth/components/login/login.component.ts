@@ -11,9 +11,9 @@ import { messages } from '../../../utils/messages';
 import { createLoginForm, LoginFormValue } from '../../constants/login-form';
 import { AuthenticationService } from '../../services/authentication.service';
 import { LoadingService } from '../../../services/loading/loading.service';
-import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message';
+import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message.component';
 import { ConnectivityService } from '../../../services/connectivity/connectivity.service';
-import { InstallPwaButtonComponent } from 'src/app/components/install-pwa-button/install-pwa-button.component';
+import { InstallPwaButtonComponent } from '../../../components/install-pwa-button/install-pwa-button.component';
 
 @Component({
   selector: 'app-login',

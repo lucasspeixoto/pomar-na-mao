@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { LoadingService } from '../../../services/loading/loading.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message';
+import { CustomValidationMessageComponent } from '../../../components/custom-validation-message/custom-validation-message.component';
 import {
   createForgotPasswordForm,
   ForgotPasswordFormValue,

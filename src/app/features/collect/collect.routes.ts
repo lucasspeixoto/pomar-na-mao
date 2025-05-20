@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { CollectRegisterComponent } from './views/collect-register/collect-register.component';
-import { CollectSearchComponent } from './views/collect-search/collect-search.component';
-import { CollectSyncComponent } from './views/collect-sync/collect-sync.component';
+import { RegisterComponent } from './views/register/register.component';
+import { SearchComponent } from './views/search/search.component';
+import { SyncComponent } from './views/sync/sync.component';
 
 export default [
-  { path: 'cadastrar', component: CollectRegisterComponent },
-  { path: 'consultar', component: CollectSearchComponent },
-  { path: 'sincronizar', component: CollectSyncComponent },
+  { path: 'cadastrar', component: RegisterComponent },
+  { path: 'consultar', component: SearchComponent },
+  { path: 'sincronizar', component: SyncComponent },
 ] as Routes;

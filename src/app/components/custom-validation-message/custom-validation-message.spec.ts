@@ -8,7 +8,7 @@ import {
   FormsModule,
   FormGroupDirective,
 } from '@angular/forms';
-import { CustomValidationMessageComponent } from './custom-validation-message';
+import { CustomValidationMessageComponent } from './custom-validation-message.component';
 import { MessageModule } from 'primeng/message';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -118,17 +118,4 @@ describe('CustomValidationMessageComponent', () => {
     expect(errorMessages.length).toBe(1);
     expect(maxLengthElement.textContent).toContain('Este campo deve ter no máximo 10 caracteres!');
   });
-
-  /* it('should show pattern error message', () => {
-    component.control.setValidators([Validators.pattern('^[a-z]+$')]);
-    component.control.updateValueAndValidity();
-    component.control.setValue('INVALID FIELD');
-    component.control.markAsDirty();
-    fixture.detectChanges();
-
-    const errorMessages = fixture.nativeElement.querySelectorAll('#messages');
-    const patternLengthElement = fixture.nativeElement.querySelector('#pattern');
-    expect(errorMessages.length).toBe(1);
-    expect(patternLengthElement.textContent).toContain('Padrão inválido!');
-  }); */
 });
