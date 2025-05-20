@@ -58,11 +58,11 @@
     }
 
     <app-complement-dialog (updateDataHandler)="updateComplementDataHandler()"
-        [isVisible]="complementDialog"
-        (dialogClosed)="complementDialog = false" />
+        [isVisible]="complementDialog()"
+        (dialogClosed)="complementDialog.set(false)" />
 
     <app-observation-dialog (updateDataHandler)="updateObservationDataHandler()"
-        [isVisible]="observationDialog"
-        (dialogClosed)="observationDialog = false" />
+        [isVisible]="observationDialog()"
+        (dialogClosed)="observationDialog.set(false)" />
 
 </section>
