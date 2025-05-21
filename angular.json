@@ -43,6 +43,10 @@
                                 ]
                             }
                         },
+                        "allowedCommonJsDependencies": [
+                            "crypto-js",
+                            "ws"
+                        ],
                         "scripts": []
                     },
                     "configurations": {
