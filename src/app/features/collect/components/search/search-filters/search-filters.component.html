@@ -1,5 +1,4 @@
 <div class="flex flex-col h-full justify-between" id="container">
-
     <div
         class="w-full mt-4 flex md:flex-col flex-row flex-wrap items-start gap-4">
         <span class="text-2xl font-semibold opacity-55">Filtros</span>
@@ -34,7 +33,7 @@
             <span
                 class="text-md md:text-xl text-surface-400 mb-0.5">Ocorrências</span>
 
-            <p-select appendTo="container" [options]="occurrences"
+            <p-select appendTo="body"  [options]="occurrences"
                 (onChange)="changeOccurrenceHandler($event)"
                 [(ngModel)]="collectSearchFiltersService.selectedOccurrences"
                 placeholder="Selecione a ocorrência" [editable]="true"

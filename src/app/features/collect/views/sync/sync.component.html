@@ -14,7 +14,7 @@
                 (click)="exportCSV()" />
         </ng-template>
 
-        <ng-template #end>
+        <ng-template #end >
             <p-button size="small" severity="danger" label="Excluir" icon="pi pi-trash" class="mr-2"
                 [disabled]="!selectedCollects || !selectedCollects.length" (click)="deleteSelectedCollects()" />
             <p-button size="small" [disabled]="!selectedCollects || !selectedCollects.length" label="Sincronizar Item" icon="pi pi-sync"

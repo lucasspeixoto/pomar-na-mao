@@ -42,11 +42,17 @@ const COMMON = [FormsModule];
   template: `
     <p-dialog
       [visible]="isVisible()"
-      [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-      [style]="{ width: '50vw' }"
-      [draggable]="true"
+      [breakpoints]="{
+        '1800px': '50vw',
+        '1600px': '50vw',
+        '800px': '70vw',
+        '650px': '80vw',
+        '575px': '90vw',
+      }"
+      [style]="{ width: '100%', height: '100vh' }"
       [showHeader]="true"
       [closable]="true"
+      [maximizable]="true"
       (onHide)="hideDialog()">
       <ng-template #content>
         <app-search-filters (hideDialog)="hideDialog()" />
