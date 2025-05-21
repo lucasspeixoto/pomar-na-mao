@@ -12,6 +12,7 @@ import { CollectService } from '@collectS/collect/collect.service';
 import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
 import { GeolocationService } from '@collectS/geolocation/geolocation.service';
 import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
+import { DetectionService } from '@sharedS/detection/detection.service';
 
 declare let L: typeof Leaflet;
 
@@ -31,15 +32,19 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   public farmRegionService = inject(FarmRegionService);
 
+  public detectionService = inject(DetectionService);
+
+  public filteredCollectData = this.collectService.filteredCollectData;
+
   public userMarker!: Leaflet.Marker;
 
   public clickedPointMarker!: Leaflet.Marker;
 
   public map2!: Leaflet.Map;
 
-  private polygonLayer!: Leaflet.Polygon | null;
+  public polygonLayer!: Leaflet.Polygon | null;
 
-  private plottedPoints: Leaflet.CircleMarker[] = [];
+  public plottedPoints: Leaflet.CircleMarker[] = [];
 
   constructor() {
     effect(() => {
@@ -106,7 +111,11 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   public plotRegionPolygon(): void {
-    this.removePolygon();
+    if (this.polygonLayer) {
+      this.polygonLayer.remove();
+      this.polygonLayer = null;
+      return;
+    }
 
     const selectedRegion = this.collectSearchFiltersService.selectedRegion();
 
@@ -148,7 +157,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
           const clickedLat = e.latlng.lat;
           const clickedLng = e.latlng.lng;
           console.log(`Lat: ${clickedLat}, Lng: ${clickedLng}`);
-          console.log(`Item: ${item.id}`);
 
           marker.bindPopup(`#${item.id.split('-')[0]}`).openPopup();
         });
@@ -163,5 +171,20 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     });
 
     this.plottedPoints = [];
+  }
+
+  public detectNearestCollect(): void {
+    const nearestCollect = this.detectionService.detectNearestCollect();
+
+    L.circleMarker([nearestCollect!.latitude, nearestCollect!.longitude], {
+      radius: 4,
+      color: 'red',
+      fillColor: 'red',
+      fillOpacity: 0.8,
+    }).addTo(this.map2);
+  }
+
+  public reloadPage(): void {
+    window.location.reload();
   }
 }

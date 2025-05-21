@@ -3,12 +3,12 @@
 @let collects = collectService.numberOfFilteredCollects();
 
 <div class="mx-1 mt-4 flex flex-wrap w-full items-center justify-center gap-8">
-    <p-button [disabled]="collects === 0"
-         severity="warn" label="Coletas"
-        (click)="plotCollectedPoints()" />
-    <p-button [disabled]="!collectSearchFiltersService.selectedRegion()"
-         severity="info" label="Região"
+    <p-button icon="pi pi-wifi" [disabled]="collects === 0"
+         severity="warn" label="Detectar"
+        (click)="detectNearestCollect()" />
+    <p-button icon="pi pi-map" [disabled]="!collectSearchFiltersService.selectedRegion()"
+         severity="info" [label]="this.polygonLayer ? 'Esconder Região' : 'Ver Região'"
         (click)="plotRegionPolygon()" />
-    <p-button  severity="help" label="Posição"
-        (click)="startMapRender()" />
+    <p-button icon="pi pi-map-marker"  severity="help" label="Posicionar"
+        (click)="reloadPage()" />
 </div>
