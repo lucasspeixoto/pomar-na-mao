@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { CollectService } from '@collectS/collect/collect.service';
 import { GeolocationService } from '@collectS/geolocation/geolocation.service';
-import { twoPointsDistance, type Point } from '../../utils/geolocation-math';
+import { twoPointsDistance, Point } from '../../utils/geolocation-math';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { MessageService } from 'primeng/api';
 import { PlantData } from '@collectM/collect.model';
