@@ -33,6 +33,8 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   public userMarker!: Leaflet.Marker;
 
+  public clickedPointMarker!: Leaflet.Marker;
+
   public map2!: Leaflet.Map;
 
   private polygonLayer!: Leaflet.Polygon | null;
@@ -113,18 +115,14 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
       .filter(item => item.region === selectedRegion)
       .map(item => [item.latitude, item.longitude]) as [number, number][];
 
-    if (this.polygonLayer) {
-      this.polygonLayer.remove();
-    }
-
     if (this.map2) {
       this.polygonLayer = L.polygon(polygonCoordinates, {
         color: '#3f4046',
         fillColor: '#3f4046',
         fillOpacity: 0.4,
-      }).addTo(this.map2);
-
-      this.polygonLayer.bindPopup(`Região ${this.collectSearchFiltersService.selectedRegion()}`);
+      })
+        .addTo(this.map2)
+        .bringToBack();
     }
   }
 
@@ -138,19 +136,22 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   public plotCollectedPoints(): void {
     this.removePlottedPoints();
 
-    const latLongItems = this.collectService
-      .filteredCollectData()
-      .map(item => [item.latitude, item.longitude]);
-
-    latLongItems.forEach(([latitude, longitude]) => {
-      const marker = L.circleMarker([latitude, longitude], {
+    this.collectService.filteredCollectData().forEach(item => {
+      const marker = L.circleMarker([item.latitude, item.longitude], {
         radius: 4,
         color: '#a3e635',
         fillColor: '#a3e635',
         fillOpacity: 0.8,
       })
         .addTo(this.map2)
-        .bindPopup(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        .on('click', (e: L.LeafletMouseEvent) => {
+          const clickedLat = e.latlng.lat;
+          const clickedLng = e.latlng.lng;
+          console.log(`Lat: ${clickedLat}, Lng: ${clickedLng}`);
+          console.log(`Item: ${item.id}`);
+
+          marker.bindPopup(`#${item.id.split('-')[0]}`).openPopup();
+        });
 
       this.plottedPoints.push(marker);
     });

@@ -17,8 +17,8 @@ import { CardModule } from 'primeng/card';
 import { TooltipModule } from 'primeng/tooltip';
 import { ComplementDialogComponent } from '@collectC/forms-dialog/complement-dialog/complement-dialog.component';
 import { ObservationDialogComponent } from '@collectC/forms-dialog/observation-dialog/observation-dialog.component';
-import type { CollectComplementDataFormValue } from '@collectCs/collect-complement-data-form';
-import type { PlantData } from '@collectM/collect.model';
+import { CollectComplementDataFormValue } from '@collectCs/collect-complement-data-form';
+import { PlantData } from '@collectM/collect.model';
 import { CollectService } from '@collectS/collect/collect.service';
 import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
 import { ObservationDataService } from '@collectS/observation-data/observation-data.service';
@@ -76,6 +76,8 @@ export class SearchItemsComponent {
   public observationDialog = signal(false);
 
   public selectedCollectId = signal<string | null>(null);
+
+  public numberOfOccurrences = signal(0);
 
   public showComplementDialog(collect: PlantData): void {
     const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =
@@ -151,5 +153,43 @@ export class SearchItemsComponent {
     await this.collectService.updateAPlantCollectObservationDataHandler(this.selectedCollectId()!);
     this.collectSearchFiltersService.applyFilters();
     this.observationDialog.set(false);
+  }
+
+  public computeNumberOfOccurrences(collect: PlantData): void {
+    const {
+      stick,
+      broken_branch,
+      vine_growing,
+      burnt_branch,
+      struck_by_lightning,
+      drill,
+      anthill,
+      in_experiment,
+      weeds_in_the_basin,
+      fertilization_or_manuring,
+      mites,
+      thrips,
+      empty_collection_box_near,
+    } = collect;
+
+    const observationDataForm = {
+      stick,
+      brokenBranch: broken_branch,
+      vineGrowing: vine_growing,
+      burntBranch: burnt_branch,
+      struckByLightning: struck_by_lightning,
+      drill,
+      anthill,
+      inExperiment: in_experiment,
+      weedsInTheBasin: weeds_in_the_basin,
+      fertilizationOrManuring: fertilization_or_manuring,
+      mites,
+      thrips,
+      emptyCollectionBoxNear: empty_collection_box_near,
+    };
+
+    this.numberOfOccurrences.set(
+      Object.values(observationDataForm).filter(value => value === true).length
+    );
   }
 }

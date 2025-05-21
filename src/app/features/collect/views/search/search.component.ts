@@ -5,8 +5,9 @@ import { SearchFiltersDialogComponent } from '@collectC/search/search-filters-di
 import { SearchFiltersComponent } from '@collectC/search/search-filters/search-filters.component';
 import { SearchItemsComponent } from '@collectC/search/search-items/search-items.component';
 import { SearchMapComponent } from '@collectC/search/search-map/search-map.component';
+import { DividerModule } from 'primeng/divider';
 
-const PRIMENG = [ButtonModule];
+const PRIMENG = [ButtonModule, DividerModule];
 
 const COMPONENTS = [
   SearchFiltersComponent,

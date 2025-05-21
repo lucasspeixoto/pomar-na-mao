@@ -14,10 +14,10 @@
         <div
             style="box-shadow: 0px 6px 20px rgba(132,204,22,0.2);"
             [ngClass]="{ 'dark-background': layoutService.isDarkTheme(), 'light-background': !layoutService.isDarkTheme()}"
-            class="cursor-pointer w-[150px] rounded-lg p-1/2 sm:p-1 gap-1 bg-slate-300 dark:bg-slate-800">
+            class="cursor-pointer w-[170px] rounded-lg p-1/2 sm:p-1 bg-slate-300 dark:bg-slate-800">
             <div class="py-2 px-0 flex justify-between items-center">
                 <span
-                    class="label-medium font-bold text-surface-500 text-sm md:text-md">
+                    class="font-bold text-surface-700 text-md">
                     #{{ collect.id.split("-")[0] }}...</span>
                 @if(collect?.region) {
                 <div
@@ -31,22 +31,27 @@
             </div>
             <div
                 class="pl-1 my-2 gap-2 flex flex-col items-start justify-start">
-                <span class="text-xs sm:text-md"> Massa: <strong>{{collect.mass}}
+                <span class="text-md sm:text-lg"> Massa: <strong>{{collect.mass}}
                         Kg</strong> </span>
-                <span class="text-xs sm:text-md"> Ocorrências: <strong>3</strong></span>
+                <span class="text-md sm:text-lg items-center"> Ocorrências: <strong>
+                    <p-button [pTooltip]="numberOfOccurrences().toString()" tooltipPosition="left" (mouseenter)="computeNumberOfOccurrences(collect)"
+                    icon="pi pi-calculator"
+                    severity="info"
+                    [text]="true" />
+                </strong></span>
             </div>
 
             <div
-                class="px-0.5 mt-4 gap-2 flex flex-wrap items-start justify-between">
-                <span class="text-sm"> {{collect.latitude.toFixed(5)}}</span>
-                <span class="text-sm"> {{collect.longitude.toFixed(5)}}</span>
+                class="px-0.5 mt-4 gap-1 flex flex-wrap items-start justify-between">
+                <span class="text-md"> {{collect.latitude.toFixed(5)}}</span>
+                <span class="text-md"> {{collect.longitude.toFixed(5)}}</span>
             </div>
 
             <div
                 class="px-0.5 gap-2 flex flex-wrap items-start justify-end">
                 <p-button pTooltip="Dados complementares" tooltipPosition="left" (click)="showComplementDialog(collect)"
                     icon="pi pi-search-plus"
-                    severity="info" [rounded]="true"
+                    severity="danger" [rounded]="true"
                     [text]="true" />
                 <p-button pTooltip="Observações" tooltipPosition="left" (click)="showObservationDialog(collect)"
                     icon="pi pi-eye" severity="warn"
