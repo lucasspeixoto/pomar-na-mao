@@ -5,35 +5,76 @@
     "compilerOptions": {
         "baseUrl": "./",
         "paths": {
-            "@utils/*": ["./src/app/utils/*"],
-            "@env/*": ["./src/environments/*"],
-            "@sharedC/*": ["./src/app/shared/components/*"],
-            "@sharedS/*": ["./src/app/shared/services/*"],
-            "@sharedP/*": ["./src/app/shared/pages/*"],
-            "@sharedCs/*": ["./src/app/shared/constants/*"],
-            "@sharedPp/*": ["./src/app/shared/pipes/*"],
-
-            "@layoutC/*": ["./src/app/layout/components/*"],
-            "@layoutS/*": ["./src/app/layout/services/*"],
-
-            "@collectC/*": ["./src/app/features/collect/components/*"],
-            "@collectS/*": ["./src/app/features/collect/services/*"],
-            "@collectV/*": ["./src/app/features/collect/views/*"],
-            "@collectCs/*": ["./src/app/features/collect/constants/*"],
-            "@collectM/*": ["./src/app/features/collect/models/*"],
-            "@collectU/*": ["./src/app/features/collect/utils/*"],
-
-            "@offcollectV/*": ["./src/app/features/offline-collect/views/*"],
-
-            "@authS/*": ["./src/app/auth/services/*"],
-            "@authC/*": ["./src/app/auth/components/*"],
-            "@authV/*": ["./src/app/auth/view/*"],
-            "@authCs/*": ["./src/app/auth/constants/*"],
-            "@authG/*": ["./src/app/auth/guards/*"]
-            },
+            "@utils/*": [
+                "./src/app/utils/*"
+            ],
+            "@env/*": [
+                "./src/environments/*"
+            ],
+            "@sharedC/*": [
+                "./src/app/shared/components/*"
+            ],
+            "@sharedS/*": [
+                "./src/app/shared/services/*"
+            ],
+            "@sharedP/*": [
+                "./src/app/shared/pages/*"
+            ],
+            "@sharedCs/*": [
+                "./src/app/shared/constants/*"
+            ],
+            "@sharedPp/*": [
+                "./src/app/shared/pipes/*"
+            ],
+            "@layoutC/*": [
+                "./src/app/layout/components/*"
+            ],
+            "@layoutS/*": [
+                "./src/app/layout/services/*"
+            ],
+            "@collectC/*": [
+                "./src/app/features/collect/components/*"
+            ],
+            "@collectS/*": [
+                "./src/app/features/collect/services/*"
+            ],
+            "@collectV/*": [
+                "./src/app/features/collect/views/*"
+            ],
+            "@collectCs/*": [
+                "./src/app/features/collect/constants/*"
+            ],
+            "@collectM/*": [
+                "./src/app/features/collect/models/*"
+            ],
+            "@collectU/*": [
+                "./src/app/features/collect/utils/*"
+            ],
+            "@offcollectV/*": [
+                "./src/app/features/offline-collect/views/*"
+            ],
+            "@authS/*": [
+                "./src/app/auth/services/*"
+            ],
+            "@authC/*": [
+                "./src/app/auth/components/*"
+            ],
+            "@authV/*": [
+                "./src/app/auth/view/*"
+            ],
+            "@authCs/*": [
+                "./src/app/auth/constants/*"
+            ],
+            "@authG/*": [
+                "./src/app/auth/guards/*"
+            ]
+        },
         "outDir": "./dist/out-tsc",
         "strict": true,
-        "types": ["jasmine", "node"],
+        "types": [
+            "jasmine",
+            "node"
+        ],
         "noImplicitOverride": true,
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,

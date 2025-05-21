@@ -148,9 +148,9 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.collectService.filteredCollectData().forEach(item => {
       const marker = L.circleMarker([item.latitude, item.longitude], {
         radius: 4,
-        color: '#a3e635',
-        fillColor: '#a3e635',
-        fillOpacity: 0.8,
+        color: 'green',
+        fillColor: 'green',
+        fillOpacity: 1,
       })
         .addTo(this.map2)
         .on('click', (e: L.LeafletMouseEvent) => {
@@ -177,11 +177,13 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     const nearestCollect = this.detectionService.detectNearestCollect();
 
     L.circleMarker([nearestCollect!.latitude, nearestCollect!.longitude], {
-      radius: 4,
-      color: 'red',
-      fillColor: 'red',
-      fillOpacity: 0.8,
-    }).addTo(this.map2);
+      radius: 6,
+      color: '#a31a1f',
+      fillColor: '#a31a1f',
+      fillOpacity: 1,
+    })
+      .addTo(this.map2)
+      .bindPopup(`Coleta próxima: #${nearestCollect?.id.split('-')[0]}`);
   }
 
   public reloadPage(): void {
