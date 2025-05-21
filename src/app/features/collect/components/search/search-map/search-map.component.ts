@@ -46,6 +46,8 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   public plottedPoints: Leaflet.CircleMarker[] = [];
 
+  public nearestPoint!: Leaflet.CircleMarker | null;
+
   constructor() {
     effect(() => {
       if (this.collectService.filteredCollectData().length === 0) {
@@ -174,9 +176,14 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   }
 
   public detectNearestCollect(): void {
+    if (this.nearestPoint) {
+      this.nearestPoint.remove();
+      this.nearestPoint = null;
+    }
+
     const nearestCollect = this.detectionService.detectNearestCollect();
 
-    L.circleMarker([nearestCollect!.latitude, nearestCollect!.longitude], {
+    this.nearestPoint = L.circleMarker([nearestCollect!.latitude, nearestCollect!.longitude], {
       radius: 6,
       color: '#a31a1f',
       fillColor: '#a31a1f',
