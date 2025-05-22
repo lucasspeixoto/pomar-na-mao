@@ -24,6 +24,7 @@ import { ComplementDataService } from '@collectS/complement-data/complement-data
 import { ObservationDataService } from '@collectS/observation-data/observation-data.service';
 import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
 import { LayoutService } from '@layoutS/layout.service';
+import { OccurrencesPipe } from '../../../pipes/occurrences.pipe';
 
 const PRIMENG = [
   TableModule,
@@ -44,7 +45,7 @@ const PRIMENG = [
 
 const PROVIDERS = [MessageService, ConfirmationService];
 
-const COMPONENTS = [ComplementDialogComponent, ObservationDialogComponent];
+const COMPONENTS = [ComplementDialogComponent, ObservationDialogComponent, OccurrencesPipe];
 
 const COMMON = [NgClass];
 
@@ -153,43 +154,5 @@ export class SearchItemsComponent {
     await this.collectService.updateAPlantCollectObservationDataHandler(this.selectedCollectId()!);
     this.collectSearchFiltersService.applyFilters();
     this.observationDialog.set(false);
-  }
-
-  public computeNumberOfOccurrences(collect: PlantData): void {
-    const {
-      stick,
-      broken_branch,
-      vine_growing,
-      burnt_branch,
-      struck_by_lightning,
-      drill,
-      anthill,
-      in_experiment,
-      weeds_in_the_basin,
-      fertilization_or_manuring,
-      mites,
-      thrips,
-      empty_collection_box_near,
-    } = collect;
-
-    const observationDataForm = {
-      stick,
-      brokenBranch: broken_branch,
-      vineGrowing: vine_growing,
-      burntBranch: burnt_branch,
-      struckByLightning: struck_by_lightning,
-      drill,
-      anthill,
-      inExperiment: in_experiment,
-      weedsInTheBasin: weeds_in_the_basin,
-      fertilizationOrManuring: fertilization_or_manuring,
-      mites,
-      thrips,
-      emptyCollectionBoxNear: empty_collection_box_near,
-    };
-
-    this.numberOfOccurrences.set(
-      Object.values(observationDataForm).filter(value => value === true).length
-    );
   }
 }

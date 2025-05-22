@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DataResumeComponent } from '@collectC/data-resume/data-resume.component';
 import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
 
 @Component({
   selector: 'app-collect',
-  imports: [RouterModule, DataResumeComponent],
+  imports: [RouterModule],
   template: ` <section>
-    <div class="grid grid-cols-12 gap-2">
-      <app-data-resume class="hidden md:contents" />
-      <div class="col-span-12 mt-4">
+    <div class="grid grid-cols-12">
+      <!-- <app-data-resume class="hidden md:contents" /> -->
+      <div class="col-span-12 mt-4 md:mt-0">
         <router-outlet />
       </div>
     </div>

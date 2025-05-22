@@ -33,11 +33,7 @@
                 class="pl-1 my-2 gap-2 flex flex-col items-start justify-start">
                 <span class="text-md sm:text-lg"> Massa: <strong>{{collect.mass}}
                         Kg</strong> </span>
-                <span class="text-md sm:text-lg items-center"> Ocorrências: <strong>
-                    <p-button [pTooltip]="numberOfOccurrences().toString()" tooltipPosition="left" (mouseenter)="computeNumberOfOccurrences(collect)"
-                    icon="pi pi-calculator"
-                    severity="info"
-                    [text]="true" />
+                <span class="mr-1 text-md sm:text-lg items-center"> Ocorrências: {{collect | occurrences}}<strong>
                 </strong></span>
             </div>
 
