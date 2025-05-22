@@ -8,9 +8,8 @@ describe('InstallPwaButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InstallPwaButtonComponent]
-    })
-    .compileComponents();
+      imports: [InstallPwaButtonComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InstallPwaButtonComponent);
     component = fixture.componentInstance;

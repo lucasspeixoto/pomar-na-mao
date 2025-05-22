@@ -8,7 +8,7 @@ import { TagModule } from 'primeng/tag';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { FluidModule } from 'primeng/fluid';
-import { NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule, CheckboxChangeEvent } from 'primeng/checkbox';
@@ -53,11 +53,13 @@ const COMPONENTS = [
 
 const PROVIDERS = [MessageService, ConfirmationService, ShortTimestampPipe];
 
-const PIPES = [ShortTimestampPipe, NgClass];
+const PIPES = [ShortTimestampPipe];
+
+const COMMON = [NgClass, AsyncPipe];
 
 @Component({
   selector: 'app-sync',
-  imports: [...PRIMENG, ...COMPONENTS, ...PIPES],
+  imports: [...COMMON, ...PRIMENG, ...COMPONENTS, ...PIPES],
   templateUrl: './sync.component.html',
   providers: [...PROVIDERS],
   styles: [
@@ -128,6 +130,8 @@ export class SyncComponent implements OnInit {
 
   public totalCollectedData = this.indexDbCollectService.totalCollectedData;
 
+  public listAllCollects$ = this.indexDbCollectService.listAllCollects();
+
   public selectedCollects: PlantData[] | null = [];
 
   public complementDialog = signal(false);
@@ -139,8 +143,6 @@ export class SyncComponent implements OnInit {
   public ngOnInit(): void {
     this.complementDataService.setCollectComplementDataFormValue(null);
     this.observationDataService.setCollectObservationDataFormValue(initialCollectObservationData);
-
-    this.indexDbCollectService.listAllCollects();
   }
 
   public selectCollectHandler(event: CheckboxChangeEvent, id: string): void {

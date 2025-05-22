@@ -95,4 +95,8 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
+
+  public reloadPage(): void {
+    window.location.reload();
+  }
 }

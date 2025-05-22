@@ -1,9 +1,9 @@
-<div id="map2"></div>
-
 @let collects = collectService.numberOfFilteredCollects();
 
-<div class="mx-1 mt-4 flex flex-wrap w-full items-center justify-center gap-8">
-    <p-button icon="pi pi-wifi" [disabled]="collects === 0"
+<div class="mb-4 flex flex-wrap w-full items-center justify-center md:justify-between gap-8">
+    <span class="hidden md:block font-bold self-start md:text-xl dark:text-slate-300 text-slate-800">Exibição de coletas</span>
+    <div class="flex gap-2">
+        <p-button icon="pi pi-wifi" [disabled]="collects === 0"
          severity="warn" label="Detectar"
         (click)="detectNearestCollect()" />
     <p-button icon="pi pi-map" [disabled]="!collectSearchFiltersService.selectedRegion()"
@@ -11,4 +11,7 @@
         (click)="plotRegionPolygon()" />
     <p-button icon="pi pi-map-marker"  severity="help" label="Posicionar"
         (click)="reloadPage()" />
+    </div>
 </div>
+
+<div id="map2"></div>
