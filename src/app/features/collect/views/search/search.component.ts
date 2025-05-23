@@ -1,19 +1,14 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { SearchFiltersDialogComponent } from '@collectC/search/search-filters-dialog/search-filters-dialog.component';
 import { SearchFiltersComponent } from '@collectC/search/search-filters/search-filters.component';
 import { SearchItemsComponent } from '@collectC/search/search-items/search-items.component';
 import { SearchMapComponent } from '@collectC/search/search-map/search-map.component';
+import { DialogModule } from 'primeng/dialog';
 
-const PRIMENG = [ButtonModule];
+const PRIMENG = [ButtonModule, DialogModule];
 
-const COMPONENTS = [
-  SearchFiltersComponent,
-  SearchMapComponent,
-  SearchItemsComponent,
-  SearchFiltersDialogComponent,
-];
+const COMPONENTS = [SearchFiltersComponent, SearchMapComponent, SearchItemsComponent];
 
 const COMMON = [NgStyle];
 
@@ -28,12 +23,16 @@ const COMMON = [NgStyle];
           cursor: not-allowed;
         }
       }
+
+      :host ::ng-deep .p-dialog-header {
+        padding: 12px 12px 0 0;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent {
-  public collectSearchFilterDialog = signal(false);
+  public collectSearchFilterDialog = false;
 
   constructor() {
     setTimeout(() => {

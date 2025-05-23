@@ -1,5 +1,5 @@
 <section class="w-full h-full">
-    @let collects =  filteredCollectData();
+    @let collects = filteredCollectData();
 
     @if(collects.length === 0) {
         <div class="mt-8 w-full flex flex-col justify-center items-center gap-4">
@@ -11,9 +11,11 @@
         <div
         class="mx-1 mt-4 w-full min-h-[100px] gap-4 flex justify-between items-center flex-wrap ">
         @for(collect of collects; track collect.id) {
-        <div
-            style="box-shadow: 0px 6px 20px rgba(132,204,22,0.2);"
-            [ngClass]="{ 'dark-background': layoutService.isDarkTheme(), 'light-background': !layoutService.isDarkTheme()}"
+            <div
+            [ngClass]="{
+                'dark-background': layoutService.isDarkTheme(), 'light-background': !layoutService.isDarkTheme(),
+                'border-4 border-red-800 animate-pulse text-shadow-[0_35px_35px_rgb(132_204_22_/_0.25)]': detectionService.detectedColledtId() === collect.id
+                }"
             class="cursor-pointer w-[150px] sm:w-[170px] rounded-lg p-1/2 sm:p-1 bg-slate-300 dark:bg-slate-800">
             <div class="py-2 px-2 flex justify-between items-center">
                 <span

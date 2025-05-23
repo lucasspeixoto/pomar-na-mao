@@ -72,9 +72,7 @@ export class GeolocationService {
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 2000);
+    this.isLoading.set(false);
   }
 
   public getUserLatitudeAndLongitude(position: GeolocationPosition): number[] {
@@ -85,16 +83,16 @@ export class GeolocationService {
   public handleGeolocationError(error: GeolocationPositionError): void {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        console.warn('O usuário negou a solicitação de geolocalização.');
+        console.warn('O usuário negou a solicitação de geolocalização!');
         break;
       case error.POSITION_UNAVAILABLE:
-        console.warn('As informações de localização não estão disponíveis.');
+        console.warn('As informações de localização não estão disponíveis!');
         break;
       case error.TIMEOUT:
-        console.warn('A solicitação para obter a localização expirou.');
+        console.warn('A solicitação para obter a localização expirou!');
         break;
       default:
-        console.warn('Ocorreu um erro desconhecido.');
+        console.warn('Ocorreu um erro desconhecido!');
         break;
     }
   }
