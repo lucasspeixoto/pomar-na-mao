@@ -1,3 +1,4 @@
+import { DetectionService } from '@sharedS/detection/detection.service';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MessageService, ConfirmationService } from 'primeng/api';
@@ -67,6 +68,8 @@ export class SearchItemsComponent {
   public collectSearchFiltersService = inject(SearchFiltersService);
 
   public layoutService = inject(LayoutService);
+
+  public detectionService = inject(DetectionService);
 
   public filteredCollectData = this.collectService.filteredCollectData;
 

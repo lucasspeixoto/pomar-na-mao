@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  EventEmitter,
-  inject,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
 import { AccordionModule } from 'primeng/accordion';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -53,7 +46,7 @@ const COMMON = [FormsModule];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFiltersComponent {
-  @Output() hideDialog = new EventEmitter<void>();
+  public hideDialog = output<void>();
 
   public farmRegionService = inject(FarmRegionService);
 
@@ -77,5 +70,9 @@ export class SearchFiltersComponent {
   public clearFilters(): void {
     this.hideDialog.emit();
     this.collectSearchFiltersService.clearFilters();
+  }
+
+  public closeDialog(): void {
+    this.hideDialog.emit();
   }
 }

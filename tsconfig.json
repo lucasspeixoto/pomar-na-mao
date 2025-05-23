@@ -26,6 +26,9 @@
             "@sharedPp/*": [
                 "./src/app/shared/pipes/*"
             ],
+            "@sharedU/*": [
+                "./src/app/shared/utils/*"
+            ],
             "@layoutC/*": [
                 "./src/app/layout/components/*"
             ],

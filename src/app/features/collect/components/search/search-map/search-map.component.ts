@@ -5,25 +5,29 @@ import {
   AfterViewInit,
   OnInit,
   effect,
+  model,
+  OnDestroy,
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import { ToggleSwitchModule, type ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
 import type * as Leaflet from 'leaflet';
 import { CollectService } from '@collectS/collect/collect.service';
 import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
 import { GeolocationService } from '@collectS/geolocation/geolocation.service';
 import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
 import { DetectionService } from '@sharedS/detection/detection.service';
+import { FormsModule } from '@angular/forms';
 
 declare let L: typeof Leaflet;
 
 @Component({
   selector: 'app-search-map',
-  imports: [ButtonModule],
+  imports: [ButtonModule, ToggleSwitchModule, FormsModule],
   templateUrl: './search-map.component.html',
   styleUrl: './search-map.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchMapComponent implements OnInit, AfterViewInit {
+export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
   public geolocationService = inject(GeolocationService);
 
   public collectService = inject(CollectService);
@@ -35,6 +39,8 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
   public detectionService = inject(DetectionService);
 
   public filteredCollectData = this.collectService.filteredCollectData;
+
+  public isAutoDetectionModeOn = model(false);
 
   public userMarker!: Leaflet.Marker;
 
@@ -48,19 +54,24 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
 
   public nearestPoint!: Leaflet.CircleMarker | null;
 
+  public intervalId: NodeJS.Timeout | null = null;
+
+  public intervalOn = false;
+
   constructor() {
     effect(() => {
       if (this.collectService.filteredCollectData().length === 0) {
         this.removePlottedPoints();
         this.removePolygon();
+        this.removeNearestPoint();
       } else {
         this.plotCollectedPoints();
       }
     });
   }
 
-  public ngOnInit(): void {
-    this.loadGeolocationData();
+  public async ngOnInit(): Promise<void> {
+    await this.loadGeolocationData();
   }
 
   public ngAfterViewInit(): void {
@@ -175,13 +186,36 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     this.plottedPoints = [];
   }
 
-  public detectNearestCollect(): void {
+  public onChangeAutoDetectionMode(event: ToggleSwitchChangeEvent): void {
+    if (event.checked) {
+      if (this.intervalOn) {
+        // Stop interval
+        clearInterval(this.intervalId!);
+        this.intervalId = null;
+        this.intervalOn = false;
+      } else {
+        // Start interval
+        this.intervalId = setInterval(() => {
+          console.warn('Modo de detecção automática ativado');
+          this.detectNearestCollect(false);
+        }, 5000); // 5 seconds
+        this.intervalOn = true;
+      }
+    } else {
+      // Stop interval
+      clearInterval(this.intervalId!);
+      this.intervalId = null;
+      this.intervalOn = false;
+    }
+  }
+
+  public detectNearestCollect(showMessage: boolean): void {
     if (this.nearestPoint) {
       this.nearestPoint.remove();
       this.nearestPoint = null;
     }
 
-    const nearestCollect = this.detectionService.detectNearestCollect();
+    const nearestCollect = this.detectionService.detectNearestCollect(showMessage);
 
     this.nearestPoint = L.circleMarker([nearestCollect!.latitude, nearestCollect!.longitude], {
       radius: 6,
@@ -191,9 +225,34 @@ export class SearchMapComponent implements OnInit, AfterViewInit {
     })
       .addTo(this.map2)
       .bindPopup(`Coleta próxima: #${nearestCollect?.id.split('-')[0]}`);
+
+    this.detectionService.setDetectedColledtId(nearestCollect!.id);
+
+    this.bringNearestPointToFront(nearestCollect!.id);
+  }
+
+  public removeNearestPoint(): void {
+    if (this.nearestPoint) {
+      this.nearestPoint.remove();
+      this.nearestPoint = null;
+    }
+  }
+
+  public bringNearestPointToFront(id: string): void {
+    const index = this.filteredCollectData().findIndex(collect => collect.id === id);
+    if (index > -1) {
+      const [item] = this.filteredCollectData().splice(index, 1);
+      this.filteredCollectData().unshift(item);
+    }
   }
 
   public reloadPage(): void {
     window.location.reload();
+  }
+
+  public ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
