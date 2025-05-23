@@ -115,11 +115,15 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
         this.userMarker?.setLatLng([latitude, longitude]);
+
+        if (this.isAutoDetectionModeOn()) {
+          this.detectNearestCollect(false);
+        }
       },
       error => {
         this.geolocationService.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
     );
   }
 
@@ -188,25 +192,25 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public onChangeAutoDetectionMode(event: ToggleSwitchChangeEvent): void {
     if (event.checked) {
+      this.detectNearestCollect(false);
+    }
+    /* if (event.checked) {
       if (this.intervalOn) {
-        // Stop interval
         clearInterval(this.intervalId!);
         this.intervalId = null;
         this.intervalOn = false;
       } else {
-        // Start interval
         this.intervalId = setInterval(() => {
           console.warn('Modo de detecção automática ativado');
           this.detectNearestCollect(false);
-        }, 5000); // 5 seconds
+        }, 5000);
         this.intervalOn = true;
       }
     } else {
-      // Stop interval
       clearInterval(this.intervalId!);
       this.intervalId = null;
       this.intervalOn = false;
-    }
+    } */
   }
 
   public detectNearestCollect(showMessage: boolean): void {
