@@ -6,7 +6,7 @@ import { MessageModule } from 'primeng/message';
   selector: 'app-custom-validation-message',
   imports: [MessageModule],
   template: `
-    @if (control && control.invalid && control.dirty) {
+    @if (control && control.invalid && control.touched) {
       <ul id="messages">
         @if (control.hasError('required')) {
           <p-message severity="error" variant="simple" class="mt-[3px] flex items-start">
@@ -28,6 +28,18 @@ import { MessageModule } from 'primeng/message';
             <span id="maxLength">Este campo deve ter no máximo {{ maxLength }} caracteres!</span>
           </p-message>
         }
+
+        @if (control.hasError('min') && min) {
+          <p-message severity="error" variant="simple" class="mt-[3px] flex items-start">
+            <span id="min">Este campo deve ter {{ min }} como valor mínimo!</span>
+          </p-message>
+        }
+        @if (control.hasError('max') && max) {
+          <p-message severity="error" variant="simple" class="mt-[3px] flex items-start">
+            <span id="max">Este campo deve ter {{ max }} como valor máximo!</span>
+          </p-message>
+        }
+
         @if (control.hasError('pattern')) {
           <p-message severity="error" variant="simple" class="mt-[3px] flex items-start">
             <span id="pattern">Padrão inválido!</span>
@@ -54,6 +66,12 @@ export class CustomValidationMessageComponent {
 
   @Input({ required: false })
   public maxLength!: number;
+
+  @Input({ required: false })
+  public min!: number;
+
+  @Input({ required: false })
+  public max!: number;
 
   public controlContainer = inject(ControlContainer);
 

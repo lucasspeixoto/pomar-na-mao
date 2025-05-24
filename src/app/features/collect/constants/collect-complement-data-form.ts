@@ -32,7 +32,7 @@ export function createCollectComplementDataForm(): FormGroup<CollectComplementDa
       validators: [],
     }),
     region: new FormControl('', {
-      validators: [],
+      validators: [Validators.required, Validators.max(1000)],
     }),
     description: new FormControl('', {
       validators: [Validators.maxLength(150)],

@@ -1,5 +1,5 @@
 <section>
-    <p-dialog header="Editar Coordenadas" [modal]="true" [visible]="isVisible()" [style]="{ width: '25rem' }" (onHide)="hideDialog()">
+    <p-dialog header="Editar Coordenadas" [(visible)]="isVisible" [style]="{ width: '25rem' }" (onHide)="hideDialog()">
         <span class="p-text-secondary block mb-8">Altere aqui os dados</span>
         <form [formGroup]="collectGeolocationDataForm" class="form">
             <div class="flex flex-col justify-start gap-2 mb-4">

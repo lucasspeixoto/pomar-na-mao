@@ -23,10 +23,6 @@ const COMMON = [NgStyle];
           cursor: not-allowed;
         }
       }
-
-      :host ::ng-deep .p-dialog-header {
-        padding: 12px 12px 0 0;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
