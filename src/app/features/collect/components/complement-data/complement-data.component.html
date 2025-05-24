@@ -40,7 +40,7 @@
                         (kg)</label>
                     <p-inputnumber class="w-full" mode="decimal" formControlName="mass"
                     [useGrouping]="false" fluid />
-                    <app-custom-validation-message controlName="mass" />
+                    <app-custom-validation-message controlName="mass" [max]="1000" />
                 </div>
 
                 <div class="my-2">

@@ -25,7 +25,7 @@
                 <div
                     class="shadow-lg shadow-green-500/50 inline-flex items-center justify-center rounded-md w-10 h-7 bg-green-200 hover:bg-green-300 transition-all duration-200 text-sm dark:bg-green-800 dark:hover:bg-green-700">
                     <div
-                        class="text-green-900 dark:text-green-50 font-medium text-center px-1">
+                        class="w-auto h-auto text-green-900 dark:text-green-50 font-medium text-center px-1">
                         R-{{collect.region}}
                     </div>
                 </div>
@@ -60,12 +60,14 @@
     </div>
     }
 
-    <app-complement-dialog (updateDataHandler)="updateComplementDataHandler()"
-        [isVisible]="complementDialog()"
-        (dialogClosed)="complementDialog.set(false)" />
+    <app-complement-dialog
+        (updateDataHandler)="updateComplementDataHandler()"
+        [isVisible]="complementDialog"
+        (dialogClosed)="complementDialog = false" />
 
-    <app-observation-dialog (updateDataHandler)="updateObservationDataHandler()"
-        [isVisible]="observationDialog()"
-        (dialogClosed)="observationDialog.set(false)" />
+    <app-observation-dialog
+        (updateDataHandler)="updateObservationDataHandler()"
+        [isVisible]="observationDialog"
+        (dialogClosed)="observationDialog = false" />
 
 </section>

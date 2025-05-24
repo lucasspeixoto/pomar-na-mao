@@ -1,4 +1,13 @@
-import { Component, inject, effect, output, ChangeDetectionStrategy, input } from '@angular/core';
+import {
+  Component,
+  inject,
+  effect,
+  output,
+  ChangeDetectionStrategy,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
@@ -44,9 +53,9 @@ const PROVIDERS = [MessageService];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplementDialogComponent {
-  public isVisible = input.required<boolean>();
+  @Input() public isVisible!: boolean;
 
-  public dialogClosed = output<void>();
+  @Output() public dialogClosed = new EventEmitter<void>();
 
   public updateDataHandler = output<void>();
 

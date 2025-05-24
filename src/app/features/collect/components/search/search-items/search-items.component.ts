@@ -75,9 +75,9 @@ export class SearchItemsComponent {
 
   public numberOfFilteredCollects = this.collectService.numberOfFilteredCollects;
 
-  public complementDialog = signal(false);
+  public complementDialog = false;
 
-  public observationDialog = signal(false);
+  public observationDialog = false;
 
   public selectedCollectId = signal<string | null>(null);
 
@@ -102,7 +102,7 @@ export class SearchItemsComponent {
 
     this.selectedCollectId.set(id);
 
-    this.complementDialog.set(true);
+    this.complementDialog = true;
   }
 
   public showObservationDialog(collect: PlantData): void {
@@ -144,18 +144,18 @@ export class SearchItemsComponent {
 
     this.selectedCollectId.set(id);
 
-    this.observationDialog.set(true);
+    this.observationDialog = true;
   }
 
   public async updateComplementDataHandler(): Promise<void> {
     await this.collectService.updateAPlantCollectComplementDataHandler(this.selectedCollectId()!);
     this.collectSearchFiltersService.applyFilters();
-    this.complementDialog.set(false);
+    this.complementDialog = false;
   }
 
   public async updateObservationDataHandler(): Promise<void> {
     await this.collectService.updateAPlantCollectObservationDataHandler(this.selectedCollectId()!);
     this.collectSearchFiltersService.applyFilters();
-    this.observationDialog.set(false);
+    this.observationDialog = false;
   }
 }
