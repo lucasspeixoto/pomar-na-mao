@@ -14,107 +14,22 @@ import { InstallPwaButtonComponent } from '@sharedC/install-pwa-button/install-p
 import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { messages } from '@utils/messages';
+import { ToolbarServicesComponent } from '@authC/toolbar-services/toolbar-services.component';
+
+const PRIMENG = [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule];
+
+const COMPONENTS = [
+  CustomValidationMessageComponent,
+  InstallPwaButtonComponent,
+  ToolbarServicesComponent,
+];
+
+const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
 @Component({
   selector: 'app-login',
-  imports: [
-    ButtonModule,
-    CheckboxModule,
-    InputTextModule,
-    PasswordModule,
-    FormsModule,
-    RouterModule,
-    RippleModule,
-    ReactiveFormsModule,
-    CustomValidationMessageComponent,
-    InstallPwaButtonComponent,
-  ],
-  template: `
-    <section>
-      @if (connectivityService.isOnline()) {
-        <app-install-pwa-button />
-      }
-      <div
-        class="container bg-surface-50 dark:bg-surface-950 flex items-center justify-center min-h-screen min-w-[100vw] overflow-hidden">
-        <div class="w-full flex flex-col items-center justify-center">
-          <div class="w-[95%] sm:w-[400px]">
-            <div class="bg-surface-0 dark:bg-surface-900 py-6 px-4 sm:px-10 rounded-2xl">
-              <div class="text-center mb-8">
-                <div class="text-surface-900 dark:text-surface-0 text-3xl font-medium mb-4">
-                  Bem vindo
-                </div>
-                <span class="text-muted-color font-medium">Faça login para continuar</span>
-              </div>
-
-              <form [formGroup]="loginForm">
-                <div class="my-4">
-                  <label
-                    for="emailField"
-                    class="block text-surface-900 dark:text-surface-0 text-xl font-medium mb-2"
-                    >Email</label
-                  >
-                  <input
-                    pInputText
-                    id="emailField"
-                    type="text"
-                    placeholder="Endereço de Email"
-                    class="w-full mb-2"
-                    formControlName="email" />
-                  <app-custom-validation-message id="emailErrorMessage" controlName="email" />
-                </div>
-
-                <div class="my-4">
-                  <label
-                    for="passwordField"
-                    class="block text-surface-900 dark:text-surface-0 font-medium text-xl mb-2"
-                    >Senha
-                  </label>
-                  <p-password
-                    id="passwordField"
-                    formControlName="password"
-                    placeholder="Senha"
-                    [toggleMask]="true"
-                    styleClass="mb-2"
-                    [fluid]="true"
-                    [feedback]="false">
-                  </p-password>
-
-                  <app-custom-validation-message
-                    id="passwordErrorMessage"
-                    controlName="password"
-                    [minLength]="3" />
-                </div>
-
-                <div class="flex items-center justify-between mt-2 mb-8 gap-8">
-                  <span>
-                    <span
-                      class="text-sm sm:text-base underline font-bold text-right cursor-pointer text-blue-400"
-                      routerLink="/coleta-offline"
-                      >Coletar
-                    </span>
-                    📦
-                  </span>
-                  <span
-                    routerLink="/lembrar-senha"
-                    class="text-sm sm:text-base font-medium hover:underline no-underline ml-2 text-right cursor-pointer text-primary"
-                    >Esqueceu a senha?</span
-                  >
-                </div>
-              </form>
-              <div class="w-full flex justify-center text-center">
-                <p-button
-                  [disabled]="!connectivityService.isOnline()"
-                  (click)="loginHandler()"
-                  id="loginButton"
-                  label="Entrar">
-                </p-button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  `,
+  imports: [...PRIMENG, ...COMPONENTS, ...COMMON],
+  templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
