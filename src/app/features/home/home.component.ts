@@ -9,6 +9,24 @@ import { servicesItems, type Service } from './constants/services';
   selector: 'app-home',
   imports: [CommonModule, FormsModule, RouterModule, InputTextModule],
   templateUrl: `./home.component.html`,
+  styles: [
+    `
+      .card-background {
+        background-image: url('/assets/images/card-wave.png');
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+      }
+
+      .card-icon {
+        font-size: 2rem;
+
+        @media (max-width: 768px) {
+          font-size: 1.3rem;
+        }
+      }
+    `,
+  ],
 })
 export class HomeComponent {
   public searchBar = model('');
