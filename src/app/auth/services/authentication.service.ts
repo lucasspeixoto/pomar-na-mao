@@ -49,7 +49,7 @@ export class AuthenticationService {
     //this.loadUserData(); Load desnecessário visto que ocorre no isLoggedGuard
 
     setTimeout(() => {
-      this.router.navigateByUrl('/inicio/coleta/cadastrar');
+      this.router.navigateByUrl('/app/inicio');
 
       this.collectService.resetCollectData(); // Reset para não ter interferência nos steps de coleta online e offline
 

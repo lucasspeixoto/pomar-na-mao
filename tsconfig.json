@@ -70,7 +70,10 @@
             ],
             "@authG/*": [
                 "./src/app/auth/guards/*"
-            ]
+            ],
+            "@home/*": [
+                "./src/app/features/home/*"
+            ],
         },
         "outDir": "./dist/out-tsc",
         "strict": true,
