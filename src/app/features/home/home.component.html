@@ -13,10 +13,10 @@
             <div *ngFor="let item of filteredServicesItems"
                 class="select-none cursor-pointer rounded-2xl p-3 h-36 w-36 md:h-48 md:w-48 bg-gradient-to-br shadow flex flex-col justify-between hover:shadow-xl transition-shadow duration-200"
                 [ngClass]="{
-                  'from-yellow-300 to-white': item.color === 'yellow',
-                  'from-blue-300 to-white': item.color === 'blue',
-                  'from-red-300 to-white': item.color === 'red',
-                  'from-green-300 to-white': item.color === 'green'
+                  'from-yellow-500 to-yellow-100': item.color === 'yellow',
+                  'from-blue-500 to-blue-100': item.color === 'blue',
+                  'from-red-500 to-red-100': item.color === 'red',
+                  'from-green-500 to-green-100': item.color === 'green'
                 }" [routerLink]="item.routerLink">
                 <div>
                     <div class="text-xl md:text-3xl font-bold mb-2" [ngClass]="{
