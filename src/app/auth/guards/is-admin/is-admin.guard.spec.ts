@@ -48,6 +48,6 @@ describe('isAdminGuard', () => {
 
     // Assert
     expect(result).toBe(false);
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/inicio/coleta/cadastrar');
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/app/inicio');
   });
 });

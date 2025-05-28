@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-toolbar-services',
+  selector: 'app-toolbar-infos',
   imports: [Toolbar, AvatarModule, ButtonModule, RouterLink],
   template: `
     <p-toolbar
@@ -20,7 +20,7 @@ import { RouterLink } from '@angular/router';
           <i
             class="pi pi-box opacity-80 hover:opacity-100"
             style="font-size: 1.2rem; color: green"></i>
-          <span class="hover:underline text-xs text-gray-950">Coletar</span>
+          <span class="hover:underline font-medium text-gray-950">Coletar</span>
         </div>
         <!-- Detectar -->
         <div class="cursor-pointer flex flex-col items-center gap-2">
@@ -40,5 +40,18 @@ import { RouterLink } from '@angular/router';
     </p-toolbar>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [
+    `
+      .container {
+        position: fixed;
+        top: 12px;
+        right: -8px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+    `,
+  ],
 })
-export class ToolbarServicesComponent {}
+export class ToolbarInfosComponent {}

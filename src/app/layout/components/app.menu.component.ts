@@ -36,6 +36,12 @@ export class AppMenuComponent implements OnInit {
         visible: true,
         items: [
           {
+            label: 'Início',
+            visible: this.isAdmin,
+            icon: 'pi pi-fw pi-home',
+            routerLink: ['/app/inicio'],
+          },
+          {
             label: 'Coleta',
             visible: this.isAdmin,
             icon: 'pi pi-fw pi-check-square',
@@ -44,19 +50,19 @@ export class AppMenuComponent implements OnInit {
                 label: 'Cadastrar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-database',
-                routerLink: ['/inicio/coleta/cadastrar'],
+                routerLink: ['/app/coleta/cadastrar'],
               },
               {
                 label: 'Sincronizar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-sync',
-                routerLink: ['/inicio/coleta/sincronizar'],
+                routerLink: ['/app/coleta/sincronizar'],
               },
               {
                 label: 'Consultar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-search-plus',
-                routerLink: ['/inicio/coleta/consultar'],
+                routerLink: ['/app/coleta/consultar'],
               },
             ],
           },

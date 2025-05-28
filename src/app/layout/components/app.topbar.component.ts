@@ -5,7 +5,7 @@ import { MenuItem } from 'primeng/api';
 import { StyleClassModule } from 'primeng/styleclass';
 import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
-import { AuthenticationService } from './../../auth/services/authentication.service';
+import { AuthenticationService } from '@authS/authentication.service';
 import { LayoutService } from '../services/layout.service';
 
 @Component({
@@ -18,7 +18,7 @@ import { LayoutService } from '../services/layout.service';
         (click)="layoutService.onMenuToggle()">
         <i class="pi pi-bars"></i>
       </button>
-      <a class="layout-topbar-logo" routerLink="/inicio/coleta/cadastrar">
+      <a class="layout-topbar-logo" routerLink="/app/inicio">
         <img alt="Logo" src="/assets/images/logo.png" />
       </a>
     </div>

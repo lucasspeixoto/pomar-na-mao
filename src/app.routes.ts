@@ -35,7 +35,7 @@ export const appRoutes: Routes = [
     path: '',
     component: AppLayoutComponent,
     canActivate: [isLoggedGuard],
-    children: [{ path: 'inicio', loadChildren: () => import('./app/features/features.routes') }],
+    children: [{ path: 'app', loadChildren: () => import('./app/features/features.routes') }],
   },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', redirectTo: '/notfound' },
