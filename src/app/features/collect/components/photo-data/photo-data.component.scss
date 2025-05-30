@@ -1,0 +1,7 @@
+.container__dropper.success {
+  @apply border-green-800;
+}
+
+.container__dropper.error {
+  @apply border-red-800;
+}
