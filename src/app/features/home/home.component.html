@@ -12,9 +12,9 @@
         <div class="flex flex-wrap self-center justify-around md:justify-evenly px-4 md:px-10 items-center w-full gap-4 sm:gap-x-4 sm:gap-y-8">
             <div *ngFor="let item of filteredServicesItems"
             [ngClass]="{
-                'collect-dark-background shadow-[#8dcee3]': layoutService.isDarkTheme(), 'collect-light-background shadow-[#c8b9f1]': !layoutService.isDarkTheme()
+                'collect-dark-background': layoutService.isDarkTheme(), 'collect-light-background': !layoutService.isDarkTheme()
                 }"
-                class="shadow-md dark:bg-gray-800 select-none cursor-pointer rounded-2xl p-3 h-36 w-36 md:h-48 md:w-48 flex flex-col justify-between"
+                class="shadow-md shadow-gray-500 dark:bg-gray-800 select-none cursor-pointer rounded-2xl p-3 h-36 w-36 md:h-48 md:w-48 flex flex-col justify-between"
                 [routerLink]="item.routerLink">
                 <div>
                     <div class="text-xl md:text-3xl font-semibold mb-2 hover:underline" >{{ item.title }}</div>
