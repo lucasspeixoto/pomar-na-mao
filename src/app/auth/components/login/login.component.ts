@@ -14,7 +14,7 @@ import { InstallPwaButtonComponent } from '@sharedC/install-pwa-button/install-p
 import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { messages } from '@utils/messages';
-import { ToolbarServicesComponent } from '@authC/toolbar-services/toolbar-services.component';
+import { ToolbarServicesComponent } from '@authC/offline-collect-button/offline-collect-button.component';
 
 const PRIMENG = [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule];
 
