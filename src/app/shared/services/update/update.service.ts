@@ -45,7 +45,7 @@ export class UpdateService {
     try {
       return await this.swUpdate.checkForUpdate();
     } catch (error) {
-      console.log('Erro ao buscar por atualizações: ' + error);
+      alert('Erro ao buscar por atualizações: ' + error);
       return true;
     }
   }

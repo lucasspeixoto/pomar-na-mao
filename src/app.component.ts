@@ -10,15 +10,17 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { NotificationService } from '@sharedS/notification/notification.service';
 import { UpdateService } from '@sharedS/update/update.service';
+import { ConnectivityComponent } from '@sharedC/connectivity/connectivity.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, ButtonModule, LoadingComponent, ToastModule],
+  imports: [RouterModule, ButtonModule, LoadingComponent, ConnectivityComponent, ToastModule],
   template: ` <p-toast styleClass="hidden md:block" position="top-right" />
     <p-toast styleClass="md:hidden block" position="top-center" />
     <div>
       <router-outlet />
       <app-loading [isLoading]="loadingService.isLoading()" />
+      <app-connectivity />
     </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

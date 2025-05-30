@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
 import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
 import { createForgotPasswordForm, ForgotPasswordFormValue } from '@authCs/forgot-password-form';
 import { ConnectivityService } from '@sharedS/connectivity/connectivity.service';
-import { ToolbarServicesComponent } from '@authC/toolbar-services/toolbar-services.component';
+import { ToolbarServicesComponent } from '@authC/offline-collect-button/offline-collect-button.component';
 
 const PRIMENG = [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule];
 

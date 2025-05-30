@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="container__fixed-icon">
+        @if (connectivityService.isOnline()) {
+        <img src="assets/images/online.png" alt="Online logo" />
+        } @else {
+        <img src="assets/images/offline.png" alt="Offline logo" />
+        }
+    </div>
+</div>
