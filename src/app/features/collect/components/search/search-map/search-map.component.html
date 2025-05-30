@@ -1,17 +1,18 @@
 @let collects = collectService.numberOfFilteredCollects();
 
-<div class="mb-4 flex flex-wrap w-full items-center justify-center md:justify-between gap-8">
+<div class="mb-4 flex flex-wrap w-full items-center justify-center md:justify-between gap-4">
     <span class="hidden md:block font-bold self-start md:text-xl dark:text-slate-300 text-slate-800">Exibição de coletas</span>
+
+    <div class="flex items-center justify-between gap-1 mt-1">
+        <label for="autoDetectionID">Auto Detectar</label>
+        <p-toggleswitch (onChange)="onChangeAutoDetectionMode($event)" inputId="autoDetectionID" [(ngModel)]="isAutoDetectionModeOn" />
+    </div>
     <div class="flex flex-wrap items-center justify-center md:justify-end gap-2">
-        <div class="flex items-center justify-between gap-1 mt-1">
-            <label for="autoDetectionID">Auto Detectar</label>
-            <p-toggleswitch (onChange)="onChangeAutoDetectionMode($event)" inputId="autoDetectionID" [(ngModel)]="isAutoDetectionModeOn" />
-        </div>
         <p-button icon="pi pi-wifi" [disabled]="collects === 0"
          severity="warn" label="Detectar"
         (click)="detectNearestCollect(true)" />
-    <p-button icon="pi pi-map" [disabled]="!collectSearchFiltersService.selectedRegion()"
-         severity="info" [label]="this.polygonLayer ? 'Esconder Região' : 'Ver Região'"
+    <p-button [icon]="this.polygonLayer ? 'pi pi-eye': 'pi pi-eye-slash'" [disabled]="!collectSearchFiltersService.selectedRegion()"
+         severity="info" label="Região"
         (click)="plotRegionPolygon()" />
     <p-button icon="pi pi-map-marker"  severity="help" label="Posicionar"
         (click)="reloadPage()" />

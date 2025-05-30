@@ -1,34 +1,44 @@
-import { Component, model } from '@angular/core';
+import { Component, inject, model } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { servicesItems, type Service } from './constants/services';
+import { LayoutService } from '@layoutS/layout.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, RouterModule, InputTextModule],
+  imports: [CommonModule, FormsModule, RouterModule, InputTextModule, NgClass],
   templateUrl: `./home.component.html`,
   styles: [
     `
-      .card-background {
-        background-image: url('/assets/images/card-wave.png');
+      .collect-dark-background {
+        background-image: url('/assets/images/collect-card-dark.svg');
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+      }
+
+      .collect-light-background {
+        background-image: url('/assets/images/collect-card-light.svg');
         background-size: cover;
         background-position: bottom center;
         background-repeat: no-repeat;
       }
 
       .card-icon {
-        font-size: 2rem;
+        font-size: 1.5rem;
 
         @media (max-width: 768px) {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
         }
       }
     `,
   ],
 })
 export class HomeComponent {
+  public layoutService = inject(LayoutService);
+
   public searchBar = model('');
 
   public servicesItems = servicesItems;
