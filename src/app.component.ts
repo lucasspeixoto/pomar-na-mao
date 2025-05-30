@@ -8,19 +8,17 @@ import { LoadingComponent } from '@sharedP/loading/loading.component';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
-import { ConnectivityComponent } from '@sharedC/connectivity/connectivity.component';
 import { NotificationService } from '@sharedS/notification/notification.service';
 import { UpdateService } from '@sharedS/update/update.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, ButtonModule, LoadingComponent, ConnectivityComponent, ToastModule],
+  imports: [RouterModule, ButtonModule, LoadingComponent, ToastModule],
   template: ` <p-toast styleClass="hidden md:block" position="top-right" />
     <p-toast styleClass="md:hidden block" position="top-center" />
     <div>
       <router-outlet />
       <app-loading [isLoading]="loadingService.isLoading()" />
-      <app-connectivity />
     </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
