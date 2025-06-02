@@ -1,3 +1,4 @@
+import { PlantUploadService } from './../../../collect/services/plant-upload/plant-upload.service';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';
@@ -36,6 +37,8 @@ const COMPONENTS = [
 export class OfflineCollectComponent {
   public collectService = inject(CollectService);
 
+  public plantUploadService = inject(PlantUploadService);
+
   public items = [{ label: 'GPS' }, { label: 'Dados' }, { label: 'Ocorrência' }, { label: 'Foto' }];
 
   public activeIndex = signal(checkCurrencStorageStep());
@@ -58,6 +61,7 @@ export class OfflineCollectComponent {
   public insertOfflineCollectHandler(): void {
     this.collectService.storageAPlantCollectHandler();
     this.activeIndex.set(0);
+    this.plantUploadService.resetSelectedImage();
     localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex().toString());
   }
 }

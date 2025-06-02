@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { LayoutService } from '@layoutS/layout.service';
 import { isPlatformBrowser } from '@angular/common';
 import { LoadingComponent } from '@sharedP/loading/loading.component';
-import { LoadingService } from '@sharedS/loading/loading.service';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { NotificationService } from '@sharedS/notification/notification.service';
@@ -19,15 +18,13 @@ import { ConnectivityComponent } from '@sharedC/connectivity/connectivity.compon
     <p-toast styleClass="md:hidden block" position="top-center" />
     <div>
       <router-outlet />
-      <app-loading [isLoading]="loadingService.isLoading()" />
+      <app-loading />
       <app-connectivity />
     </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   public layoutService = inject(LayoutService);
-
-  public loadingService = inject(LoadingService);
 
   public updateService = inject(UpdateService);
 

@@ -11,6 +11,7 @@ import { checkCurrencStorageStep } from '@collectU/localstorage';
 import { IndexDbCollectService } from '@sharedS/index-db/index-db-collect.service';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { injectSupabase } from '@utils/inject-supabase';
+import { delay } from '@sharedU/timer';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +65,12 @@ export class CollectService {
 
   public async insertAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
+
+    this.loadingService.message.set('Reposicionando...');
+
+    await delay(5000);
+
+    this.loadingService.message.set('Salvando...');
 
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
@@ -175,6 +182,7 @@ export class CollectService {
         life: 3000,
       });
     }
+    this.loadingService.message.set('Carregando...');
   }
 
   public async updateAPlantCollectComplementDataHandler(id: string): Promise<void> {
@@ -273,9 +281,16 @@ export class CollectService {
   public async syncAllCollectPlantHandler(plantDatas: PlantData[]): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    const { error } = await this.supabase.from('plant_collect').insert(plantDatas);
+    const plantDataUpdate = plantDatas.map(item => {
+      return {
+        ...item,
+        photo_url: `https://cumkqrjwsbyotaojeyxv.supabase.co/storage/v1/object/public/plant-collect/uploads/${item.id}.png`,
+      };
+    });
 
-    const plantDataIds = plantDatas.map(item => item.id);
+    const { error } = await this.supabase.from('plant_collect').insert(plantDataUpdate);
+
+    const plantDataIds = plantDataUpdate.map(item => item.id);
 
     if (!error) {
       this.indexDbCollectService.deleteManyCollects(plantDataIds, false).subscribe();
@@ -292,11 +307,25 @@ export class CollectService {
       });
     }
 
+    await Promise.all(
+      plantDatas.map(item =>
+        this.supabase.storage
+          .from('plant-collect')
+          .upload(`uploads/${item.id!}.png`, item.photo_url!)
+      )
+    );
+
     this.loadingService.isLoading.set(false);
   }
 
   public async storageAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
+
+    this.loadingService.message.set('Reposicionando...');
+
+    await delay(5000);
+
+    this.loadingService.message.set('Armazenando...');
 
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
@@ -373,11 +402,16 @@ export class CollectService {
       region: region.toUpperCase(),
     } as PlantData;
 
-    this.plantUploadService.imageName.set(newCollectData.id);
+    const file = this.plantUploadService.plantPhotoFile() as File;
+
+    const renamedFile = new File([file], `${newCollectData.id}.png`, {
+      type: file.type,
+      lastModified: file.lastModified,
+    });
 
     newCollectData = {
       ...newCollectData,
-      photo_url: this.plantUploadService.plantPhotoFile(),
+      photo_url: renamedFile,
     };
 
     this.indexDbCollectService.addCollect(newCollectData).subscribe();
