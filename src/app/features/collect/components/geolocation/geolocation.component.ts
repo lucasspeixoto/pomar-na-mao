@@ -72,7 +72,7 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; OpenStreetMap contributors',
-          maxZoom: 19,
+          maxZoom: 30,
         }).addTo(this.map);
       },
       error => {
@@ -86,13 +86,11 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
         this.userMarker?.setLatLng([latitude, longitude]);
-
-        this.cd.markForCheck();
       },
       error => {
         this.geolocationService.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 3000 }
     );
   }
 

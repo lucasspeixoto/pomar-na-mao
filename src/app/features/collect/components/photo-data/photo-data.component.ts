@@ -48,6 +48,8 @@ export class PhotoDataComponent {
     if (file && file.type.startsWith('image/')) {
       this.selectedFile = file;
 
+      this.plantUploadService.plantPhotoFile.set(this.selectedFile);
+
       this.plantUploadService.fileSize.set(Math.round(file.size / 1024));
 
       const reader = new FileReader();

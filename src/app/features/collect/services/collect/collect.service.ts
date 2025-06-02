@@ -1,3 +1,4 @@
+import { PlantUploadService } from './../plant-upload/plant-upload.service';
 import { ObservationDataService } from './../observation-data/observation-data.service';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,6 +11,7 @@ import { checkCurrencStorageStep } from '@collectU/localstorage';
 import { IndexDbCollectService } from '@sharedS/index-db/index-db-collect.service';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { injectSupabase } from '@utils/inject-supabase';
+import { delay } from '@sharedU/timer';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +26,8 @@ export class CollectService {
   public loadingService = inject(LoadingService);
 
   public complementDataService = inject(ComplementDataService);
+
+  public plantUploadService = inject(PlantUploadService);
 
   public indexDbCollectService = inject(IndexDbCollectService);
 
@@ -62,13 +66,19 @@ export class CollectService {
   public async insertAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
 
+    this.loadingService.message.set('Reposicionando...');
+
+    await delay(5000);
+
+    this.loadingService.message.set('Salvando...');
+
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
     if (!complementData) {
       this.loadingService.isLoading.set(false);
       this.messageService.add({
-        severity: 'error',
-        summary: 'Erro',
+        severity: 'info',
+        summary: 'Info',
         detail: 'Dados complementares não foram salvos!',
         life: 3000,
       });
@@ -133,10 +143,26 @@ export class CollectService {
       mites,
       thrips,
       empty_collection_box_near: emptyCollectionBoxNear,
-      region,
+      region: region.toUpperCase(),
     };
 
-    const { error } = await this.supabase.from('plant_collect').insert([newCollectData]);
+    const { data, error } = await this.supabase
+      .from('plant_collect')
+      .insert([newCollectData])
+      .select();
+
+    const { error: plantPhotoInsertError } = await this.supabase.storage
+      .from('plant-collect')
+      .upload(`uploads/${data![0]?.id!}.png`, this.plantUploadService.plantPhotoFile()!);
+
+    if (plantPhotoInsertError) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Foto',
+        detail: 'Ocorreu um erro ao inserir a foto, inclua novamente no painel',
+        life: 3000,
+      });
+    }
 
     this.loadingService.isLoading.set(false);
 
@@ -156,6 +182,7 @@ export class CollectService {
         life: 3000,
       });
     }
+    this.loadingService.message.set('Carregando...');
   }
 
   public async updateAPlantCollectComplementDataHandler(id: string): Promise<void> {
@@ -254,9 +281,16 @@ export class CollectService {
   public async syncAllCollectPlantHandler(plantDatas: PlantData[]): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    const { error } = await this.supabase.from('plant_collect').insert(plantDatas);
+    const plantDataUpdate = plantDatas.map(item => {
+      return {
+        ...item,
+        photo_url: `https://cumkqrjwsbyotaojeyxv.supabase.co/storage/v1/object/public/plant-collect/uploads/${item.id}.png`,
+      };
+    });
 
-    const plantDataIds = plantDatas.map(item => item.id);
+    const { error } = await this.supabase.from('plant_collect').insert(plantDataUpdate);
+
+    const plantDataIds = plantDataUpdate.map(item => item.id);
 
     if (!error) {
       this.indexDbCollectService.deleteManyCollects(plantDataIds, false).subscribe();
@@ -273,19 +307,33 @@ export class CollectService {
       });
     }
 
+    await Promise.all(
+      plantDatas.map(item =>
+        this.supabase.storage
+          .from('plant-collect')
+          .upload(`uploads/${item.id!}.png`, item.photo_url!)
+      )
+    );
+
     this.loadingService.isLoading.set(false);
   }
 
   public async storageAPlantCollectHandler(): Promise<void> {
     this.loadingService.isLoading.set(true);
 
+    this.loadingService.message.set('Reposicionando...');
+
+    await delay(5000);
+
+    this.loadingService.message.set('Armazenando...');
+
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
     if (!complementData) {
       this.loadingService.isLoading.set(false);
       this.messageService.add({
-        severity: 'error',
-        summary: 'Erro',
+        severity: 'info',
+        summary: 'Info',
         detail: 'Dados complementares não foram salvos!',
         life: 3000,
       });
@@ -326,7 +374,7 @@ export class CollectService {
       emptyCollectionBoxNear,
     } = this.observationDataService.getCollectObservationDataFormValue()!;
 
-    const newCollectData = {
+    let newCollectData = {
       id: uuidv4(),
       created_at: new Date().toISOString(),
       longitude,
@@ -351,8 +399,20 @@ export class CollectService {
       mites,
       thrips,
       empty_collection_box_near: emptyCollectionBoxNear,
-      region,
+      region: region.toUpperCase(),
     } as PlantData;
+
+    const file = this.plantUploadService.plantPhotoFile() as File;
+
+    const renamedFile = new File([file], `${newCollectData.id}.png`, {
+      type: file.type,
+      lastModified: file.lastModified,
+    });
+
+    newCollectData = {
+      ...newCollectData,
+      photo_url: renamedFile,
+    };
 
     this.indexDbCollectService.addCollect(newCollectData).subscribe();
 

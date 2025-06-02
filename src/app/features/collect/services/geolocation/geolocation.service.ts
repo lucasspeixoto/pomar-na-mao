@@ -69,7 +69,7 @@ export class GeolocationService {
         this.coordinatesTimestamp.set(position.timestamp);
       },
       this.handleGeolocationError,
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 3000 }
     );
 
     this.isLoading.set(false);

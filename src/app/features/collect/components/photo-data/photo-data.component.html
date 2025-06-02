@@ -1,22 +1,19 @@
-<div  class="w-full flex flex-col justify-center items-center" (drop)="onFileDrop($event)" (dragover)="onDragOver($event)">
+<div class="w-full flex flex-col justify-center items-center" (drop)="onFileDrop($event)"
+    (dragover)="onDragOver($event)">
     <input type="file" accept="image/*" (change)="onFileChange($event)" hidden #fileInput />
-    <div
-    class="flex flex-col items-center rounded-lg p-1 w-[80%] md:w-[300px] cursor-pointer border-2 border-dashed"
-    [class.success]="uploadSuccess"
-    [class.error]="uploadError"
-      (click)="fileInput.click()">
-      <i class="pi pi-upload my-4" style="font-size: 1rem"></i>
-      <p class="font-bold">Foto Planta</p>
-      <div  class="flex flex-col justify-center items-center w-full">
-        @if (selectedFile || plantUploadService.plantPhotoString()) {
-          <img class="w-[80%] sm:w-[80px] h-[180px] mb-1 rounded-lg" [src]="plantUploadService.plantPhotoString()" alt="Foto planta" />
-
-          <p>
-            <span>{{ plantUploadService.imageName() }}</span> ({{ plantUploadService.fileSize() }} KB)
-          </p>
-        } @else {
-          <img class="rounded-lg mb-4" src="/assets/images/empty-photo.jpg" width="150px" height="150px" alt="Sem foto" />
-        }
-      </div>
+    <div class="flex flex-col items-center rounded-lg p-1 w-full sm:w-[80%] md:w-[300px] cursor-pointer border-2 border-dashed"
+        [class.success]="uploadSuccess" [class.error]="uploadError" (click)="fileInput.click()">
+        <i class="pi pi-upload my-2" style="font-size: 1.2rem"></i>
+        <p class="font-bold">Foto Planta</p>
+        <div class="flex flex-col justify-center items-center w-full">
+            @if (selectedFile || plantUploadService.plantPhotoString()) {
+            <img class="w-full max-h-[250px] mb-1 rounded-lg" [src]="plantUploadService.plantPhotoString()"
+                alt="Foto planta" />
+            <p class="text-center w-[80%] overflow-hidden truncate">{{ plantUploadService.imageName() }}</p> ({{ plantUploadService.fileSize() }} KB)
+            } @else {
+            <img class="rounded-lg mb-4" src="/assets/images/empty-photo.jpg"
+                alt="Sem foto" />
+            }
+        </div>
     </div>
-  </div>
+</div>

@@ -7,6 +7,7 @@ import { ObservationDataComponent } from '@collectC/observation-data/observation
 import { CollectService } from '@collectS/collect/collect.service';
 import { checkCurrencStorageStep } from '@collectU/localstorage';
 import { PhotoDataComponent } from '@collectC/photo-data/photo-data.component';
+import { PlantUploadService } from '@collectS/plant-upload/plant-upload.service';
 
 const PRIMENG = [StepsModule, ButtonModule];
 
@@ -25,6 +26,8 @@ const COMPONENTS = [
 })
 export class RegisterComponent implements OnInit {
   public collectService = inject(CollectService);
+
+  public plantUploadService = inject(PlantUploadService);
 
   public items = [{ label: 'GPS' }, { label: 'Dados' }, { label: 'Ocorrência' }, { label: 'Foto' }];
 
@@ -52,6 +55,7 @@ export class RegisterComponent implements OnInit {
   public insertOnlineCollectHandler(): void {
     this.collectService.insertAPlantCollectHandler();
     this.activeIndex.set(0);
+    this.plantUploadService.resetSelectedImage();
     localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex().toString());
   }
 }

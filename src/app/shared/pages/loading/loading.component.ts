@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LoadingService } from '@sharedS/loading/loading.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
@@ -8,5 +9,5 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   styleUrl: './loading.component.scss',
 })
 export class LoadingComponent {
-  public isLoading = input<boolean>(false);
+  public loadingService = inject(LoadingService);
 }
