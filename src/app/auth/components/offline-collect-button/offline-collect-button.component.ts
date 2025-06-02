@@ -7,7 +7,7 @@ import { ConnectivityService } from '@sharedS/connectivity/connectivity.service'
   selector: 'app-offline-collect-button',
   imports: [ButtonModule, RouterLink],
   template: `
-    <section class="offline-collect-button flex justify-center w-full">
+    <section class="offline-collect-button flex justify-center items-center w-full">
       <p-button
         routerLink="/coleta-offline"
         icon="pi pi-box"
@@ -22,7 +22,7 @@ import { ConnectivityService } from '@sharedS/connectivity/connectivity.service'
     `
       .offline-collect-button {
         .p-button {
-          min-width: 100vw;
+          min-width: 90vw;
 
           @media (min-width: 576px) {
             min-width: 350px;
