@@ -4,7 +4,7 @@ import {
   inject,
   OnInit,
   ChangeDetectorRef,
-  type AfterViewInit,
+  AfterViewInit,
 } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { MessageModule } from 'primeng/message';
@@ -41,6 +41,8 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
 
   public geolocationTextInfo = GEOLOCATION_INFO_TEXT;
 
+  public isMapElementAvailable = false;
+
   public ngOnInit(): void {
     this.loadGeolocationData();
   }
@@ -49,24 +51,26 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
     this.startMapRender();
   }
 
-  public async loadGeolocationData(): Promise<void> {
-    await this.geolocationService.getLocaltionPermission();
+  public loadGeolocationData(): void {
+    this.geolocationService.getLocaltionPermission();
     this.geolocationService.getLocaltionCoordinate();
   }
 
   public startMapRender(): void {
+    this.map = L.map('map');
+
+    this.isMapElementAvailable = true;
+
     if (!navigator.geolocation) {
       console.warn('Localização indisponível neste dispositivo!');
       this.geolocationService.showUnavailableGeolocation();
     }
 
-    this.map = L.map('map');
-
     navigator.geolocation.getCurrentPosition(
       position => {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        this.map.setView([latitude, longitude], 17);
+        this.map.setView([latitude, longitude], 19);
 
         this.userMarker = L.marker([latitude, longitude]).addTo(this.map);
 
@@ -78,7 +82,7 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       error => {
         this.geolocationService.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
     );
 
     navigator.geolocation.watchPosition(
@@ -90,7 +94,7 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
       error => {
         this.geolocationService.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 3000 }
+      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
     );
   }
 
