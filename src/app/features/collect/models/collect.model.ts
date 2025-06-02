@@ -6,7 +6,7 @@ export interface PlantData {
   longitude: number;
   latitude: number;
   gps_timestamp: number;
-  plant_photo: string;
+  photo_url: File | null;
   mass: string;
   variety: string;
   harvest: string;

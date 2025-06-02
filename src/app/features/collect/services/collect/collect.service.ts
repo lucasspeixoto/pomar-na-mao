@@ -1,3 +1,4 @@
+import { PlantUploadService } from './../plant-upload/plant-upload.service';
 import { ObservationDataService } from './../observation-data/observation-data.service';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
@@ -24,6 +25,8 @@ export class CollectService {
   public loadingService = inject(LoadingService);
 
   public complementDataService = inject(ComplementDataService);
+
+  public plantUploadService = inject(PlantUploadService);
 
   public indexDbCollectService = inject(IndexDbCollectService);
 
@@ -67,8 +70,8 @@ export class CollectService {
     if (!complementData) {
       this.loadingService.isLoading.set(false);
       this.messageService.add({
-        severity: 'error',
-        summary: 'Erro',
+        severity: 'info',
+        summary: 'Info',
         detail: 'Dados complementares não foram salvos!',
         life: 3000,
       });
@@ -133,10 +136,26 @@ export class CollectService {
       mites,
       thrips,
       empty_collection_box_near: emptyCollectionBoxNear,
-      region,
+      region: region.toUpperCase(),
     };
 
-    const { error } = await this.supabase.from('plant_collect').insert([newCollectData]);
+    const { data, error } = await this.supabase
+      .from('plant_collect')
+      .insert([newCollectData])
+      .select();
+
+    const { error: plantPhotoInsertError } = await this.supabase.storage
+      .from('plant-collect')
+      .upload(`uploads/${data![0]?.id!}.png`, this.plantUploadService.plantPhotoFile()!);
+
+    if (plantPhotoInsertError) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Foto',
+        detail: 'Ocorreu um erro ao inserir a foto, inclua novamente no painel',
+        life: 3000,
+      });
+    }
 
     this.loadingService.isLoading.set(false);
 
@@ -284,8 +303,8 @@ export class CollectService {
     if (!complementData) {
       this.loadingService.isLoading.set(false);
       this.messageService.add({
-        severity: 'error',
-        summary: 'Erro',
+        severity: 'info',
+        summary: 'Info',
         detail: 'Dados complementares não foram salvos!',
         life: 3000,
       });
@@ -326,7 +345,7 @@ export class CollectService {
       emptyCollectionBoxNear,
     } = this.observationDataService.getCollectObservationDataFormValue()!;
 
-    const newCollectData = {
+    let newCollectData = {
       id: uuidv4(),
       created_at: new Date().toISOString(),
       longitude,
@@ -351,8 +370,15 @@ export class CollectService {
       mites,
       thrips,
       empty_collection_box_near: emptyCollectionBoxNear,
-      region,
+      region: region.toUpperCase(),
     } as PlantData;
+
+    this.plantUploadService.imageName.set(newCollectData.id);
+
+    newCollectData = {
+      ...newCollectData,
+      photo_url: this.plantUploadService.plantPhotoFile(),
+    };
 
     this.indexDbCollectService.addCollect(newCollectData).subscribe();
 

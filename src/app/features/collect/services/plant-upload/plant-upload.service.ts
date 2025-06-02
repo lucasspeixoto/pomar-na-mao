@@ -4,6 +4,8 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class PlantUploadService {
+  public plantPhotoFile = signal<File | null>(null);
+
   public plantPhotoString = signal('');
 
   public imageName = signal('');

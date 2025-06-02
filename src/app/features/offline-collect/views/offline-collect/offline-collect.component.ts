@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
-import { ObservationDataComponent } from '../../../collect/components/observation-data/observation-data.component';
-import { ComplementDataComponent } from '../../../collect/components/complement-data/complement-data.component';
-import { GeolocationComponent } from '../../../collect/components/geolocation/geolocation.component';
-import { CollectService } from '../../../collect/services/collect/collect.service';
+import { ObservationDataComponent } from '@collectC/observation-data/observation-data.component';
+import { ComplementDataComponent } from '@collectC/complement-data/complement-data.component';
+import { GeolocationComponent } from '@collectC/geolocation/geolocation.component';
+import { CollectService } from '@collectS/collect/collect.service';
 import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
-import { OfflineLoginButtonComponent } from '../../../../shared/components/offline-login-button/offline-login-button.component';
+import { OfflineLoginButtonComponent } from '@sharedC/offline-login-button/offline-login-button.component';
+import { PhotoDataComponent } from '@collectC/photo-data/photo-data.component';
 
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];
 
@@ -16,6 +17,7 @@ const COMPONENTS = [
   ComplementDataComponent,
   ObservationDataComponent,
   OfflineLoginButtonComponent,
+  PhotoDataComponent,
 ];
 
 @Component({
@@ -34,28 +36,28 @@ const COMPONENTS = [
 export class OfflineCollectComponent {
   public collectService = inject(CollectService);
 
-  public items = [{ label: 'GPS' }, { label: 'Dados' }, { label: 'Ocorrência' }];
+  public items = [{ label: 'GPS' }, { label: 'Dados' }, { label: 'Ocorrência' }, { label: 'Foto' }];
 
-  public activeIndex: number = checkCurrencStorageStep();
+  public activeIndex = signal(checkCurrencStorageStep());
 
   public onActiveIndexChange(event: number): void {
-    this.activeIndex = event;
-    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+    this.activeIndex.set(event);
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex().toString());
   }
 
   public goToPreviousStep(): void {
-    this.activeIndex = this.activeIndex - 1;
-    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+    this.activeIndex.update(item => item - 1);
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex().toString());
   }
 
   public goToNextStep(): void {
-    this.activeIndex = this.activeIndex + 1;
-    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+    this.activeIndex.update(item => item + 1);
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex().toString());
   }
 
   public insertOfflineCollectHandler(): void {
     this.collectService.storageAPlantCollectHandler();
-    this.activeIndex = 0;
-    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex.toString());
+    this.activeIndex.set(0);
+    localStorage.setItem('POMAR-NA-MAO:COLLECT-STEP', this.activeIndex().toString());
   }
 }
