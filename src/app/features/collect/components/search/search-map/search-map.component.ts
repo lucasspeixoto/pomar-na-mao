@@ -58,56 +58,58 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public intervalOn = false;
 
+  public isMapElementAvailable = false;
+
   constructor() {
     effect(() => {
       if (this.collectService.filteredCollectData().length === 0) {
-        this.removePlottedPoints();
-        this.removePolygon();
-        this.removeNearestPoint();
+        this.removeMapPlots();
       } else {
-        this.plotCollectedPoints();
+        if (this.isMapElementAvailable) this.plotCollectedPoints();
       }
     });
   }
 
   public async ngOnInit(): Promise<void> {
-    await this.loadGeolocationData();
+    this.loadGeolocationData();
   }
 
   public ngAfterViewInit(): void {
     this.startMapRender();
   }
 
-  public async loadGeolocationData(): Promise<void> {
-    await this.geolocationService.getLocaltionPermission();
+  public loadGeolocationData(): void {
+    this.geolocationService.getLocaltionPermission();
     this.geolocationService.getLocaltionCoordinate();
   }
 
   public startMapRender(): void {
+    this.map2 = L.map('map2');
+
+    this.isMapElementAvailable = true;
+
     if (!navigator.geolocation) {
       console.warn('Localização indisponível neste dispositivo!');
       this.geolocationService.showUnavailableGeolocation();
     }
 
-    this.map2 = L.map('map2');
-
     navigator.geolocation.getCurrentPosition(
       position => {
         const [latitude, longitude] = this.geolocationService.getUserLatitudeAndLongitude(position);
 
-        this.map2.setView([latitude, longitude], 17);
+        this.map2.setView([latitude, longitude], 19);
 
         this.userMarker = L.marker([latitude, longitude]).addTo(this.map2);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; OpenStreetMap contributors',
-          maxZoom: 19,
+          maxZoom: 30,
         }).addTo(this.map2);
       },
       error => {
         this.geolocationService.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
     );
 
     navigator.geolocation.watchPosition(
@@ -123,8 +125,10 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
       error => {
         this.geolocationService.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
     );
+
+    if (this.isMapElementAvailable) this.plotCollectedPoints();
   }
 
   public plotRegionPolygon(): void {
@@ -162,7 +166,7 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
   public plotCollectedPoints(): void {
     this.removePlottedPoints();
 
-    this.collectService.filteredCollectData().forEach(item => {
+    this.collectService.filteredCollectData()?.forEach(item => {
       const marker = L.circleMarker([item.latitude, item.longitude], {
         radius: 4,
         color: 'green',
@@ -194,23 +198,6 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
     if (event.checked) {
       this.detectNearestCollect(false);
     }
-    /* if (event.checked) {
-      if (this.intervalOn) {
-        clearInterval(this.intervalId!);
-        this.intervalId = null;
-        this.intervalOn = false;
-      } else {
-        this.intervalId = setInterval(() => {
-          console.warn('Modo de detecção automática ativado');
-          this.detectNearestCollect(false);
-        }, 5000);
-        this.intervalOn = true;
-      }
-    } else {
-      clearInterval(this.intervalId!);
-      this.intervalId = null;
-      this.intervalOn = false;
-    } */
   }
 
   public detectNearestCollect(showMessage: boolean): void {
@@ -252,6 +239,12 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public reloadPage(): void {
     window.location.reload();
+  }
+
+  public removeMapPlots(): void {
+    this.removePlottedPoints();
+    this.removePolygon();
+    this.removeNearestPoint();
   }
 
   public ngOnDestroy(): void {
