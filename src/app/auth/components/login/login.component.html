@@ -1,24 +1,19 @@
 <section class="flex">
     <div class="hidden md:block w-[60%] container min-h-screen"></div>
-    <div
-        class="w-full md:w-[40%] h-screen bg-surface-0 dark:bg-surface-900">
+    <div class="w-full md:w-[40%] h-screen bg-surface-0 dark:bg-surface-900">
         @if (connectivityService.isOnline()) {
         <app-install-pwa-button />
         }
-        <div
-            class="flex h-full flex-col items-center justify-between">
+        <div class="flex h-full flex-col items-center justify-between">
 
             <!-- Top -->
             <div class="flex flex-col items-center justify-center w-full mt-8 md:mt-0">
                 <!-- Image -->
-                <img class="w-[180px] md:w-[150px]"
-                    src="assets/images/lichia.png"
-                    alt="Pomar" />
+                <img class="w-[180px] md:w-[150px]" src="assets/images/lichia.png" alt="Pomar" />
 
                 <!-- Welcome -->
                 <div class="flex flex-col text-center mb-8 gap-2">
-                    <span
-                        class="text-surface-900 dark:text-surface-0 text-lg md:text-3xl font-medium">
+                    <span class="text-surface-900 dark:text-surface-0 text-lg md:text-3xl font-medium">
                         Pomar na mão
                     </span>
                     <span class="text-muted-color text-md md:text-xl">Bem
@@ -27,66 +22,43 @@
             </div>
 
             <!-- Bottom -->
-            <div
-                class="flex flex-col items-center justify-end w-full h-full m-4 px-2 md:px-8">
+            <div class="flex flex-col items-center justify-end w-full h-full m-4 px-4 md:px-8">
                 <!-- Form -->
                 <form [formGroup]="loginForm" class="w-full sm:w-[350px] mb-8">
                     <div class="mb-2">
-                        <label
-                            for="emailField"
+                        <label for="emailField"
                             class="block text-surface-900 dark:text-surface-0 text-md md:text-xl font-medium mb-1">Email</label>
-                        <input
-                            pInputText
-                            id="emailField"
-                            type="text"
-                            placeholder="Endereço de Email"
-                            class="w-full mb-1"
-                            formControlName="email" />
-                        <app-custom-validation-message
-                            id="emailErrorMessage" controlName="email" />
+                        <input pInputText id="emailField" type="text" placeholder="Endereço de Email"
+                            class="w-full mb-1" formControlName="email" />
+                        <app-custom-validation-message id="emailErrorMessage" controlName="email" />
                     </div>
 
                     <div class="my-4">
-                        <label
-                            for="passwordField"
+                        <label for="passwordField"
                             class="block text-surface-900 dark:text-surface-0 font-medium text-md md:text-xl mb-1">Senha
                         </label>
-                        <p-password
-                            id="passwordField"
-                            formControlName="password"
-                            placeholder="Senha"
-                            [toggleMask]="true"
-                            styleClass="mb-1"
-                            [fluid]="true"
-                            [feedback]="false">
+                        <p-password id="passwordField" formControlName="password" placeholder="Senha"
+                            [toggleMask]="true" styleClass="mb-1" [fluid]="true" [feedback]="false">
                         </p-password>
 
-                        <app-custom-validation-message
-                            id="passwordErrorMessage"
-                            controlName="password"
+                        <app-custom-validation-message id="passwordErrorMessage" controlName="password"
                             [minLength]="3" />
                     </div>
 
-                    <div
-                        class="flex justify-end">
-                        <span
-                            routerLink="/lembrar-senha"
+                    <div class="flex justify-end">
+                        <span routerLink="/lembrar-senha"
                             class="text-sm sm:text-base font-medium hover:underline no-underline ml-2 text-right cursor-pointer text-primary">Esqueceu
                             a senha?</span>
                     </div>
 
                     <div class="mt-4 w-full flex justify-center">
-                        <p-button
-                            class="w-auto rounded-full"
-                            [disabled]="!connectivityService.isOnline()"
-                            (click)="loginHandler()"
-                            id="loginButton"
-                            label="Entrar">
+                        <p-button class="w-auto rounded-full" [disabled]="!connectivityService.isOnline()"
+                            (click)="loginHandler()" id="loginButton" label="Entrar">
                         </p-button>
                     </div>
                 </form>
 
-                <app-offline-collect-button  />
+                <app-offline-collect-button />
             </div>
         </div>
     </div>

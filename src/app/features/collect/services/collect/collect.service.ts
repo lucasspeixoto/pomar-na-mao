@@ -182,6 +182,7 @@ export class CollectService {
         life: 3000,
       });
     }
+
     this.loadingService.message.set('Carregando...');
   }
 
@@ -417,6 +418,8 @@ export class CollectService {
     this.indexDbCollectService.addCollect(newCollectData).subscribe();
 
     this.resetCollectData();
+
+    this.loadingService.message.set('Carregando...');
   }
 
   public resetCollectData(): void {
