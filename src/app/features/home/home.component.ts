@@ -12,25 +12,11 @@ import { LayoutService } from '@layoutS/layout.service';
   templateUrl: `./home.component.html`,
   styles: [
     `
-      .collect-dark-background {
-        background-image: url('/assets/images/collect-card-dark.svg');
-        background-size: cover;
-        background-position: bottom center;
-        background-repeat: no-repeat;
-      }
-
-      .collect-light-background {
-        background-image: url('/assets/images/collect-card-light.svg');
-        background-size: cover;
-        background-position: bottom center;
-        background-repeat: no-repeat;
-      }
-
       .card-icon {
-        font-size: 1.5rem;
+        font-size: 2rem;
 
         @media (max-width: 768px) {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
         }
       }
     `,

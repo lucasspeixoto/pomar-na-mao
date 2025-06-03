@@ -17,6 +17,7 @@ import { GeolocationService } from '@collectS/geolocation/geolocation.service';
 import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
 import { DetectionService } from '@sharedS/detection/detection.service';
 import { FormsModule } from '@angular/forms';
+import { sortCoordinatesClockwise } from '@utils/sort-coordinates';
 
 declare let L: typeof Leaflet;
 
@@ -145,14 +146,18 @@ export class SearchMapComponent implements OnInit, AfterViewInit, OnDestroy {
       .filter(item => item.region === selectedRegion)
       .map(item => [item.latitude, item.longitude]) as [number, number][];
 
+    const closedPoligon = [...sortCoordinatesClockwise(polygonCoordinates)];
+
     if (this.map2) {
-      this.polygonLayer = L.polygon(polygonCoordinates, {
-        color: '#3f4046',
-        fillColor: '#3f4046',
-        fillOpacity: 0.4,
+      this.polygonLayer = L.polygon(closedPoligon, {
+        color: 'blue',
+        fillColor: '#3388ff',
+        fillOpacity: 0.5,
       })
         .addTo(this.map2)
         .bringToBack();
+
+      this.map2.fitBounds(this.polygonLayer.getBounds());
     }
   }
 
