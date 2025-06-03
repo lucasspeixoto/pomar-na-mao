@@ -1,14 +1,14 @@
 import { Component, inject, model } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { servicesItems, type Service } from './constants/services';
+import { servicesItems, Service } from './constants/services';
 import { LayoutService } from '@layoutS/layout.service';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, RouterModule, InputTextModule, NgClass],
+  imports: [CommonModule, FormsModule, RouterModule, InputTextModule],
   templateUrl: `./home.component.html`,
   styles: [
     `
