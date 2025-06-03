@@ -1,4 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { REGIONS } from '@collectCs/regions';
 import { FarmRegion } from '@collectM/farm-region.model';
 import { LoadingService } from '@sharedS/loading/loading.service';
 import { injectSupabase } from '@utils/inject-supabase';
@@ -17,6 +18,14 @@ export class FarmRegionService {
   private _farmRegions = signal<FarmRegion[]>([]);
 
   public farmRegions = this._farmRegions.asReadonly();
+
+  public uniqueRegions = computed(() => {
+    if (this.farmRegions().length > 0) {
+      return [...new Set(this.farmRegions().map(item => item.region))];
+    } else {
+      return REGIONS;
+    }
+  });
 
   public numberOfFarmRegionPoints = computed(() => this._farmRegions().length);
 

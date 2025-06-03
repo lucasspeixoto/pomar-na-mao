@@ -8,7 +8,7 @@ import { TagModule } from 'primeng/tag';
 import { InputIconModule } from 'primeng/inputicon';
 import { IconFieldModule } from 'primeng/iconfield';
 import { FluidModule } from 'primeng/fluid';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule, CheckboxChangeEvent } from 'primeng/checkbox';
@@ -56,7 +56,7 @@ const PROVIDERS = [MessageService, ConfirmationService, ShortTimestampPipe];
 
 const PIPES = [ShortTimestampPipe, OccurrencesPipe];
 
-const COMMON = [NgClass, AsyncPipe];
+const COMMON = [AsyncPipe];
 
 @Component({
   selector: 'app-sync',
@@ -91,20 +91,6 @@ const COMMON = [NgClass, AsyncPipe];
         .p-iconfield {
           width: 100%;
         }
-      }
-
-      .light-background {
-        background-image: url('/assets/images/light-wave.svg');
-        background-size: cover;
-        background-position: bottom center;
-        background-repeat: no-repeat;
-      }
-
-      .dark-background {
-        background-image: url('/assets/images/dark-wave.svg');
-        background-size: cover;
-        background-position: bottom center;
-        background-repeat: no-repeat;
       }
     `,
   ],
