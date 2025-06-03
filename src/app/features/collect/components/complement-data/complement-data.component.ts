@@ -17,13 +17,14 @@ import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import {
   createCollectComplementDataForm,
-  type CollectComplementDataFormValue,
+  CollectComplementDataFormValue,
 } from '@collectCs/collect-complement-data-form';
 import { lycheeVarieties } from '@collectCs/lychee-varieties';
 import { COMPLEMENT_INFO_TEXT } from '@collectCs/texts';
 import { CollectService } from '@collectS/collect/collect.service';
 import { ComplementDataService } from '@collectS/complement-data/complement-data.service';
 import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
+import { FarmRegionService } from '@collectS/farm-region/farm-region.service';
 
 const PRIMENG = [
   InputMaskModule,
@@ -90,6 +91,8 @@ export class ComplementDataComponent implements OnInit {
   public complementDataService = inject(ComplementDataService);
 
   public collectService = inject(CollectService);
+
+  public farmRegionService = inject(FarmRegionService);
 
   public collectComplementDataForm = createCollectComplementDataForm();
 

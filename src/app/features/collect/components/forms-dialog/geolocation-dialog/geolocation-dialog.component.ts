@@ -20,7 +20,7 @@ import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import {
   createCollectGeolocationDataForm,
-  type CollectGeolocationDataFormValue,
+  CollectGeolocationDataFormValue,
 } from '@collectCs/collect-geolocation-data-form';
 import { GeolocationFormService } from '@collectS/geolocation-form/geolocation-form.service';
 import { CustomValidationMessageComponent } from '@sharedC/custom-validation-message/custom-validation-message.component';
