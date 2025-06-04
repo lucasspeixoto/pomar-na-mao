@@ -85,6 +85,8 @@ export class ObservationDataComponent implements OnInit {
   public observationInfoText = OBSERVARTION_INFO_TEXT;
 
   public ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const observationData = this.observationDataService.getCollectObservationDataFormValue();
 
     if (observationData) {

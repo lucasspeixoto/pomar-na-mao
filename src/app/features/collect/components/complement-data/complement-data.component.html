@@ -63,8 +63,9 @@
 
                 <div class="my-2">
                     <label for="region" class="block font-bold mb-3">Região</label>
-                    <p-select class="w-full" appendTo="body" [options]="farmRegionService.uniqueRegions()"
-                        formControlName="region" [showClear]="true" placeholder="Selecione a região" />
+                    <p-select [editable]="true" class="w-full" appendTo="body"
+                        [options]="farmRegionService.uniqueRegions()" formControlName="region" [showClear]="true"
+                        placeholder="Selecione a região" />
                 </div>
             </div>
 

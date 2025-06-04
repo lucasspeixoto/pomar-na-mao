@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewChild, type ElementRef } from '@angular/core';
+import { Component, inject, signal, ViewChild, type ElementRef, type OnInit } from '@angular/core';
 import { PlantUploadService } from '@collectS/plant-upload/plant-upload.service';
 import { MessageService } from 'primeng/api';
 
@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './photo-data.component.html',
   styleUrls: ['./photo-data.component.scss'],
 })
-export class PhotoDataComponent {
+export class PhotoDataComponent implements OnInit {
   public messageService = inject(MessageService);
 
   public plantUploadService = inject(PlantUploadService);
@@ -21,6 +21,10 @@ export class PhotoDataComponent {
   public uploadSuccess: boolean = false;
 
   public uploadError: boolean = false;
+
+  public ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   public onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;

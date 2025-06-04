@@ -19,7 +19,7 @@ import { CollectComplementDataFormValue } from '@collectCs/collect-complement-da
 import { CollectGeolocationDataFormValue } from '@collectCs/collect-geolocation-data-form';
 import {
   initialCollectObservationData,
-  type CollectObservationDataFormValue,
+  CollectObservationDataFormValue,
 } from '@collectCs/collect-observation-data-form';
 import { PlantData } from '@collectM/collect.model';
 import { CollectService } from '@collectS/collect/collect.service';

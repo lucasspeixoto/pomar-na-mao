@@ -282,16 +282,15 @@ export class CollectService {
   public async syncAllCollectPlantHandler(plantDatas: PlantData[]): Promise<void> {
     this.loadingService.isLoading.set(true);
 
-    const plantDataUpdate = plantDatas.map(item => {
-      return {
-        ...item,
-        photo_url: `https://cumkqrjwsbyotaojeyxv.supabase.co/storage/v1/object/public/plant-collect/uploads/${item.id}.png`,
-      };
+    const plantDatasWithoutPhotoUrl = plantDatas.map(item => {
+      const { photo_file, ...plantDataWithoutPhotoUrl } = item;
+
+      return plantDataWithoutPhotoUrl;
     });
 
-    const { error } = await this.supabase.from('plant_collect').insert(plantDataUpdate);
+    const { error } = await this.supabase.from('plant_collect').insert(plantDatasWithoutPhotoUrl);
 
-    const plantDataIds = plantDataUpdate.map(item => item.id);
+    const plantDataIds = plantDatasWithoutPhotoUrl.map(item => item.id);
 
     if (!error) {
       this.indexDbCollectService.deleteManyCollects(plantDataIds, false).subscribe();
@@ -312,7 +311,7 @@ export class CollectService {
       plantDatas.map(item =>
         this.supabase.storage
           .from('plant-collect')
-          .upload(`uploads/${item.id!}.png`, item.photo_url!)
+          .upload(`uploads/${item.id!}.png`, item.photo_file!)
       )
     );
 
@@ -338,6 +337,7 @@ export class CollectService {
         detail: 'Dados complementares não foram salvos!',
         life: 3000,
       });
+
       return;
     }
 
@@ -345,12 +345,14 @@ export class CollectService {
 
     if (!this.geolocationService.isCoordinatesAvailable()) {
       this.loadingService.isLoading.set(false);
+
       this.messageService.add({
         severity: 'error',
         summary: 'Erro',
         detail: 'Não foi possível obter as coordenadas!',
         life: 3000,
       });
+
       return;
     }
 
@@ -412,7 +414,7 @@ export class CollectService {
 
     newCollectData = {
       ...newCollectData,
-      photo_url: renamedFile,
+      photo_file: renamedFile,
     };
 
     this.indexDbCollectService.addCollect(newCollectData).subscribe();

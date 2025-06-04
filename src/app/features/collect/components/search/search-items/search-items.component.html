@@ -14,7 +14,7 @@
         <div [ngClass]="{
                 'border-2 border-primary-500 animate-pulse text-shadow-[0_35px_35px_rgb(132_204_22_/_0.25)]': detectionService.detectedColledtId() === collect.id
                 }"
-            class="border border-transparent hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[180px] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
+            class="hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[180px] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
             <div class="py-2 px-2 flex justify-between items-center">
                 <span class="font-bold text-md">
                     #{{ collect.id.split("-")[0] }}...</span>
@@ -40,8 +40,9 @@
             </div>
 
             <div class="px-0.5 gap-1 flex flex-wrap items-start justify-center">
-                <p-button pTooltip="Foto" tooltipPosition="top" icon="pi pi-image" severity="secondary" [rounded]="true"
-                    [text]="true" />
+
+                <p-button (onClick)="openPlantPhotoPopover($event, collect.id!)" pTooltip="Foto" tooltipPosition="top"
+                    icon="pi pi-image" severity="secondary" [rounded]="true" [text]="true" />
                 <p-button pTooltip="Dados complementares" tooltipPosition="top" (click)="showComplementDialog(collect)"
                     icon="pi pi-search-plus" severity="info" [rounded]="true" [text]="true" />
                 <p-button pTooltip="Observações" tooltipPosition="top" (click)="showObservationDialog(collect)"
@@ -51,6 +52,12 @@
         }
     </div>
     }
+
+    <p-popover #plantPhotoPopover>
+        <div class="p-4 max-w-fit max-h-fit">
+            <img width="200px" height="200px" [src]="selectedPlantPhotoUrl" alt="Foto Planta" />
+        </div>
+    </p-popover>
 
     <app-complement-dialog (updateDataHandler)="updateComplementDataHandler()" [isVisible]="complementDialog"
         (dialogClosed)="complementDialog = false" />

@@ -5,17 +5,6 @@
             (activeIndexChange)="onActiveIndexChange($event)" />
     </div>
 
-    <div class="w-full justify-end flex my-2 gap-2">
-        @if(activeIndex() !== 0) {
-        <p-button (click)="goToPreviousStep()" [link]="true" severity="contrast" label="Voltar" icon="pi pi-angle-left"
-            iconPos="left" />
-        }
-        @if(activeIndex() !== 3) {
-        <p-button (click)="goToNextStep()" [link]="true" severity="contrast" label="Próximo" icon="pi pi-angle-right"
-            iconPos="right" />
-        }
-    </div>
-
     <section class="my-2">
         @if(activeIndex() === 0) {
         <app-geolocation />
@@ -27,6 +16,17 @@
         <app-photo-data />
         }
     </section>
+
+    <div class="w-full justify-end flex my-2 gap-2">
+        @if(activeIndex() !== 0) {
+        <p-button (click)="goToPreviousStep()" [link]="true" severity="contrast" label="Voltar" icon="pi pi-angle-left"
+            iconPos="left" />
+        }
+        @if(activeIndex() !== 3) {
+        <p-button (click)="goToNextStep()" [link]="true" severity="contrast" label="Próximo" icon="pi pi-angle-right"
+            iconPos="right" />
+        }
+    </div>
 
     @if(activeIndex() === 3) {
     <div class="justify-center w-full flex mt-4 gap-2">
