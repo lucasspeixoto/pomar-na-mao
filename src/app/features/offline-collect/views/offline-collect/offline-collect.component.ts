@@ -1,4 +1,4 @@
-import { PlantUploadService } from './../../../collect/services/plant-upload/plant-upload.service';
+import { PlantUploadService } from '@collectS/plant-upload/plant-upload.service';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';

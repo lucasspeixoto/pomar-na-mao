@@ -101,6 +101,8 @@ export class ComplementDataComponent implements OnInit {
   public complementDataText = COMPLEMENT_INFO_TEXT;
 
   public ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const complementData = this.complementDataService.getCollectComplementDataFormValue();
 
     if (complementData) {

@@ -44,6 +44,8 @@ export class GeolocationComponent implements OnInit, AfterViewInit {
   public isMapElementAvailable = false;
 
   public ngOnInit(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     this.loadGeolocationData();
   }
 

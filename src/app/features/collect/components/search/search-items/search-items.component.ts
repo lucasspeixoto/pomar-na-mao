@@ -1,5 +1,5 @@
 import { DetectionService } from '@sharedS/detection/detection.service';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, ViewChild } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -26,8 +26,13 @@ import { ObservationDataService } from '@collectS/observation-data/observation-d
 import { SearchFiltersService } from '@collectS/search-filters/search-filters.service';
 import { LayoutService } from '@layoutS/layout.service';
 import { OccurrencesPipe } from '../../../pipes/occurrences.pipe';
+import { Popover } from 'primeng/popover';
+import { PopoverModule } from 'primeng/popover';
+import { environment } from '@env/environment';
+import { PLANT_COLLECT_STORAGE } from '@sharedU/endpoints';
 
 const PRIMENG = [
+  PopoverModule,
   TableModule,
   ButtonModule,
   ToastModule,
@@ -59,6 +64,8 @@ const COMMON = [NgClass];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchItemsComponent {
+  @ViewChild('plantPhotoPopover') public plantPhotoPopover!: Popover;
+
   public collectService = inject(CollectService);
 
   public observationDataService = inject(ObservationDataService);
@@ -82,6 +89,8 @@ export class SearchItemsComponent {
   public selectedCollectId = signal<string | null>(null);
 
   public numberOfOccurrences = signal(0);
+
+  public selectedPlantPhotoUrl!: string;
 
   public showComplementDialog(collect: PlantData): void {
     const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =
@@ -145,6 +154,11 @@ export class SearchItemsComponent {
     this.selectedCollectId.set(id);
 
     this.observationDialog = true;
+  }
+
+  public openPlantPhotoPopover(event: Event, plantId: string): void {
+    this.selectedPlantPhotoUrl = `${environment.SUPABASE_URL}/${PLANT_COLLECT_STORAGE}/${plantId}.png`;
+    this.plantPhotoPopover.toggle(event);
   }
 
   public async updateComplementDataHandler(): Promise<void> {
