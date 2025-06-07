@@ -17,8 +17,8 @@ import { providePrimeNG } from 'primeng/config';
 import { appRoutes } from './app.routes';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { ptBrTranslation } from './app/utils/pt-br';
-import { LayoutService } from '@layoutS/layout.service';
+import { ptBrTranslation } from './app/shared/utils/pt-br';
+import { LayoutConfig } from 'src/app/core/layout/layout-config';
 import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
@@ -32,7 +32,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideAnimationsAsync(),
     importProvidersFrom(FormsModule),
-    provideAppInitializer(() => inject(LayoutService).setInitialStorageTheme()),
+    provideAppInitializer(() => inject(LayoutConfig).setInitialStorageTheme()),
     providePrimeNG({
       translation: ptBrTranslation,
       theme: { preset: Lara, options: { darkModeSelector: '.app-dark' } },

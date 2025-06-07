@@ -18,7 +18,7 @@ import { ButtonModule } from 'primeng/button';
             Página Não encontrada
           </h1>
           <div class="text-surface-600 dark:text-surface-200 mb-8">
-            Requested resource is not available.
+            O recurso solicitado não existe ou foi removido
           </div>
           <a
             routerLink="/login"
@@ -30,11 +30,9 @@ import { ButtonModule } from 'primeng/button';
             </span>
             <span class="ml-6 flex flex-col">
               <span class="text-surface-900 dark:text-surface-0 lg:text-xl font-medium mb-0 block"
-                >Frequently Asked Questions</span
+                >Questões mais frequentes</span
               >
-              <span class="text-surface-600 dark:text-surface-200 lg:text-xl"
-                >Ultricies mi quis hendrerit dolor.</span
-              >
+              <span class="text-surface-600 dark:text-surface-200 lg:text-xl">...</span>
             </span>
           </a>
           <a
@@ -47,11 +45,9 @@ import { ButtonModule } from 'primeng/button';
             </span>
             <span class="ml-6 flex flex-col">
               <span class="text-surface-900 dark:text-surface-0 lg:text-xl font-medium mb-0"
-                >Solution Center</span
+                >Central de problemas</span
               >
-              <span class="text-surface-600 dark:text-surface-200 lg:text-xl"
-                >Phasellus faucibus scelerisque eleifend.</span
-              >
+              <span class="text-surface-600 dark:text-surface-200 lg:text-xl">...</span>
             </span>
           </a>
           <a
@@ -64,11 +60,9 @@ import { ButtonModule } from 'primeng/button';
             </span>
             <span class="ml-6 flex flex-col">
               <span class="text-surface-900 dark:text-surface-0 lg:text-xl font-medium mb-0"
-                >Permission Manager</span
+                >Solicitação de permissões</span
               >
-              <span class="text-surface-600 dark:text-surface-200 lg:text-xl"
-                >Accumsan in nisl nisi scelerisque</span
-              >
+              <span class="text-surface-600 dark:text-surface-200 lg:text-xl">...</span>
             </span>
           </a>
           <p-button label="Voltar" routerLink="/login" />
@@ -77,4 +71,4 @@ import { ButtonModule } from 'primeng/button';
     </div>
   </div>`,
 })
-export class NotfoundComponent {}
+export class Notfound {}

@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { RegisterComponent } from './views/register/register.component';
-import { SearchComponent } from './views/search/search.component';
-import { SyncComponent } from './views/sync/sync.component';
+import { Register } from './pages/register/register';
+import { Search } from './pages/search/search';
+import { Sync } from './pages/sync/sync';
 
 export default [
-  { path: 'cadastrar', component: RegisterComponent },
-  { path: 'consultar', component: SearchComponent },
-  { path: 'sincronizar', component: SyncComponent },
+  { path: 'cadastrar', component: Register },
+  { path: 'consultar', component: Search },
+  { path: 'sincronizar', component: Sync },
 ] as Routes;
