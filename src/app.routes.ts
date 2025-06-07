@@ -1,42 +1,36 @@
 import { Routes } from '@angular/router';
-import { AppLayoutComponent } from '@layoutC/app.layout.component';
-import { NotfoundComponent } from '@sharedP/notfound/notfound';
-import { isLoggedGuard } from '@authG/is-logged/is-logged.guard';
+import { AppLayout } from '@layoutC/app.layout';
+import { Notfound } from '@sharedP/notfound/notfound';
+import { isLoggedGuard } from '@authG/is-logged-guard';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
-    loadComponent: () =>
-      import('./app/auth/components/login/login.component').then(c => c.LoginComponent),
+    loadComponent: () => import('./app/core/auth/pages/login').then(c => c.Login),
   },
   {
     path: 'lembrar-senha',
     loadComponent: () =>
-      import('./app/auth/components/forgot-password/forgot-password.component').then(
-        c => c.ForgotPasswordComponent
-      ),
+      import('./app/core/auth/pages/forgot-password').then(c => c.ForgotPassword),
   },
   {
     path: 'resetar-senha',
-    loadComponent: () =>
-      import('./app/auth/components/reset-password/reset-password.component').then(
-        c => c.ResetPasswordComponent
-      ),
+    loadComponent: () => import('./app/core/auth/pages/reset-password').then(c => c.ResetPassword),
   },
   {
     path: 'coleta-offline',
     loadComponent: () =>
-      import('./app/features/offline-collect/views/offline-collect/offline-collect.component').then(
-        c => c.OfflineCollectComponent
+      import('./app/features/offline-collect/views/offline-collect/offline-collect').then(
+        c => c.OfflineCollect
       ),
   },
   {
     path: '',
-    component: AppLayoutComponent,
+    component: AppLayout,
     canActivate: [isLoggedGuard],
     children: [{ path: 'app', loadChildren: () => import('./app/features/features.routes') }],
   },
-  { path: 'notfound', component: NotfoundComponent },
+  { path: 'notfound', component: Notfound },
   { path: '**', redirectTo: '/notfound' },
 ];

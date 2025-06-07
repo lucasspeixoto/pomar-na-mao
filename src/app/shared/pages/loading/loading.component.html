@@ -1,8 +1,0 @@
-@if (loadingService.isLoading()) {
-<div class="loading-overlay">
-    <p-progress-spinner ariaLabel="loading" strokeWidth="8" fill="transparent" animationDuration="1s"
-        styleClass="text-primart" [style]="{ width: '70px', height: '70px' }" />
-
-    <span class="font-semibold text-lg my-4 animate animate-pulse">{{loadingService.message()}}</span>
-</div>
-}

@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Routes } from '@angular/router';
-import { CollectComponent } from './collect/views/collect.component';
-import { HomeComponent } from '@home/home.component';
+import { Collect } from './collect/pages/collect';
+import { Home } from '@home/home';
 
 //import { isAdminGuard } from '../auth/guards/is-admin/is-admin.guard';
 
 export default [
   {
     path: 'inicio',
-    component: HomeComponent,
+    component: Home,
   },
   {
     path: 'coleta',
-    component: CollectComponent,
+    component: Collect,
     /* canActivate: [isAdminGuard], */
     children: [
       {

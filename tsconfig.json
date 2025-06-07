@@ -30,10 +30,10 @@
                 "./src/app/shared/utils/*"
             ],
             "@layoutC/*": [
-                "./src/app/layout/components/*"
+                "./src/app/core/layout/components/*"
             ],
             "@layoutS/*": [
-                "./src/app/layout/services/*"
+                "./src/app/core/layout/services/*"
             ],
             "@collectC/*": [
                 "./src/app/features/collect/components/*"
@@ -57,19 +57,19 @@
                 "./src/app/features/offline-collect/views/*"
             ],
             "@authS/*": [
-                "./src/app/auth/services/*"
+                "./src/app/core/auth/services/*"
             ],
             "@authC/*": [
-                "./src/app/auth/components/*"
+                "./src/app/core/auth/components/*"
             ],
             "@authV/*": [
-                "./src/app/auth/view/*"
+                "./src/app/core/auth/view/*"
             ],
             "@authCs/*": [
-                "./src/app/auth/constants/*"
+                "./src/app/core/auth/constants/*"
             ],
             "@authG/*": [
-                "./src/app/auth/guards/*"
+                "./src/app/core/auth/guards/*"
             ],
             "@home/*": [
                 "./src/app/features/home/*"
