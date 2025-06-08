@@ -2,11 +2,11 @@ import type { Coordinate } from '@collectS/geolocation-navigator';
 
 export type Point = { latitude: number; longitude: number; accuracy?: number };
 
-export const maxAcceptableAccuracy = 7; // meters
+export const maxAcceptableAccuracy = 20; // meters
 
-export const threshold = 3; // meters
+export const threshold = 2; // meters
 
-export const bufferSize = 5;
+export const bufferSize = 4;
 
 //Formula de Haversine
 export const twoPointsDistance = (P1: Point, P2: Point): number => {

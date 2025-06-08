@@ -252,7 +252,7 @@ export class Geolocation implements OnInit, AfterViewInit {
       error => {
         this.geolocationNavigator.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
   }
 

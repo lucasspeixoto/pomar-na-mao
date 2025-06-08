@@ -27,7 +27,7 @@ import {
   getDistance,
   maxAcceptableAccuracy,
   threshold,
-  type Point,
+  Point,
 } from '@sharedU/geolocation-math';
 
 declare let L: typeof Leaflet;
@@ -184,10 +184,6 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
         const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
 
-        console.log(accuracy);
-
-        alert(accuracy);
-
         // Ignore poor accuracy
         if (accuracy > maxAcceptableAccuracy) {
           return;
@@ -237,7 +233,7 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
       error => {
         this.geolocationNavigator.handleGeolocationError(error);
       },
-      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
 
     if (this.isMapElementAvailable) this.plotCollectedPoints();
