@@ -184,6 +184,10 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
         const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
 
+        console.log(accuracy);
+
+        alert(accuracy);
+
         // Ignore poor accuracy
         if (accuracy > maxAcceptableAccuracy) {
           return;
