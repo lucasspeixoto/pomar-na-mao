@@ -8,9 +8,7 @@ export const threshold = 3; // meters
 
 export const bufferSize = 5;
 
-/*
- * Formula de Haversine
- */
+//Formula de Haversine
 export const twoPointsDistance = (P1: Point, P2: Point): number => {
   const earthRadius = 6371000; // Raio da Terra em metros
   const latitudeDiff = (P2.latitude - P1.latitude) * (Math.PI / 180); // Diferença de latitudes
@@ -31,12 +29,12 @@ export const twoPointsDistance = (P1: Point, P2: Point): number => {
   return distance;
 };
 
-export const getDistance = (point1: Point, point2: Point): number => {
+export const getDistance = (P1: Point, P2: Point): number => {
   const earthRadius = 6371000; // Raio da Terra em metros
-  const φ1 = (point1.latitude * Math.PI) / 180;
-  const φ2 = (point2.latitude * Math.PI) / 180;
-  const Δφ = ((point2.latitude - point1.latitude) * Math.PI) / 180;
-  const Δλ = ((point2.longitude - point1.longitude) * Math.PI) / 180;
+  const φ1 = (P1.latitude * Math.PI) / 180;
+  const φ2 = (P2.latitude * Math.PI) / 180;
+  const Δφ = ((P2.latitude - P1.latitude) * Math.PI) / 180;
+  const Δλ = ((P2.longitude - P1.longitude) * Math.PI) / 180;
 
   const a =
     Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
