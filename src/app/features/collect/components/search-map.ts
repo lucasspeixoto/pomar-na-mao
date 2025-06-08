@@ -8,6 +8,7 @@ import {
   model,
   OnDestroy,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
@@ -72,6 +73,10 @@ declare let L: typeof Leaflet;
       </div>
     </div>
 
+    <span class="font-bold self-start text-md md:text-xl mb-4 dark:text-slate-300 text-slate-800"
+      >Acurácia: {{ accuracy()?.toFixed(2) }} m
+    </span>
+
     <div id="map2"></div>
   `,
   styles: [
@@ -125,6 +130,8 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
   public lastPosition: Coordinate | null = null;
 
   public positionBuffer: Coordinate[] = [];
+
+  public accuracy = signal<number | null>(null);
 
   constructor() {
     effect(() => {
@@ -183,6 +190,8 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
       position => {
         const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
+
+        this.accuracy.set(accuracy);
 
         // Ignore poor accuracy
         if (accuracy > maxAcceptableAccuracy) {
