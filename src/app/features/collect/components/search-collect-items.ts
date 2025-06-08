@@ -72,14 +72,14 @@ const COMMON = [NgClass];
           >Mostrando {{ numberOfFilteredCollects() }} resultados</span
         >
         <div
-          class="mx-1 mt-4 w-full min-h-[100px] gap-4 flex justify-between items-center flex-wrap ">
+          class="mx-0.5 mt-4 w-full min-h-[100px] gap-4 flex justify-between items-center flex-wrap ">
           @for (collect of collects; track collect.id) {
             <div
               [ngClass]="{
                 'border-2 border-primary-500 animate-pulse text-shadow-[0_35px_35px_rgb(132_204_22_/_0.25)]':
                   PlantPositionDetect.detectedColledtId() === collect.id,
               }"
-              class="hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[180px] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
+              class="hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[45%] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
               <div class="py-2 px-2 flex justify-between items-center">
                 <span class="font-bold text-md"> #{{ collect.id.split('-')[0] }}...</span>
                 @if (collect?.region) {

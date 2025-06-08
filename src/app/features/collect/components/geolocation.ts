@@ -13,7 +13,15 @@ import { ButtonModule } from 'primeng/button';
 import type * as Leaflet from 'leaflet';
 import { GEOLOCATION_INFO_TEXT } from '@collectCs/texts';
 import { EpochToTimePipe } from '@sharedPp/epoch-to-time-pipe';
-import { GeolocationNavigator } from '@collectS/geolocation-navigator';
+import { GeolocationNavigator, type Coordinate } from '@collectS/geolocation-navigator';
+import {
+  maxAcceptableAccuracy,
+  getDistance,
+  threshold,
+  bufferSize,
+  averagePosition,
+  type Point,
+} from '@sharedU/geolocation-math';
 
 declare let L: typeof Leaflet;
 
@@ -100,7 +108,7 @@ const PIPES = [EpochToTimePipe];
         </div>
 
         <div class="w-full md:2/3">
-          <div id="map" style="height: 480px;"></div>
+          <div id="map"></div>
         </div>
       </div>
     </div>
@@ -108,6 +116,7 @@ const PIPES = [EpochToTimePipe];
   styles: [
     `
       #map {
+        height: 480px;
         width: 100%;
         border-radius: 10px;
         z-index: 0;
@@ -115,12 +124,16 @@ const PIPES = [EpochToTimePipe];
 
       @media (max-width: 768px) {
         #map {
-          height: calc(100vh - 200px);
+          height: calc(100vh - 270px);
         }
       }
 
-      :host ::ng-deep .card {
+      .card {
         padding: 1rem;
+
+        @media (max-width: 768px) {
+          padding: 8px 5px;
+        }
       }
     `,
   ],
@@ -139,6 +152,10 @@ export class Geolocation implements OnInit, AfterViewInit {
   public geolocationTextInfo = GEOLOCATION_INFO_TEXT;
 
   public isMapElementAvailable = false;
+
+  public lastPosition: Coordinate | null = null;
+
+  public positionBuffer: Coordinate[] = [];
 
   public ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -182,14 +199,49 @@ export class Geolocation implements OnInit, AfterViewInit {
 
     navigator.geolocation.watchPosition(
       position => {
-        const [latitude, longitude] =
+        const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
 
-        const coordinates = { latitude, longitude };
+        // Ignore poor accuracy
+        if (accuracy > maxAcceptableAccuracy) {
+          return;
+        }
 
-        this.userMarker?.setLatLng([latitude, longitude]);
+        const currentPos = { latitude, longitude, accuracy };
 
-        this.geolocationNavigator.coordinates.set(coordinates);
+        const point1: Point = {
+          latitude: this.lastPosition!.latitude,
+          longitude: this.lastPosition!.longitude,
+        };
+
+        const point2: Point = {
+          latitude: currentPos.latitude,
+          longitude: currentPos.longitude,
+        };
+
+        // Ignore small jumps
+        if (this.lastPosition) {
+          const distance = getDistance(point1, point2);
+
+          if (distance < threshold) {
+            return;
+          }
+        }
+
+        this.lastPosition = currentPos;
+
+        // Add to buffer for smoothing
+        this.positionBuffer.push(currentPos);
+
+        if (this.positionBuffer.length > bufferSize) {
+          this.positionBuffer.shift();
+        }
+
+        const smoothedPosition = averagePosition(this.positionBuffer);
+
+        this.userMarker?.setLatLng([smoothedPosition.latitude, smoothedPosition.longitude]);
+
+        this.geolocationNavigator.coordinates.set(smoothedPosition);
         this.geolocationNavigator.coordinatesTimestamp.set(position.timestamp);
       },
       error => {

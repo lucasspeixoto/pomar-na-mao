@@ -25,7 +25,63 @@ const COMPONENTS = [
 @Component({
   selector: 'app-offline-collect',
   imports: [...PRIMENG, ...COMPONENTS],
-  templateUrl: './offline-collect.html',
+  template: `
+    <app-offline-login-button />
+    <div class="">
+      <div class="py-8 px-2 sm:px-10 md:px-36 lg:px-56">
+        <div class="mb-4 flex w-full justify-start items-start">
+          <p-steps
+            class="w-full"
+            [model]="items"
+            [readonly]="false"
+            [activeIndex]="activeIndex()"
+            (activeIndexChange)="onActiveIndexChange($event)" />
+        </div>
+
+        <section class="my-2">
+          @if (activeIndex() === 0) {
+            <app-geolocation />
+          }
+          @if (activeIndex() === 1) {
+            <app-complement-form />
+          }
+          @if (activeIndex() === 2) {
+            <app-observation-form />
+          }
+          @if (activeIndex() === 3) {
+            <app-photo-fom />
+          }
+        </section>
+
+        <div class="w-full justify-end flex my-2 gap-2">
+          @if (activeIndex() !== 0) {
+            <p-button
+              (click)="goToPreviousStep()"
+              [link]="true"
+              severity="contrast"
+              label="Voltar"
+              icon="pi pi-angle-left"
+              iconPos="left" />
+          }
+          @if (activeIndex() !== 3) {
+            <p-button
+              (click)="goToNextStep()"
+              [link]="true"
+              severity="contrast"
+              label="Próximo"
+              icon="pi pi-angle-right"
+              iconPos="right" />
+          }
+        </div>
+
+        @if (activeIndex() === 3) {
+          <div class="justify-center flex mt-4 gap-2">
+            <p-button label="Coletar" (click)="insertOfflineCollectHandler()"></p-button>
+          </div>
+        }
+      </div>
+    </div>
+  `,
   styles: [
     `
       .card {

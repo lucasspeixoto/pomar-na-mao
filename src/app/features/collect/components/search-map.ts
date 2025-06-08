@@ -19,8 +19,16 @@ import { FormsModule } from '@angular/forms';
 import { sortCoordinatesClockwise } from '@sharedU/sort-coordinates';
 import { CollectApi } from '@collectS/collect-api';
 import { FarmRegionApi } from '@collectS/farm-region-api';
-import { GeolocationNavigator } from '@collectS/geolocation-navigator';
+import { GeolocationNavigator, type Coordinate } from '@collectS/geolocation-navigator';
 import { LoadingStore } from '@sharedS/loading-store';
+import {
+  averagePosition,
+  bufferSize,
+  getDistance,
+  maxAcceptableAccuracy,
+  threshold,
+  type Point,
+} from '@sharedU/geolocation-math';
 
 declare let L: typeof Leaflet;
 
@@ -114,6 +122,10 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
 
   public isMapElementAvailable = false;
 
+  public lastPosition: Coordinate | null = null;
+
+  public positionBuffer: Coordinate[] = [];
+
   constructor() {
     effect(() => {
       if (this.collectService.filteredCollectData().length === 0) {
@@ -164,14 +176,49 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
 
     navigator.geolocation.watchPosition(
       position => {
-        const [latitude, longitude] =
+        const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
 
-        const coordinates = { latitude, longitude };
+        // Ignore poor accuracy
+        if (accuracy > maxAcceptableAccuracy) {
+          return;
+        }
 
-        this.userMarker?.setLatLng([latitude, longitude]);
+        const currentPos = { latitude, longitude, accuracy };
 
-        this.geolocationNavigator.coordinates.set(coordinates);
+        const point1: Point = {
+          latitude: this.lastPosition!.latitude,
+          longitude: this.lastPosition!.longitude,
+        };
+
+        const point2: Point = {
+          latitude: currentPos.latitude,
+          longitude: currentPos.longitude,
+        };
+
+        // Ignore small jumps
+        if (this.lastPosition) {
+          const distance = getDistance(point1, point2);
+
+          if (distance < threshold) {
+            return;
+          }
+        }
+
+        this.lastPosition = currentPos;
+
+        // Add to buffer for smoothing
+        this.positionBuffer.push(currentPos);
+
+        if (this.positionBuffer.length > bufferSize) {
+          this.positionBuffer.shift();
+        }
+
+        const smoothedPosition = averagePosition(this.positionBuffer);
+
+        this.userMarker?.setLatLng([smoothedPosition.latitude, smoothedPosition.longitude]);
+
+        this.geolocationNavigator.coordinates.set(smoothedPosition);
         this.geolocationNavigator.coordinatesTimestamp.set(position.timestamp);
 
         if (this.isAutoDetectionModeOn()) {

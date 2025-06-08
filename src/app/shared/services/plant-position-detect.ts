@@ -31,9 +31,6 @@ export class PlantPositionDetect {
   public detectNearestCollect(showMessage: boolean): PlantData | null {
     this.loadingStore.startLoading();
 
-    // Update user position
-    //this.GeolocationStore.getLocaltionCoordinate();
-
     const currentPosition = this.geolocationNavigator.coordinates();
 
     if (!currentPosition) {
@@ -43,6 +40,8 @@ export class PlantPositionDetect {
         detail: 'Não foi possível detectar sua localização. Ative o GPS e tente novamente.',
         life: 3000,
       });
+
+      this.loadingStore.stopLoading();
 
       return null;
     }
