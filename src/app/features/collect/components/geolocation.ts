@@ -14,14 +14,7 @@ import type * as Leaflet from 'leaflet';
 import { GEOLOCATION_INFO_TEXT } from '@collectCs/texts';
 import { EpochToTimePipe } from '@sharedPp/epoch-to-time-pipe';
 import { GeolocationNavigator, type Coordinate } from '@collectS/geolocation-navigator';
-import {
-  maxAcceptableAccuracy,
-  getDistance,
-  threshold,
-  bufferSize,
-  averagePosition,
-  type Point,
-} from '@sharedU/geolocation-math';
+import { maxAcceptableAccuracy } from '@sharedU/geolocation-math';
 
 declare let L: typeof Leaflet;
 
@@ -212,41 +205,11 @@ export class Geolocation implements OnInit, AfterViewInit {
           return;
         }
 
-        const currentPos = { latitude, longitude, accuracy };
+        const coordinates = { latitude, longitude, accuracy };
 
-        const point1: Point = {
-          latitude: this.lastPosition!.latitude,
-          longitude: this.lastPosition!.longitude,
-        };
+        this.userMarker?.setLatLng([latitude, longitude]);
 
-        const point2: Point = {
-          latitude: currentPos.latitude,
-          longitude: currentPos.longitude,
-        };
-
-        // Ignore small jumps
-        if (this.lastPosition) {
-          const distance = getDistance(point1, point2);
-
-          if (distance < threshold) {
-            return;
-          }
-        }
-
-        this.lastPosition = currentPos;
-
-        // Add to buffer for smoothing
-        this.positionBuffer.push(currentPos);
-
-        if (this.positionBuffer.length > bufferSize) {
-          this.positionBuffer.shift();
-        }
-
-        const smoothedPosition = averagePosition(this.positionBuffer);
-
-        this.userMarker?.setLatLng([smoothedPosition.latitude, smoothedPosition.longitude]);
-
-        this.geolocationNavigator.coordinates.set(smoothedPosition);
+        this.geolocationNavigator.coordinates.set(coordinates);
         this.geolocationNavigator.coordinatesTimestamp.set(position.timestamp);
       },
       error => {
