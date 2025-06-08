@@ -175,8 +175,13 @@ export class Geolocation implements OnInit, AfterViewInit {
 
     navigator.geolocation.getCurrentPosition(
       position => {
-        const [latitude, longitude] =
+        const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
+
+        const coordinates = { latitude, longitude, accuracy };
+
+        this.geolocationNavigator.coordinates.set(coordinates);
+        this.geolocationNavigator.coordinatesTimestamp.set(position.timestamp);
 
         this.map.setView([latitude, longitude], 16);
 
