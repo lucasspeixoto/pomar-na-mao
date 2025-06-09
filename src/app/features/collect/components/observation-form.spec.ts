@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ObservationDataComponent } from './observation-form.component';
+import { ObservationDataComponent } from './observation-form';
 import { MessageService } from 'primeng/api';
 import { provideAnimations, provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';

@@ -101,9 +101,9 @@ const COMMON = [NgClass];
                 ></span>
               </div>
 
-              <div class="px-0.5 mt-4 gap-1 flex flex-wrap items-start justify-between">
-                <span class="text-md"> {{ collect.latitude.toFixed(5) }}</span>
-                <span class="text-md"> {{ collect.longitude.toFixed(5) }}</span>
+              <div class="px-2 mt-4 gap-1 flex flex-wrap items-start justify-between">
+                <span class="text-sm md:text-md"> {{ collect.latitude.toFixed(5) }}</span>
+                <span class="text-sm md:text-md"> {{ collect.longitude.toFixed(5) }}</span>
               </div>
 
               <div class="px-0.5 gap-1 flex flex-wrap items-start justify-center">
@@ -138,8 +138,17 @@ const COMMON = [NgClass];
       }
 
       <p-popover #plantPhotoPopover>
-        <div class="p-4 max-w-fit max-h-fit">
-          <img width="200px" height="200px" [src]="selectedPlantPhotoUrl" alt="Foto Planta" />
+        <div class="p-4 max-w-fit max-h-fit flex flex-col justify-center items-center gap-2">
+          <img
+            (error)="onImageError($event)"
+            width="200px"
+            height="200px"
+            [src]="selectedPlantPhotoUrl"
+            alt="Foto Planta" />
+
+          @if (!selectedPlantPhotoUrl) {
+            <span class="font-medium">Sem Foto</span>
+          }
         </div>
       </p-popover>
 
@@ -194,7 +203,13 @@ export class SearchCollectItems {
 
   public numberOfOccurrences = signal(0);
 
-  public selectedPlantPhotoUrl!: string;
+  public selectedPlantPhotoUrl!: string | null;
+
+  public onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/images/empty-photo.jpg';
+    this.selectedPlantPhotoUrl = null;
+  }
 
   public showComplementDialog(collect: PlantData): void {
     const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =

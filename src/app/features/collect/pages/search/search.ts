@@ -22,6 +22,10 @@ const COMMON = [NgStyle];
         .p-button:disabled {
           cursor: not-allowed;
         }
+
+        .p-dialog-header {
+          padding: 0;
+        }
       }
     `,
   ],

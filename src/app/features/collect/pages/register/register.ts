@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { StepsModule } from 'primeng/steps';
 import { ButtonModule } from 'primeng/button';
 import { ComplementForm } from '@collectC/complement-form';
-import { Geolocation } from '@collectC/geolocation';
-import { ObservationDataComponent } from '@collectC/observation-form.component';
+import { DeviceGeolocation } from '@collectC/device-geolocation/device-geolocation';
+import { ObservationDataComponent } from '@collectC/observation-form';
 import { CollectApi } from '@collectS/collect-api';
 import { checkCurrencStorageStep } from '@collectU/localstorage';
 import { PhotoDataComponent } from '@collectC/photo-form';
@@ -11,7 +11,12 @@ import { PlantUploadStore } from '@collectS/plant-upload-store';
 
 const PRIMENG = [StepsModule, ButtonModule];
 
-const COMPONENTS = [Geolocation, ComplementForm, ObservationDataComponent, PhotoDataComponent];
+const COMPONENTS = [
+  DeviceGeolocation,
+  ComplementForm,
+  ObservationDataComponent,
+  PhotoDataComponent,
+];
 
 @Component({
   selector: 'app-register',

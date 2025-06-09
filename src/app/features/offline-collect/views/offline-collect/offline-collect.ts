@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
-import { ObservationDataComponent } from '@collectC/observation-form.component';
+import { ObservationDataComponent } from '@collectC/observation-form';
 import { ComplementForm } from '@collectC/complement-form';
-import { Geolocation } from '@collectC/geolocation';
+import { DeviceGeolocation } from '@collectC/device-geolocation/device-geolocation';
 
 import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
 import { OfflineLoginButton } from '@sharedC/offline-login-button.component';
@@ -15,7 +15,7 @@ import { CollectApi } from '@collectS/collect-api';
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];
 
 const COMPONENTS = [
-  Geolocation,
+  DeviceGeolocation,
   ComplementForm,
   ObservationDataComponent,
   OfflineLoginButton,
@@ -40,7 +40,7 @@ const COMPONENTS = [
 
         <section class="my-2">
           @if (activeIndex() === 0) {
-            <app-geolocation />
+            <app-device-geolocation />
           }
           @if (activeIndex() === 1) {
             <app-complement-form />

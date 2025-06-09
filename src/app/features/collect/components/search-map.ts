@@ -32,12 +32,35 @@ declare let L: typeof Leaflet;
   template: `
     @let collects = collectService.numberOfFilteredCollects();
 
-    <div class="mb-4 flex flex-wrap w-full items-center justify-center md:justify-between gap-4">
-      <span
-        class="hidden md:block font-bold self-start md:text-xl dark:text-slate-300 text-slate-800"
-        >Exibição de coletas</span
-      >
+    <!-- Mobile actions -->
+    <div class="inline-block md:hidden my-2 w-full">
+      <div
+        class="card z-50 bg-surface-50 rounded-xl shadow-lg py-2 px-4 flex justify-between items-center font-medium">
+        <div class="text-md flex flex-col justify-center items-center gap-2">
+          <span>Acurácia</span>
+          <span>{{ accuracy()?.toFixed(2) }} m</span>
+        </div>
 
+        <div class="flex gap-1">
+          <p-button icon="pi pi-compass" severity="help" (click)="detectNearestCollect(false)" />
+          <p-button
+            icon="pi pi-wifi"
+            [disabled]="collects === 0"
+            severity="warn"
+            (click)="detectNearestCollect(true)" />
+          <p-button
+            [icon]="this.polygonLayer ? 'pi pi-eye' : 'pi pi-eye-slash'"
+            [disabled]="!collectSearchFiltersStore.selectedRegion()"
+            severity="info"
+            (click)="plotRegionPolygon()" />
+          <p-button icon="pi pi-map" severity="secondary" (click)="reloadPage()"> </p-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Web actioms -->
+    <div
+      class="hidden mb-4 md:flex flex-wrap w-full items-center justify-center md:justify-between gap-4">
       <div class="flex items-center justify-between gap-1 mt-1">
         <label for="autoDetectionID">Auto Detectar</label>
         <p-toggleswitch
@@ -58,18 +81,12 @@ declare let L: typeof Leaflet;
           severity="info"
           label="Região"
           (click)="plotRegionPolygon()" />
-        <p-button
-          icon="pi pi-map-marker"
-          severity="help"
-          label="Posicionar"
-          (click)="reloadPage()" />
+        <p-button severity="secondary" (click)="reloadPage()">
+          <span>Reposicionar</span>
+          <img width="15px" height="15px" alt="Mapa" src="assets/images/map.png" />
+        </p-button>
       </div>
     </div>
-
-    <span class="font-bold self-start text-md md:text-xl mb-4 dark:text-slate-300 text-slate-800"
-      >Acurácia: {{ accuracy()?.toFixed(2) }} m
-    </span>
-
     <div id="map2"></div>
   `,
   styles: [
@@ -79,6 +96,14 @@ declare let L: typeof Leaflet;
         width: 100%;
         border-radius: 10px;
         z-index: 0;
+      }
+
+      .card {
+        padding: 1rem;
+
+        @media (max-width: 768px) {
+          padding: 8px;
+        }
       }
     `,
   ],
@@ -161,6 +186,7 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
 
         this.geolocationNavigator.coordinates.set(coordinates);
         this.geolocationNavigator.coordinatesTimestamp.set(position.timestamp);
+        this.accuracy.set(accuracy);
 
         this.map2.setView([latitude, longitude], 16);
 
@@ -184,12 +210,12 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
         const [latitude, longitude, accuracy] =
           this.geolocationNavigator.getUserLatitudeAndLongitude(position);
 
-        this.accuracy.set(accuracy);
-
         // Ignore poor accuracy
         if (accuracy > maxAcceptableAccuracy) {
           return;
         }
+
+        this.accuracy.set(accuracy);
 
         const coordinates = { latitude, longitude, accuracy };
 
