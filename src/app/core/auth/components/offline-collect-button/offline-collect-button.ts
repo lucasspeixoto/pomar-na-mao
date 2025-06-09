@@ -10,10 +10,11 @@ import { ConnectivityStatus } from '@sharedS/connectivity-status';
     <section class="offline-collect-button flex justify-center items-center w-full">
       <p-button
         routerLink="/coleta-offline"
-        icon="pi pi-box"
         label="Coleta offline"
         [raised]="true"
-        severity="secondary" />
+        severity="secondary">
+        <img width="20px" height="20px" alt="Box" src="assets/images/open-box.png" />
+      </p-button>
     </section>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

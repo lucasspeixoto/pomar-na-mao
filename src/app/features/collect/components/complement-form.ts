@@ -60,7 +60,7 @@ const PROVIDERS = [MessageService];
       <section class="w-full md:w-1/3 hidden md:inline-block">
         <div class="flex flex-col items-center justify-start gap-1">
           <p-message class="mb-4" severity="info">
-            <span class="text-md lg:text-lg text-justify font-semibold">
+            <span class="text-md text-justify font-semibold">
               {{ complementDataText }}
             </span>
           </p-message>

@@ -72,14 +72,14 @@ const COMMON = [NgClass];
           >Mostrando {{ numberOfFilteredCollects() }} resultados</span
         >
         <div
-          class="mx-1 mt-4 w-full min-h-[100px] gap-4 flex justify-between items-center flex-wrap ">
+          class="mx-0.5 mt-4 w-full min-h-[100px] gap-4 flex justify-between items-center flex-wrap ">
           @for (collect of collects; track collect.id) {
             <div
               [ngClass]="{
                 'border-2 border-primary-500 animate-pulse text-shadow-[0_35px_35px_rgb(132_204_22_/_0.25)]':
                   PlantPositionDetect.detectedColledtId() === collect.id,
               }"
-              class="hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[180px] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
+              class="hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[45%] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
               <div class="py-2 px-2 flex justify-between items-center">
                 <span class="font-bold text-md"> #{{ collect.id.split('-')[0] }}...</span>
                 @if (collect?.region) {
@@ -101,9 +101,9 @@ const COMMON = [NgClass];
                 ></span>
               </div>
 
-              <div class="px-0.5 mt-4 gap-1 flex flex-wrap items-start justify-between">
-                <span class="text-md"> {{ collect.latitude.toFixed(5) }}</span>
-                <span class="text-md"> {{ collect.longitude.toFixed(5) }}</span>
+              <div class="px-2 mt-4 gap-1 flex flex-wrap items-start justify-between">
+                <span class="text-sm md:text-md"> {{ collect.latitude.toFixed(5) }}</span>
+                <span class="text-sm md:text-md"> {{ collect.longitude.toFixed(5) }}</span>
               </div>
 
               <div class="px-0.5 gap-1 flex flex-wrap items-start justify-center">
@@ -138,8 +138,17 @@ const COMMON = [NgClass];
       }
 
       <p-popover #plantPhotoPopover>
-        <div class="p-4 max-w-fit max-h-fit">
-          <img width="200px" height="200px" [src]="selectedPlantPhotoUrl" alt="Foto Planta" />
+        <div class="p-4 max-w-fit max-h-fit flex flex-col justify-center items-center gap-2">
+          <img
+            (error)="onImageError($event)"
+            width="200px"
+            height="200px"
+            [src]="selectedPlantPhotoUrl"
+            alt="Foto Planta" />
+
+          @if (!selectedPlantPhotoUrl) {
+            <span class="font-medium">Sem Foto</span>
+          }
         </div>
       </p-popover>
 
@@ -194,7 +203,13 @@ export class SearchCollectItems {
 
   public numberOfOccurrences = signal(0);
 
-  public selectedPlantPhotoUrl!: string;
+  public selectedPlantPhotoUrl!: string | null;
+
+  public onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'assets/images/empty-photo.jpg';
+    this.selectedPlantPhotoUrl = null;
+  }
 
   public showComplementDialog(collect: PlantData): void {
     const { id, mass, variety, harvest, planting_date, description, life_of_the_tree, region } =

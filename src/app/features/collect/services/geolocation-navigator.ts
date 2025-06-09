@@ -1,8 +1,14 @@
 import { computed, Injectable, signal } from '@angular/core';
 
-type Coordinate = {
+export type Coordinate = {
   latitude: number;
   longitude: number;
+  accuracy?: number;
+};
+
+export type Position = {
+  coords: Coordinate;
+  timestamp: number;
 };
 
 @Injectable({
@@ -76,8 +82,8 @@ export class GeolocationNavigator {
   }
 
   public getUserLatitudeAndLongitude(position: GeolocationPosition): number[] {
-    const { latitude, longitude } = position.coords;
-    return [latitude, longitude];
+    const { latitude, longitude, accuracy } = position.coords;
+    return [latitude, longitude, accuracy];
   }
 
   public handleGeolocationError(error: GeolocationPositionError): void {
