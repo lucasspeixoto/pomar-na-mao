@@ -144,10 +144,14 @@ const PROVIDERS = [MessageService];
   `,
   styles: [
     `
-      ::ng-deep {
+      :host ::ng-deep {
         .p-inputmask,
         .p-datepicker {
           width: 100%;
+        }
+
+        .p-dialog-header {
+          padding: 1rem;
         }
       }
     `,

@@ -1,4 +1,13 @@
-import { Component, HostBinding, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
@@ -65,7 +74,8 @@ import { LayoutConfig } from '../layout-config';
             [item]="child"
             [index]="i"
             [parentKey]="key"
-            [class]="child['badgeClass']"></li>
+            [class]="child['badgeClass']"
+            (childActive)="onChildActive()"></li>
         </ng-template>
       </ul>
     </ng-container>
@@ -90,12 +100,6 @@ import { LayoutConfig } from '../layout-config';
   providers: [LayoutConfig],
 })
 export class AppMenuitem implements OnInit, OnDestroy {
-  public router = inject(Router);
-
-  public route = inject(ActivatedRoute);
-
-  private layoutService = inject(LayoutConfig);
-
   @Input() item!: MenuItem;
 
   @Input() index!: number;
@@ -103,6 +107,14 @@ export class AppMenuitem implements OnInit, OnDestroy {
   @Input() @HostBinding('class.layout-root-menuitem') root!: boolean;
 
   @Input() parentKey!: string;
+
+  @Output() childActive = new EventEmitter<void>();
+
+  public router = inject(Router);
+
+  public route = inject(ActivatedRoute);
+
+  private layoutService = inject(LayoutConfig);
 
   public active = false;
 
@@ -147,15 +159,49 @@ export class AppMenuitem implements OnInit, OnDestroy {
     }
   }
 
-  public updateActiveStateFromRoute(): void {
-    const activeRoute = this.router.isActive(this.item.routerLink[0], {
-      paths: 'exact',
-      queryParams: 'ignored',
-      matrixParams: 'ignored',
-      fragment: 'ignored',
-    });
+  public onChildActive(): void {
+    this.active = true;
+  }
 
-    if (activeRoute) {
+  private isChildRouteActive(item: MenuItem): boolean {
+    if (
+      item.routerLink &&
+      this.router.isActive(item.routerLink[0], {
+        paths: 'exact',
+        queryParams: 'ignored',
+        matrixParams: 'ignored',
+        fragment: 'ignored',
+      })
+    ) {
+      return true;
+    }
+    if (item.items) {
+      return item.items.some(child => this.isChildRouteActive(child));
+    }
+    return false;
+  }
+
+  public updateActiveStateFromRoute(): void {
+    const wasActive = this.active;
+
+    if (this.item.routerLink) {
+      this.active = this.router.isActive(this.item.routerLink[0], {
+        paths: 'exact',
+        queryParams: 'ignored',
+        matrixParams: 'ignored',
+        fragment: 'ignored',
+      });
+    } else if (this.item.items) {
+      this.active = this.item.items.some(child => this.isChildRouteActive(child));
+    } else {
+      this.active = false;
+    }
+
+    if (this.active && !wasActive && this.childActive) {
+      this.childActive.emit();
+    }
+
+    if (this.active) {
       this.layoutService.onMenuStateChange({ key: this.key, routeEvent: true });
     }
   }

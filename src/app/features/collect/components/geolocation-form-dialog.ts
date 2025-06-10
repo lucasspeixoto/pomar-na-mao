@@ -89,6 +89,20 @@ const COMMON = [CardModule, FormsModule, ReactiveFormsModule, CustomValidationMe
       </p-dialog>
     </section>
   `,
+  styles: [
+    `
+      :host ::ng-deep {
+        .p-inputmask,
+        .p-datepicker {
+          width: 100%;
+        }
+
+        .p-dialog-header {
+          padding: 1rem;
+        }
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GeolocationFormDialog {

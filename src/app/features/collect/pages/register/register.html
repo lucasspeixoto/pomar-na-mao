@@ -5,7 +5,7 @@
             (activeIndexChange)="onActiveIndexChange($event)" />
     </div>
 
-    <section class="my-2">
+    <section>
         @if(activeIndex() === 0) {
         <app-device-geolocation />
         } @if (activeIndex() === 1) {
@@ -17,7 +17,7 @@
         }
     </section>
 
-    <div class="w-full justify-end flex my-2 gap-2">
+    <div class="w-full justify-end flex gap-2">
         @if(activeIndex() !== 0) {
         <p-button (click)="goToPreviousStep()" [link]="true" severity="contrast" label="Voltar" icon="pi pi-angle-left"
             iconPos="left" />
@@ -29,7 +29,7 @@
     </div>
 
     @if(activeIndex() === 3) {
-    <div class="justify-center w-full flex mt-4 gap-2">
+    <div class="justify-center w-full flex gap-2">
         <p-button label="Coletar" icon="pi pi-database" iconPos="right"
             (click)="insertOnlineCollectHandler()"></p-button>
     </div>

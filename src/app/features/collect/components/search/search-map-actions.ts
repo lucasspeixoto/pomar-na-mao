@@ -25,13 +25,13 @@ import { NgClass } from '@angular/common';
             <span class="text-sm md:text-lg">Auto Detectar</span>
             <p-button
               [ngClass]="{
-                'animate-ping': isAutoDetectionModeOn(),
+                'animate animate-pulse': isAutoDetectionModeOn(),
                 'animate-none': !isAutoDetectionModeOn(),
               }"
               icon="pi pi-wifi"
               [disabled]="isCollectDataEmpty()"
               [rounded]="true"
-              [text]="true"
+              [outlined]="true"
               severity="warn"
               (click)="onChangeAutoDetectionModeHandler()" />
           </div>
@@ -41,7 +41,7 @@ import { NgClass } from '@angular/common';
               icon="pi pi-wifi"
               [disabled]="isCollectDataEmpty()"
               [rounded]="true"
-              [text]="true"
+              [outlined]="true"
               severity="danger"
               (click)="detectNearestCollectHander()" />
           </div>
@@ -51,7 +51,7 @@ import { NgClass } from '@angular/common';
               icon="pi pi-map"
               [disabled]="!collectSearchFiltersStore.selectedRegion()"
               [rounded]="true"
-              [text]="true"
+              [outlined]="true"
               severity="info"
               (click)="plotRegionPolygonHandler()" />
           </div>
@@ -61,7 +61,7 @@ import { NgClass } from '@angular/common';
             <p-button
               icon="pi pi-map-marker"
               [rounded]="true"
-              [text]="true"
+              [outlined]="true"
               severity="help"
               (click)="reloadPage()">
             </p-button>

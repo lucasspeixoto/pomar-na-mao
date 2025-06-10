@@ -185,6 +185,20 @@ const PROVIDERS = [MessageService];
       </ng-template>
     </p-dialog>
   `,
+  styles: [
+    `
+      :host ::ng-deep {
+        .p-inputmask,
+        .p-datepicker {
+          width: 100%;
+        }
+
+        .p-dialog-header {
+          padding: 1rem;
+        }
+      }
+    `,
+  ],
   providers: [...PROVIDERS],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -27,8 +27,8 @@ const COMPONENTS = [DeviceGeolocationWebInfos, DeviceGeolocationMobileInfos, Geo
   selector: 'app-device-geolocation',
   imports: [...PRIMENG, ...COMPONENTS],
   template: `
-    <div class="overflow-hidden flex flex-col min-h-[450px]">
-      <div class="self-end inline-block md:hidden my-2">
+    <div class="overflow-hidden flex flex-col min-h-[400px]">
+      <div class="self-end inline-block h-auto md:hidden my-2">
         <p-button
           (click)="reloadPage()"
           severity="help"
@@ -39,8 +39,8 @@ const COMPONENTS = [DeviceGeolocationWebInfos, DeviceGeolocationMobileInfos, Geo
 
       <app-device-geolocation-mobile-infos />
 
-      <div class="w-full flex flex-col sm:flex-row justify-between gap-4 sm:gap-4">
-        <div class="hidden md:inline-block w-full md:w-1/3">
+      <div class="w-full flex flex-col sm:flex-row gap-4 sm:gap-4">
+        <div class="hidden md:inline-block w-full md:w-2/5">
           <div class="w-full flex flex-col justify-between h-full">
             <app-geolocation-form-info />
 
@@ -48,7 +48,7 @@ const COMPONENTS = [DeviceGeolocationWebInfos, DeviceGeolocationMobileInfos, Geo
           </div>
         </div>
 
-        <div class="w-full md:2/3">
+        <div class="w-full md:3/5">
           <div id="map"></div>
         </div>
       </div>
@@ -57,7 +57,7 @@ const COMPONENTS = [DeviceGeolocationWebInfos, DeviceGeolocationMobileInfos, Geo
   styles: [
     `
       #map {
-        height: 480px;
+        height: 400px;
         width: 100%;
         border-radius: 10px;
         z-index: 0;
