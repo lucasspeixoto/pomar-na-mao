@@ -24,7 +24,7 @@ const COMMON = [NgStyle];
         }
 
         .p-dialog-header {
-          padding: 0;
+          padding: 0rem;
         }
       }
     `,

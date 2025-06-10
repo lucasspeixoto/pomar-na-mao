@@ -60,6 +60,7 @@ const COMMON = [FormsModule];
               [(ngModel)]="collectSearchFiltersStore.selectedRegion"
               [checkmark]="true"
               [showClear]="true"
+              [editable]="true"
               placeholder="Selecione a região" />
             <small class="font-semibold text-blue-500 dark:text-cyan-300" id="selectedHarvestField"
               >Seleciona apenas uma região de alcançe para o filtro</small
@@ -76,7 +77,8 @@ const COMMON = [FormsModule];
             (onChange)="changeOccurrenceHandler($event)"
             [(ngModel)]="collectSearchFiltersStore.selectedOccurrences"
             placeholder="Selecione a ocorrência"
-            [editable]="true"
+            [checkmark]="true"
+            [showClear]="true"
             optionLabel="name"
             optionValue="code"
             class="w-full" />
