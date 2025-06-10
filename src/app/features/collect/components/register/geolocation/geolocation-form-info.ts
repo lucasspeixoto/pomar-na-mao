@@ -13,9 +13,9 @@ import { MessageModule } from 'primeng/message';
         <span class="text-md text-justify font-semibold">{{ geolocationTextInfo }}</span>
         <p-button
           (click)="reloadPage()"
+          severity="help"
+          label="Reposicionar"
           class="mt-4 self-end flex items-center justify-center opacity-80 hover:opacicy-100">
-          <span>Reposicionar</span>
-          <img width="20px" height="20px" alt="Mapa" src="assets/images/map.png" />
         </p-button>
       </div>
     </p-message>

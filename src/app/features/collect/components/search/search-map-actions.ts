@@ -8,11 +8,8 @@ import {
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
-
 import { SearchFiltersStore } from '@collectS/search-filters-store';
-
 import { FormsModule } from '@angular/forms';
-
 import { NgClass } from '@angular/common';
 
 @Component({

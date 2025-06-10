@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
-import { SearchCollectFilters } from '@collectC/search-collect-filters';
-import { SearchCollectItems } from '@collectC/search-collect-items';
-import { SearchMap } from '@collectC/search-map/search-map';
+import { SearchCollectFilters } from '@collectC/search/search-collect-filters';
+import { SearchCollectItems } from '@collectC/search/search-collect-items';
+import { SearchMap } from '@collectC/search/search-map';
 import { DialogModule } from 'primeng/dialog';
 
 const PRIMENG = [ButtonModule, DialogModule];

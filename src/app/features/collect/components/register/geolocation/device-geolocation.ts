@@ -31,9 +31,9 @@ const COMPONENTS = [DeviceGeolocationWebInfos, DeviceGeolocationMobileInfos, Geo
       <div class="self-end inline-block md:hidden my-2">
         <p-button
           (click)="reloadPage()"
+          severity="help"
+          label="Reposicionar"
           class="mt-4 self-end flex items-center justify-center opacity-80 hover:opacicy-100">
-          <span>Reposicionar</span>
-          <img width="20px" height="20px" alt="Mapa" src="assets/images/map.png" />
         </p-button>
       </div>
 
