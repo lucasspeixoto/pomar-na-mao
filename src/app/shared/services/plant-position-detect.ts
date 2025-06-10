@@ -24,7 +24,7 @@ export class PlantPositionDetect {
 
   public filteredCollectData = this.collectService.filteredCollectData;
 
-  public setDetectedColledtId(id: string): void {
+  public setDetectedColledtId(id: string | null): void {
     this._detectedColledtId.set(id);
   }
 

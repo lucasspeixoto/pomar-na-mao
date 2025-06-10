@@ -28,12 +28,12 @@ const COMPONENTS = [DeviceGeolocationWebInfos, DeviceGeolocationMobileInfos, Geo
   imports: [...PRIMENG, ...COMPONENTS],
   template: `
     <div class="overflow-hidden flex flex-col min-h-[400px]">
-      <div class="self-end inline-block h-auto md:hidden my-2">
+      <div class="self-end inline-block h-auto md:hidden mb-2">
         <p-button
           (click)="reloadPage()"
           severity="help"
           label="Reposicionar"
-          class="mt-4 self-end flex items-center justify-center opacity-80 hover:opacicy-100">
+          class="self-end flex items-center justify-center opacity-80 hover:opacicy-100">
         </p-button>
       </div>
 

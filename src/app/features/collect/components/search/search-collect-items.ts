@@ -76,10 +76,12 @@ const COMMON = [NgClass];
           @for (collect of collects; track collect.id) {
             <div
               [ngClass]="{
-                'border-2 border-primary-500 animate-pulse text-shadow-[0_35px_35px_rgb(132_204_22_/_0.25)]':
-                  PlantPositionDetect.detectedColledtId() === collect.id,
+                'dark-background': layoutService.isDarkTheme(),
+                'light-background': !layoutService.isDarkTheme(),
+                'border-2 border-[#a31a1f] animate-pulse text-shadow-[0_35px_35px_rgb(132_204_22_/_0.25)]':
+                  plantPositionDetect.detectedColledtId() === collect.id,
               }"
-              class="hover:border hover:border-primary-500 bg-surface-0 dark:bg-surface-900 cursor-pointer w-[45%] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
+              class="bg-surface-0 dark:bg-surface-900 cursor-pointer w-[45%] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
               <div class="py-2 px-2 flex justify-between items-center">
                 <span class="font-bold text-md"> #{{ collect.id.split('-')[0] }}...</span>
                 @if (collect?.region) {
@@ -102,8 +104,8 @@ const COMMON = [NgClass];
               </div>
 
               <div class="px-2 mt-4 gap-1 flex flex-wrap items-start justify-between">
-                <span class="text-sm md:text-md"> {{ collect.latitude.toFixed(5) }}</span>
-                <span class="text-sm md:text-md"> {{ collect.longitude.toFixed(5) }}</span>
+                <span class="text-sm md:text-lg"> {{ collect.latitude.toFixed(5) }}</span>
+                <span class="text-sm md:text-lg"> {{ collect.longitude.toFixed(5) }}</span>
               </div>
 
               <div class="px-0.5 gap-1 flex flex-wrap items-start justify-center">
@@ -171,6 +173,20 @@ const COMMON = [NgClass];
           font-size: 1.1rem;
         }
       }
+
+      .light-background {
+        background-image: url('/assets/images/light-wave.svg');
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+      }
+
+      .dark-background {
+        background-image: url('/assets/images/dark-wave.svg');
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+      }
     `,
   ],
   providers: [...PROVIDERS],
@@ -189,7 +205,7 @@ export class SearchCollectItems {
 
   public layoutService = inject(LayoutConfig);
 
-  public PlantPositionDetect = inject(PlantPositionDetect);
+  public plantPositionDetect = inject(PlantPositionDetect);
 
   public filteredCollectData = this.collectService.filteredCollectData;
 

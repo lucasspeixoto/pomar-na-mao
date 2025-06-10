@@ -257,6 +257,9 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
 
     if (this.isAutoDetectionModeOn()) {
       this.detectNearestCollect(false);
+    } else {
+      this.removeNearestPoint();
+      this.plantPositionDetect.setDetectedColledtId(null);
     }
   }
 
