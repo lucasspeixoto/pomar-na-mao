@@ -5,13 +5,12 @@ import {
   AfterViewInit,
   OnInit,
   effect,
-  model,
   OnDestroy,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { ToggleSwitchModule, ToggleSwitchChangeEvent } from 'primeng/toggleswitch';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import type * as Leaflet from 'leaflet';
 
 import { SearchFiltersStore } from '@collectS/search-filters-store';
@@ -20,73 +19,26 @@ import { FormsModule } from '@angular/forms';
 import { sortCoordinatesClockwise } from '@sharedU/sort-coordinates';
 import { CollectApi } from '@collectS/collect-api';
 import { FarmRegionApi } from '@collectS/farm-region-api';
-import { GeolocationNavigator, type Coordinate } from '@collectS/geolocation-navigator';
+import { GeolocationNavigator } from '@collectS/geolocation-navigator';
 import { LoadingStore } from '@sharedS/loading-store';
 import { maxAcceptableAccuracy } from '@sharedU/geolocation-math';
+import { SearchMapActions } from './search-map-actions';
 
 declare let L: typeof Leaflet;
 
 @Component({
   selector: 'app-search-map',
-  imports: [ButtonModule, ToggleSwitchModule, FormsModule],
+  imports: [ButtonModule, ToggleSwitchModule, FormsModule, SearchMapActions],
   template: `
     @let collects = collectService.numberOfFilteredCollects();
 
-    <!-- Mobile actions -->
-    <div class="inline-block md:hidden my-2 w-full">
-      <div
-        class="card z-50 bg-surface-50 rounded-xl shadow-lg py-2 px-4 flex justify-between items-center font-medium">
-        <div class="text-md flex flex-col justify-center items-center gap-2">
-          <span>Acurácia</span>
-          <span>{{ accuracy()?.toFixed(2) }} m</span>
-        </div>
+    <app-search-map-actions
+      [isAutoDetectionModeOn]="isAutoDetectionModeOn()"
+      [isCollectDataEmpty]="collects === 0 ? true : false"
+      (detectNearestCollect)="detectNearestCollect($event)"
+      (changeAutoDetectionMode)="onChangeAutoDetectionMode()"
+      (plotRegionPolygon)="plotRegionPolygon()" />
 
-        <div class="flex gap-1">
-          <p-button icon="pi pi-compass" severity="help" (click)="detectNearestCollect(false)" />
-          <p-button
-            icon="pi pi-wifi"
-            [disabled]="collects === 0"
-            severity="warn"
-            (click)="detectNearestCollect(true)" />
-          <p-button
-            [icon]="this.polygonLayer ? 'pi pi-eye' : 'pi pi-eye-slash'"
-            [disabled]="!collectSearchFiltersStore.selectedRegion()"
-            severity="info"
-            (click)="plotRegionPolygon()" />
-          <p-button icon="pi pi-map" severity="secondary" (click)="reloadPage()"> </p-button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Web actioms -->
-    <div
-      class="hidden mb-4 md:flex flex-wrap w-full items-center justify-center md:justify-between gap-4">
-      <div class="flex items-center justify-between gap-1 mt-1">
-        <label for="autoDetectionID">Auto Detectar</label>
-        <p-toggleswitch
-          (onChange)="onChangeAutoDetectionMode($event)"
-          inputId="autoDetectionID"
-          [(ngModel)]="isAutoDetectionModeOn" />
-      </div>
-      <div class="flex flex-wrap items-center justify-center md:justify-end gap-2">
-        <p-button
-          icon="pi pi-wifi"
-          [disabled]="collects === 0"
-          severity="warn"
-          label="Detectar"
-          (click)="detectNearestCollect(true)" />
-        <p-button
-          [icon]="this.polygonLayer ? 'pi pi-eye' : 'pi pi-eye-slash'"
-          [disabled]="!collectSearchFiltersStore.selectedRegion()"
-          severity="info"
-          label="Região"
-          (click)="plotRegionPolygon()" />
-        <p-button severity="secondary" (click)="reloadPage()">
-          <span>Reposicionar</span>
-          <img width="15px" height="15px" alt="Mapa" src="assets/images/map.png" />
-        </p-button>
-      </div>
-    </div>
     <div id="map2"></div>
   `,
   styles: [
@@ -125,7 +77,7 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
 
   public filteredCollectData = this.collectService.filteredCollectData;
 
-  public isAutoDetectionModeOn = model(false);
+  public isAutoDetectionModeOn = signal(false);
 
   public userMarker!: Leaflet.Marker;
 
@@ -144,10 +96,6 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
   public intervalOn = false;
 
   public isMapElementAvailable = false;
-
-  public lastPosition: Coordinate | null = null;
-
-  public positionBuffer: Coordinate[] = [];
 
   public accuracy = signal<number | null>(null);
 
@@ -304,8 +252,10 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
     this.plottedPoints = [];
   }
 
-  public onChangeAutoDetectionMode(event: ToggleSwitchChangeEvent): void {
-    if (event.checked) {
+  public onChangeAutoDetectionMode(): void {
+    this.isAutoDetectionModeOn.update(current => !current);
+
+    if (this.isAutoDetectionModeOn()) {
       this.detectNearestCollect(false);
     }
   }
@@ -345,10 +295,6 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
       const [item] = this.filteredCollectData().splice(index, 1);
       this.filteredCollectData().unshift(item);
     }
-  }
-
-  public reloadPage(): void {
-    window.location.reload();
   }
 
   public removeMapPlots(): void {
