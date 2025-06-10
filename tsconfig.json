@@ -54,7 +54,7 @@
                 "./src/app/features/collect/utils/*"
             ],
             "@offcollectV/*": [
-                "./src/app/features/offline-collect/views/*"
+                "src/app/features/offline-collect/pages/*"
             ],
             "@authS/*": [
                 "./src/app/core/auth/services/*"

@@ -3,13 +3,13 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { StepsModule } from 'primeng/steps';
 import { StepperModule } from 'primeng/stepper';
 import { ButtonModule } from 'primeng/button';
-import { ObservationDataComponent } from '@collectC/observation-form';
-import { ComplementForm } from '@collectC/complement-form';
-import { DeviceGeolocation } from '@collectC/device-geolocation/device-geolocation';
+import { ObservationDataComponent } from '@collectC/register/observation/observation-form';
+import { ComplementForm } from '@collectC/register/complement/complement-form';
+import { DeviceGeolocation } from '@collectC/register/geolocation/device-geolocation';
 
-import { checkCurrencStorageStep } from '../../../collect/utils/localstorage';
+import { checkCurrencStorageStep } from '../../collect/utils/localstorage';
 import { OfflineLoginButton } from '@sharedC/offline-login-button.component';
-import { PhotoDataComponent } from '@collectC/photo-form';
+import { PhotoDataComponent } from '@collectC/register/photo-form';
 import { CollectApi } from '@collectS/collect-api';
 
 const PRIMENG = [StepsModule, ButtonModule, StepperModule];

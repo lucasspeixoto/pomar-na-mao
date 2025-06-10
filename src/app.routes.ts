@@ -21,9 +21,7 @@ export const appRoutes: Routes = [
   {
     path: 'coleta-offline',
     loadComponent: () =>
-      import('./app/features/offline-collect/views/offline-collect/offline-collect').then(
-        c => c.OfflineCollect
-      ),
+      import('./app/features/offline-collect/pages/offline-collect').then(c => c.OfflineCollect),
   },
   {
     path: '',

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { StepsModule } from 'primeng/steps';
 import { ButtonModule } from 'primeng/button';
-import { ComplementForm } from '@collectC/complement-form';
-import { DeviceGeolocation } from '@collectC/device-geolocation/device-geolocation';
-import { ObservationDataComponent } from '@collectC/observation-form';
+import { ComplementForm } from '@collectC/register/complement/complement-form';
+import { DeviceGeolocation } from '@collectC/register/geolocation/device-geolocation';
+import { ObservationDataComponent } from '@collectC/register/observation/observation-form';
 import { CollectApi } from '@collectS/collect-api';
 import { checkCurrencStorageStep } from '@collectU/localstorage';
-import { PhotoDataComponent } from '@collectC/photo-form';
+import { PhotoDataComponent } from '@collectC/register/photo-form';
 import { PlantUploadStore } from '@collectS/plant-upload-store';
 
 const PRIMENG = [StepsModule, ButtonModule];

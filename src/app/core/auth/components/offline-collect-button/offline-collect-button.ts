@@ -13,7 +13,7 @@ import { ConnectivityStatus } from '@sharedS/connectivity-status';
         label="Coleta offline"
         [raised]="true"
         severity="secondary">
-        <img width="20px" height="20px" alt="Box" src="assets/images/open-box.png" />
+        <img width="15px" height="15px" alt="Box" src="assets/images/open-box.png" />
       </p-button>
     </section>
   `,

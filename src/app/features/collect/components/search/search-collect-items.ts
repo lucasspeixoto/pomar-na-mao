@@ -25,7 +25,7 @@ import { ComplementStore } from '@collectS/complement-store';
 import { ObservationStore } from '@collectS/observation-store';
 import { SearchFiltersStore } from '@collectS/search-filters-store';
 import { LayoutConfig } from 'src/app/core/layout/layout-config';
-import { OccurrencesPipe } from '../pipes/occurrences-pipe';
+import { OccurrencesPipe } from '../../pipes/occurrences-pipe';
 import { Popover } from 'primeng/popover';
 import { PopoverModule } from 'primeng/popover';
 import { environment } from '@env/environment';
