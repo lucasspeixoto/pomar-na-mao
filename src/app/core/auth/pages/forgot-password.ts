@@ -30,7 +30,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
       <div class="w-full md:w-[40%] min-h-screen bg-surface-0 dark:bg-surface-900">
         <div class="flex h-full flex-col items-center justify-between">
           <!-- Top -->
-          <div class="flex flex-col items-center justify-center w-full mt-8 md:mt-0">
+          <div class="flex flex-col items-center justify-center w-full mt-0">
             <!-- Image -->
             <img
               class="md:inline-block hidden w-full md:w-[150px]"
