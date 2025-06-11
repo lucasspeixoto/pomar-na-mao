@@ -83,14 +83,16 @@ const COMMON = [NgClass];
               }"
               class="bg-surface-0 dark:bg-surface-900 cursor-pointer w-[45%] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
               <div class="py-2 px-2 flex justify-between items-center">
-                <span class="font-bold text-md"> #{{ collect.id.split('-')[0] }}...</span>
+                <span class="font-bold sm:text-sm md:text-md">
+                  #{{ collect.id.split('-')[0] }}...</span
+                >
                 @if (collect?.region) {
                   <div
                     class="shadow-lg p-2 shadow-purple-500/50 inline-flex items-center justify-center rounded-md p-1/2 bg-purple-200 hover:bg-purple-300 transition-all duration-200 text-sm dark:bg-purple-800 dark:hover:bg-purple-700">
-                    <div
-                      class="w-auto h-auto text-purple-900 dark:text-purple-50 font-medium text-center px-1">
-                      R-{{ collect.region }}
-                    </div>
+                    <span
+                      class="w-auto h-auto text-purple-900 dark:text-purple-50 text-xs sm:text-sm md:text-md text-center p-0 md:px-1">
+                      {{ collect.region }}
+                    </span>
                   </div>
                 }
               </div>
