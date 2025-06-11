@@ -28,29 +28,41 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
   template: `
     <section class="flex">
       <div class="hidden md:block w-[60%] container min-h-screen"></div>
-      <div class="w-full md:w-[40%] h-screen bg-surface-0 dark:bg-surface-900">
+      <div class="w-full md:w-[40%] min-h-screen bg-surface-0 dark:bg-surface-900">
         @if (ConnectivityStatus.isOnline()) {
           <app-install-pwa-button />
         }
-        <div class="flex h-full flex-col items-center justify-between">
+        <div class="flex flex-col items-center justify-between">
           <!-- Top -->
-          <div class="flex flex-col items-center justify-center w-full mt-8 md:mt-0">
+          <div class="flex flex-col items-center justify-center w-full mt-0">
             <!-- Image -->
-            <img class="w-[180px] md:w-[150px]" src="assets/images/lichia.png" alt="Pomar" />
+            <img
+              class="md:inline-block hidden w-full md:w-[150px]"
+              src="assets/images/lichia.png"
+              alt="Pomar" />
+
+            <div class="inline-block md:hidden relative w-full h-full overflow-hidden">
+              <img
+                src="assets/images/background.jpeg"
+                alt="Pomar"
+                class="w-full h-full object-cover [clip-path:ellipse(90%_80%_at_50%_0%)]" />
+            </div>
 
             <!-- Welcome -->
             <div class="flex flex-col text-center mb-8 gap-2">
-              <span class="text-surface-900 dark:text-surface-0 text-lg md:text-3xl font-medium">
+              <span class="text-surface-900 dark:text-surface-0 text-xl md:text-3xl font-medium">
                 Pomar na mão
               </span>
-              <span class="text-muted-color text-md md:text-xl">Bem vindo</span>
+              <span class="text-muted-color text-lg md:text-2xl"
+                >Controle – Rastreabilidade - Produtividade
+              </span>
             </div>
           </div>
 
           <!-- Bottom -->
           <div class="flex flex-col items-center justify-end w-full h-full m-4 px-4 md:px-8">
             <!-- Form -->
-            <form [formGroup]="loginForm" class="w-full sm:w-[350px] mb-8">
+            <form [formGroup]="loginForm" class="w-full sm:w-[350px] mb-8 mx-8">
               <div class="mb-2">
                 <label
                   for="emailField"
@@ -99,7 +111,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
               <div class="mt-4 w-full flex justify-center">
                 <p-button
-                  class="w-auto rounded-full"
+                  class="w-full rounded-3xl"
                   [disabled]="!ConnectivityStatus.isOnline()"
                   (click)="loginHandler()"
                   id="loginButton"
@@ -121,6 +133,18 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
+      }
+
+      :host ::ng-deep {
+        .p-inputtext {
+          border-radius: 20px;
+          padding: 1rem;
+        }
+
+        .p-button {
+          width: 100%;
+          border-radius: 20px;
+        }
       }
     `,
   ],
