@@ -86,9 +86,9 @@ const COMMON = [NgClass];
                 <span class="font-bold text-md"> #{{ collect.id.split('-')[0] }}...</span>
                 @if (collect?.region) {
                   <div
-                    class="shadow-lg shadow-primary-500/50 inline-flex items-center justify-center rounded-md w-10 h-7 bg-primary-200 hover:bg-primary-300 transition-all duration-200 text-sm dark:bg-primary-800 dark:hover:bg-primary-700">
+                    class="shadow-lg p-2 shadow-purple-500/50 inline-flex items-center justify-center rounded-md p-1/2 bg-purple-200 hover:bg-purple-300 transition-all duration-200 text-sm dark:bg-purple-800 dark:hover:bg-purple-700">
                     <div
-                      class="w-auto h-auto text-primary-900 dark:text-primary-50 font-medium text-center px-1">
+                      class="w-auto h-auto text-purple-900 dark:text-purple-50 font-medium text-center px-1">
                       R-{{ collect.region }}
                     </div>
                   </div>
