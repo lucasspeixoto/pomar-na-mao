@@ -32,7 +32,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
         @if (ConnectivityStatus.isOnline()) {
           <app-install-pwa-button />
         }
-        <div class="flex flex-col items-center justify-between">
+        <div class="flex flex-col items-center justify-between h-full">
           <!-- Top -->
           <div class="flex flex-col items-center justify-center w-full mt-0">
             <!-- Image -->
@@ -60,7 +60,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
           </div>
 
           <!-- Bottom -->
-          <div class="flex flex-col items-center justify-end w-full h-full m-4 px-4 md:px-8">
+          <div class="flex flex-col items-center justify-center w-full h-full m-4 px-4 md:px-8">
             <!-- Form -->
             <form [formGroup]="loginForm" class="w-full sm:w-[350px] mb-8 mx-8">
               <div class="mb-2">
@@ -119,9 +119,9 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
                 </p-button>
               </div>
             </form>
-
-            <app-offline-collect-button />
           </div>
+
+          <app-offline-collect-button class="mb-4" />
         </div>
       </div>
     </section>
@@ -144,6 +144,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
         .p-button {
           width: 100%;
           border-radius: 20px;
+          padding: 1rem;
         }
       }
     `,

@@ -30,7 +30,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
       <div class="w-full md:w-[40%] min-h-screen bg-surface-0 dark:bg-surface-900">
         <div class="flex h-full flex-col items-center justify-between">
           <!-- Top -->
-          <div class="flex flex-col items-center justify-center w-full mt-0">
+          <div class="flex flex-col items-center justify-between h-full">
             <!-- Image -->
             <img
               class="md:inline-block hidden w-full md:w-[150px]"
@@ -56,7 +56,8 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
           </div>
 
           <!-- Bottom -->
-          <div class="flex flex-col items-center justify-end gap-4 w-full h-full m-4 px-4 md:px-8">
+          <div
+            class="flex flex-col items-center justify-center gap-4 w-full h-full m-4 px-4 md:px-8">
             <!-- Form -->
             <form [formGroup]="forgotPasswordForm" class="w-full sm:w-[350px] mb-8">
               <div class="mb-2">
@@ -93,9 +94,9 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
                   class="w-full rounded-3xl"></p-button>
               </div>
             </form>
-
-            <app-offline-collect-button />
           </div>
+
+          <app-offline-collect-button class="mb-4" />
         </div>
       </div>
     </section>
@@ -118,6 +119,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
         .p-button {
           width: 100%;
           border-radius: 20px;
+          padding: 1rem;
         }
       }
     `,
