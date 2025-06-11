@@ -90,7 +90,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
               <div class="mt-4 w-full flex justify-center">
                 <p-button
-                  class="w-full rounded-full"
+                  class="w-full rounded-3xl"
                   [disabled]="!ConnectivityStatus.isOnline()"
                   (click)="resetPasswordHandler()"
                   id="resetPasswordButton"
@@ -119,11 +119,11 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
           border-radius: 20px;
           padding: 1rem;
         }
-      }
 
-      .p-button {
-        width: 100%;
-        border-radius: 20px;
+        .p-button {
+          width: 100%;
+          border-radius: 20px;
+        }
       }
     `,
   ],

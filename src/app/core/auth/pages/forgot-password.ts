@@ -90,7 +90,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
                   (click)="forgotPasswordHandler()"
                   id="forgotPasswordButton"
                   label="Lembrar"
-                  class="w-full rounded-full"></p-button>
+                  class="w-full rounded-3xl"></p-button>
               </div>
             </form>
 
@@ -114,11 +114,11 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
           border-radius: 20px;
           padding: 1rem;
         }
-      }
 
-      .p-button {
-        width: 100%;
-        border-radius: 20px;
+        .p-button {
+          width: 100%;
+          border-radius: 20px;
+        }
       }
     `,
   ],
