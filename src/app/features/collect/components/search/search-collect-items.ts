@@ -83,8 +83,11 @@ const COMMON = [NgClass];
               }"
               class="bg-surface-0 dark:bg-surface-900 cursor-pointer w-[45%] sm:w-[220px] rounded-lg p-1/2 sm:p-1">
               <div class="py-2 px-2 flex justify-between items-center">
-                <span class="font-bold sm:text-sm md:text-md">
+                <!-- <span class="font-bold sm:text-sm md:text-lg">
                   #{{ collect.id.split('-')[0] }}...</span
+                > -->
+                <span class="font-bold sm:text-sm md:text-lg">
+                  Ponto: {{ collect.description }}</span
                 >
                 @if (collect?.region) {
                   <div
@@ -101,13 +104,15 @@ const COMMON = [NgClass];
                   Massa: <strong>{{ collect.mass }} Kg</strong>
                 </span>
                 <span class="mr-1 text-md sm:text-lg items-center">
-                  Ocorrências: {{ collect | occurrences }}<strong> </strong
-                ></span>
+                  Ocorrências: <strong>{{ collect | occurrences }} </strong></span
+                >
               </div>
 
               <div class="px-2 mt-4 gap-1 flex flex-wrap items-start justify-between">
-                <span class="text-sm md:text-lg"> {{ collect.latitude.toFixed(5) }}</span>
-                <span class="text-sm md:text-lg"> {{ collect.longitude.toFixed(5) }}</span>
+                <span class="font-bold text-sm md:text-lg"> {{ collect.latitude.toFixed(5) }}</span>
+                <span class="font-bold text-sm md:text-lg">
+                  {{ collect.longitude.toFixed(5) }}</span
+                >
               </div>
 
               <div class="px-0.5 gap-1 flex flex-wrap items-start justify-center">

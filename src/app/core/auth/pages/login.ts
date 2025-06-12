@@ -41,26 +41,26 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
               src="assets/images/lichia.png"
               alt="Pomar" />
 
-            <div class="inline-block md:hidden relative w-full h-full overflow-hidden">
+            <div class="inline-block md:hidden relative w-full h-[200px] mb-4 overflow-hidden">
               <img
                 src="assets/images/background.jpeg"
                 alt="Pomar"
-                class="w-full h-full object-cover [clip-path:ellipse(90%_80%_at_50%_0%)]" />
+                class="w-full h-full object-cover [clip-path:ellipse(90%_85%_at_50%_0%)]" />
             </div>
 
             <!-- Welcome -->
-            <div class="flex flex-col text-center mb-8 gap-2">
+            <div class="flex flex-col text-center mb-4 gap-1">
               <span class="text-surface-900 dark:text-surface-0 text-xl md:text-3xl font-medium">
                 Pomar na mão
               </span>
               <span class="text-muted-color text-lg md:text-2xl"
-                >Controle – Rastreabilidade - Produtividade
+                >Controle - Rastreabilidade - Produtividade
               </span>
             </div>
           </div>
 
           <!-- Bottom -->
-          <div class="flex flex-col items-center justify-center w-full h-full m-4 px-4 md:px-8">
+          <div class="flex flex-col items-center justify-center w-full h-full m-2 px-4 md:px-8">
             <!-- Form -->
             <form [formGroup]="loginForm" class="w-full sm:w-[350px] mb-8 mx-8">
               <div class="mb-2">
