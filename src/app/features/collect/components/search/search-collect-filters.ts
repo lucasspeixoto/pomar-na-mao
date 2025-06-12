@@ -35,7 +35,7 @@ const COMMON = [FormsModule];
   imports: [...PRIMENG, ...COMMON],
   template: `
     <div class="flex flex-col h-full" id="container">
-      <div class="w-full mt-4 flex md:flex-col flex-row flex-wrap items-start gap-4">
+      <div class="w-full mt-0 flex md:flex-col flex-row flex-wrap items-start gap-4">
         <span class="text-2xl font-semibold opacity-55">Filtros</span>
         <div class="my-2 w-full">
           <span class="text-md md:text-xl text-surface-400 mb-0.5">Safra</span>

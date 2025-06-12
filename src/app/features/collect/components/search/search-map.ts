@@ -237,7 +237,7 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
           const clickedLng = e.latlng.lng;
           console.log(`Lat: ${clickedLat}, Lng: ${clickedLng}`);
 
-          marker.bindPopup(`#${item.id.split('-')[0]}`).openPopup();
+          marker.bindPopup(`Ponto: ${item.description}`).openPopup();
         });
 
       this.plottedPoints.push(marker);
@@ -278,7 +278,8 @@ export class SearchMap implements OnInit, AfterViewInit, OnDestroy {
       fillOpacity: 1,
     })
       .addTo(this.map2)
-      .bindPopup(`Coleta próxima: #${nearestCollect?.id.split('-')[0]}`);
+      .bindPopup(`Ponto: ${nearestCollect?.description}`)
+      .openPopup();
 
     this.plantPositionDetect.setDetectedColledtId(nearestCollect!.id);
 
