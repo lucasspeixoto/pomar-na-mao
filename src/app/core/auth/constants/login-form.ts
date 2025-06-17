@@ -15,7 +15,7 @@ export function createLoginForm(): FormGroup<LoginFormControl> {
       nonNullable: true,
     }),
     password: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(3)],
+      validators: [Validators.required, Validators.minLength(6)],
       nonNullable: true,
     }),
   });
