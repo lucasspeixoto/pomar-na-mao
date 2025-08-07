@@ -21,14 +21,14 @@ export class AppMenu implements OnInit {
 
   private authenticationService = inject(AuthenticationApi);
 
-  public isAdmin = false;
-
   public isLogged = false;
 
-  public ngOnInit(): void {
-    this.isAdmin = this.authenticationService.isAdminCheckHandler();
+  public isAdmin = false;
 
+  public ngOnInit(): void {
     this.isLogged = this.authenticationService.isLoggedCheckHandler();
+
+    this.isAdmin = this.authenticationService.isAdminCheckHandler();
 
     this.menuItems = [
       {
@@ -47,22 +47,16 @@ export class AppMenu implements OnInit {
             icon: 'pi pi-fw pi-check-square',
             items: [
               {
-                label: 'Cadastrar',
+                label: 'Pendentes',
                 visible: this.isAdmin,
-                icon: 'pi pi-fw pi-database',
-                routerLink: ['/app/rotinas-de-trabalho/cadastrar'],
+                icon: 'pi pi-fw pi-calendar-clock',
+                routerLink: ['/app/rotinas-de-trabalho/pendentes'],
               },
               {
-                label: 'Sincronizar',
+                label: 'Finalizadas',
                 visible: this.isAdmin,
-                icon: 'pi pi-fw pi-sync',
-                routerLink: ['/app/rotinas-de-trabalho/sincronizar'],
-              },
-              {
-                label: 'Consultar',
-                visible: this.isAdmin,
-                icon: 'pi pi-fw pi-search-plus',
-                routerLink: ['/app/rotinas-de-trabalho/consultar'],
+                icon: 'pi pi-fw pi-check-circle',
+                routerLink: ['/app/rotinas-de-trabalho/finalizadas'],
               },
             ],
           },

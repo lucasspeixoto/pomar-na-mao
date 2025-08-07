@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-pending',
   imports: [],
-  templateUrl: './search.html',
+  templateUrl: './pending.html',
   styles: [
     `
       :host ::ng-deep {
@@ -19,4 +19,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Search {}
+export class Pending {}

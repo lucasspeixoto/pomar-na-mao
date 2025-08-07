@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-completed',
   imports: [],
-  templateUrl: './register.html',
+  templateUrl: './completed.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Register {}
+export class Completed {}
