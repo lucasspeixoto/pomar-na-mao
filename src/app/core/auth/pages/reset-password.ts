@@ -10,14 +10,12 @@ import { MessageService } from 'primeng/api';
 import { createResetPasswordForm, ResetPasswordFormValue } from '@authCs/reset-password-form';
 import { AuthenticationApi } from '@authS/authentication-api';
 import { CustomValidationMessage } from '@sharedC/custom-validation-message';
-import { ConnectivityStatus } from '@sharedS/connectivity-status';
 import { LoadingStore } from '@sharedS/loading-store';
 import { messages } from '@sharedU/messages';
-import { OfflineCollectButton } from '@authC/offline-collect-button/offline-collect-button';
 
 const PRIMENG = [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule];
 
-const COMPONENTS = [CustomValidationMessage, OfflineCollectButton];
+const COMPONENTS = [CustomValidationMessage];
 
 const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
@@ -92,7 +90,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
               <div class="mt-4 w-full flex justify-center">
                 <p-button
                   class="w-full rounded-3xl"
-                  [disabled]="!ConnectivityStatus.isOnline()"
                   (click)="resetPasswordHandler()"
                   id="resetPasswordButton"
                   label="Gerar">
@@ -100,8 +97,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
               </div>
             </form>
           </div>
-
-          <app-offline-collect-button class="mb-4" />
         </div>
       </div>
     </section>
@@ -139,8 +134,6 @@ export class ResetPassword {
   public LoadingStore = inject(LoadingStore);
 
   public messageService = inject(MessageService);
-
-  public ConnectivityStatus = inject(ConnectivityStatus);
 
   public resetPasswordForm = createResetPasswordForm();
 

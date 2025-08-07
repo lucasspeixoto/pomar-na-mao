@@ -19,11 +19,6 @@ export const appRoutes: Routes = [
     loadComponent: () => import('./app/core/auth/pages/reset-password').then(c => c.ResetPassword),
   },
   {
-    path: 'coleta-offline',
-    loadComponent: () =>
-      import('./app/features/offline-collect/pages/offline-collect').then(c => c.OfflineCollect),
-  },
-  {
     path: '',
     component: AppLayout,
     canActivate: [isLoggedGuard],

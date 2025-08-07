@@ -37,12 +37,12 @@ export class AppMenu implements OnInit {
         items: [
           {
             label: 'Início',
-            visible: this.isAdmin,
+            visible: true,
             icon: 'pi pi-fw pi-home',
             routerLink: ['/app/inicio'],
           },
           {
-            label: 'Coleta',
+            label: 'Rotinas de Trabalho',
             visible: this.isAdmin,
             icon: 'pi pi-fw pi-check-square',
             items: [
@@ -50,19 +50,19 @@ export class AppMenu implements OnInit {
                 label: 'Cadastrar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-database',
-                routerLink: ['/app/coleta/cadastrar'],
+                routerLink: ['/app/rotinas-de-trabalho/cadastrar'],
               },
               {
                 label: 'Sincronizar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-sync',
-                routerLink: ['/app/coleta/sincronizar'],
+                routerLink: ['/app/rotinas-de-trabalho/sincronizar'],
               },
               {
                 label: 'Consultar',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-search-plus',
-                routerLink: ['/app/coleta/consultar'],
+                routerLink: ['/app/rotinas-de-trabalho/consultar'],
               },
             ],
           },
