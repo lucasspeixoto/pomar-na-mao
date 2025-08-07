@@ -9,10 +9,8 @@ import { providePrimeNG } from 'primeng/config';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
-import { AppUpdate } from '@sharedS/app-update';
 import { LayoutConfig } from './app/core/layout/layout-config';
 
-// Add mock SwUpdate
 const swUpdateMock = {
   available: {
     subscribe: () => {},
@@ -36,7 +34,6 @@ describe('AppComponent', () => {
       providers: [
         ToastModule,
         MessageService,
-        AppUpdate,
         provideAnimationsAsync(),
         providePrimeNG(),
         { provide: LayoutConfig, useValue: layoutServiceMock },

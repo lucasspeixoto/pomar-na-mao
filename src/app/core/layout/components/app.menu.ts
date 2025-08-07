@@ -21,14 +21,14 @@ export class AppMenu implements OnInit {
 
   private authenticationService = inject(AuthenticationApi);
 
-  public isAdmin = false;
-
   public isLogged = false;
 
-  public ngOnInit(): void {
-    this.isAdmin = this.authenticationService.isAdminCheckHandler();
+  public isAdmin = false;
 
+  public ngOnInit(): void {
     this.isLogged = this.authenticationService.isLoggedCheckHandler();
+
+    this.isAdmin = this.authenticationService.isAdminCheckHandler();
 
     this.menuItems = [
       {
@@ -37,32 +37,26 @@ export class AppMenu implements OnInit {
         items: [
           {
             label: 'Início',
-            visible: this.isAdmin,
+            visible: true,
             icon: 'pi pi-fw pi-home',
             routerLink: ['/app/inicio'],
           },
           {
-            label: 'Coleta',
+            label: 'Rotinas de Trabalho',
             visible: this.isAdmin,
             icon: 'pi pi-fw pi-check-square',
             items: [
               {
-                label: 'Cadastrar',
+                label: 'Pendentes',
                 visible: this.isAdmin,
-                icon: 'pi pi-fw pi-database',
-                routerLink: ['/app/coleta/cadastrar'],
+                icon: 'pi pi-fw pi-calendar-clock',
+                routerLink: ['/app/rotinas-de-trabalho/pendentes'],
               },
               {
-                label: 'Sincronizar',
+                label: 'Finalizadas',
                 visible: this.isAdmin,
-                icon: 'pi pi-fw pi-sync',
-                routerLink: ['/app/coleta/sincronizar'],
-              },
-              {
-                label: 'Consultar',
-                visible: this.isAdmin,
-                icon: 'pi pi-fw pi-search-plus',
-                routerLink: ['/app/coleta/consultar'],
+                icon: 'pi pi-fw pi-check-circle',
+                routerLink: ['/app/rotinas-de-trabalho/finalizadas'],
               },
             ],
           },

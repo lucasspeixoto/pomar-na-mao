@@ -12,12 +12,10 @@ import { LoadingStore } from '@sharedS/loading-store';
 import { MessageService } from 'primeng/api';
 import { CustomValidationMessage } from '@sharedC/custom-validation-message';
 import { createForgotPasswordForm, ForgotPasswordFormValue } from '@authCs/forgot-password-form';
-import { ConnectivityStatus } from '@sharedS/connectivity-status';
-import { OfflineCollectButton } from '@authC/offline-collect-button/offline-collect-button';
 
 const PRIMENG = [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule];
 
-const COMPONENTS = [CustomValidationMessage, OfflineCollectButton];
+const COMPONENTS = [CustomValidationMessage];
 
 const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
@@ -87,7 +85,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
               <div class="mt-4 w-full flex justify-center">
                 <p-button
-                  [disabled]="!ConnectivityStatus.isOnline()"
                   (click)="forgotPasswordHandler()"
                   id="forgotPasswordButton"
                   label="Lembrar"
@@ -95,8 +92,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
               </div>
             </form>
           </div>
-
-          <app-offline-collect-button class="mb-4" />
         </div>
       </div>
     </section>
@@ -134,8 +129,6 @@ export class ForgotPassword {
   public LoadingStore = inject(LoadingStore);
 
   public messageService = inject(MessageService);
-
-  public ConnectivityStatus = inject(ConnectivityStatus);
 
   public forgotPasswordForm = createForgotPasswordForm();
 

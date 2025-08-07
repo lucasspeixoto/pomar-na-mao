@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Routes } from '@angular/router';
-import { Collect } from './collect/pages/collect';
-import { Home } from '@home/home';
 
-//import { isAdminGuard } from '../auth/guards/is-admin/is-admin.guard';
+import { Home } from '@home/home';
+import { WorkRoutines } from './work-routines/pages/work-routines';
+import { isAdminGuard } from '@authG/is-admin-guard';
 
 export default [
   {
@@ -11,13 +11,13 @@ export default [
     component: Home,
   },
   {
-    path: 'coleta',
-    component: Collect,
-    /* canActivate: [isAdminGuard], */
+    path: 'rotinas-de-trabalho',
+    component: WorkRoutines,
+    canActivate: [isAdminGuard],
     children: [
       {
         path: '',
-        loadChildren: () => import('./collect/collect.routes'),
+        loadChildren: () => import('./work-routines/work-routines.routes'),
       },
     ],
   },

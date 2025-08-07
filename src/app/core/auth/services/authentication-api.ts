@@ -1,6 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { CollectApi } from '@collectS/collect-api';
 import { LoadingStore } from '@sharedS/loading-store';
 import { Session } from '@supabase/supabase-js';
 import { injectSupabase } from '@sharedU/inject-supabase';
@@ -19,8 +18,6 @@ export class AuthenticationApi {
   public messageService = inject(MessageService);
 
   public loadingStore = inject(LoadingStore);
-
-  public collectService = inject(CollectApi);
 
   public messages = messages;
 
@@ -46,12 +43,8 @@ export class AuthenticationApi {
       return;
     }
 
-    //this.loadUserData(); Load desnecessário visto que ocorre no isLoggedGuard
-
     setTimeout(() => {
       this.router.navigateByUrl('/app/inicio');
-
-      this.collectService.resetCollectData(); // Reset para não ter interferência nos steps de coleta online e offline
 
       this.loadingStore.stopLoading();
 
@@ -147,13 +140,13 @@ export class AuthenticationApi {
         .eq('id', session?.user.id)
         .single();
 
-      /* const { data: userRoleData } = await this.supabase
+      const { data: userRoleData } = await this.supabase
         .from('user_roles')
         .select('role')
         .eq('user_id', this.session?.user.id)
-        .single(); */
+        .single();
 
-      const isAdmin = true; //userRoleData?.role === 'admin' ? true : false;
+      const isAdmin = userRoleData?.role === 'admin' ? true : false;
 
       const iUserData = {
         ...userData,
@@ -196,8 +189,6 @@ export class AuthenticationApi {
 
   public async logoutAndRedirect(): Promise<void> {
     this.router.navigate(['/login']);
-
-    this.collectService.resetCollectData(); // Reset para não ter interferência nos steps de coleta online e offline
 
     await this.supabase.auth.signOut();
   }

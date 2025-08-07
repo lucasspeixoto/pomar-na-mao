@@ -10,7 +10,6 @@ import { MessageService } from 'primeng/api';
 import { createLoginForm, type LoginFormValue } from '@authCs/login-form';
 import { AuthenticationApi } from '@authS/authentication-api';
 import { CustomValidationMessage } from '@sharedC/custom-validation-message';
-import { ConnectivityStatus } from '@sharedS/connectivity-status';
 import { LoadingStore } from '@sharedS/loading-store';
 import { messages } from '@sharedU/messages';
 
@@ -107,7 +106,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
               <div class="mt-4 w-full flex justify-center">
                 <p-button
                   class="w-full rounded-3xl"
-                  [disabled]="!ConnectivityStatus.isOnline()"
                   (click)="loginHandler()"
                   id="loginButton"
                   label="Entrar">
@@ -152,8 +150,6 @@ export class Login {
   public loadingStore = inject(LoadingStore);
 
   public messageService = inject(MessageService);
-
-  public ConnectivityStatus = inject(ConnectivityStatus);
 
   public loginForm = createLoginForm();
 
