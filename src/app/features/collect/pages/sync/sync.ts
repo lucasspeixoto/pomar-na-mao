@@ -26,7 +26,6 @@ import { PlantData } from '@collectM/collect.model';
 import { GeolocationStore } from '@collectS/geolocation-store';
 import { ObservationStore } from '@collectS/observation-store';
 import { LayoutConfig } from 'src/app/core/layout/layout-config';
-import { ExcelExport } from '@sharedS/excel-export';
 import { IndexDbPlantStore } from '@sharedS/index-db-plant-store';
 import { ShortTimestampPipe } from '@sharedPp/short-timestamp-pipe';
 import { OccurrencesPipe } from '../../pipes/occurrences-pipe';
@@ -104,8 +103,6 @@ export class Sync implements OnInit {
 
   private geolocationStore = inject(GeolocationStore);
 
-  private ExcelExport = inject(ExcelExport);
-
   private confirmationService = inject(ConfirmationService);
 
   public layoutService = inject(LayoutConfig);
@@ -145,10 +142,6 @@ export class Sync implements OnInit {
     this.selectedCollects = this.collectedData();
 
     await this.syncSelectedCollects();
-  }
-
-  public exportCSV(): void {
-    this.ExcelExport.exportToExcel(this.collectedData(), 'Coletas Offline');
   }
 
   public onGlobalFilter(table: Table, event: Event): void {

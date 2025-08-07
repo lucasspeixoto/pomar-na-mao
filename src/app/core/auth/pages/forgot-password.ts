@@ -34,8 +34,8 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
             <!-- Image -->
             <img
               class="md:inline-block hidden w-full md:w-[150px]"
-              src="assets/images/lichia.png"
-              alt="Pomar" />
+              src="assets/images/logo.png"
+              alt="Logo" />
 
             <div class="inline-block md:hidden relative w-full h-[200px] mb-4 overflow-hidden">
               <img

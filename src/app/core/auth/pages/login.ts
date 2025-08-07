@@ -10,15 +10,13 @@ import { MessageService } from 'primeng/api';
 import { createLoginForm, type LoginFormValue } from '@authCs/login-form';
 import { AuthenticationApi } from '@authS/authentication-api';
 import { CustomValidationMessage } from '@sharedC/custom-validation-message';
-import { InstallPwaButton } from '@sharedC/install-pwa-button';
 import { ConnectivityStatus } from '@sharedS/connectivity-status';
 import { LoadingStore } from '@sharedS/loading-store';
 import { messages } from '@sharedU/messages';
-import { OfflineCollectButton } from '@authC/offline-collect-button/offline-collect-button';
 
 const PRIMENG = [ButtonModule, CheckboxModule, InputTextModule, PasswordModule, RippleModule];
 
-const COMPONENTS = [CustomValidationMessage, InstallPwaButton, OfflineCollectButton];
+const COMPONENTS = [CustomValidationMessage];
 
 const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
@@ -29,9 +27,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
     <section class="flex">
       <div class="hidden md:block w-[60%] container min-h-screen"></div>
       <div class="w-full md:w-[40%] min-h-screen bg-surface-0 dark:bg-surface-900">
-        @if (ConnectivityStatus.isOnline()) {
-          <app-install-pwa-button />
-        }
         <div class="flex flex-col items-center justify-between h-full">
           <!-- Top -->
           <div class="flex flex-col items-center justify-center w-full mt-0">
@@ -43,8 +38,8 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
 
             <div class="inline-block md:hidden relative w-full h-[200px] mb-4 overflow-hidden">
               <img
-                src="assets/images/background.jpeg"
-                alt="Pomar"
+                src="assets/images/logo.png"
+                alt="Logo"
                 class="w-full h-full object-cover [clip-path:ellipse(90%_85%_at_50%_0%)]" />
             </div>
 
@@ -120,8 +115,6 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
               </div>
             </form>
           </div>
-
-          <app-offline-collect-button class="mb-4" />
         </div>
       </div>
     </section>
