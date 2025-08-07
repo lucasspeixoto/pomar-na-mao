@@ -9,10 +9,7 @@
 </div>
 } @else {
 <p-toolbar styleClass="mb-4">
-    <ng-template #start>
-        <p-button size="small" [disabled]="totalCollectedData() === 0" label="Exportar" icon="pi pi-upload"
-            severity="success" (click)="exportCSV()" />
-    </ng-template>
+
 
     <ng-template #end>
         <p-button size="small" severity="danger" label="Excluir" icon="pi pi-trash" class="mr-2"
