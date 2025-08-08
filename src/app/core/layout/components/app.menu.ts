@@ -47,16 +47,16 @@ export class AppMenu implements OnInit {
             icon: 'pi pi-fw pi-check-square',
             items: [
               {
-                label: 'Pendentes',
+                label: 'Aprovações',
                 visible: this.isAdmin,
                 icon: 'pi pi-fw pi-calendar-clock',
-                routerLink: ['/app/rotinas-de-trabalho/pendentes'],
+                routerLink: ['/app/rotinas-de-trabalho/aprovacoes'],
               },
               {
-                label: 'Finalizadas',
+                label: 'Plantas',
                 visible: this.isAdmin,
-                icon: 'pi pi-fw pi-check-circle',
-                routerLink: ['/app/rotinas-de-trabalho/finalizadas'],
+                icon: 'pi pi-fw pi-th-large',
+                routerLink: ['/app/rotinas-de-trabalho/plantas'],
               },
             ],
           },
