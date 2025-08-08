@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-completed',
+  selector: 'app-plants',
   imports: [],
-  templateUrl: './completed.html',
+  templateUrl: './plants.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Completed {}
+export class Plants {}

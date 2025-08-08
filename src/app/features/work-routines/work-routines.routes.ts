@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { Pending } from './pages/pending/pending';
-import { Completed } from './pages/completed/completed';
+import { Plants } from './pages/plants/plants';
+import { Approvals } from './pages/approvals/approvals';
 
 export default [
-  { path: 'pendentes', component: Pending },
-  { path: 'finalizadas', component: Completed },
+  { path: 'aprovacoes', component: Approvals },
+  { path: 'plantas', component: Plants },
 ] as Routes;

@@ -1,0 +1,114 @@
+<!-- <p-toolbar class="flex flex-wrap justify-center md:justify-between gap-2 mb-4">
+    <ng-template #start>
+
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Exportar" icon="pi pi-upload" severity="success"  />
+    </ng-template>
+</p-toolbar> -->
+
+<p-table #dt [rows]="10" [value]="workRoutines()" [expandedRowKeys]="expandedRows"
+    [columns]="columns" [paginator]="true" [globalFilterFields]="filters"
+    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedWorkRoutine" selectionMode="single"
+    [metaKeySelection]="false" dataKey="id" [scrollable]="true" [rowHover]="true"
+    currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} rotinas" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30, 50, 100]">
+    <ng-template #caption>
+        <div class="flex items-center justify-start sm:justify-between flex-wrap gap-4">
+            <h5 class="m-0 font-bold">Rotinas
+                @if(totalOfWorkRoutines() > 0) {
+                <span>({{totalOfWorkRoutines()}})</span>
+                } @else {
+                <span>(Nenhum resultado)</span>
+                }
+            </h5>
+
+            <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                <p-select
+                    (onChange)="onApprovedStatusChange($event)"
+                    [(ngModel)]="workRoutineStore.selectedApprovedStatus"
+                    [showClear]="true" appendTo="body" class="mr-2 w-full sm:w-[200px]" optionLabel="name"
+                    optionValue="value" [options]="approvedOptions"
+                    placeholder="Situação" />
+                <p-select
+                    (onChange)="onRegionChange($event)"
+                    [(ngModel)]="workRoutineStore.selectedRegion"
+                    [showClear]="true" appendTo="body" class="mr-2 w-full sm:w-[200px]"  [options]="farmRegionApi.uniqueRegions()"
+                    placeholder="Zona" />
+                <p-iconfield class="w-full sm:w-[200px]">
+                    <p-inputicon class="pi pi-search" />
+                    <input class="w-full" pInputText type="text" (input)="onGlobalFilter(dt, $event)"
+                        placeholder="Pesquisar..." />
+                </p-iconfield>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="min-width: 10rem"></th>
+            <th style="min-width: 4rem">Nº</th>
+            <th pSortableColumn="users.full_name" style="min-width: 8rem">
+                Funcionário
+                <p-sortIcon field="users.full_name" />
+            </th>
+            <th pSortableColumn="date" style="min-width: 4rem">
+                Data
+                <p-sortIcon field="date" />
+            <th style="min-width: 4rem">Zona</th>
+            <th style="min-width: 4rem">Ocorrências</th>
+            <th style="min-width: 8rem">Nome</th>
+            <th>Aprovação</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-work let-expanded="expanded">
+        <tr [pSelectableRow]="work">
+            <td style="min-width: 10rem">
+                <p-button type="button" pRipple [pRowToggler]="work" [text]="true" [rounded]="true" [plain]="true"
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+            </td>
+            <td style="min-width: 2rem">
+                 {{ work.id }}
+            </td>
+            <td style="min-width: 8rem">{{ work.users?.full_name | firstAndLastname}}</td>
+            <td style="min-width: 4rem">{{ work.date  | primengDate }}</td>
+            <td style="min-width: 5rem">
+                {{ work.region }}
+            </td>
+            <td style="min-width: 3rem">
+                 {{ work.occurrence | occurence }}
+            </td>
+
+            <td style="min-width: 4rem">
+               {{ work.routine_name }}
+            </td>
+            <td>
+                @if(work.approved) {
+                <i class="pi pi-check-circle text-green-400"></i>
+                } @else {
+                <i class="pi pi-ban text-red-400"></i>
+                }
+            </td>
+            <td>
+                <p-button  icon="pi pi-pencil" severity="info" [rounded]="true"
+                    [text]="true"  />
+                <p-button  icon="pi pi-trash" severity="danger" [rounded]="true"
+                    [text]="true"  />
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template #expandedrow let-work>
+        <tr>
+            <td colspan="9">
+                <section class="w-full flex flex-col p-2">
+                    <span class="font-semibold mb-4 text-lg">Descrição</span>
+                    <p class="ml-2 w-full m-0 text-surface-500 dark:text-surface-400 font-medium">
+                        {{work.description}}
+                    </p>
+                </section>
+            </td>
+        </tr>
+
+    </ng-template>
+</p-table>
