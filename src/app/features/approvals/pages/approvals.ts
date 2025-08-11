@@ -13,4 +13,4 @@ import { RouterModule } from '@angular/router';
   </section>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkRoutines {}
+export class Approvals {}

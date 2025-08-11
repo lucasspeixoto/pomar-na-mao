@@ -2,8 +2,8 @@
 import { Routes } from '@angular/router';
 
 import { Home } from '@home/home';
-import { WorkRoutines } from './work-routines/pages/work-routines';
 import { isAdminGuard } from '@authG/is-admin-guard';
+import { Approvals } from './approvals/pages/approvals';
 
 export default [
   {
@@ -11,13 +11,13 @@ export default [
     component: Home,
   },
   {
-    path: 'rotinas-de-trabalho',
-    component: WorkRoutines,
+    path: 'aprovacoes',
+    component: Approvals,
     canActivate: [isAdminGuard],
     children: [
       {
         path: '',
-        loadChildren: () => import('./work-routines/work-routines.routes'),
+        loadChildren: () => import('./approvals/approvals.routes'),
       },
     ],
   },

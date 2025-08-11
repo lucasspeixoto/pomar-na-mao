@@ -11,7 +11,7 @@ export const servicesItems: Service[] = [
     title: 'Rotinas de trabalho',
     subtitle: 'Acesse e valide as rotinas de trabalho',
     icon: 'pi pi-box',
-    routerLink: '/app/rotinas-de-trabalho/aprovacoes',
+    routerLink: '/app/aprovacoes/rotinas-de-trabalho',
     image: '/assets/images/work.png',
   },
 ];
