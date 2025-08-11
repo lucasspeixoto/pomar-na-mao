@@ -4,9 +4,9 @@ import { WorkRoutinesTableComponent } from '../../components/work-routines-table
 import { FarmRegionApi } from '@sharedS/farm-region-api';
 
 @Component({
-  selector: 'app-approvals',
+  selector: 'app-work-routines',
   imports: [WorkRoutinesTableComponent],
-  templateUrl: './approvals.html',
+  templateUrl: './work-routines.html',
   styles: [
     `
       :host ::ng-deep {
@@ -22,7 +22,7 @@ import { FarmRegionApi } from '@sharedS/farm-region-api';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Approvals implements OnInit {
+export class WorkRoutines implements OnInit {
   public workRoutineStore = inject(WorkRoutineStore);
 
   public farmRegionApi = inject(FarmRegionApi);
