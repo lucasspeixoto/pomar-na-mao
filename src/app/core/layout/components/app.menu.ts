@@ -53,10 +53,10 @@ export class AppMenu implements OnInit {
                 routerLink: ['/app/aprovacoes/rotinas-de-trabalho'],
               },
               {
-                label: 'Marcações Pontuais',
+                label: 'Rotinas de Inspeção',
                 visible: this.isAdmin,
-                icon: 'pi pi-fw pi-mobile',
-                routerLink: ['/app/aprovacoes/marcacoes-pontuais'],
+                icon: 'pi pi-fw pi-eye',
+                routerLink: ['/app/aprovacoes/rotinas-de-inspecao'],
               },
             ],
           },

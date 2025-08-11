@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-punctual-markings',
+  selector: 'app-inspection-routines',
   imports: [],
-  templateUrl: './punctual-markings.html',
+  templateUrl: './inspection-routines.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PunctualMarkings {}
+export class InspectionRoutines {}

@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { PunctualMarkings } from './pages/punctual-markings/punctual-markings';
+import { InspectionRoutines } from './pages/inspection-routines/inspection-routines';
 import { WorkRoutines } from './pages/work-routines/work-routines';
 
 export default [
   { path: 'rotinas-de-trabalho', component: WorkRoutines },
-  { path: 'marcacoes-pontuais', component: PunctualMarkings },
+  { path: 'rotinas-de-inspecao', component: InspectionRoutines },
 ] as Routes;
