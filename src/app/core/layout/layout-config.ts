@@ -53,20 +53,20 @@ export class LayoutConfig {
     { label: 'Overlay', value: 'overlay' },
   ];
 
-  public limeSurfaceType: SurfacesType = {
-    name: 'lime',
+  public emeraldSurfaceType: SurfacesType = {
+    name: 'emerald',
     palette: {
-      50: '#f7fee7',
-      100: '#ecfccb',
-      200: '#d9f99d',
-      300: '#bef264',
-      400: '#a3e635',
-      500: '#84cc16',
-      600: '#65a30d',
-      700: '#4d7c0f',
-      800: '#3f6212',
-      900: '#365314',
-      950: '#1a2e05',
+      '50': '#ecfdf5',
+      '100': '#d1fae5',
+      '200': '#a7f3d0',
+      '300': '#6ee7b7',
+      '400': '#34d399',
+      '500': '#10b981',
+      '600': '#059669',
+      '700': '#047857',
+      '800': '#065f46',
+      '900': '#064e3b',
+      '950': '#022c22',
     },
   };
 
@@ -90,7 +90,7 @@ export class LayoutConfig {
 
   private _config: layoutConfig = {
     preset: 'Lara',
-    primary: 'lime',
+    primary: 'emerald',
     surface: 'soho',
     darkTheme: true,
     menuMode: 'static',
@@ -237,7 +237,7 @@ export class LayoutConfig {
   public getThemeSemantic(): any {
     return {
       semantic: {
-        primary: this.limeSurfaceType.palette,
+        primary: this.emeraldSurfaceType.palette,
         colorScheme: {
           light: {
             primary: {

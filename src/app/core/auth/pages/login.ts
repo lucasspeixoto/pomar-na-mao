@@ -30,24 +30,14 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
           <!-- Top -->
           <div class="flex flex-col items-center justify-center w-full mt-0">
             <!-- Image -->
-            <img
-              class="md:inline-block hidden w-full md:w-[150px]"
-              src="assets/images/lichia.png"
-              alt="Pomar" />
-
-            <div class="inline-block md:hidden relative w-full h-[200px] mb-4 overflow-hidden">
-              <img
-                src="assets/images/logo.png"
-                alt="Logo"
-                class="w-full h-full object-cover [clip-path:ellipse(90%_85%_at_50%_0%)]" />
-            </div>
+            <img class="p-4 w-[100px] md:w-[150px]" src="assets/images/logo.png" alt="Pomar" />
 
             <!-- Welcome -->
             <div class="flex flex-col text-center mb-4 gap-1">
-              <span class="text-surface-900 dark:text-surface-0 text-xl md:text-3xl font-medium">
+              <span class="text-surface-900 dark:text-surface-0 text-xl md:text-2xl font-medium">
                 Pomar na mão
               </span>
-              <span class="text-muted-color text-lg md:text-2xl"
+              <span class="text-muted-color text-lg md:text-xl"
                 >Controle - Rastreabilidade - Produtividade
               </span>
             </div>
@@ -84,7 +74,7 @@ const COMMON = [FormsModule, RouterModule, ReactiveFormsModule];
                   formControlName="password"
                   placeholder="Senha"
                   [toggleMask]="true"
-                  styleClass="mb-1"
+                  class="mb-1"
                   [fluid]="true"
                   [feedback]="false">
                 </p-password>

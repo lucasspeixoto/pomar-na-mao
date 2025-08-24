@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { WorkRoutineStore } from '../../services/work-routine-store';
-import { WorkRoutinesTableComponent } from '../../components/work-routines-table/work-routines-table';
 import { FarmRegionApi } from '@sharedS/farm-region-api';
+import { WorkRoutinesTableComponent } from '../../../components/work-routines/work-routines-table/work-routines-table';
+import { WorkRoutineStore } from '../../../services/work-routine-store';
 
 @Component({
-  selector: 'app-work-routines',
+  selector: 'app-work-routine-list',
   imports: [WorkRoutinesTableComponent],
-  templateUrl: './work-routines.html',
+  templateUrl: './work-routine-list.html',
   styles: [
     `
       :host ::ng-deep {
@@ -22,7 +22,7 @@ import { FarmRegionApi } from '@sharedS/farm-region-api';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkRoutines implements OnInit {
+export class WorkRoutineList implements OnInit {
   public workRoutineStore = inject(WorkRoutineStore);
 
   public farmRegionApi = inject(FarmRegionApi);

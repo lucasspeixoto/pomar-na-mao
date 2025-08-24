@@ -21,15 +21,22 @@ export class WorkRoutineStore {
   private _workRoutines = signal<WorkRoutine[]>([]);
   public workRoutines = this._workRoutines.asReadonly();
 
+  private _selectedWorkRoutine = signal<WorkRoutine | null>(null);
+  public selectedWorkRoutine = this._selectedWorkRoutine.asReadonly();
+
   public numberOfWorkRoutines = computed(() => this._workRoutines().length);
 
   public setWorkRoutines(workRoutines: WorkRoutine[]): void {
     this._workRoutines.set(workRoutines);
   }
 
+  public setSelectedWorkRoutine(workRoutine: WorkRoutine): void {
+    this._selectedWorkRoutine.set(workRoutine);
+  }
+
   //* --------- Estado de Loading
   private _isLoading = signal<boolean>(false);
-  public isLoading = this._workRoutines.asReadonly();
+  public isLoading = this._isLoading.asReadonly();
 
   public startLoading(): void {
     this._isLoading.set(true);

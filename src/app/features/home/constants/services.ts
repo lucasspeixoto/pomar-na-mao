@@ -3,15 +3,19 @@ export type Service = {
   subtitle: string;
   icon: string;
   routerLink: string;
-  image: string;
 };
 
 export const servicesItems: Service[] = [
   {
     title: 'Rotinas de trabalho',
     subtitle: 'Acesse e valide as rotinas de trabalho',
-    icon: 'pi pi-box',
+    icon: 'pi pi-check-square',
     routerLink: '/app/aprovacoes/rotinas-de-trabalho',
-    image: '/assets/images/work.png',
+  },
+  {
+    title: 'Rotinas de inspeção',
+    subtitle: 'Acesse e valide as rotinas de inspeção',
+    icon: 'pi pi-eye',
+    routerLink: '/app/aprovacoes/rotinas-de-inspecao',
   },
 ];

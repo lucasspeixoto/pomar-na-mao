@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -17,14 +17,19 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { DatePickerModule } from 'primeng/datepicker';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { WorkRoutineStore } from '../../services/work-routine-store';
+import { DrawerModule } from 'primeng/drawer';
 import type { Column } from 'src/app/shared/models/columns.model';
-import type { WorkRoutine } from '../../models/work-routine.model';
+
 import { PrimengDatePipe } from '@sharedPp/primeng-date-pipe';
 import { FirstAndLastnamePipe } from '@sharedPp/first-and-lastname-pipe';
 import { OccurencePipe } from '@sharedPp/occurence-pipe';
-import { approvedOptions } from '../../utils/filter-options';
+
 import { FarmRegionApi } from '@sharedS/farm-region-api';
+import type { WorkRoutine } from '../../../models/work-routine.model';
+import { WorkRoutineStore } from '../../../services/work-routine-store';
+import { approvedOptions } from '../../../utils/filter-options';
+import { WorkRoutinePlantsStore } from '../../../services/work-routine-plants-store';
+import { WorkRoutineLoadedPlantsConfirmationComponent } from '../work-routine-loaded-plants-confirmation/work-routine-loaded-plants-confirmation';
 
 const COLUMNS_FILTER_FIELDS = ['users.full_name', 'routine_name', 'occurrence', 'region'];
 
@@ -46,6 +51,7 @@ const PRIMENG = [
   InputIconModule,
   IconFieldModule,
   ConfirmDialogModule,
+  DrawerModule,
 ];
 
 const COMMON = [FormsModule, ReactiveFormsModule, PrimengDatePipe];
@@ -55,16 +61,40 @@ const PIPES = [FirstAndLastnamePipe, PrimengDatePipe, OccurencePipe];
 @Component({
   selector: 'app-work-routines-table',
   templateUrl: './work-routines-table.html',
-  imports: [...PRIMENG, ...COMMON, ...PIPES],
+  imports: [...PRIMENG, ...COMMON, ...PIPES, WorkRoutineLoadedPlantsConfirmationComponent],
+  styles: [
+    `
+      .selected-work-routine {
+        background-color: rgba(5, 150, 105, 0.1) !important;
+        border-left: 4px solid var(--primary) !important;
+        font-weight: 600;
+      }
+
+      .step-overrides {
+        .p-step {
+          padding-bottom: 30px;
+        }
+
+        .p-drawer-header {
+          padding: 2px;
+        }
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkRoutinesTableComponent {
   public workRoutineStore = inject(WorkRoutineStore);
 
   public farmRegionApi = inject(FarmRegionApi);
 
+  public workRoutinePlantsStore = inject(WorkRoutinePlantsStore);
+
   protected workRoutines = this.workRoutineStore.workRoutines;
 
   protected totalOfWorkRoutines = this.workRoutineStore.numberOfWorkRoutines;
+
+  public showWorkRoutinePlants = false;
 
   public columns!: Column[];
 
@@ -88,5 +118,11 @@ export class WorkRoutinesTableComponent {
   public onRegionChange(event: SelectChangeEvent): void {
     this.workRoutineStore.selectedRegion.set(event.value);
     this.workRoutineStore.getWorkRoutinesDataHandler();
+  }
+
+  public showWorkRoutinePlantsDetails(routine: WorkRoutine): void {
+    this.workRoutineStore.setSelectedWorkRoutine(routine);
+    this.workRoutinePlantsStore.getWorkRoutinePlantsDataHandler(routine.id);
+    this.showWorkRoutinePlants = true;
   }
 }

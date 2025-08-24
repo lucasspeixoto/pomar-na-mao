@@ -1,9 +1,16 @@
 import { Routes } from '@angular/router';
 
-import { InspectionRoutines } from './pages/inspection-routines/inspection-routines';
-import { WorkRoutines } from './pages/work-routines/work-routines';
+import { WorkRoutineList } from './pages/work-routines/work-routine-list/work-routine-list';
+
+import { InspectionRoutineList } from './pages/inspection-routines/inspection-routine-list/inspection-routine-list';
 
 export default [
-  { path: 'rotinas-de-trabalho', component: WorkRoutines },
-  { path: 'rotinas-de-inspecao', component: InspectionRoutines },
+  {
+    path: 'rotinas-de-trabalho',
+    component: WorkRoutineList,
+  },
+  {
+    path: 'rotinas-de-inspecao',
+    component: InspectionRoutineList,
+  },
 ] as Routes;

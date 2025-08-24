@@ -11,8 +11,8 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-root',
   imports: [RouterModule, ButtonModule, Loading, ToastModule],
-  template: ` <p-toast styleClass="hidden md:block" position="top-right" />
-    <p-toast styleClass="md:hidden block" position="top-center" />
+  template: ` <p-toast class="hidden md:block" position="top-right" />
+    <p-toast class="md:hidden block" position="top-center" />
     <div>
       <router-outlet />
       <app-loading />
