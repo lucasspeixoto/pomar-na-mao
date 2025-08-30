@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -22,14 +22,13 @@ import type { Column } from 'src/app/shared/models/columns.model';
 
 import { PrimengDatePipe } from '@sharedPp/primeng-date-pipe';
 import { FirstAndLastnamePipe } from '@sharedPp/first-and-lastname-pipe';
-import { OccurencePipe } from '@sharedPp/occurence-pipe';
 
 import { FarmRegionApi } from '@sharedS/farm-region-api';
-import type { Routine, WorkRoutine } from '../../../models/routine.model';
-import { WorkRoutineStore } from '../../../services/work-routine/work-routine-store';
+import type { Routine } from '../../../models/routine.model';
 import { approvedOptions } from '../../../utils/filter-options';
-import { WorkRoutinePlantsStore } from '../../../services/work-routine/work-routine-plants-store';
-import { WorkRoutineLoadedPlantsConfirmationComponent } from '../work-routine-loaded-plants-confirmation/work-routine-loaded-plants-confirmation';
+import { InspectRoutineLoadedPlantsConfirmationComponent } from '../inspect-routine-loaded-plants-confirmation/inspect-routine-loaded-plants-confirmation';
+import { InspectRoutineStore } from '../../../services/inspect-routine/inspect-routine-store';
+import { InspectRoutinePlantsStore } from '../../../services/inspect-routine/inspect-routine-plants-store';
 
 const COLUMNS_FILTER_FIELDS = ['users.full_name', 'routine_name', 'occurrence', 'region'];
 
@@ -56,45 +55,35 @@ const PRIMENG = [
 
 const COMMON = [FormsModule, ReactiveFormsModule, PrimengDatePipe];
 
-const PIPES = [FirstAndLastnamePipe, PrimengDatePipe, OccurencePipe];
+const PIPES = [FirstAndLastnamePipe, PrimengDatePipe];
 
 @Component({
-  selector: 'app-work-routines-table',
-  templateUrl: './work-routines-table.html',
-  imports: [...PRIMENG, ...COMMON, ...PIPES, WorkRoutineLoadedPlantsConfirmationComponent],
+  selector: 'app-inspect-routines-table',
+  templateUrl: './inspect-routines-table.html',
+  imports: [...PRIMENG, ...COMMON, ...PIPES, InspectRoutineLoadedPlantsConfirmationComponent],
   styles: [
     `
-      .selected-work-routine {
+      .selected-inspect-routine {
         background-color: rgba(5, 150, 105, 0.1) !important;
         border-left: 4px solid var(--primary) !important;
         font-weight: 600;
-      }
-
-      .step-overrides {
-        .p-step {
-          padding-bottom: 30px;
-        }
-
-        .p-drawer-header {
-          padding: 2px;
-        }
       }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkRoutinesTableComponent {
-  public workRoutineStore = inject(WorkRoutineStore);
+export class InspectRoutinesTableComponent implements OnInit {
+  public inspectRoutineStore = inject(InspectRoutineStore);
 
   public farmRegionApi = inject(FarmRegionApi);
 
-  public workRoutinePlantsStore = inject(WorkRoutinePlantsStore);
+  public inspectRoutinePlantsStore = inject(InspectRoutinePlantsStore);
 
-  protected workRoutines = this.workRoutineStore.workRoutines;
+  protected inspectRoutines = this.inspectRoutineStore.inspectRoutines;
 
-  protected totalOfWorkRoutines = this.workRoutineStore.numberOfWorkRoutines;
+  protected totalOfInspectRoutines = this.inspectRoutineStore.numberOfInspectRoutines;
 
-  public showWorkRoutinePlants = false;
+  public showInspectRoutinePlants = false;
 
   public columns!: Column[];
 
@@ -102,27 +91,32 @@ export class WorkRoutinesTableComponent {
 
   public expandedRows = {};
 
-  public selectedWorkRoutine: Routine | null = null;
+  public selectedInspectRoutine: Routine | null = null;
 
   public approvedOptions = approvedOptions;
+
+  public ngOnInit(): void {
+    this.inspectRoutineStore.selectedRegion.set('Z');
+    this.inspectRoutineStore.getInspectRoutinesDataHandler();
+  }
 
   public onGlobalFilter(table: Table, event: Event): void {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
   public onApprovedStatusChange(event: SelectChangeEvent): void {
-    this.workRoutineStore.selectedApprovedStatus.set(event.value);
-    this.workRoutineStore.getWorkRoutinesDataHandler();
+    this.inspectRoutineStore.selectedApprovedStatus.set(event.value);
+    this.inspectRoutineStore.getInspectRoutinesDataHandler();
   }
 
   public onRegionChange(event: SelectChangeEvent): void {
-    this.workRoutineStore.selectedRegion.set(event.value);
-    this.workRoutineStore.getWorkRoutinesDataHandler();
+    this.inspectRoutineStore.selectedRegion.set(event.value);
+    this.inspectRoutineStore.getInspectRoutinesDataHandler();
   }
 
-  public showWorkRoutinePlantsDetails(routine: WorkRoutine): void {
-    this.workRoutineStore.setSelectedWorkRoutine(routine);
-    this.workRoutinePlantsStore.getWorkRoutinePlantsDataHandler(routine.id);
-    this.showWorkRoutinePlants = true;
+  public showInspectRoutinePlantsDetails(routine: Routine): void {
+    this.inspectRoutineStore.setSelectedInspectRoutine(routine);
+    this.inspectRoutinePlantsStore.getInspectRoutinePlantsDataHandler(routine.id);
+    this.showInspectRoutinePlants = true;
   }
 }

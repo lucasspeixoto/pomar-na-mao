@@ -1,0 +1,33 @@
+@let selectedInspectRoutine = inspectRoutineStore.selectedInspectRoutine();
+
+@if(selectedInspectRoutine) {
+    <section class="flex h-full w-full gap-4 p-4">
+        <!-- Left Side -->
+        <div class="w-[30%] flex flex-col gap-4">
+            <!-- Top Block -->
+            <div class="h-1/2 bg-zinc-100 dark:bg-slate-900 rounded-lg shadow">
+                <app-routine-detail-card />
+            </div>
+
+            <!-- Bottom Block -->
+            <div class="h-1/2 flex flex-col justify-between">
+                <!-- Map -->
+                <div class="h-[180px] shadow">
+                    <app-routine-map-detail />
+                </div>
+
+                <!-- Actions -->
+                <div class="h-fit flex justify-between items-end mt-1/2">
+                    <button class="h-full" severity="danger" pButton type="button" label="Excluir" class="p-button-outlined"></button>
+                    <button class="h-full" severity="contrast" pButton type="button" label="Aprovar Todas" class="p-button-primary"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="w-[70%] overflow-auto h-full bg-zinc-100 dark:bg-slate-900 rounded-lg shadow p-4">
+            <app-plants-stepper />
+        </div>
+
+    </section>
+}

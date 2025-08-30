@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FarmRegionApi } from '@sharedS/farm-region-api';
 import { WorkRoutinesTableComponent } from '../../../components/work-routines/work-routines-table/work-routines-table';
-import { WorkRoutineStore } from '../../../services/work-routine-store';
+import { WorkRoutineStore } from '../../../services/work-routine/work-routine-store';
 
 @Component({
   selector: 'app-work-routine-list',

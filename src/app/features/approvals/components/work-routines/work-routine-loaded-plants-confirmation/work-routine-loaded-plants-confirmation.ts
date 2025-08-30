@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
 import { StepperModule } from 'primeng/stepper';
-import { WorkRoutinePlantsStore } from '../../../services/work-routine-plants-store';
-import { WorkRoutineStore } from '../../../services/work-routine-store';
-import type { WorkRoutinePlants } from '../../../models/work-routine.model';
+import { WorkRoutinePlantsStore } from '../../../services/work-routine/work-routine-plants-store';
+import { WorkRoutineStore } from '../../../services/work-routine/work-routine-store';
+import { WorkRoutinePlants } from '../../../models/routine.model';
 
 const PRIMENG = [ButtonModule, StepperModule, SplitterModule];
 

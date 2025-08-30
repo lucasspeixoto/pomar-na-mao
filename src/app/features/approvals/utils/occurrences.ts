@@ -1,0 +1,35 @@
+import type { BooleanKeys } from '../models/plant-data.model';
+
+export const occurenceKeys: BooleanKeys[] = [
+  'anthill',
+  'broken_branch',
+  'burnt_branch',
+  'drill',
+  'empty_collection_box_near',
+  'fertilization_or_manuring',
+  'in_experiment',
+  'is_dead',
+  'mites',
+  'stick',
+  'struck_by_lightning',
+  'thrips',
+  'vine_growing',
+  'weeds_in_the_basin',
+];
+
+export const occurencesLabels: Record<string, string> = {
+  stick: 'Galho Seco',
+  broken_branch: 'Galho Quebrado',
+  vine_growing: 'Cipó crescendo',
+  burnt_branch: 'Galho Queimado',
+  struck_by_lightning: 'Atingido por raio',
+  drill: 'Broca',
+  anthill: 'Formigueiro',
+  in_experiment: 'Em experimento/teste',
+  weeds_in_the_basin: 'Mato na bacia',
+  is_dead: 'Planta Morta',
+  mites: 'Presença de ácaro',
+  thrips: 'Presença de tripes',
+  empty_collection_box_near: 'Caixa de colheita vazia perto',
+  fertilization_or_manuring: 'Parada de pulverização/adubação',
+};

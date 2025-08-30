@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { WorkRoutineStore } from './work-routine-store';
+import { InspectRoutineStore } from './inspect-routine-store';
 import { MessageService } from 'primeng/api';
 
-describe('WorkRoutineStore', () => {
-  let service: WorkRoutineStore;
+describe('InspectRoutineStore', () => {
+  let service: InspectRoutineStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [MessageService],
     });
-    service = TestBed.inject(WorkRoutineStore);
+    service = TestBed.inject(InspectRoutineStore);
   });
 
   it('should be created', () => {

@@ -1,0 +1,144 @@
+@if(plant) {
+<div class="p-1 grid grid-cols-1 gap-3">
+  <!-- anthill -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Formigueiro</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.anthill ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.anthill ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- broken_branch -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Galho Quebrado</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.broken_branch ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.broken_branch ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- burnt_branch -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Galho Queimado</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.burnt_branch ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.burnt_branch ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- drill -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Broca</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.drill ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.drill ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- empty_collection_box_near -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Caixa de Colheita vazia perto</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.empty_collection_box_near ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.empty_collection_box_near ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- fertilization_or_manuring -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Parada de pulverização/adubação</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.fertilization_or_manuring ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.fertilization_or_manuring ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- in_experiment -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Em experimento/teste</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.in_experiment ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.in_experiment ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- is_dead -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Planta Morta</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.is_dead ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.is_dead ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- mites -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Presença de ácaro</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.mites ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.mites ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- vine_growing -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Cipó crescendo</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.vine_growing ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.vine_growing ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- stick -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Galho Seco</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.stick ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.stick ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- struck_by_lightning -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Atingido por raio</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.struck_by_lightning ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.struck_by_lightning ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- thrips -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Presença de tripes</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.thrips ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.thrips ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+
+  <!-- weeds_in_the_basin -->
+  <div
+    class="flex items-center justify-between p-2 gap-4 rounded-xl shadow-md bg-yellow-100 h-auto ">
+    <h3 class="text-sm font-semibold text-slate-700 mb-1">Mato na bacia</h3>
+    <p class="text-lg font-bold"
+      [ngClass]="plant.weeds_in_the_basin ? 'text-emerald-600' : 'text-rose-600'">
+      {{ plant.weeds_in_the_basin ? '✔ Sim' : '✘ Não' }}
+    </p>
+  </div>
+</div>
+
+}

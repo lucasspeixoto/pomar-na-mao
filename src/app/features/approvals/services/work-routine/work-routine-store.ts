@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { WorkRoutine } from '../models/work-routine.model';
+import { WorkRoutine } from '../../models/routine.model';
 import { injectSupabase } from '@sharedU/inject-supabase';
 import { MessageService } from 'primeng/api';
 

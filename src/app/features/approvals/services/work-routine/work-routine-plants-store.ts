@@ -1,7 +1,8 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { type WorkRoutinePlants } from '../models/work-routine.model';
+
 import { injectSupabase } from '@sharedU/inject-supabase';
 import { MessageService } from 'primeng/api';
+import { WorkRoutinePlants } from '../../models/routine.model';
 
 @Injectable({
   providedIn: 'root',

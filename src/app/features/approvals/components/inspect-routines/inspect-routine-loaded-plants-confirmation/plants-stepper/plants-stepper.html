@@ -1,0 +1,32 @@
+@let plants = inspectRoutinePlantsStore.inspectRoutinePlants();
+
+<p-stepper [(value)]="activeIndex"
+    class="step-overrides py-2 w-full">
+    <p-step-list>
+        @for(plant of plants; track plant.id; let listIndex = $index) {
+        <p-step [value]="listIndex + 1"
+            (click)="onStepClick(listIndex + 1, plant)">Planta
+            {{plant.plant_id!.split("-")[0]}}</p-step>
+        }
+    </p-step-list>
+    <p-step-panels class="h-full overflow-y-auto">
+        @for(plant of plants; track plant.id; let panelIndex = $index) {
+        <p-step-panel [value]="panelIndex + 1">
+            <ng-template #content>
+                <div class="flex justify-between items-center w-full">
+                    <!-- Planta atual -->
+                    <app-plant-occurrences [plant]="selectedPlant()!" />
+                    <span class="mx-4 flex items-center">
+                        <svg width="64" height="64" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                          <line x1="10" y1="24" x2="38" y2="24"></line>
+                          <polyline points="26 12 38 24 26 36"></polyline>
+                        </svg>
+                    </span>
+                    <!-- Modificação da rotina de inspeção -->
+                    <app-plant-occurrences [plant]="plant" />
+                </div>
+            </ng-template>
+        </p-step-panel>
+        }
+    </p-step-panels>
+</p-stepper>

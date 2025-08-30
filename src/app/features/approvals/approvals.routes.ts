@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { WorkRoutineList } from './pages/work-routines/work-routine-list/work-routine-list';
 
-import { InspectionRoutineList } from './pages/inspection-routines/inspection-routine-list/inspection-routine-list';
+import { InspectRoutineList } from './pages/inspection-routines/inspect-routine-list/inspect-routine-list';
 
 export default [
   {
@@ -11,6 +11,6 @@ export default [
   },
   {
     path: 'rotinas-de-inspecao',
-    component: InspectionRoutineList,
+    component: InspectRoutineList,
   },
 ] as Routes;

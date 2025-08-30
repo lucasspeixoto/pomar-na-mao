@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FarmRegionApi } from '@sharedS/farm-region-api';
-import { WorkRoutineStore } from '../../../services/work-routine-store';
+import { WorkRoutineStore } from '../../../services/work-routine/work-routine-store';
+import { InspectRoutinesTableComponent } from '../../../components/inspect-routines/inspect-routines-table/inspect-routines-table';
 
 @Component({
-  selector: 'app-inspection-routine-list',
-  imports: [],
-  templateUrl: './inspection-routine-list.html',
+  selector: 'app-inspect-routine-list',
+  imports: [InspectRoutinesTableComponent],
+  templateUrl: './inspect-routine-list.html',
   styles: [
     `
       :host ::ng-deep {
@@ -21,7 +22,7 @@ import { WorkRoutineStore } from '../../../services/work-routine-store';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InspectionRoutineList implements OnInit {
+export class InspectRoutineList implements OnInit {
   public workRoutineStore = inject(WorkRoutineStore);
 
   public farmRegionApi = inject(FarmRegionApi);
