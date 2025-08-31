@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, type OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
 import { StepperModule } from 'primeng/stepper';
@@ -10,6 +10,7 @@ import { PlantsStore } from '../../../services/plants/plants-store';
 import { RoutineDetailCardComponent } from './routine-detail-card/routine-detail-card';
 import { PlantsStepperComponent } from './plants-stepper/plants-stepper';
 import { RoutineMapDetailComponent } from './routine-map-detail/routine-map-detail';
+import { FarmRegionApi } from '@sharedS/farm-region-api';
 
 const PRIMENG = [ButtonModule, StepperModule, SplitterModule, ToggleSwitchModule];
 
@@ -38,10 +39,16 @@ const COMPONENTS = [RoutineDetailCardComponent, PlantsStepperComponent, RoutineM
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InspectRoutineLoadedPlantsConfirmationComponent {
+export class InspectRoutineLoadedPlantsConfirmationComponent implements OnInit {
   public inspectRoutinePlantsStore = inject(InspectRoutinePlantsStore);
 
   public inspectRoutineStore = inject(InspectRoutineStore);
 
   public plantsStore = inject(PlantsStore);
+
+  public farmRegionApi = inject(FarmRegionApi);
+
+  public ngOnInit(): void {
+    this.farmRegionApi.getAllFarmRegionsHandler();
+  }
 }

@@ -2,6 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlantsStepperComponent } from './plants-stepper';
+import { MessageService } from 'primeng/api';
 
 describe('PlantsStepperComponent', () => {
   let component: PlantsStepperComponent;
@@ -9,7 +10,8 @@ describe('PlantsStepperComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PlantsStepperComponent],
+      imports: [PlantsStepperComponent],
+      providers: [MessageService],
     }).compileComponents();
   });
 

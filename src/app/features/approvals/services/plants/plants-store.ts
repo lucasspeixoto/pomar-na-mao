@@ -36,9 +36,7 @@ export class PlantsStore {
 
     if (!error) {
       this._selectedPlant.set(data);
-    }
-
-    if (error) {
+    } else {
       this._selectedPlant.set(null);
     }
 

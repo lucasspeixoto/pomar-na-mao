@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoutineDetailCardComponent } from './routine-detail-card';
+import { MessageService } from 'primeng/api';
 
 describe('RoutineDetailCardComponent', () => {
   let component: RoutineDetailCardComponent;
@@ -9,6 +10,7 @@ describe('RoutineDetailCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RoutineDetailCardComponent],
+      providers: [MessageService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(RoutineDetailCardComponent);

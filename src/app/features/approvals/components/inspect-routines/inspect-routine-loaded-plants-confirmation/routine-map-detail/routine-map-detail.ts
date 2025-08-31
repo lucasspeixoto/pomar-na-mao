@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  signal,
-  type AfterViewInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import type * as Leaflet from 'leaflet';
 import { InspectRoutinePlantsStore } from '../../../../services/inspect-routine/inspect-routine-plants-store';
 import { InspectRoutineStore } from '../../../../services/inspect-routine/inspect-routine-store';
@@ -34,7 +27,7 @@ declare let L: typeof Leaflet;
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RoutineMapDetailComponent implements AfterViewInit {
+export class RoutineMapDetailComponent {
   public inspectRoutinePlantsStore = inject(InspectRoutinePlantsStore);
 
   public inspectRoutineStore = inject(InspectRoutineStore);
@@ -74,10 +67,6 @@ export class RoutineMapDetailComponent implements AfterViewInit {
         this.startMapBuild();
       }
     });
-  }
-
-  public ngAfterViewInit(): void {
-    this.plotRegionPolygon();
   }
 
   public startMapBuild(): void {

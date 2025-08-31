@@ -4,7 +4,6 @@ import { SplitterModule } from 'primeng/splitter';
 import { StepperModule } from 'primeng/stepper';
 import { WorkRoutinePlantsStore } from '../../../services/work-routine/work-routine-plants-store';
 import { WorkRoutineStore } from '../../../services/work-routine/work-routine-store';
-import { WorkRoutinePlants } from '../../../models/routine.model';
 
 const PRIMENG = [ButtonModule, StepperModule, SplitterModule];
 
@@ -31,8 +30,4 @@ export class WorkRoutineLoadedPlantsConfirmationComponent {
   public workRoutinePlantsStore = inject(WorkRoutinePlantsStore);
 
   public workRoutineStore = inject(WorkRoutineStore);
-
-  public sincronizePlantUpdate(plant: WorkRoutinePlants): void {
-    console.log(plant);
-  }
 }

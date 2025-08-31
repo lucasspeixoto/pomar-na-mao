@@ -2,6 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoutineMapDetailComponent } from './routine-map-detail';
+import { MessageService } from 'primeng/api';
 
 describe('RoutineMapDetailComponent', () => {
   let component: RoutineMapDetailComponent;
@@ -9,7 +10,8 @@ describe('RoutineMapDetailComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RoutineMapDetailComponent],
+      imports: [RoutineMapDetailComponent],
+      providers: [MessageService],
     }).compileComponents();
   });
 

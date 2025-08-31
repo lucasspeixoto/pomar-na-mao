@@ -9,7 +9,7 @@ describe('PlantOccurrencesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PlantOccurrencesComponent],
+      imports: [PlantOccurrencesComponent],
     }).compileComponents();
   });
 
