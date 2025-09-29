@@ -1,4 +1,4 @@
-import type { Coordinate } from '@collectS/geolocation-navigator';
+import type { Coordinate } from '../shared/services/geolocation-navigator';
 
 export type Point = { latitude: number; longitude: number; accuracy?: number };
 

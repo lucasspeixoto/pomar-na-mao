@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @angular-eslint/no-output-native */
 import { CommonModule } from '@angular/common';
 import {
@@ -51,7 +52,7 @@ export class ModalComponent implements OnInit, OnChanges, OnDestroy {
     event.stopPropagation();
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown', ['$event'])
   onEscape(_event: KeyboardEvent): void {
     if (this.isOpen) {
       this.close.emit();

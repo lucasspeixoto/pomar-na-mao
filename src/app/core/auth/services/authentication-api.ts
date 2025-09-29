@@ -47,7 +47,7 @@ export class AuthenticationApi {
 
       this.loadingStore.stopLoading();
 
-      this.toastService.show('Login realizado', 'Login realizado com sucesso!', 'success');
+      this.toastService.show('Bem-vindo de volta', 'Login realizado com sucesso!', 'success');
     }, 3000);
   }
 
