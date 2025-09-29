@@ -49,6 +49,6 @@ describe('isAdminGuard', () => {
 
     // Assert
     expect(result).toBe(false);
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/');
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/inicio');
   });
 });

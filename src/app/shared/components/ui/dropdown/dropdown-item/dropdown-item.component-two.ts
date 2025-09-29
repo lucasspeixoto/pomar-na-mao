@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-output-native */
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -24,7 +25,7 @@ export class DropdownItemTwoComponent {
     return `${this.baseClassName} ${this.className}`.trim();
   }
 
-  handleClick(event: Event) {
+  handleClick(_event: Event): void {
     this.click.emit();
     this.itemClick.emit();
   }

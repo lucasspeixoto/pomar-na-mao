@@ -9,7 +9,7 @@ import { ComponentCardComponent } from '../../../common/component-card/component
   styles: ``,
 })
 export class ToggleSwitchComponent {
-  handleSwitchChange(checked: boolean) {
+  handleSwitchChange(checked: boolean): void {
     console.log('Switch is now:', checked ? 'ON' : 'OFF');
   }
 }

@@ -14,7 +14,7 @@ export class BackdropComponent {
     this.isMobileOpen$ = this.sidebarService.isMobileOpen$;
   }
 
-  closeSidebar() {
+  closeSidebar(): void {
     this.sidebarService.setMobileOpen(false);
   }
 }

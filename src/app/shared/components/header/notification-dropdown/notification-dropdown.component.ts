@@ -13,12 +13,12 @@ export class NotificationDropdownComponent {
   isOpen = false;
   notifying = true;
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.isOpen = !this.isOpen;
     this.notifying = false;
   }
 
-  closeDropdown() {
+  closeDropdown(): void {
     this.isOpen = false;
   }
 }

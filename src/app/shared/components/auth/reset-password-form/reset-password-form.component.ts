@@ -12,6 +12,7 @@ import {
   createResetPasswordForm,
   type ResetPasswordFormValue,
 } from '../../../../core/auth/constants/reset-password-form';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-reset-password-form',
@@ -34,6 +35,8 @@ export class ResetPasswordFormComponent {
 
   public loadingStore = inject(LoadingStore);
 
+  public toastService = inject(ToastService);
+
   public showPassword = false;
 
   public isChecked = false;
@@ -55,7 +58,11 @@ export class ResetPasswordFormComponent {
     this.loadingStore.startLoading();
 
     if (!this.resetPasswordForm.valid) {
-      alert('Preenchas os campos corretamente');
+      this.toastService.show(
+        'Formulário inválido!',
+        'Por favor, verifique se todos os campos foram preenchidos corretamente.',
+        'info'
+      );
 
       this.loadingStore.stopLoading();
 

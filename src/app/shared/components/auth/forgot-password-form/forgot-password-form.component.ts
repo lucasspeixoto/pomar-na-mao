@@ -12,6 +12,7 @@ import { messages } from '../../../../utils/messages';
 import { LoadingStore } from '../../../services/loading-store';
 import { CustomValidationMessage } from '../../form/custom-validation-message/custom-validation-message';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-forgot-password-form',
@@ -37,13 +38,19 @@ export class ForgotPasswordFormComponent {
 
   public LoadingStore = inject(LoadingStore);
 
+  public toastService = inject(ToastService);
+
   public forgotPasswordForm = createForgotPasswordForm();
 
   public messages = messages;
 
   public forgotPasswordHandler(): void {
     if (!this.forgotPasswordForm.valid) {
-      alert('Preenchas os campos corretamente');
+      this.toastService.show(
+        'Formulário inválido!',
+        'Por favor, verifique se todos os campos foram preenchidos corretamente.',
+        'info'
+      );
 
       return;
     }

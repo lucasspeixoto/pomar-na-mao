@@ -1,26 +1,25 @@
 {
   "root": true,
-  "ignorePatterns": ["node_modules/*", ".angular/*", "cypress/e2e/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "prettier"
+        "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-        "@typescript-eslint/explicit-function-return-type": "error",
-        "@typescript-eslint/no-explicit-any": "warn",
-        "@angular-eslint/component-class-suffix": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": ["app"],
+            "prefix": "app",
             "style": "camelCase"
           }
         ],
@@ -28,38 +27,21 @@
           "error",
           {
             "type": "element",
-            "prefix": ["app"],
+            "prefix": "app",
             "style": "kebab-case"
-          }
-        ],
-        "@typescript-eslint/no-unused-vars": [
-          "warn",
-          {
-            "args": "all",
-            "argsIgnorePattern": "^_",
-            "caughtErrors": "all",
-            "caughtErrorsIgnorePattern": "^_",
-            "destructuredArrayIgnorePattern": "^_",
-            "varsIgnorePattern": "^_",
-            "ignoreRestSiblings": true
           }
         ]
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
-        "plugin:@angular-eslint/template/accessibility",
-        "plugin:prettier/recommended"
+        "plugin:@angular-eslint/template/accessibility"
       ],
-      "rules": {
-        "@angular-eslint/template/prefer-control-flow": "off",
-        "@angular-eslint/template/click-events-have-key-events": "off",
-        "@angular-eslint/template/interactive-supports-focus": "off",
-        "@angular-eslint/template/elements-content": "off",
-        "prettier/prettier": "off"
-      }
+      "rules": {}
     }
   ]
 }

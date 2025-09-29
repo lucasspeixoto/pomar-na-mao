@@ -60,7 +60,7 @@ export class SigninFormComponent {
       this.toastService.show(
         'Erro ao entrar',
         'Por favor, verifique se todos os campos foram preenchidos corretamente.',
-        'error'
+        'info'
       );
 
       this.loadingStore.stopLoading();

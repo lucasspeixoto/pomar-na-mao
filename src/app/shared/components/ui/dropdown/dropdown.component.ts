@@ -17,12 +17,13 @@ import {
 })
 export class DropdownComponent implements AfterViewInit, OnDestroy {
   @Input() isOpen = false;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() close = new EventEmitter<void>();
   @Input() className = '';
 
   @ViewChild('dropdownRef') dropdownRef!: ElementRef<HTMLDivElement>;
 
-  private handleClickOutside = (event: MouseEvent) => {
+  private handleClickOutside = (event: MouseEvent): void => {
     if (
       this.isOpen &&
       this.dropdownRef &&
@@ -34,11 +35,11 @@ export class DropdownComponent implements AfterViewInit, OnDestroy {
     }
   };
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     document.addEventListener('mousedown', this.handleClickOutside);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 }

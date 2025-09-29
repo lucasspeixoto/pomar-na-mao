@@ -35,7 +35,7 @@ export class TextAreaComponent {
 
   @Output() valueChange = new EventEmitter<string>();
 
-  onInput(event: Event) {
+  onInput(event: Event): void {
     const val = (event.target as HTMLTextAreaElement).value;
     this.valueChange.emit(val);
   }

@@ -5,7 +5,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
   selector: 'app-switch',
   imports: [CommonModule],
   template: `
-    <label
+    <span
       class="flex cursor-pointer select-none items-center gap-3 text-sm font-medium"
       [ngClass]="disabled ? 'text-gray-400' : 'text-gray-700 dark:text-gray-400'"
       (click)="handleToggle()">
@@ -20,10 +20,10 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
           [ngClass]="switchColors.knob"></div>
       </div>
       {{ label }}
-    </label>
+    </span>
   `,
 })
-export class SwitchComponent {
+export class SwitchComponent implements OnInit {
   @Input() label!: string;
   @Input() defaultChecked: boolean = false;
   @Input() disabled: boolean = false;
@@ -33,17 +33,17 @@ export class SwitchComponent {
 
   isChecked: boolean = false;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isChecked = this.defaultChecked;
   }
 
-  handleToggle() {
+  handleToggle(): void {
     if (this.disabled) return;
     this.isChecked = !this.isChecked;
     this.valueChange.emit(this.isChecked);
   }
 
-  get switchColors() {
+  get switchColors(): { background: string; knob: string } {
     if (this.color === 'blue') {
       return {
         background: this.isChecked ? 'bg-brand-500' : 'bg-gray-200 dark:bg-white/10',

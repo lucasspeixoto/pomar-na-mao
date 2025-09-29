@@ -32,7 +32,7 @@ export class AuthenticationApi {
 
     if (error) {
       this.toastService.show(
-        'Erro ao entrar',
+        'Erro',
         this.messages[error.status!] || 'Erro ao entrar. Tente novamente.',
         'error'
       );
@@ -43,7 +43,7 @@ export class AuthenticationApi {
     }
 
     setTimeout(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/inicio');
 
       this.loadingStore.stopLoading();
 
@@ -59,7 +59,11 @@ export class AuthenticationApi {
     if (error) {
       this.loadingStore.stopLoading();
 
-      alert(this.messages[error.status!] || 'Erro ao entrar. Tente novamente.');
+      this.toastService.show(
+        'Erro',
+        this.messages[error.status!] || 'Erro ao lembrar senha. Tente novamente.',
+        'error'
+      );
 
       return;
     }
@@ -68,7 +72,7 @@ export class AuthenticationApi {
 
     this.loadingStore.stopLoading();
 
-    alert('Link de recuperação enviado por e-mail!');
+    this.toastService.show('Enviado', 'Link de recuperação enviado por e-mail!', 'success');
 
     this.router.navigateByUrl('/login');
   }
@@ -81,12 +85,11 @@ export class AuthenticationApi {
     if (error) {
       this.loadingStore.stopLoading();
 
-      /* this.messageService.add({
-        severity: 'warn',
-        summary: 'Erro',
-        detail: messages[error.status!],
-        life: 3000,
-      }); */
+      this.toastService.show(
+        'Erro',
+        this.messages[error.status!] || 'Erro ao resetar senha. Tente novamente.',
+        'error'
+      );
 
       return;
     }
@@ -95,12 +98,7 @@ export class AuthenticationApi {
 
     this.loadingStore.stopLoading();
 
-    /* this.messageService.add({
-      severity: 'success',
-      summary: 'Sucesso',
-      detail: 'Senha alterada com sucesso!',
-      life: 3000,
-    }); */
+    this.toastService.show('Sucesso', 'Senha alterada com sucesso!', 'success');
 
     this.router.navigateByUrl('/login');
   }
@@ -174,6 +172,6 @@ export class AuthenticationApi {
   public async logoutAndRedirect(): Promise<void> {
     await this.supabase.auth.signOut();
 
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('login');
   }
 }

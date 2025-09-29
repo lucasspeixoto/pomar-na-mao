@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-output-native */
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -5,9 +6,10 @@ import {
   Output,
   EventEmitter,
   ElementRef,
+  HostListener,
+  OnChanges,
   OnInit,
   OnDestroy,
-  HostListener,
 } from '@angular/core';
 
 @Component({
@@ -16,7 +18,7 @@ import {
   templateUrl: './modal.component.html',
   styles: ``,
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
   @Input() className = '';
@@ -25,32 +27,32 @@ export class ModalComponent {
 
   constructor(private el: ElementRef) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.isOpen) {
       document.body.style.overflow = 'hidden';
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     document.body.style.overflow = 'unset';
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     document.body.style.overflow = this.isOpen ? 'hidden' : 'unset';
   }
 
-  onBackdropClick(event: MouseEvent) {
+  onBackdropClick(_event: MouseEvent): void {
     if (!this.isFullscreen) {
       this.close.emit();
     }
   }
 
-  onContentClick(event: MouseEvent) {
+  onContentClick(event: MouseEvent): void {
     event.stopPropagation();
   }
 
   @HostListener('document:keydown.escape', ['$event'])
-  onEscape(event: KeyboardEvent) {
+  onEscape(_event: KeyboardEvent): void {
     if (this.isOpen) {
       this.close.emit();
     }

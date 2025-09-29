@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService, type Theme } from '../../../services/theme.service';
 import { CommonModule } from '@angular/common';
+import type { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-theme-toggle-button',
@@ -8,13 +9,13 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
 })
 export class ThemeToggleButtonComponent {
-  theme$;
+  public theme$!: Observable<Theme>;
 
   constructor(private themeService: ThemeService) {
     this.theme$ = this.themeService.theme$;
   }
 
-  toggleTheme() {
+  toggleTheme(): void {
     this.themeService.toggleTheme();
   }
 }

@@ -71,7 +71,7 @@ export class CheckboxComponent {
   @Input() disabled = false;
   @Output() checkedChange = new EventEmitter<boolean>();
 
-  onChange(event: Event) {
+  onChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.checkedChange.emit(input.checked);
   }
