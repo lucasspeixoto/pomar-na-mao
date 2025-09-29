@@ -101,18 +101,18 @@ export class CalenderComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    const event = clickInfo.event as any;
+    const event = clickInfo.event;
     this.selectedEvent = {
       id: event.id,
       title: event.title,
       start: event.startStr,
       end: event.endStr,
-      extendedProps: { calendar: event.extendedProps.calendar },
+      extendedProps: { calendar: event.extendedProps['calendar'] },
     };
     this.eventTitle = event.title;
     this.eventStartDate = event.startStr;
     this.eventEndDate = event.endStr || '';
-    this.eventLevel = event.extendedProps.calendar;
+    this.eventLevel = event.extendedProps['calendar'];
     this.openModal();
   }
 

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { LoadingStore } from './loading-store';
+import { LoadingStore } from './loading-store.service';
 
 describe('LoadingStore', () => {
   let service: LoadingStore;

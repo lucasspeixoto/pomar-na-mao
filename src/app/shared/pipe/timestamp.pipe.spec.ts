@@ -1,4 +1,4 @@
-import { TimestampPipe } from './timestamp-pipe';
+import { TimestampPipe } from './timestamp.pipe';
 
 describe('TimestampPipe', () => {
   let pipe: TimestampPipe;

@@ -3,16 +3,18 @@ import { ModalService } from '../../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ModalComponent } from '../../ui/modal/modal.component';
-import { AuthenticationApi } from '../../../../core/auth/services/authentication-api';
+import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
+import { LabelComponent } from '../../form/label/label.component';
+import { InputFieldComponent } from '../../form/input/input-field.component';
 
 @Component({
   selector: 'app-user-info-card',
-  imports: [CommonModule, ButtonComponent, ModalComponent],
+  imports: [CommonModule, ButtonComponent, ModalComponent, LabelComponent, InputFieldComponent],
   templateUrl: './user-info-card.component.html',
   styles: ``,
 })
 export class UserInfoCardComponent {
-  public authenticationService = inject(AuthenticationApi);
+  public authenticationService = inject(AuthenticationService);
 
   constructor(public modal: ModalService) {}
 

@@ -12,11 +12,11 @@
         </h4>
         <div class="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            {{ user.role }}
+            Desenvolvedor
           </p>
           <div class="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"></div>
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            {{ user.location }}
+            Ribeirão Preto, SP
           </p>
         </div>
       </div>
@@ -51,10 +51,10 @@
 <app-modal
   [isOpen]="isOpen"
   (close)="closeModal()"
-  className="max-w-[700px] m-4"
+  className="max-w-[700px] h-screen p-0"
 >
-  <div class="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
-    <div class="px-2 pr-14">
+  <div class="no-scrollbar relative w-full min-h-screen max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
+    <!-- <div class="px-2 pr-14">
       <h4 class="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
         Editar Informações Pessoais
       </h4>
@@ -107,6 +107,6 @@
           Salvar alterações
         </app-button>
       </div>
-    </form>
+    </form> -->
   </div>
 </app-modal>

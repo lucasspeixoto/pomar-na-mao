@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-variable */
 
-import { EpochToTimePipe } from './epoch-to-time-pipe';
+import { EpochToTimePipe } from './epoch-to-time.pipe';
 
 describe('EpochToTime', () => {
   it('create an instance', () => {

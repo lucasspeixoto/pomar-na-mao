@@ -1,15 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from '@supabase/supabase-js';
-import { LoadingStore } from '../../../shared/services/loading-store';
+import { LoadingService } from '../../../shared/services/loading-store.service';
 import { injectSupabase } from '../../../utils/inject-supabase';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersApi {
+export class UsersService {
   private supabase = injectSupabase();
 
-  public loadingStore = inject(LoadingStore);
+  public loadingStore = inject(LoadingService);
 
   public users = signal<User[]>([]);
 

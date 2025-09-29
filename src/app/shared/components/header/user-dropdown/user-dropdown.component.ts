@@ -3,7 +3,7 @@ import { DropdownComponent } from '../../ui/dropdown/dropdown.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DropdownItemTwoComponent } from '../../ui/dropdown/dropdown-item/dropdown-item.component-two';
-import { AuthenticationApi } from '../../../../core/auth/services/authentication-api';
+import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 
 @Component({
   selector: 'app-user-dropdown',
@@ -11,7 +11,7 @@ import { AuthenticationApi } from '../../../../core/auth/services/authentication
   imports: [CommonModule, RouterModule, DropdownComponent, DropdownItemTwoComponent],
 })
 export class UserDropdownComponent {
-  public authenticationService = inject(AuthenticationApi);
+  public authenticationService = inject(AuthenticationService);
 
   public isOpen = false;
 

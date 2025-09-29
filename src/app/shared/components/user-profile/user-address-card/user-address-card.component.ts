@@ -6,7 +6,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { LabelComponent } from '../../form/label/label.component';
 import { ModalComponent } from '../../ui/modal/modal.component';
 import { FormsModule } from '@angular/forms';
-import { AuthenticationApi } from '../../../../core/auth/services/authentication-api';
+import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 
 @Component({
   selector: 'app-user-address-card',
@@ -22,7 +22,7 @@ import { AuthenticationApi } from '../../../../core/auth/services/authentication
   styles: ``,
 })
 export class UserAddressCardComponent {
-  public authenticationService = inject(AuthenticationApi);
+  public authenticationService = inject(AuthenticationService);
 
   constructor(public modal: ModalService) {}
 
@@ -37,9 +37,9 @@ export class UserAddressCardComponent {
   }
 
   address = {
-    country: 'Brasil.',
-    cityState: 'São Paulo, SP, Brasil.',
-    postalCode: 'ERT 2489',
+    country: 'Brasil',
+    cityState: 'Ribeirão Preto, SP',
+    postalCode: '14033897',
     taxId: 'AS4568384',
   };
 

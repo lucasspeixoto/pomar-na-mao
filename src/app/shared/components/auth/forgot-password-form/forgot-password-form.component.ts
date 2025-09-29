@@ -7,9 +7,8 @@ import {
   createForgotPasswordForm,
   type ForgotPasswordFormValue,
 } from '../../../../core/auth/constants/forgot-password-form';
-import { AuthenticationApi } from '../../../../core/auth/services/authentication-api';
+import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 import { messages } from '../../../../utils/messages';
-import { LoadingStore } from '../../../services/loading-store';
 import { CustomValidationMessage } from '../../form/custom-validation-message/custom-validation-message';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ToastService } from '../../../services/toast.service';
@@ -34,9 +33,7 @@ export class ForgotPasswordFormComponent {
 
   public router = inject(Router);
 
-  public authenticationService = inject(AuthenticationApi);
-
-  public LoadingStore = inject(LoadingStore);
+  public authenticationService = inject(AuthenticationService);
 
   public toastService = inject(ToastService);
 

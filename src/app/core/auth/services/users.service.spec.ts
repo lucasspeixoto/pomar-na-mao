@@ -1,15 +1,15 @@
 /* tslint:disable:no-unused-variable */
 import { TestBed, inject } from '@angular/core/testing';
-import { UsersApi } from './users-api';
+import { UsersService } from './users.service';
 
-describe('UsersApi', () => {
+describe('UsersService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UsersApi],
+      providers: [UsersService],
     });
   });
 
-  it('should ...', inject([UsersApi], (service: UsersApi) => {
+  it('should ...', inject([UsersService], (service: UsersService) => {
     expect(service).toBeTruthy();
   }));
 });

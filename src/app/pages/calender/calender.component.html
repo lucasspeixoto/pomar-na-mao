@@ -2,7 +2,6 @@
   <div class="custom-calendar">
     <full-calendar #calendar [options]="calendarOptions"></full-calendar>
   </div>
-
   <app-modal
     [isOpen]="isOpen"
     (close)="closeModal()"
@@ -19,9 +18,9 @@
       </div>
       <div class="mt-8">
         <div>
-          <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+          <span class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
             Event Title
-          </label>
+          </span>
           <input
             id="event-title"
             type="text"
@@ -32,9 +31,9 @@
       </div>
 
       <div class="mt-6">
-        <label class="block mb-4 text-sm font-medium text-gray-700 dark:text-gray-400">
+        <span class="block mb-4 text-sm font-medium text-gray-700 dark:text-gray-400">
           Event Color
-        </label>
+        </span>
         <div class="flex flex-wrap items-center gap-4 sm:gap-5">
           @for (entry of (calendarsEvents | keyvalue); track $index) {
             <div
@@ -73,9 +72,9 @@
       </div>
 
       <div class="mt-6">
-        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+        <span class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
           Enter Start Date
-        </label>
+        </span>
         <input
           id="event-start-date"
           type="date"
@@ -85,9 +84,9 @@
       </div>
 
       <div class="mt-6">
-        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+        <span class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
           Enter End Date
-        </label>
+        </span>
         <input
           id="event-end-date"
           type="date"

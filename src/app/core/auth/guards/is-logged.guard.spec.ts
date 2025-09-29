@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { isLoggedGuard } from './is-logged-guard';
-import { AuthenticationApi } from '../services/authentication-api';
+import { isLoggedGuard } from './is-logged.guard';
+import { AuthenticationService } from '../services/authentication.service';
 
 describe('isLoggedGuard', () => {
-  let authService: jasmine.SpyObj<AuthenticationApi>;
+  let authService: jasmine.SpyObj<AuthenticationService>;
   let router: jasmine.SpyObj<Router>;
   let mockRoute: ActivatedRouteSnapshot;
   let mockState: RouterStateSnapshot;
@@ -21,12 +21,12 @@ describe('isLoggedGuard', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: AuthenticationApi, useValue: authServiceMock },
+        { provide: AuthenticationService, useValue: authServiceMock },
         { provide: Router, useValue: routerMock },
       ],
     });
 
-    authService = TestBed.inject(AuthenticationApi) as jasmine.SpyObj<AuthenticationApi>;
+    authService = TestBed.inject(AuthenticationService) as jasmine.SpyObj<AuthenticationService>;
     router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 

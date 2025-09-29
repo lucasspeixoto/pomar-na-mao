@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FarmRegionApi } from './farm-region-api';
+import { FarmRegionApi } from './farm-region-api.service';
 
 describe('FarmRegionApi', () => {
   let service: FarmRegionApi;

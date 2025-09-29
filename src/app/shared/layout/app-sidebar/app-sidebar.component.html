@@ -24,22 +24,18 @@
   >
     <a routerLink="/inicio">
       @if ((isExpanded$ | async) || (isHovered$ | async) || (isMobileOpen$ | async)) {
-      <img
-        class="dark:hidden"
-        src="/images/logo/logo.svg"
+      <div class="flex gap-4 items-center">
+        <img
+        src="/images/logo/logo.png"
         alt="Logo"
-        width="150"
-        height="40"
+        width="35"
+        height="45"
       />
-      <img
-        class="hidden dark:block"
-        src="/images/logo/logo-dark.svg"
-        alt="Logo"
-        width="150"
-        height="40"
-      />
+      <span class="text-lg font-semibold text-gray-800 dark:text-white/90">Pomar na mão</span>
+      </div>
+
       } @else {
-      <img src="/images/logo/logo-icon.svg" alt="Logo" width="32" height="32" />
+      <img src="/images/logo/logo.png" alt="Logo" width="32" height="32" />
       }
     </a>
   </div>
@@ -47,7 +43,6 @@
   <div class="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
     <nav class="mb-6">
       <div class="flex flex-col gap-4">
-        <!-- Menu Section -->
         <div>
           <h2
             class="mb-4 text-xs uppercase flex leading-[20px] text-gray-400"
@@ -79,7 +74,7 @@
             }
           </h2>
           <ul class="flex flex-col gap-1">
-            @for (nav of navItems; track $index;let i = $index) {
+            @for (nav of menuItems; track $index;let i = $index) {
             <li>
               @if (nav.subItems) {
                 <button

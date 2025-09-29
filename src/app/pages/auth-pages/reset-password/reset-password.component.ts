@@ -5,7 +5,11 @@ import { ResetPasswordFormComponent } from '../../../shared/components/auth/rese
 @Component({
   selector: 'app-reset-password',
   imports: [AuthPageLayoutComponent, ResetPasswordFormComponent],
-  templateUrl: './reset-password.component.html',
+  template: `
+    <app-auth-page-layout>
+      <app-reset-password-form class="flex flex-col flex-1" />
+    </app-auth-page-layout>
+  `,
   styles: ``,
 })
 export class ResetPasswordComponent {}

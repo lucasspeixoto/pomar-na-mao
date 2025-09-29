@@ -5,7 +5,11 @@ import { SigninFormComponent } from '../../../shared/components/auth/signin-form
 @Component({
   selector: 'app-sign-in',
   imports: [AuthPageLayoutComponent, SigninFormComponent],
-  templateUrl: './sign-in.component.html',
+  template: `
+    <app-auth-page-layout>
+      <app-signin-form class="flex flex-col flex-1" />
+    </app-auth-page-layout>
+  `,
   styles: ``,
 })
 export class SignInComponent {}

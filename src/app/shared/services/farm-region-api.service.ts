@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import type { FarmRegion } from '../../models/farm-region.model';
 import { injectSupabase } from '../../utils/inject-supabase';
-import { LoadingStore } from './loading-store';
+import { LoadingService } from './loading-store.service';
 
 export const REGIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
@@ -11,7 +11,7 @@ export const REGIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 export class FarmRegionApi {
   private supabase = injectSupabase();
 
-  public loadingStore = inject(LoadingStore);
+  public loadingStore = inject(LoadingService);
 
   private _farmRegions = signal<FarmRegion[]>([]);
 

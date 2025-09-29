@@ -1,4 +1,4 @@
-import { ShortTimestampPipe } from './short-timestamp-pipe';
+import { ShortTimestampPipe } from './short-timestamp.pipe';
 
 describe('ShortTimestampPipe', () => {
   let pipe: ShortTimestampPipe;

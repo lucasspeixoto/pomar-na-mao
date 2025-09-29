@@ -1,21 +1,21 @@
-import { messages } from './../../../utils/messages';
+import { messages } from '../../../utils/messages';
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Session } from '@supabase/supabase-js';
 import { iUser } from '../models/user.model';
-import { LoadingStore } from '../../../shared/services/loading-store';
+import { LoadingService } from '../../../shared/services/loading-store.service';
 import { injectSupabase } from '../../../utils/inject-supabase';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationApi {
+export class AuthenticationService {
   public supabase = injectSupabase();
 
   public currentUser = signal<iUser | null>(null);
 
-  public loadingStore = inject(LoadingStore);
+  public loadingStore = inject(LoadingService);
 
   public messages = messages;
 

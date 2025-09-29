@@ -6,8 +6,8 @@ import { ButtonComponent } from '../../ui/button/button.component';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createLoginForm, type LoginFormValue } from '../../../../core/auth/constants/login-form';
-import { AuthenticationApi } from '../../../../core/auth/services/authentication-api';
-import { LoadingStore } from '../../../services/loading-store';
+import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
+import { LoadingService } from '../../../services/loading-store.service';
 import { messages } from '../../../../utils/messages';
 import { CustomValidationMessage } from '../../form/custom-validation-message/custom-validation-message';
 import { ToastService } from '../../../services/toast.service';
@@ -30,9 +30,9 @@ import { ToastService } from '../../../services/toast.service';
 export class SigninFormComponent {
   public router = inject(Router);
 
-  public authenticationService = inject(AuthenticationApi);
+  public authenticationService = inject(AuthenticationService);
 
-  public loadingStore = inject(LoadingStore);
+  public loadingStore = inject(LoadingService);
 
   public toastService = inject(ToastService);
 

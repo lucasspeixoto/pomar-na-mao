@@ -3,7 +3,7 @@ import { Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class LoadingStore {
+export class LoadingService {
   private _isLoading = signal(false);
 
   public isLoading = this._isLoading.asReadonly();

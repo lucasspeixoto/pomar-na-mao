@@ -14,7 +14,7 @@ export type Position = {
 @Injectable({
   providedIn: 'root',
 })
-export class GeolocationNavigator {
+export class GeolocationNavigatorService {
   public geolocationErrorMessage = signal<string>('');
 
   public permissionStatus = signal<PermissionStatus | null>(null);

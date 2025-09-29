@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthenticationApi } from '../services/authentication-api';
+import { AuthenticationService } from '../services/authentication.service';
 
 export const isAdminGuard: CanActivateFn = (_route, _state) => {
-  const authenticationService = inject(AuthenticationApi);
+  const authenticationService = inject(AuthenticationService);
 
   const router = inject(Router);
 

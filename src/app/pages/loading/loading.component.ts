@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LoadingStore } from '../../shared/services/loading-store';
+import { LoadingService } from '../../shared/services/loading-store.service';
 
 @Component({
   selector: 'app-loading',
@@ -27,6 +27,6 @@ import { LoadingStore } from '../../shared/services/loading-store';
     }
   `,
 })
-export class Loading {
-  public loadingStore = inject(LoadingStore);
+export class LoadingComponent {
+  public loadingStore = inject(LoadingService);
 }
