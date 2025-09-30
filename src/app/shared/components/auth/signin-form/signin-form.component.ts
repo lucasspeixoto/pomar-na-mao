@@ -9,7 +9,7 @@ import { createLoginForm, type LoginFormValue } from '../../../../core/auth/cons
 import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 import { LoadingService } from '../../../services/loading-store.service';
 import { messages } from '../../../../utils/messages';
-import { CustomValidationMessage } from '../../form/custom-validation-message/custom-validation-message';
+import { CustomValidationMessageComponent } from '../../form/custom-validation-message/custom-validation-message';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { ToastService } from '../../../services/toast.service';
     LabelComponent,
     CheckboxComponent,
     ButtonComponent,
-    CustomValidationMessage,
+    CustomValidationMessageComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

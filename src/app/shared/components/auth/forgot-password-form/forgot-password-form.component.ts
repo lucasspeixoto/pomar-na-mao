@@ -9,7 +9,7 @@ import {
 } from '../../../../core/auth/constants/forgot-password-form';
 import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 import { messages } from '../../../../utils/messages';
-import { CustomValidationMessage } from '../../form/custom-validation-message/custom-validation-message';
+import { CustomValidationMessageComponent } from '../../form/custom-validation-message/custom-validation-message';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { ToastService } from '../../../services/toast.service';
 
@@ -19,7 +19,7 @@ import { ToastService } from '../../../services/toast.service';
     CommonModule,
     LabelComponent,
     ButtonComponent,
-    CustomValidationMessage,
+    CustomValidationMessageComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

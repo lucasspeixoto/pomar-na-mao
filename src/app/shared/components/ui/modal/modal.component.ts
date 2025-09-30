@@ -11,6 +11,7 @@ import {
   OnChanges,
   OnInit,
   OnDestroy,
+  inject,
 } from '@angular/core';
 
 @Component({
@@ -20,13 +21,13 @@ import {
   styles: ``,
 })
 export class ModalComponent implements OnInit, OnChanges, OnDestroy {
+  private el = inject(ElementRef);
+
   @Input() isOpen = false;
   @Output() close = new EventEmitter<void>();
   @Input() className = '';
   @Input() showCloseButton = true;
   @Input() isFullscreen = false;
-
-  constructor(private el: ElementRef) {}
 
   ngOnInit(): void {
     if (this.isOpen) {

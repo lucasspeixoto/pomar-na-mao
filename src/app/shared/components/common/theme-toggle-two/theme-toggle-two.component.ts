@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ThemeService, type Theme } from '../../../services/theme.service';
 import { CommonModule } from '@angular/common';
 import type { Observable } from 'rxjs';
@@ -10,9 +10,11 @@ import type { Observable } from 'rxjs';
   styles: ``,
 })
 export class ThemeToggleTwoComponent {
+  private themeService = inject(ThemeService);
+
   public theme$!: Observable<Theme>;
 
-  constructor(private themeService: ThemeService) {
+  constructor() {
     this.theme$ = this.themeService.theme$;
   }
 

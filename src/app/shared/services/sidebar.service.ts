@@ -6,30 +6,34 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SidebarService {
   private isExpandedSubject = new BehaviorSubject<boolean>(true);
+
   private isMobileOpenSubject = new BehaviorSubject<boolean>(false);
+
   private isHoveredSubject = new BehaviorSubject<boolean>(false);
 
-  isExpanded$ = this.isExpandedSubject.asObservable();
-  isMobileOpen$ = this.isMobileOpenSubject.asObservable();
-  isHovered$ = this.isHoveredSubject.asObservable();
+  public isExpanded$ = this.isExpandedSubject.asObservable();
 
-  setExpanded(val: boolean) {
+  public isMobileOpen$ = this.isMobileOpenSubject.asObservable();
+
+  public isHovered$ = this.isHoveredSubject.asObservable();
+
+  public setExpanded(val: boolean): void {
     this.isExpandedSubject.next(val);
   }
 
-  toggleExpanded() {
+  public toggleExpanded(): void {
     this.isExpandedSubject.next(!this.isExpandedSubject.value);
   }
 
-  setMobileOpen(val: boolean) {
+  public setMobileOpen(val: boolean): void {
     this.isMobileOpenSubject.next(val);
   }
 
-  toggleMobileOpen() {
+  public toggleMobileOpen(): void {
     this.isMobileOpenSubject.next(!this.isMobileOpenSubject.value);
   }
 
-  setHovered(val: boolean) {
+  public setHovered(val: boolean): void {
     this.isHoveredSubject.next(val);
   }
 }

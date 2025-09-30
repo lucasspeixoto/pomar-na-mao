@@ -10,11 +10,11 @@ import {
 } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomValidationMessage } from './custom-validation-message';
+import { CustomValidationMessageComponent } from './custom-validation-message';
 
-describe('CustomValidationMessage', () => {
-  let component: CustomValidationMessage;
-  let fixture: ComponentFixture<CustomValidationMessage>;
+describe('CustomValidationMessageComponent', () => {
+  let component: CustomValidationMessageComponent;
+  let fixture: ComponentFixture<CustomValidationMessageComponent>;
   let formGroupDirective: FormGroupDirective;
   let testForm: FormGroup;
 
@@ -27,11 +27,16 @@ describe('CustomValidationMessage', () => {
     formGroupDirective.form = testForm;
 
     TestBed.configureTestingModule({
-      imports: [CustomValidationMessage, BrowserAnimationsModule, FormsModule, ReactiveFormsModule],
+      imports: [
+        CustomValidationMessageComponent,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+      ],
       providers: [{ provide: ControlContainer, useValue: formGroupDirective }],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CustomValidationMessage);
+    fixture = TestBed.createComponent(CustomValidationMessageComponent);
     component = fixture.componentInstance;
 
     component.controlName = 'testField';

@@ -14,9 +14,9 @@ import { InputFieldComponent } from '../../form/input/input-field.component';
   styles: ``,
 })
 export class UserInfoCardComponent {
-  public authenticationService = inject(AuthenticationService);
+  modal = inject(ModalService);
 
-  constructor(public modal: ModalService) {}
+  public authenticationService = inject(AuthenticationService);
 
   isOpen = false;
 

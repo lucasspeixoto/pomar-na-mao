@@ -7,6 +7,7 @@ import {
   ChangeDetectorRef,
   OnInit,
   OnDestroy,
+  inject,
 } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
@@ -27,6 +28,10 @@ type NavItem = {
   templateUrl: './app-sidebar.component.html',
 })
 export class AppSidebarComponent implements OnInit, OnDestroy {
+  sidebarService = inject(SidebarService);
+  private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
+
   // Main nav items
   public menuItems: NavItem[] = [
     {
@@ -64,11 +69,7 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(
-    public sidebarService: SidebarService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {
+  constructor() {
     this.isExpanded$ = this.sidebarService.isExpanded$;
     this.isMobileOpen$ = this.sidebarService.isMobileOpen$;
     this.isHovered$ = this.sidebarService.isHovered$;

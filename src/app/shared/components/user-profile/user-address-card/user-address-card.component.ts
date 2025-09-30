@@ -22,9 +22,9 @@ import { AuthenticationService } from '../../../../core/auth/services/authentica
   styles: ``,
 })
 export class UserAddressCardComponent {
-  public authenticationService = inject(AuthenticationService);
+  modal = inject(ModalService);
 
-  constructor(public modal: ModalService) {}
+  public authenticationService = inject(AuthenticationService);
 
   isOpen = false;
 

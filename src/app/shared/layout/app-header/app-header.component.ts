@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -18,12 +18,14 @@ import { UserDropdownComponent } from '../../components/header/user-dropdown/use
   templateUrl: './app-header.component.html',
 })
 export class AppHeaderComponent implements AfterViewInit, OnDestroy {
+  sidebarService = inject(SidebarService);
+
   isApplicationMenuOpen = false;
   readonly isMobileOpen$;
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  constructor(public sidebarService: SidebarService) {
+  constructor() {
     this.isMobileOpen$ = this.sidebarService.isMobileOpen$;
   }
 

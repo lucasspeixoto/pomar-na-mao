@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
 import { CommonModule } from '@angular/common';
 import { AppSidebarComponent } from '../app-sidebar/app-sidebar.component';
@@ -12,17 +12,19 @@ import { AppHeaderComponent } from '../app-header/app-header.component';
   templateUrl: './app-layout.component.html',
 })
 export class AppLayoutComponent {
+  sidebarService = inject(SidebarService);
+
   readonly isExpanded$;
   readonly isHovered$;
   readonly isMobileOpen$;
 
-  constructor(public sidebarService: SidebarService) {
+  constructor() {
     this.isExpanded$ = this.sidebarService.isExpanded$;
     this.isHovered$ = this.sidebarService.isHovered$;
     this.isMobileOpen$ = this.sidebarService.isMobileOpen$;
   }
 
-  get containerClasses() {
+  get containerClasses(): string[] {
     return [
       'flex-1',
       'transition-all',

@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../../../core/auth/services/authentication.service';
 import { LoadingService } from '../../../services/loading-store.service';
 import { messages } from '../../../../utils/messages';
-import { CustomValidationMessage } from '../../form/custom-validation-message/custom-validation-message';
+import { CustomValidationMessageComponent } from '../../form/custom-validation-message/custom-validation-message';
 import {
   createResetPasswordForm,
   type ResetPasswordFormValue,
@@ -20,7 +20,7 @@ import { ToastService } from '../../../services/toast.service';
     CommonModule,
     LabelComponent,
     ButtonComponent,
-    CustomValidationMessage,
+    CustomValidationMessageComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,

@@ -56,7 +56,7 @@ import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
     `,
   ],
 })
-export class CustomValidationMessage {
+export class CustomValidationMessageComponent {
   @Input({ required: true })
   public controlName!: string;
 
