@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, type OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CheckboxComponent } from '../../../../shared/components/form/input/checkbox.component';
 import { AvatarTextComponent } from '../../../../shared/components/ui/avatar/avatar-text.component';
 import { FarmRegionApi } from '../../../../shared/services/farm-region-api.service';
@@ -7,6 +7,7 @@ import { InspectRoutinePlantsStore } from '../../services/inspect-routine-plants
 import { InspectRoutineStore } from '../../services/inspect-routine-store';
 import { ModalComponent } from '../../../../shared/components/ui/modal/modal.component';
 import { ButtonComponent } from '../../../../shared/components/ui/button/button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inspect-routines-table',
@@ -21,12 +22,15 @@ export class InspectRoutinesTableComponent implements OnInit {
 
   public inspectRoutinePlantsStore = inject(InspectRoutinePlantsStore);
 
-  isOpen = false;
+  public router = inject(Router);
 
-  selectedRows: string[] = [];
-  selectAll: boolean = false;
+  public isOpen = false;
 
-  selectedRoutineId: string | null = null;
+  public selectedRows: string[] = [];
+
+  public selectAll: boolean = false;
+
+  public selectedRoutineId: string | null = null;
 
   public async ngOnInit(): Promise<void> {
     await this.inspectRoutineStore.getInspectRoutinesDataHandler();
@@ -41,6 +45,12 @@ export class InspectRoutinesTableComponent implements OnInit {
     console.log('Deletando rotina com ID:', this.selectedRoutineId);
     //this.inspectRoutineStore.deleteInspectRoutine(routineId);
     this.closeDeleteRoutineConfirmationModal();
+  }
+
+  public handleDetailRoutine(routineId: string): void {
+    this.selectedRoutineId = routineId;
+    console.log('Exibindo detalhes da rotina com ID:', this.selectedRoutineId);
+    this.router.navigate(['rotinas-de-inspecao', routineId]);
   }
 
   public handleSelectAll(): void {

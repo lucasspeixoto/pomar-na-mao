@@ -1,0 +1,33 @@
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
+    <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
+        <div class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl dark:bg-gray-800"
+            [innerHTML]="icons.plantsIcon | safeHtml">
+        </div>
+        <div class="flex items-start flex-col justify-between mt-5 w-full">
+            <span class="text-sm text-gray-500 dark:text-gray-400 w-full">Pés ativos</span>
+            <div class="flex w-full justify-between items-center mt-4">
+                <h4 class="font-bold text-gray-800 text-title-sm dark:text-white/90">17432</h4>
+                <app-badge color="success">
+                    <span [innerHTML]="icons.arrowUpIcon | safeHtml"></span>
+                    4.54%
+                </app-badge>
+            </div>
+        </div>
+    </div>
+
+    <div class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
+        <div class="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl dark:bg-gray-800"
+            [innerHTML]="icons.boxIconLine| safeHtml">
+        </div>
+        <div class="flex items-start flex-col justify-between mt-5 w-full">
+            <span class="text-sm text-gray-500 dark:text-gray-400 w-full">Produtividade (caixas/ha)</span>
+            <div class="flex w-full justify-between items-center mt-4">
+                <h4 class="font-bold text-gray-800 text-title-sm dark:text-white/90">812</h4>
+                <app-badge color="error">
+                    <span [innerHTML]="icons.arrowDownIcon | safeHtml"></span>
+                    2.05%
+                </app-badge>
+            </div>
+        </div>
+    </div>
+</div>

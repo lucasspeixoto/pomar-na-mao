@@ -11,6 +11,7 @@ import { ResetPasswordComponent } from './pages/auth-pages/reset-password/reset-
 import { InspectRoutinesComponent } from './pages/routines/inspect-routines/inspect-routines.component';
 import { HomeComponent } from './pages/home/home.component';
 import { WorkRoutinesComponent } from './pages/routines/work-routines/work-routines.component';
+import { InspectRoutineDetailsComponent } from './pages/routines/inspect-routine-details/inspect-routine-details.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,7 @@ export const routes: Routes = [
         path: 'inicio',
         pathMatch: 'full',
         component: HomeComponent,
-        title: 'Bem-vindo(a) ao pomar na mão',
+        title: 'Minha Fazenda',
       },
       {
         path: 'rotinas-de-inspecao',
@@ -48,6 +49,11 @@ export const routes: Routes = [
         path: 'rotinas-de-trabalho',
         component: WorkRoutinesComponent,
         title: 'Rotinas de trabalho',
+      },
+      {
+        path: 'rotinas-de-inspecao/:id',
+        component: InspectRoutineDetailsComponent,
+        title: 'Detalhe Inspeção',
       },
       {
         path: 'calendar',
