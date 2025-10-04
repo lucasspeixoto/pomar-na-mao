@@ -38,7 +38,7 @@ export const routes: Routes = [
         path: 'inicio',
         pathMatch: 'full',
         component: HomeComponent,
-        title: 'Bem-vindo(a)',
+        title: 'Minha Fazenda',
       },
       {
         path: 'rotinas-de-inspecao',

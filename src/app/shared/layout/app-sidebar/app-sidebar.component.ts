@@ -37,7 +37,7 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
   public menuItems: MenuItem[] = [
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" fill-rule="evenodd"><path d="M256 64L32 288h64v160h128V320h64v128h128V288h64L256 64z"/></svg>`,
-      name: 'Início',
+      name: 'Minha Fazenda',
       path: '/inicio',
     },
     {
