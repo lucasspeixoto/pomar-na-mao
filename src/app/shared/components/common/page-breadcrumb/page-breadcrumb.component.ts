@@ -9,4 +9,8 @@ import { RouterModule } from '@angular/router';
 })
 export class PageBreadcrumbComponent {
   @Input() pageTitle = '';
+
+  @Input() firstRouter = '/inicio';
+
+  @Input() firstRouterTitle = 'Início';
 }

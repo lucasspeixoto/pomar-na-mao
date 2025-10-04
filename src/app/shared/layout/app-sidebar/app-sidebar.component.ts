@@ -12,14 +12,14 @@ import {
 import { SidebarService } from '../../services/sidebar.service';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
-import { combineLatest, Subscription } from 'rxjs';
+import { combineLatest, Subscription, type Observable } from 'rxjs';
 
-type NavItem = {
+type MenuItem = {
   name: string;
   icon: string;
   path?: string;
   new?: boolean;
-  subItems?: { name: string; path: string; pro?: boolean; new?: boolean }[];
+  subItems?: { name: string; path: string; pro?: boolean; new?: boolean; hidden?: boolean }[];
 };
 
 @Component({
@@ -28,12 +28,13 @@ type NavItem = {
   templateUrl: './app-sidebar.component.html',
 })
 export class AppSidebarComponent implements OnInit, OnDestroy {
-  sidebarService = inject(SidebarService);
+  public sidebarService = inject(SidebarService);
+
   private router = inject(Router);
+
   private cdr = inject(ChangeDetectorRef);
 
-  // Main nav items
-  public menuItems: NavItem[] = [
+  public menuItems: MenuItem[] = [
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" fill-rule="evenodd"><path d="M256 64L32 288h64v160h128V320h64v128h128V288h64L256 64z"/></svg>`,
       name: 'Início',
@@ -43,8 +44,13 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M176 112V80c0-17.673 14.327-32 32-32h96c17.673 0 32 14.327 32 32v32h64c17.673 0 32 14.327 32 32v288c0 17.673-14.327 32-32 32H112c-17.673 0-32-14.327-32-32V144c0-17.673 14.327-32 32-32h64zm32-32v32h96V80h-96zM112 176v256h288V176H112z"/></svg>`,
       name: 'Rotinas',
       subItems: [
-        { name: 'Inspeção', path: '/rotinas-de-inspecao' },
-        { name: 'Trabalho', path: '/rotinas-de-trabalho' },
+        { name: 'Inspeção', path: '/rotinas-de-inspecao', hidden: false },
+        { name: 'Trabalho', path: '/rotinas-de-trabalho', hidden: false },
+        {
+          name: 'Detalhes da Rotina',
+          path: '/detalhes-rotina/:id',
+          hidden: true,
+        },
       ],
     },
     {
@@ -59,13 +65,17 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
     },
   ];
 
-  openSubmenu: string | null | number = null;
-  subMenuHeights: { [key: string]: number } = {};
+  public openSubmenu: string | null | number = null;
+
+  public subMenuHeights: { [key: string]: number } = {};
+
   @ViewChildren('subMenu') subMenuRefs!: QueryList<ElementRef>;
 
-  readonly isExpanded$;
-  readonly isMobileOpen$;
-  readonly isHovered$;
+  public readonly isExpanded$: Observable<boolean>;
+
+  public readonly isMobileOpen$: Observable<boolean>;
+
+  public readonly isHovered$: Observable<boolean>;
 
   private subscription: Subscription = new Subscription();
 
@@ -75,7 +85,7 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
     this.isHovered$ = this.sidebarService.isHovered$;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     // Subscribe to router events
     this.subscription.add(
       this.router.events.subscribe(event => {
@@ -90,14 +100,7 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
       combineLatest([this.isExpanded$, this.isMobileOpen$, this.isHovered$]).subscribe(
         ([isExpanded, isMobileOpen, isHovered]) => {
           if (!isExpanded && !isMobileOpen && !isHovered) {
-            // this.openSubmenu = null;
-            // this.savedSubMenuHeights = { ...this.subMenuHeights };
-            // this.subMenuHeights = {};
             this.cdr.detectChanges();
-          } else {
-            // Restore saved heights when reopening
-            // this.subMenuHeights = { ...this.savedSubMenuHeights };
-            // this.cdr.detectChanges();
           }
         }
       )
@@ -107,16 +110,16 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
     this.setActiveMenuFromRoute(this.router.url);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     // Clean up subscriptions
     this.subscription.unsubscribe();
   }
 
-  isActive(path: string): boolean {
-    return this.router.url === path;
+  public isActive(path: string): boolean {
+    return this.router.url === path || this.router.url.startsWith(path + '/');
   }
 
-  toggleSubmenu(section: string, index: number): void {
+  public toggleSubmenu(section: string, index: number): void {
     const key = `${section}-${index}`;
 
     if (this.openSubmenu === key) {
@@ -135,7 +138,7 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSidebarMouseEnter(): void {
+  public onSidebarMouseEnter(): void {
     this.isExpanded$
       .subscribe(expanded => {
         if (!expanded) {
@@ -151,19 +154,25 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
       /* { items: this.othersItems, prefix: 'others' }, */
     ];
 
+    let submenuOpened = false;
+
     menuGroups.forEach(group => {
       group.items.forEach((nav, i) => {
         if (nav.subItems) {
           nav.subItems.forEach(subItem => {
-            if (currentUrl === subItem.path) {
+            if (
+              currentUrl === subItem.path ||
+              (subItem.path && currentUrl.startsWith(subItem.path.replace(/:.*$/, '')))
+            ) {
               const key = `${group.prefix}-${i}`;
               this.openSubmenu = key;
+              submenuOpened = true;
 
               setTimeout(() => {
                 const el = document.getElementById(key);
                 if (el) {
                   this.subMenuHeights[key] = el.scrollHeight;
-                  this.cdr.detectChanges(); // Ensure UI updates
+                  this.cdr.detectChanges();
                 }
               });
             }
@@ -171,9 +180,11 @@ export class AppSidebarComponent implements OnInit, OnDestroy {
         }
       });
     });
+
+    if (!submenuOpened) this.openSubmenu = null;
   }
 
-  onSubmenuClick(): void {
+  public onSubmenuClick(): void {
     this.isMobileOpen$
       .subscribe(isMobile => {
         if (isMobile) {
