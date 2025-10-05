@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { InspectRoutineStore } from './inspect-routine-store';
+import { InspectRoutineService } from './inspect-routine.service';
 
-describe('InspectRoutineStore', () => {
-  let service: InspectRoutineStore;
+describe('InspectRoutineService', () => {
+  let service: InspectRoutineService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [],
     });
-    service = TestBed.inject(InspectRoutineStore);
+    service = TestBed.inject(InspectRoutineService);
   });
 
   it('should be created', () => {

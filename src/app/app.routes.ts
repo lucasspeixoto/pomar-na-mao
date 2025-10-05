@@ -5,7 +5,6 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AppLayoutComponent } from './shared/layout/app-layout/app-layout.component';
 import { SignInComponent } from './pages/auth-pages/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './pages/auth-pages/forgot-password/forgot-password.component';
-import { CalenderComponent } from './pages/calender/calender.component';
 import { isLoggedGuard } from './core/auth/guards/is-logged.guard';
 import { ResetPasswordComponent } from './pages/auth-pages/reset-password/reset-password.component';
 import { InspectRoutinesComponent } from './pages/routines/inspect-routines/inspect-routines.component';
@@ -54,11 +53,6 @@ export const routes: Routes = [
         path: 'rotinas-de-inspecao/:id',
         component: InspectRoutineDetailsComponent,
         title: 'Detalhe Inspeção',
-      },
-      {
-        path: 'calendar',
-        component: CalenderComponent,
-        title: 'Calendário',
       },
       {
         path: 'perfil',

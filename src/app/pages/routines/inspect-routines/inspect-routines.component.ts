@@ -1,7 +1,7 @@
 import { Component, inject, type OnInit } from '@angular/core';
 import { PageBreadcrumbComponent } from '../../../shared/components/common/page-breadcrumb/page-breadcrumb.component';
 import { InspectRoutinesTableComponent } from '../../../features/inspect-routines/components/inspect-routines-table/inspect-routines-table.component';
-import { InspectRoutineStore } from '../../../features/inspect-routines/services/inspect-routine-store';
+import { InspectRoutineService } from '../../../features/inspect-routines/services/inspect-routine.service';
 import { FarmRegionApi } from '../../../shared/services/farm-region-api.service';
 
 @Component({
@@ -10,12 +10,12 @@ import { FarmRegionApi } from '../../../shared/services/farm-region-api.service'
   templateUrl: './inspect-routines.component.html',
 })
 export class InspectRoutinesComponent implements OnInit {
-  public inspectRoutineStore = inject(InspectRoutineStore);
+  public inspectRoutineService = inject(InspectRoutineService);
 
   public farmRegionApi = inject(FarmRegionApi);
 
   public async ngOnInit(): Promise<void> {
-    await this.inspectRoutineStore.getInspectRoutinesDataHandler();
+    await this.inspectRoutineService.getInspectRoutinesDataHandler();
     await this.farmRegionApi.getAllFarmRegionsHandler();
   }
 }

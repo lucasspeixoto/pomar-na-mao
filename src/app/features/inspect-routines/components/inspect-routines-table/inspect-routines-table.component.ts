@@ -3,24 +3,32 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CheckboxComponent } from '../../../../shared/components/form/input/checkbox.component';
 import { AvatarTextComponent } from '../../../../shared/components/ui/avatar/avatar-text.component';
 import { FarmRegionApi } from '../../../../shared/services/farm-region-api.service';
-import { InspectRoutinePlantsStore } from '../../services/inspect-routine-plants-store';
-import { InspectRoutineStore } from '../../services/inspect-routine-store';
+import { InspectRoutinePlantsService } from '../../services/inspect-routine-plants.service';
 import { ModalComponent } from '../../../../shared/components/ui/modal/modal.component';
 import { ButtonComponent } from '../../../../shared/components/ui/button/button.component';
 import { Router } from '@angular/router';
+import { TableSkeletonComponent } from '../../../../shared/components/skeleton/table-skeleton.component';
+import { InspectRoutineService } from '../../services/inspect-routine.service';
 
 @Component({
   selector: 'app-inspect-routines-table',
-  imports: [CommonModule, AvatarTextComponent, CheckboxComponent, ButtonComponent, ModalComponent],
+  imports: [
+    CommonModule,
+    AvatarTextComponent,
+    TableSkeletonComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    ModalComponent,
+  ],
   templateUrl: './inspect-routines-table.component.html',
   styles: ``,
 })
 export class InspectRoutinesTableComponent implements OnInit {
-  public inspectRoutineStore = inject(InspectRoutineStore);
+  public inspectRoutineStore = inject(InspectRoutineService);
 
   public farmRegionApi = inject(FarmRegionApi);
 
-  public inspectRoutinePlantsStore = inject(InspectRoutinePlantsStore);
+  public inspectRoutinePlantsStore = inject(InspectRoutinePlantsService);
 
   public router = inject(Router);
 

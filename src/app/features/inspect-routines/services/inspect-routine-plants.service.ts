@@ -6,7 +6,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 @Injectable({
   providedIn: 'root',
 })
-export class InspectRoutinePlantsStore {
+export class InspectRoutinePlantsService {
   private supabase = injectSupabase();
 
   public toastService = inject(ToastService);

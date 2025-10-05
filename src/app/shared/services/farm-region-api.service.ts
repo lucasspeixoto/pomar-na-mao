@@ -11,11 +11,20 @@ export const REGIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 export class FarmRegionApi {
   private supabase = injectSupabase();
 
-  public loadingStore = inject(LoadingService);
-
   private _farmRegions = signal<FarmRegion[]>([]);
 
   public farmRegions = this._farmRegions.asReadonly();
+
+  private _isLoading = signal<boolean>(false);
+  public isLoading = this._isLoading.asReadonly();
+
+  public startLoading(): void {
+    this._isLoading.set(true);
+  }
+
+  public stopLoading(): void {
+    this._isLoading.set(false);
+  }
 
   public uniqueRegions = computed(() => {
     if (this.farmRegions().length > 0) {
@@ -34,7 +43,7 @@ export class FarmRegionApi {
   });
 
   public async getAllFarmRegionsHandler(): Promise<void> {
-    this.loadingStore.startLoading();
+    this.startLoading();
 
     const { data, error } = await this.supabase
       .from('regions')
@@ -43,16 +52,10 @@ export class FarmRegionApi {
 
     if (!error) this._farmRegions.set(data);
 
-    this.loadingStore.stopLoading();
+    this.stopLoading();
 
     if (error) {
       this._farmRegions.set([]);
-      /* this.messageService.add({
-        severity: 'warn',
-        summary: 'Erro',
-        detail: 'Ocorreu um erro ao carregar regiões, tente novamente!',
-        life: 3000,
-      }); */
     }
   }
 }

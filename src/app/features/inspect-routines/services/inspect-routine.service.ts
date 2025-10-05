@@ -6,7 +6,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 @Injectable({
   providedIn: 'root',
 })
-export class InspectRoutineStore {
+export class InspectRoutineService {
   private supabase = injectSupabase();
 
   public toastService = inject(ToastService);
@@ -73,7 +73,9 @@ export class InspectRoutineStore {
       );
     }
 
-    this.stopLoading();
+    setTimeout(() => {
+      this.stopLoading();
+    }, 3000);
   }
 
   public async deleteInspectRoutine(routineId: string): Promise<void> {
