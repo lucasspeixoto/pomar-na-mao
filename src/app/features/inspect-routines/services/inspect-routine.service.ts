@@ -17,8 +17,8 @@ export class InspectRoutineService {
 
   /* Routines filters */
   public selectedRegion = signal<string | null>(null);
-  public selectedUserId = signal<string | null>(null); //'6c32bee6-8f87-476d-b609-bd2e9b904759'
-  public selectedRangeDate = signal<string | null>(null); //'21/10/2025 - 25/10/2025'
+  public selectedUserId = signal<string | null>(null);
+  public selectedRangeDate = signal<string | null>(null);
 
   private _inspectRoutines = signal<Routine[]>([]);
   public inspectRoutines = this._inspectRoutines.asReadonly();

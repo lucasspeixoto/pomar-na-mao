@@ -14,7 +14,6 @@ import { SelectComponent } from '../../../../shared/components/form/select/selec
 import { LabelComponent } from '../../../../shared/components/form/label/label.component';
 import { UsersService } from '../../../../core/auth/services/users.service';
 import { DateRangeComponent } from '../../../../shared/components/form/date-range/date-range.component';
-import { getInitialDate } from '../../../../utils/date';
 
 @Component({
   selector: 'app-inspect-routines-table',
@@ -52,8 +51,6 @@ export class InspectRoutinesTableComponent implements OnInit {
   public selectedRoutineId: string | null = null;
 
   public isFiltersOpen = false;
-
-  public initialDate = getInitialDate();
 
   public async ngOnInit(): Promise<void> {
     await this.inspectRoutineService.getInspectRoutinesDataHandler();

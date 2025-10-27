@@ -6,6 +6,7 @@
 
 @let isLoadingFarmRegions = farmRegionService.isLoading();
 
+
 @if(isLoadingRoutines || isLoadingFarmRegions) {
 <app-table-skeleton [lines]="8" />
 } @else {
@@ -163,6 +164,7 @@
         </table>
     </div>
 </div>
+}
 
 <!-- Delete routine modal confirmation -->
 <app-modal [isOpen]="isDeleteModalOpen"
@@ -183,10 +185,10 @@
                 Deletar
             </app-button>
         </div>
-    </app-modal>
+</app-modal>
 
-    <!-- Filter dropdown -->
-    <app-modal
+<!-- Filter dropdown -->
+<app-modal
         [isOpen]="isFiltersOpen"
         (close)="closeFiltersDropdown()"
         className="max-w-[600px] p-5 lg:p-10">
@@ -195,20 +197,21 @@
         </h4>
 
         <div class="flex flex-col gap-4">
-
             <div class="flex gap-2 w-full">
-                <!-- Região -->
-                <div class="w-1/2">
-                    <app-label for="region">Zona</app-label>
-                    <app-select
-                        id="region"
-                        [value]="inspectRoutineService.selectedRegion()!"
-                        [options]="farmRegionService.uniqueRegionsOptions()"
-                        placeholder="Selecione a zona"
-                        (valueChange)="changeFarmRegionFilter($event)">
-                    </app-select>
-                </div>
 
+                <!-- Região -->
+                @if(farmRegionService.uniqueRegionsOptions()) {
+                    <div class="w-1/2">
+                        <app-label for="region">Zona</app-label>
+                        <app-select
+                            id="region"
+                            [value]="inspectRoutineService.selectedRegion()!"
+                            [options]="farmRegionService.uniqueRegionsOptions()"
+                            placeholder="Selecione a zona"
+                            (valueChange)="changeFarmRegionFilter($event)">
+                        </app-select>
+                    </div>
+                }
                 <!-- Usuário -->
                 <div class="w-1/2">
                     <app-label for="user">Funcionário</app-label>
@@ -216,7 +219,7 @@
                         id="user"
                         [value]="inspectRoutineService.selectedUserId()!"
                         [options]="usersService.usersOptions()"
-                        placeholder="Selecione o Funcionário"
+                        placeholder="Selecione o funcionário"
                         (valueChange)="changeUserFilter($event)">
                     </app-select>
                 </div>
@@ -243,5 +246,4 @@
             </app-button>
         </div>
 
-    </app-modal>
-    }
+</app-modal>
