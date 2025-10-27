@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   ApexNonAxisChartSeries,
   ApexChart,
@@ -15,6 +15,7 @@ import { DropdownComponent } from '../ui/dropdown/dropdown.component';
   selector: 'app-harvest-productivity',
   imports: [CommonModule, NgApexchartsModule, DropdownComponent, DropdownItemComponent],
   templateUrl: './harvest-productivity.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HarvestProductivityComponent {
   public series: ApexNonAxisChartSeries = [75.55];

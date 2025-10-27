@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ModalService } from '../../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from '../../ui/modal/modal.component';
@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../../../core/auth/services/authentica
   selector: 'app-user-meta-card',
   imports: [CommonModule, ModalComponent],
   templateUrl: './user-meta-card.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserMetaCardComponent {
   modal = inject(ModalService);

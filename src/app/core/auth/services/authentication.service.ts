@@ -47,7 +47,7 @@ export class AuthenticationService {
 
       this.loadingStore.stopLoading();
 
-      this.toastService.show('Bem-vindo de volta', 'Login realizado com sucesso!', 'success');
+      this.toastService.show('Bem-vindo!', 'Login realizado com sucesso!', 'success');
     }, 3000);
   }
 

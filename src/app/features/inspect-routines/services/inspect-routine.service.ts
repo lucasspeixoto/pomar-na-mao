@@ -2,6 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { injectSupabase } from '../../../utils/inject-supabase';
 import { Routine } from '../models/routine.model';
 import { ToastService } from '../../../shared/services/toast.service';
+import { parseDateString } from '../../../utils/date';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,13 @@ export class InspectRoutineService {
 
   public toastService = inject(ToastService);
 
+  private _isComparisonActive = signal(false);
+  public isComparisonActive = this._isComparisonActive.asReadonly();
+
+  /* Routines filters */
   public selectedRegion = signal<string | null>(null);
-  public selectedOccurrence = signal<string | null>(null);
+  public selectedUserId = signal<string | null>(null); //'6c32bee6-8f87-476d-b609-bd2e9b904759'
+  public selectedRangeDate = signal<string | null>(null); //'21/10/2025 - 25/10/2025'
 
   private _inspectRoutines = signal<Routine[]>([]);
   public inspectRoutines = this._inspectRoutines.asReadonly();
@@ -22,6 +28,10 @@ export class InspectRoutineService {
 
   public numberOfInspectRoutines = computed(() => this._inspectRoutines().length);
 
+  public setIsComparisonActive(state: boolean): void {
+    this._isComparisonActive.set(state);
+  }
+
   public setInspectRoutines(inspectRoutines: Routine[]): void {
     this._inspectRoutines.set(inspectRoutines);
   }
@@ -30,7 +40,6 @@ export class InspectRoutineService {
     this._selectedInspectRoutine.set(inspectRoutine);
   }
 
-  //* --------- Estado de Loading
   private _isLoading = signal<boolean>(false);
   public isLoading = this._isLoading.asReadonly();
 
@@ -54,8 +63,22 @@ export class InspectRoutineService {
       query = query.eq('region', this.selectedRegion());
     }
 
-    if (this.selectedOccurrence()) {
-      query = query.eq('occurrence', this.selectedOccurrence());
+    if (this.selectedUserId()) {
+      query = query.eq('user_id', this.selectedUserId());
+    }
+
+    if (this.selectedRangeDate()) {
+      const startDate = this.selectedRangeDate()!.split(' - ')[0];
+      const endDate = this.selectedRangeDate()!.split(' - ')[1];
+
+      const parsedStartDate = parseDateString(startDate);
+      const parsedEndDate = parseDateString(endDate);
+
+      const exclusiveEndDate = new Date(parsedEndDate);
+      exclusiveEndDate.setDate(parsedEndDate.getDate() + 1);
+
+      query = query.gte('created_at', parsedStartDate.toISOString());
+      query = query.lt('created_at', exclusiveEndDate.toISOString());
     }
 
     const { data, error } = await query;
@@ -73,9 +96,7 @@ export class InspectRoutineService {
       );
     }
 
-    setTimeout(() => {
-      this.stopLoading();
-    }, 3000);
+    this.stopLoading();
   }
 
   public async deleteInspectRoutine(routineId: string): Promise<void> {
@@ -85,5 +106,11 @@ export class InspectRoutineService {
       this.toastService.show('Sucesso', 'Rotina deletada com sucesso!', 'success');
       this.getInspectRoutinesDataHandler();
     }
+  }
+
+  public clearFilters(): void {
+    this.selectedRegion.set(null);
+    this.selectedUserId.set(null);
+    this.selectedRangeDate.set(null);
   }
 }

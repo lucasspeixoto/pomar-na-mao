@@ -7,10 +7,10 @@ import { SignInComponent } from './pages/auth-pages/sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './pages/auth-pages/forgot-password/forgot-password.component';
 import { isLoggedGuard } from './core/auth/guards/is-logged.guard';
 import { ResetPasswordComponent } from './pages/auth-pages/reset-password/reset-password.component';
-import { InspectRoutinesComponent } from './pages/routines/inspect-routines/inspect-routines.component';
+import { InspectRoutinesComponent } from './features/inspect-routines/pages/inspect-routines/inspect-routines.component';
 import { HomeComponent } from './pages/home/home.component';
-import { WorkRoutinesComponent } from './pages/routines/work-routines/work-routines.component';
-import { InspectRoutineDetailsComponent } from './pages/routines/inspect-routine-details/inspect-routine-details.component';
+import { WorkRoutinesComponent } from './features/work-routines/pages/work-routines/work-routines.component';
+import { InspectRoutineDetailsComponent } from './features/inspect-routines/pages/inspect-routine-details/inspect-routine-details.component';
 
 export const routes: Routes = [
   {

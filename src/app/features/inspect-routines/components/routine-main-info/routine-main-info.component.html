@@ -1,0 +1,38 @@
+<div class="flex py-2 px-2 w-full h-full justify-between gap-1 md:gap-4 ">
+    <!-- Mensagem -->
+    <div class="m-2 flex flex-col justify-start gap-2 w-1/2">
+        <p class="text-gray-800 text-lg font-semibold dark:text-white/80">Aprovação Rotina <span
+                class="text-gradient text-lg font-semibold ml-1">#{{currentInspectRoutineId}}</span> </p>
+        <span class="text-gradient text-md font-medium">Valide cada inspeção e aprove as
+            mudanças</span>
+    </div>
+
+    <!-- Infos -->
+    <div class="mx-2 flex flex-wrap justify-start self-center gap-x-12 gap-y-4 w-1/2">
+        <div class="flex justify-center gap-3 h-[50px]">
+            <img width="40" height="30" src="/images/user.svg" alt="Logo usuário" />
+            <div class="flex flex-col justify-between">
+                <span class="font-medium text-gray-800 text-theme-md dark:text-white/90">{{routineDetail.userName |
+                    firstAndLastname}}</span>
+                <span class="text-gray-500 text-theme-sm dark:text-gray-400">Funcionário</span>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-3 h-[50px]">
+            <img width="40" height="30" src="/images/region.svg" alt="Logo Mapa" />
+            <div class="flex flex-col justify-between">
+                <span class="font-medium text-gray-800 text-theme-md dark:text-white/90">{{routineDetail.region}}</span>
+                <span class="text-gray-500 text-theme-sm dark:text-gray-400">Zona</span>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-3 h-[50px]">
+            <img width="40" height="30" src="/images/calendar.svg" alt="Calendário" />
+            <div class="flex flex-col justify-between">
+                <span class="font-medium text-gray-800 text-theme-md dark:text-white/90">{{routineDetail.date |
+                    date:'dd/MM/yyyy'}}</span>
+                <span class="text-gray-500 text-theme-sm dark:text-gray-400">Data envio</span>
+            </div>
+        </div>
+    </div>
+</div>

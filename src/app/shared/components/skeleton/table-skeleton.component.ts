@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table-skeleton',
@@ -89,7 +89,7 @@ import { Component, Input } from '@angular/core';
       </div>
     </div>
   `,
-  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSkeletonComponent {
   @Input() lines: number = 5;

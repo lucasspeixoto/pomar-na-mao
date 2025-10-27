@@ -14,6 +14,11 @@ export class InspectRoutinePlantsService {
   private _inspectRoutinePlants = signal<RoutinePlants[]>([]);
   public inspectRoutinePlants = this._inspectRoutinePlants.asReadonly();
 
+  public totalOfInspectRoutinePlants = computed(() => this._inspectRoutinePlants().length);
+
+  private _selectedPlantInComparison = signal<RoutinePlants | null>(null);
+  public selectedPlantInComparison = this._selectedPlantInComparison.asReadonly();
+
   public approvedInspectRoutinePlants = computed(() =>
     this._inspectRoutinePlants().filter(plant => plant.is_approved)
   );
@@ -24,6 +29,10 @@ export class InspectRoutinePlantsService {
 
   public setInspectRoutinePlants(workRoutinePlants: RoutinePlants[]): void {
     this._inspectRoutinePlants.set(workRoutinePlants);
+  }
+
+  public setSelectedPlantInComparison(plant: RoutinePlants): void {
+    this._selectedPlantInComparison.set(plant);
   }
 
   private _isLoading = signal<boolean>(false);

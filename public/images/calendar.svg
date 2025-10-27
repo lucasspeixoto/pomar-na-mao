@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title id="title">Calendar Logo</title>
+  <desc id="desc">Modern calendar logo with gradient circular badge, minimal flat design, matching color style to user logo.</desc>
+
+  <defs>
+    <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="var(--g1, #4f46e5)"/>
+      <stop offset="1" stop-color="var(--g2, #06b6d4)"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo circular -->
+  <circle cx="100" cy="100" r="92" fill="url(#grad)" filter="url(#softShadow)"/>
+
+  <!-- Corpo do calendário -->
+  <rect x="55" y="60" width="90" height="80" rx="10" fill="#ffffff" fill-opacity="0.95"/>
+  <rect x="55" y="60" width="90" height="25" rx="8" fill="#e0e7ff" fill-opacity="0.8"/>
+  
+  <!-- Linhas do calendário -->
+  <g stroke="#000000" stroke-opacity="0.05" stroke-width="2">
+    <line x1="55" y1="95" x2="145" y2="95"/>
+    <line x1="55" y1="115" x2="145" y2="115"/>
+    <line x1="55" y1="135" x2="145" y2="135"/>
+    <line x1="80" y1="85" x2="80" y2="140"/>
+    <line x1="105" y1="85" x2="105" y2="140"/>
+    <line x1="130" y1="85" x2="130" y2="140"/>
+  </g>
+
+  <!-- Círculos de anéis superiores -->
+  <circle cx="75" cy="55" r="6" fill="#ffffff" fill-opacity="0.95"/>
+  <circle cx="125" cy="55" r="6" fill="#ffffff" fill-opacity="0.95"/>
+
+  <!-- Contorno -->
+  <circle cx="100" cy="100" r="92" fill="none" stroke="#000000" stroke-opacity="0.04"/>
+
+  <!-- Sombra inferior -->
+  <ellipse cx="100" cy="155" rx="36" ry="6" fill="#000" fill-opacity="0.06"/>
+</svg>

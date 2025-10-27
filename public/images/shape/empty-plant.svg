@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="5 5 125 229" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title desc" role="img">
+  <title id="title">Cruz diagonal</title>
+  <desc id="desc">Duas linhas diagonais formando um X, sem fundo (transparente)</desc>
+  <g fill="none" stroke="#7f8c98" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <line x1="7" y1="7" x2="128" y2="232"/>
+    <line x1="7" y1="232" x2="128" y2="7"/>
+  </g>
+</svg>

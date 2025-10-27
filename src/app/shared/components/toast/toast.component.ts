@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../services/toast.service';
 
@@ -14,14 +14,13 @@ import { ToastService } from '../../services/toast.service';
     @if (toastService.isVisible()) {
       <div class="fixed top-4 right-4 z-999999 flex flex-col gap-3">
         <div
-          class="pointer-events-auto w-72 rounded-lg shadow-lg border bg-white px-4 py-3 flex items-start gap-3 animate-slide-in"
+          class="pointer-events-auto w-72 rounded-lg shadow-md  border-1 bg-white dark:bg-gray-900 px-4 py-3 flex items-start gap-3 animate-slide-in"
           [ngClass]="{
-            'border-green-200 text-green-500': type === 'success',
-            'border-red-200 text-red-500': type === 'error',
-            'border-yellow-200 text-yellow-500': type === 'warn',
-            'border-slate-200 text-slate-500': type === 'info',
+            'shadow-brand-200 text-brand-500': type === 'success',
+            'shadow-error-200 text-error-500': type === 'error',
+            'shadow-yellow-200 text-yellow-500': type === 'warn',
+            'shadow-slate-200 text-slate-500': type === 'info',
           }">
-          <!-- Conteúdo -->
           <div class="flex-1">
             @if (title) {
               <div class="font-semibold text-sm">{{ title }}</div>
@@ -61,6 +60,7 @@ import { ToastService } from '../../services/toast.service';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastComponent {
   public toastService = inject(ToastService);

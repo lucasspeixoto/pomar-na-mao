@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LabelComponent } from '../../form/label/label.component';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +25,7 @@ import { ToastService } from '../../../services/toast.service';
     ReactiveFormsModule,
   ],
   templateUrl: './forgot-password-form.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForgotPasswordFormComponent {
   showPassword = false;

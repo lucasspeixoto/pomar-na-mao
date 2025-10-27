@@ -274,6 +274,7 @@ layer(base);
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 @utility custom-scrollbar {
   &::-webkit-scrollbar {
     @apply size-1.5;
@@ -288,18 +289,41 @@ layer(base);
   }
 }
 
+.dark {
+  .leaflet-layer,
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out,
+  .leaflet-control-attribution {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  }
+
+  .leaflet-container {
+    @apply bg-gray-800;
+  }
+}
+
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #344054;
 }
 
 @layer utilities {
-  /* For Remove Date Icon */
   input[type='date']::-webkit-inner-spin-button,
   input[type='time']::-webkit-inner-spin-button,
   input[type='date']::-webkit-calendar-picker-indicator,
   input[type='time']::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
+    @apply cursor-pointer;
+    filter: invert(0%) brightness(200%);
+  }
+}
+
+.dark {
+  @layer utilities {
+    input[type='date']::-webkit-inner-spin-button,
+    input[type='time']::-webkit-inner-spin-button,
+    input[type='date']::-webkit-calendar-picker-indicator,
+    input[type='time']::-webkit-calendar-picker-indicator {
+      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
   }
 }
 

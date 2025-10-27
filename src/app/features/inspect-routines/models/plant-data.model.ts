@@ -10,6 +10,7 @@ export interface PlantData {
   was_updated: boolean;
   id: string;
   created_at: string;
+  updated_at: string;
   longitude: number;
   latitude: number;
   gps_timestamp: number;

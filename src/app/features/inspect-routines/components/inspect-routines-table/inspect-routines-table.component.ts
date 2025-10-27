@@ -1,14 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CheckboxComponent } from '../../../../shared/components/form/input/checkbox.component';
 import { AvatarTextComponent } from '../../../../shared/components/ui/avatar/avatar-text.component';
-import { FarmRegionApi } from '../../../../shared/services/farm-region-api.service';
+import { FarmRegionService } from '../../../../shared/services/farm-region.service';
 import { InspectRoutinePlantsService } from '../../services/inspect-routine-plants.service';
 import { ModalComponent } from '../../../../shared/components/ui/modal/modal.component';
 import { ButtonComponent } from '../../../../shared/components/ui/button/button.component';
 import { Router } from '@angular/router';
 import { TableSkeletonComponent } from '../../../../shared/components/skeleton/table-skeleton.component';
 import { InspectRoutineService } from '../../services/inspect-routine.service';
+import { Routine } from '../../models/routine.model';
+import { SelectComponent } from '../../../../shared/components/form/select/select.component';
+import { LabelComponent } from '../../../../shared/components/form/label/label.component';
+import { UsersService } from '../../../../core/auth/services/users.service';
+import { DateRangeComponent } from '../../../../shared/components/form/date-range/date-range.component';
+import { getInitialDate } from '../../../../utils/date';
 
 @Component({
   selector: 'app-inspect-routines-table',
@@ -19,20 +25,25 @@ import { InspectRoutineService } from '../../services/inspect-routine.service';
     CheckboxComponent,
     ButtonComponent,
     ModalComponent,
+    SelectComponent,
+    LabelComponent,
+    DateRangeComponent,
   ],
   templateUrl: './inspect-routines-table.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InspectRoutinesTableComponent implements OnInit {
-  public inspectRoutineStore = inject(InspectRoutineService);
+  public inspectRoutineService = inject(InspectRoutineService);
 
-  public farmRegionApi = inject(FarmRegionApi);
+  public farmRegionService = inject(FarmRegionService);
 
   public inspectRoutinePlantsStore = inject(InspectRoutinePlantsService);
 
   public router = inject(Router);
 
-  public isOpen = false;
+  public usersService = inject(UsersService);
+
+  public isDeleteModalOpen = false;
 
   public selectedRows: string[] = [];
 
@@ -40,31 +51,46 @@ export class InspectRoutinesTableComponent implements OnInit {
 
   public selectedRoutineId: string | null = null;
 
+  public isFiltersOpen = false;
+
+  public initialDate = getInitialDate();
+
   public async ngOnInit(): Promise<void> {
-    await this.inspectRoutineStore.getInspectRoutinesDataHandler();
-    await this.farmRegionApi.getAllFarmRegionsHandler();
+    await this.inspectRoutineService.getInspectRoutinesDataHandler();
+    await this.farmRegionService.getAllFarmRegionsHandler();
+    await this.usersService.getAllUsers();
   }
 
   public closeDeleteRoutineConfirmationModal(): void {
-    this.isOpen = false;
+    this.isDeleteModalOpen = false;
   }
 
   public handleConfirmDeleteRoutine(): void {
-    console.log('Deletando rotina com ID:', this.selectedRoutineId);
-    //this.inspectRoutineStore.deleteInspectRoutine(routineId);
+    if (this.selectedRoutineId) {
+      this.inspectRoutineService.deleteInspectRoutine(this.selectedRoutineId);
+    }
+
     this.closeDeleteRoutineConfirmationModal();
   }
 
-  public handleDetailRoutine(routineId: string): void {
-    this.selectedRoutineId = routineId;
-    console.log('Exibindo detalhes da rotina com ID:', this.selectedRoutineId);
-    this.router.navigate(['rotinas-de-inspecao', routineId]);
+  public handleDetailRoutine(routine: Routine): void {
+    this.selectedRoutineId = routine.id;
+
+    this.inspectRoutineService.setSelectedInspectRoutine(routine);
+
+    this.router.navigate(['rotinas-de-inspecao', routine.id], {
+      queryParams: {
+        userName: routine.users.full_name,
+        region: routine.region,
+        date: routine.created_at,
+      },
+    });
   }
 
   public handleSelectAll(): void {
     this.selectAll = !this.selectAll;
     if (this.selectAll) {
-      this.selectedRows = this.inspectRoutineStore.inspectRoutines().map(row => row.id);
+      this.selectedRows = this.inspectRoutineService.inspectRoutines().map(row => row.id);
     } else {
       this.selectedRows = [];
     }
@@ -80,6 +106,37 @@ export class InspectRoutinesTableComponent implements OnInit {
 
   public handleDeleteRoutine(routineId: string): void {
     this.selectedRoutineId = routineId;
-    this.isOpen = true;
+    this.isDeleteModalOpen = true;
+  }
+
+  public toggleFiltersDropdown(): void {
+    this.isFiltersOpen = !this.isFiltersOpen;
+  }
+
+  public closeFiltersDropdown(): void {
+    this.isFiltersOpen = false;
+  }
+
+  public changeFarmRegionFilter(regionId: string): void {
+    this.inspectRoutineService.selectedRegion.set(regionId);
+  }
+
+  public changeUserFilter(userId: string): void {
+    this.inspectRoutineService.selectedUserId.set(userId);
+  }
+
+  public changeRangeDateFilter(rangeDate: string): void {
+    this.inspectRoutineService.selectedRangeDate.set(rangeDate);
+  }
+
+  public searchInspectRoutinesWithFilter(): void {
+    this.inspectRoutineService.getInspectRoutinesDataHandler();
+
+    this.closeFiltersDropdown();
+  }
+
+  public seeAllInspectRoutines(): void {
+    this.inspectRoutineService.clearFilters();
+    this.inspectRoutineService.getInspectRoutinesDataHandler();
   }
 }
