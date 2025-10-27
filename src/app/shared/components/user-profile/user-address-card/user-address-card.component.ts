@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ModalService } from '../../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { InputFieldComponent } from '../../form/input/input-field.component';
@@ -19,7 +19,7 @@ import { AuthenticationService } from '../../../../core/auth/services/authentica
     FormsModule,
   ],
   templateUrl: './user-address-card.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserAddressCardComponent {
   modal = inject(ModalService);

@@ -1,0 +1,13 @@
+@if(selectedPlantInComparison) {
+<div class="custom-scrollbar p-4 h-full w-full overflow-y-auto bg-gray-300 dark:bg-white/[0.03] rounded-lg">
+    <ul class="space-y-2">
+        @for (occurence of occurenceKeys; track occurence) {
+        <li class="text-gray-800 dark:text-white/90">
+            {{ occurencesLabels[occurence] }}:
+            <span>{{ selectedPlantInComparison[occurence] ?
+                '✅' : '⛔' }}</span>
+        </li>
+        }
+    </ul>
+</div>
+}

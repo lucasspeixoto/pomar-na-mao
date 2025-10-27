@@ -1,0 +1,26 @@
+<app-page-breadcrumb firstRouter="/rotinas-de-inspecao" firstRouterTitle="Inspeções"
+    [pageTitle]="'Detalhes Inspeção #' + currentInspectRoutineId!.toString()" />
+
+<div class="grid grid-cols-2 md:grid-cols-10 mb-2 py-2 gap-4 h-full">
+    <!-- Lado Esquerdo (30%) -->
+    <div class="md:col-span-3 flex flex-col justify-between h-full gap-4">
+        <div class="flex flex-col h-full justify-between gap-4">
+
+            <div class="border bg-white dark:bg-white/[0.03] border-gray-200 dark:border-gray-800 rounded-2xl">
+                <app-inspect-comparison-resume [routineId]="currentInspectRoutineId" />
+            </div>
+
+            <app-routine-map [routineDetail]="routineDetail" />
+        </div>
+    </div>
+
+    <!-- Lado Direito (70%) -->
+    <div class="md:col-span-7 flex flex-col justify-start h-full gap-4">
+        <div class="h-[18%] border bg-white dark:bg-white/[0.03] border-gray-200 dark:border-gray-800 rounded-2xl">
+            <app-routine-main-info [currentInspectRoutineId]="currentInspectRoutineId" [routineDetail]="routineDetail" />
+        </div>
+        <div id="routine-plant-comparison" class="h-full border bg-white dark:bg-white/[0.03] border-gray-200 dark:border-gray-800 rounded-2xl">
+            <app-routine-plant-comparison [routineDetail]="routineDetail" />
+        </div>
+    </div>
+</div>

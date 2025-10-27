@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SafeHtmlPipe } from '../../pipe/safe-html.pipe';
 import { BadgeComponent } from '../ui/badge/badge.component';
 
@@ -6,6 +6,7 @@ import { BadgeComponent } from '../ui/badge/badge.component';
   selector: 'app-farm-metrics',
   imports: [BadgeComponent, SafeHtmlPipe],
   templateUrl: './farm-metrics.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FarmMetricsComponent {
   public icons = {

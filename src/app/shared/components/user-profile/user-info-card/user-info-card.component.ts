@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ModalService } from '../../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../ui/button/button.component';
@@ -11,7 +11,7 @@ import { InputFieldComponent } from '../../form/input/input-field.component';
   selector: 'app-user-info-card',
   imports: [CommonModule, ButtonComponent, ModalComponent, LabelComponent, InputFieldComponent],
   templateUrl: './user-info-card.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserInfoCardComponent {
   modal = inject(ModalService);

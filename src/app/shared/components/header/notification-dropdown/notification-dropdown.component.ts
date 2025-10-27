@@ -10,15 +10,15 @@ import { DropdownItemComponent } from '../../ui/dropdown/dropdown-item/dropdown-
   imports: [CommonModule, RouterModule, DropdownComponent, DropdownItemComponent],
 })
 export class NotificationDropdownComponent {
-  isOpen = false;
-  notifying = true;
+  public isOpen = false;
+  public notifying = true;
 
-  toggleDropdown(): void {
+  public toggleDropdown(): void {
     this.isOpen = !this.isOpen;
     this.notifying = false;
   }
 
-  closeDropdown(): void {
+  public closeDropdown(): void {
     this.isOpen = false;
   }
 }

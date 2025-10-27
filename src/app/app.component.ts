@@ -5,8 +5,11 @@ import { ToastComponent } from './shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterModule, LoadingComponent, ToastComponent],
-  templateUrl: './app.component.html',
+  template: `
+    <app-loading />
+    <app-toast />
+    <router-outlet />
+  `,
 })
 export class AppComponent {}

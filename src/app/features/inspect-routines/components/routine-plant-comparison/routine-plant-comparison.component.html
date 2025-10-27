@@ -1,0 +1,101 @@
+@let isComparisonActive = inspectRoutineService.isComparisonActive();
+
+@let isLoadingRoutinePlants = inspectRoutinePlantsService.isLoading();
+
+@let isLoadingCurrentPlant = plantsService.isLoading();
+
+@let currentSelectedPlantInComparison =
+plantsService.selectedPlantInComparison();
+
+@let updatedSelectedPlantInComparison =
+inspectRoutinePlantsService.selectedPlantInComparison();
+
+@let inspectRoutinePlants = inspectRoutinePlantsService.inspectRoutinePlants();
+
+<div class="flex justify-start w-full h-full">
+    <!-- Planta antes -->
+    @if(isLoadingRoutinePlants || isLoadingCurrentPlant) {
+    <div
+        class="w-full flex items-center justify-center bg-gray-300 dark:bg-white/[0.03] rounded-lg">
+        <app-card-loader />
+    </div>
+    } @else {
+    @if(isComparisonActive) {
+    <app-plant-ocurrences-list class="w-1/2"
+        [selectedPlantInComparison]="currentSelectedPlantInComparison" />
+    } @else {
+    <div
+        style="background-image: url('/images/plants/lichia.png'); background-size: contain; background-position: center; background-repeat: no-repeat;"
+        class="w-full flex items-center justify-center bg-gray-300 dark:bg-white/[0.03] rounded-lg">
+        <span class="text-4xl font-semibold text-white/90">
+            ANTES
+        </span>
+    </div>
+
+    }
+    }
+
+    <!-- Button (next and previous) -->
+    <div class="flex flex-col justify-center items-center gap-4">
+        <div class="w-auto flex items-center justify-between gap-4 mx-2">
+            <!-- Botão Anterior -->
+            <button [disabled]="!isComparisonActive || !canGoPreviousPlant"
+                (click)="goPreviousPlant()"
+                class="w-12 h-12 transition rounded-full flex items-center justify-center
+           bg-gray-300 dark:bg-white/[0.03]
+           hover:bg-gray-400/50 hover:shadow-lg
+           disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed">
+                <!-- Ícone de anterior (seta para a esquerda) -->
+                <svg class="size-8 font-bold text-brand-600" fill="none"
+                    stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <!-- Botão Próximo -->
+            <button [disabled]="!isComparisonActive || !canGoNextPlant"
+                (click)="goNextPlant()"
+                class="w-12 h-12 transition rounded-full flex items-center justify-center
+           bg-gray-300 dark:bg-white/[0.03]
+           hover:bg-gray-400/50 hover:shadow-lg
+           disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed">
+                <!-- Ícone de próximo (seta para a direita) -->
+                <svg class="size-8 font-bold text-brand-600" fill="none"
+                    stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+        @if(isComparisonActive) {
+        <span
+            class="text-gray-800 text-2xl font-semibold dark:text-white/80">{{currentIndex
+            +
+            1}}/{{inspectRoutinePlants.length}}</span>
+        }
+
+    </div>
+
+    @if(isLoadingRoutinePlants || isLoadingCurrentPlant) {
+    <div
+        class="w-full flex items-center justify-center bg-gray-300 dark:bg-white/[0.03] rounded-lg">
+        <app-card-loader />
+    </div>
+    } @else {
+    @if(isComparisonActive) {
+    <app-plant-ocurrences-list class="w-1/2"
+        [selectedPlantInComparison]="updatedSelectedPlantInComparison" />
+    } @else {
+    <div
+        style="background-image: url('/images/plants/lichia.png'); background-size: contain; background-position: center; background-repeat: no-repeat;"
+        class="w-full flex items-center justify-center bg-gray-300 dark:bg-white/[0.03] rounded-lg">
+        <span class="text-4xl font-semibold text-white/90">
+            DEPOIS
+        </span>
+    </div>
+    }
+    }
+</div>

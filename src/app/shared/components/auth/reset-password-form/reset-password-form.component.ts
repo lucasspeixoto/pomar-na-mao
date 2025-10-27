@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
 import { LabelComponent } from '../../form/label/label.component';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { Router, RouterModule } from '@angular/router';
@@ -26,7 +26,7 @@ import { ToastService } from '../../../services/toast.service';
     ReactiveFormsModule,
   ],
   templateUrl: './reset-password-form.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResetPasswordFormComponent {
   public router = inject(Router);

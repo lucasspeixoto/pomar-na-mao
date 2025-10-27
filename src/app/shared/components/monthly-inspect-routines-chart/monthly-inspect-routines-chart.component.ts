@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   NgApexchartsModule,
   ApexAxisChartSeries,
@@ -22,6 +22,7 @@ import { DropdownComponent } from '../ui/dropdown/dropdown.component';
   standalone: true,
   imports: [CommonModule, NgApexchartsModule, DropdownComponent, DropdownItemComponent],
   templateUrl: './monthly-inspect-routines-chart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthlyInspectRoutinesChartComponent {
   public series: ApexAxisChartSeries = [

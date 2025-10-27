@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject } from '@angular/core';
 import { LabelComponent } from '../../form/label/label.component';
 import { CheckboxComponent } from '../../form/input/checkbox.component';
 import { ButtonComponent } from '../../ui/button/button.component';
@@ -25,7 +25,7 @@ import { ToastService } from '../../../services/toast.service';
     ReactiveFormsModule,
   ],
   templateUrl: './signin-form.component.html',
-  styles: ``,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SigninFormComponent {
   public router = inject(Router);

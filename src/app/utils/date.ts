@@ -1,4 +1,24 @@
 /**
+ * Retorna o dia de hoje no formato 'dd/mm/yyyy - dd/mm/yyyy'
+ */
+export function getInitialDate(): string {
+  const today = new Date();
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const year = today.getFullYear();
+  return `${day}/${month}/${year} - ${day}/${month}/${year}`;
+}
+
+/**
+ * Converte uma string 'dd/mm/yyyy' para um objeto Date (à meia-noite).
+ */
+export function parseDateString(dateStr: string): Date {
+  const [day, month, year] = dateStr.split('/').map(Number);
+  // Mês no JS é 0-indexado (0=Jan, 11=Dez)
+  return new Date(year, month - 1, day);
+}
+
+/**
  * @status: Tested
  * Returns the current date in the format "MM/YYYY".
  *
