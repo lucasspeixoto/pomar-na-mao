@@ -6,7 +6,7 @@ import { RoutineMapComponent } from './routine-map.component';
 import { RoutineMainInfo } from '../../models/routine-main-info.model';
 import { FarmRegionService } from '../../../../shared/services/farm-region.service';
 import { GeolocationNavigatorService } from '../../../../shared/services/geolocation-navigator.service';
-import { PlantsService } from '../../../../shared/services/plants.service';
+import { PlantsService } from '../../../plants/services/plants.service';
 
 // --- Mock do Leaflet (L) ---
 // Define o objeto L globalmente com métodos espiões (spies) para simular o Leaflet

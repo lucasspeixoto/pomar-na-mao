@@ -2,7 +2,7 @@ import { computed, Injectable, signal } from '@angular/core';
 import type { FarmRegion } from '../../models/farm-region.model';
 import { injectSupabase } from '../../utils/inject-supabase';
 
-export const REGIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+export const REGIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'FEAGRI', 'Z'];
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +51,8 @@ export class FarmRegionService {
   });
 
   public async getAllFarmRegionsHandler(): Promise<void> {
+    if (this._farmRegions().length > 0) return;
+
     this.startLoading();
 
     const { data, error } = await this.supabase

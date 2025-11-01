@@ -1,4 +1,5 @@
 import type { BooleanKeys } from '../features/inspect-routines/models/plant-data.model';
+import type { Option } from '../shared/components/form/select/select.component';
 
 export const occurenceKeys: BooleanKeys[] = [
   'anthill',
@@ -45,3 +46,8 @@ export const occurencesLabels: Record<string, string> = {
   buds: 'Presença de Brotos (Novo)',
   dehydrated: 'Pé Desidratado (Novo)',
 };
+
+export const occurencesOptions: Option[] = Object.entries(occurencesLabels).map(([key, value]) => ({
+  value: key,
+  label: value,
+}));

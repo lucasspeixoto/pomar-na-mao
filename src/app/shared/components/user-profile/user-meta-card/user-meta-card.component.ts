@@ -11,22 +11,21 @@ import { AuthenticationService } from '../../../../core/auth/services/authentica
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserMetaCardComponent {
-  modal = inject(ModalService);
+  public modal = inject(ModalService);
 
   public authenticationService = inject(AuthenticationService);
 
-  isOpen = false;
+  public isOpen = false;
 
-  openModal(): void {
+  public openModal(): void {
     this.isOpen = true;
   }
 
-  closeModal(): void {
+  public closeModal(): void {
     this.isOpen = false;
   }
 
-  handleSave(): void {
-    // Handle save logic here
+  public handleSave(): void {
     this.modal.closeModal();
   }
 }

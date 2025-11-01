@@ -11,6 +11,7 @@ import { InspectRoutinesComponent } from './features/inspect-routines/pages/insp
 import { HomeComponent } from './pages/home/home.component';
 import { WorkRoutinesComponent } from './features/work-routines/pages/work-routines/work-routines.component';
 import { InspectRoutineDetailsComponent } from './features/inspect-routines/pages/inspect-routine-details/inspect-routine-details.component';
+import { PlantsComponent } from './features/plants/pages/plants/plants.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,11 @@ export const routes: Routes = [
     path: 'resetar-senha',
     component: ResetPasswordComponent,
     title: 'Resetar Senha',
+  },
+  {
+    path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full',
   },
   {
     path: '',
@@ -53,6 +59,11 @@ export const routes: Routes = [
         path: 'rotinas-de-inspecao/:id',
         component: InspectRoutineDetailsComponent,
         title: 'Detalhe Inspeção',
+      },
+      {
+        path: 'plantas',
+        component: PlantsComponent,
+        title: 'Minhas plantas',
       },
       {
         path: 'perfil',

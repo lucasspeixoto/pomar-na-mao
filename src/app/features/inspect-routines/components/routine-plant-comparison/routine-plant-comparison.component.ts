@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, effect, inject, Input } from '@angu
 import { RoutineMainInfo } from '../../models/routine-main-info.model';
 import { InspectRoutineService } from '../../services/inspect-routine.service';
 import { InspectRoutinePlantsService } from '../../services/inspect-routine-plants.service';
-import { PlantsService } from '../../../../shared/services/plants.service';
+
 import { CardLoaderComponent } from '../../../../shared/components/card-loader/card-loader.component';
 import { occurenceKeys, occurencesLabels } from '../../../../utils/occurrences';
 import { PlantOcurrencesListComponent } from '../plant-ocurrences-list/plant-ocurrences-list.component';
+import { PlantsService } from '../../../plants/services/plants.service';
 
 @Component({
   selector: 'app-routine-plant-comparison',

@@ -10,6 +10,17 @@ export function getInitialDate(): string {
 }
 
 /**
+ * Transforma uma data 'yyyy-mm-dd' em 'dd/mm/yyyy'
+ */
+export function getTransformedDateFromInput(date: string): string {
+  const splitDate = date.split('-');
+  const day = splitDate[2];
+  const month = splitDate[1];
+  const year = splitDate[0];
+  return `${day}/${month}/${year}`;
+}
+
+/**
  * Converte uma string 'dd/mm/yyyy' para um objeto Date (à meia-noite).
  */
 export function parseDateString(dateStr: string): Date {

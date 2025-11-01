@@ -1,7 +1,7 @@
 import { Component, effect, inject, Input } from '@angular/core';
 import { InspectRoutineService } from '../../services/inspect-routine.service';
 import { ButtonComponent } from '../../../../shared/components/ui/button/button.component';
-import { PlantsService } from '../../../../shared/services/plants.service';
+
 import { InspectRoutinePlantsService } from '../../services/inspect-routine-plants.service';
 import { InspectComparisonResumeSkeletonComponent } from '../../../../shared/components/skeleton/inspect-comparison-resume-skeleton.component';
 import { countPlantOccurrenceDifferences } from '../../../../utils/plant-computation';
@@ -10,6 +10,7 @@ import { injectSupabase } from '../../../../utils/inject-supabase';
 import { occurenceKeys } from '../../../../utils/occurrences';
 import { RoutinePlants } from '../../models/routine.model';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { PlantsService } from '../../../plants/services/plants.service';
 
 @Component({
   selector: 'app-inspect-comparison-resume',

@@ -1,3 +1,5 @@
+@let currentUser = authenticationService.currentUser();
+
 <div class="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
   <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
     <div>
@@ -10,7 +12,7 @@
             Nome
           </p>
           <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-            {{ authenticationService.currentUser()?.full_name!.split(' ')[0] }}
+            {{ currentUser?.full_name!.split(' ')[0] }}
           </p>
         </div>
         <div>
@@ -18,7 +20,7 @@
             Sobrenome
           </p>
           <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-            {{ authenticationService.currentUser()?.full_name!.split(' ')[1] }}
+            {{ currentUser?.full_name!.split(' ')[1] }}
           </p>
         </div>
         <div>
@@ -26,7 +28,7 @@
             E-mail
           </p>
           <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-            {{ authenticationService.currentUser()?.email }}
+            {{ currentUser?.email }}
           </p>
         </div>
         <div>
@@ -34,7 +36,7 @@
             Telefone
           </p>
           <p class="text-sm font-medium text-gray-800 dark:text-white/90">
-            19982664733
+            -
           </p>
         </div>
         <div>
@@ -49,7 +51,9 @@
     </div>
     <button
       (click)="openModal()"
-      class="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
+      [disabled]="true"
+      class="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto
+      disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-200 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:bg-gray-100 disabled:dark:bg-gray-700 disabled:dark:text-gray-500 disabled:dark:border-gray-700 disabled:dark:hover:bg-gray-700"
     >
       <svg
         class="fill-current"
@@ -95,15 +99,15 @@
             <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
               <div class="col-span-2 lg:col-span-1">
                 <app-label>Nome</app-label>
-                <app-input-field type="text" [value]="authenticationService.currentUser()?.full_name!.split(' ')[0]" />
+                <app-input-field type="text"  />
               </div>
               <div class="col-span-2 lg:col-span-1">
                 <app-label>Sobrenome</app-label>
-                <app-input-field type="text" [value]="authenticationService.currentUser()?.full_name!.split(' ')[1]" />
+                <app-input-field type="text"  />
               </div>
               <div class="col-span-2 lg:col-span-1">
                 <app-label>Email</app-label>
-                <app-input-field type="text" [value]="authenticationService.currentUser()?.email!" />
+                <app-input-field type="text"  />
               </div>
               <div class="col-span-2 lg:col-span-1">
                 <app-label>Telefone</app-label>
@@ -111,7 +115,7 @@
               </div>
               <div class="col-span-2">
                 <app-label>Bio</app-label>
-                <app-input-field type="text" [value]="''" />
+                <app-input-field type="text" />
               </div>
             </div>
           </div>

@@ -1,13 +1,6 @@
-interface User {
-  id: string;
-  updated_at: string;
-  email: string;
-  full_name: string;
-  avatar_url: string | null;
-}
+import type { iUser } from '../../../core/auth/models/user.model';
 
 export interface PlantData {
-  was_updated: boolean;
   id: string;
   created_at: string;
   updated_at: string;
@@ -37,16 +30,14 @@ export interface PlantData {
   region: string;
   empty_collection_box_near: boolean;
   is_dead: boolean;
-
   is_new: boolean;
   non_existent: boolean;
   frost: boolean;
   flowers: boolean;
   buds: boolean;
   dehydrated: boolean;
-
   last_work: string;
-  users: Partial<User>;
+  users: Partial<iUser>;
 }
 
 export interface Position {

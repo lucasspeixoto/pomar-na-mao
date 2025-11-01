@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input-field',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="relative">
       <input
@@ -17,7 +19,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         [step]="step"
         [disabled]="disabled"
         [ngClass]="inputClasses"
-        (input)="onInput($event)" />
+        (input)="onInput($event)"
+        (blur)="onBlur()" />
 
       @if (hint) {
         <p
@@ -32,17 +35,28 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       }
     </div>
   `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputFieldComponent),
+      multi: true,
+    },
+  ],
 })
-export class InputFieldComponent {
+export class InputFieldComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
   @Input() id?: string = '';
   @Input() name?: string = '';
   @Input() placeholder?: string = '';
-  @Input() value: string | number = '';
+
+  public value: string | number = '';
+
   @Input() min?: string;
   @Input() max?: string;
   @Input() step?: number;
-  @Input() disabled: boolean = false;
+
+  public disabled: boolean = false;
+
   @Input() success: boolean = false;
   @Input() error: boolean = false;
   @Input() hint?: string;
@@ -50,8 +64,27 @@ export class InputFieldComponent {
 
   @Output() valueChange = new EventEmitter<string | number>();
 
+  private onChange: (value: string | number) => void = () => {};
+
+  private onTouched: () => void = () => {};
+
+  public writeValue(value: string | number): void {
+    this.value = value !== undefined && value !== null ? value : '';
+  }
+
+  public registerOnChange(fn: (value: string | number) => void): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   get inputClasses(): string {
-    // Adiciona appearance-none SOMENTE se o type não for 'date'
     const appearanceClass = this.type !== 'date' ? 'appearance-none' : '';
 
     let inputClasses = `h-11 w-full rounded-lg border ${appearanceClass} px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 ${this.className}`;
@@ -68,8 +101,16 @@ export class InputFieldComponent {
     return inputClasses;
   }
 
-  onInput(event: Event): void {
+  public onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.valueChange.emit(this.type === 'number' ? +input.value : input.value);
+    const value = this.type === 'number' ? +input.value : input.value;
+
+    this.value = value;
+    this.onChange(value);
+    this.valueChange.emit(value);
+  }
+
+  public onBlur(): void {
+    this.onTouched();
   }
 }
