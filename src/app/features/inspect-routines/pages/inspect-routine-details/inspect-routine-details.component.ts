@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, type OnDestroy } fr
 import { PageBreadcrumbComponent } from '../../../../shared/components/common/page-breadcrumb/page-breadcrumb.component';
 import { ActivatedRoute } from '@angular/router';
 import { RoutineMainInfoComponent } from '../../components/routine-main-info/routine-main-info.component';
-import { RoutineMainInfo } from '../../models/routine-main-info.model';
+import { RoutineMainInfo } from '../../models/routine-main-info';
 import { RoutineMapComponent } from '../../components/routine-map/routine-map.component';
 import { RoutinePlantComparisonComponent } from '../../components/routine-plant-comparison/routine-plant-comparison.component';
 import { InspectComparisonResumeComponent } from '../../components/inspect-comparison-resume/inspect-comparison-resume.component';

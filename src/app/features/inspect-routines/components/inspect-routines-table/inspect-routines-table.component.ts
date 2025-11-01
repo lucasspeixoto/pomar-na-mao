@@ -8,11 +8,8 @@ import { ModalComponent } from '../../../../shared/components/ui/modal/modal.com
 import { ButtonComponent } from '../../../../shared/components/ui/button/button.component';
 import { Router } from '@angular/router';
 import { InspectRoutinesTableSkeletonComponent } from '../../../../shared/components/skeleton/inspect-routines-table-skeleton.component';
-import {
-  InspectRoutineService,
-  type InspectRoutinesSearchInfo,
-} from '../../services/inspect-routine.service';
-import { Routine } from '../../models/routine.model';
+import { InspectRoutineService } from '../../services/inspect-routine.service';
+import { Routine } from '../../models/routine';
 import { SelectComponent } from '../../../../shared/components/form/select/select.component';
 import { LabelComponent } from '../../../../shared/components/form/label/label.component';
 import { UsersService } from '../../../../core/auth/services/users.service';
@@ -20,13 +17,8 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { InputFieldComponent } from '../../../../shared/components/form/input/input-field.component';
 import { getTransformedDateFromInput } from '../../../../utils/date';
 import { CustomPaginatorComponent } from '../../../../shared/components/table/custom-paginator/custom-paginator.component';
-
-export type InspectRoutinesSearchFilters = {
-  region: string | null;
-  userId: string | null;
-  startCreatedAt: string | null;
-  endCreatedAt: string | null;
-};
+import type { InspectRoutinesSearchFilters } from '../../models/inspect-routines-search-filters';
+import type { InspectRoutinesSearchInfo } from '../../models/inspect-routines-search-info';
 
 @Component({
   selector: 'app-inspect-routines-table',

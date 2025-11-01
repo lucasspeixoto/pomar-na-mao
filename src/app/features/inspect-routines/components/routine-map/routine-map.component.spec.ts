@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RoutineMapComponent } from './routine-map.component';
-import { RoutineMainInfo } from '../../models/routine-main-info.model';
+import { RoutineMainInfo } from '../../models/routine-main-info';
 import { FarmRegionService } from '../../../../shared/services/farm-region.service';
 import { GeolocationNavigatorService } from '../../../../shared/services/geolocation-navigator.service';
 import { PlantsService } from '../../../plants/services/plants.service';

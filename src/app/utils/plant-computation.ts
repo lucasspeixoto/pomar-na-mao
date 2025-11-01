@@ -1,5 +1,5 @@
-import { PlantData } from '../features/inspect-routines/models/plant-data.model';
-import { RoutinePlants } from '../features/inspect-routines/models/routine.model';
+import { PlantData } from '../features/plants/models/plant-data';
+import { RoutinePlants } from '../features/inspect-routines/models/routine';
 import { occurenceKeys } from './occurrences';
 
 /**

@@ -1,6 +1,6 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { injectSupabase } from '../../../utils/inject-supabase';
-import type { RoutinePlants } from '../models/routine.model';
+import type { RoutinePlants } from '../models/routine';
 import { ToastService } from '../../../shared/services/toast.service';
 
 @Injectable({

@@ -6,22 +6,17 @@ import { ButtonComponent } from '../../../../shared/components/ui/button/button.
 import { Router } from '@angular/router';
 import { SelectComponent } from '../../../../shared/components/form/select/select.component';
 import { LabelComponent } from '../../../../shared/components/form/label/label.component';
-import { PlantsService, type PlantsSearchInfo } from '../../services/plants.service';
+import { PlantsService } from '../../services/plants.service';
 import { CustomPaginatorComponent } from '../../../../shared/components/table/custom-paginator/custom-paginator.component';
-import { PlantData } from '../../../inspect-routines/models/plant-data.model';
+import { PlantData } from '../../models/plant-data';
 import { FarmRegionService } from '../../../../shared/services/farm-region.service';
 import { occurencesOptions } from '../../../../utils/occurrences';
 import { PlantsTableSkeletonComponent } from '../../../../shared/components/skeleton/plants-table-skeleton.component';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { InputFieldComponent } from '../../../../shared/components/form/input/input-field.component';
 import { getTransformedDateFromInput } from '../../../../utils/date';
-
-export type PlantsSearchFilters = {
-  region: string | null;
-  occurrence: string | null;
-  startLastWork: string | null;
-  endLastWork: string | null;
-};
+import type { PlantsSearchFilters } from '../../models/plants-search-filters';
+import type { PlantsSearchInfo } from '../../models/plants-search-info';
 
 @Component({
   selector: 'app-plants-table',

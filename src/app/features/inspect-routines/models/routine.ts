@@ -1,4 +1,4 @@
-import type { PlantData } from './plant-data.model';
+import type { PlantData } from '../../plants/models/plant-data';
 
 export interface Routine {
   id: string;
