@@ -13,7 +13,7 @@ import { FarmRegionService } from '../../../../shared/services/farm-region.servi
 import { sortCoordinatesClockwise } from '../../../../utils/sort-coordinates';
 import { GeolocationNavigatorService } from '../../../../shared/services/geolocation-navigator.service';
 import type * as Leaflet from 'leaflet';
-import { PlantsService } from '../../../../shared/services/plants.service';
+import { PlantsService } from '../../../plants/services/plants.service';
 
 declare let L: typeof Leaflet;
 

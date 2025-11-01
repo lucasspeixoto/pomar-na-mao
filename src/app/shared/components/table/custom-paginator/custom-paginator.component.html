@@ -1,0 +1,58 @@
+
+<nav class="flex justify-center items-center gap-2"
+    aria-label="Paginação">
+
+    <button
+        (click)="prevPage()"
+        [disabled]="currentPage === 1"
+        class="
+          inline-flex items-center justify-center rounded-md border
+          border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700
+          transition duration-200 ease-in-out
+          disabled:cursor-not-allowed disabled:opacity-50
+          dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300
+        ">
+        &laquo; Anterior
+    </button>
+
+    @for (page of visiblePages; track page) {
+    <button
+        (click)="goToPage(page)"
+        [class.bg-brand-500]="page === currentPage"
+        [class.text-white]="page === currentPage"
+        [class.border-brand-500]="page === currentPage"
+        [class.z-10]="page === currentPage"
+        [class.hover:opacity-80]="page === currentPage"
+        [class.bg-white]="page !== currentPage"
+        [class.text-gray-700]="page !== currentPage"
+        [class.hover:bg-gray-50]="page !== currentPage"
+        [class.dark:bg-gray-800]="page !== currentPage"
+        [class.dark:text-gray-300]="page !== currentPage"
+        [class.dark:hover:bg-gray-700]="page !== currentPage"
+        class="
+          inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium
+          transition duration-200 ease-in-out
+          disabled:cursor-not-allowed disabled:opacity-50
+          border border-gray-300 dark:border-gray-700
+        ">
+        {{ page }}
+    </button>
+    }
+
+    <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages"
+        class="
+          inline-flex items-center justify-center rounded-md border
+          border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700
+          transition duration-200 ease-in-out
+          disabled:cursor-not-allowed disabled:opacity-50
+          dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300
+        ">
+        Próximo &raquo;
+    </button>
+</nav>
+
+<div class="my-4 text-center text-sm text-gray-500 dark:text-gray-400">
+    Página {{ currentPage }} de {{ totalPages }}
+</div>

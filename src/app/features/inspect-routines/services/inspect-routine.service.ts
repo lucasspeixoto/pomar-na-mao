@@ -4,6 +4,12 @@ import { Routine } from '../models/routine.model';
 import { ToastService } from '../../../shared/services/toast.service';
 import { parseDateString } from '../../../utils/date';
 
+export type InspectRoutinesSearchInfo = {
+  userId: string | null;
+  region: string | null;
+  createdAtRangeDate: string | null;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,11 +20,6 @@ export class InspectRoutineService {
 
   private _isComparisonActive = signal(false);
   public isComparisonActive = this._isComparisonActive.asReadonly();
-
-  /* Routines filters */
-  public selectedRegion = signal<string | null>(null);
-  public selectedUserId = signal<string | null>(null);
-  public selectedRangeDate = signal<string | null>(null);
 
   private _inspectRoutines = signal<Routine[]>([]);
   public inspectRoutines = this._inspectRoutines.asReadonly();
@@ -51,25 +52,29 @@ export class InspectRoutineService {
     this._isLoading.set(false);
   }
 
-  public async getInspectRoutinesDataHandler(): Promise<void> {
+  public async getFilteredInspectRoutinesDataHandler(
+    inspectRoutinesSearchInfo: InspectRoutinesSearchInfo
+  ): Promise<void> {
     this.startLoading();
+
+    const { userId, region, createdAtRangeDate } = inspectRoutinesSearchInfo;
 
     let query = this.supabase
       .from('inspect_routines')
       .select('*, users(full_name, email)')
       .order('created_at', { ascending: false });
 
-    if (this.selectedRegion()) {
-      query = query.eq('region', this.selectedRegion());
+    if (region) {
+      query = query.eq('region', region);
     }
 
-    if (this.selectedUserId()) {
-      query = query.eq('user_id', this.selectedUserId());
+    if (userId) {
+      query = query.eq('user_id', userId);
     }
 
-    if (this.selectedRangeDate()) {
-      const startDate = this.selectedRangeDate()!.split(' - ')[0];
-      const endDate = this.selectedRangeDate()!.split(' - ')[1];
+    if (createdAtRangeDate) {
+      const startDate = createdAtRangeDate!.split(' - ')[0];
+      const endDate = createdAtRangeDate!.split(' - ')[1];
 
       const parsedStartDate = parseDateString(startDate);
       const parsedEndDate = parseDateString(endDate);
@@ -99,18 +104,36 @@ export class InspectRoutineService {
     this.stopLoading();
   }
 
+  public async getAllInspectRoutinesDataHandler(): Promise<void> {
+    this.startLoading();
+
+    const { data, error } = await this.supabase
+      .from('inspect_routines')
+      .select('*, users(full_name, email)')
+      .order('created_at', { ascending: false });
+
+    if (!error) {
+      this.setInspectRoutines(data);
+    }
+
+    if (error) {
+      this.setInspectRoutines([]);
+      this.toastService.show(
+        'Erro',
+        'Erro ao carregar rotinas, tente novamente mais tarde!',
+        'error'
+      );
+    }
+
+    this.stopLoading();
+  }
+
   public async deleteInspectRoutine(routineId: string): Promise<void> {
     const { error } = await this.supabase.from('inspect_routines').delete().eq('id', routineId);
 
     if (!error) {
       this.toastService.show('Sucesso', 'Rotina deletada com sucesso!', 'success');
-      this.getInspectRoutinesDataHandler();
+      this.getAllInspectRoutinesDataHandler();
     }
-  }
-
-  public clearFilters(): void {
-    this.selectedRegion.set(null);
-    this.selectedUserId.set(null);
-    this.selectedRangeDate.set(null);
   }
 }
