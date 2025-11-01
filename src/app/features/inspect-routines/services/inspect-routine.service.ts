@@ -1,14 +1,9 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { injectSupabase } from '../../../utils/inject-supabase';
-import { Routine } from '../models/routine.model';
+import { Routine } from '../models/routine';
 import { ToastService } from '../../../shared/services/toast.service';
 import { parseDateString } from '../../../utils/date';
-
-export type InspectRoutinesSearchInfo = {
-  userId: string | null;
-  region: string | null;
-  createdAtRangeDate: string | null;
-};
+import type { InspectRoutinesSearchInfo } from '../models/inspect-routines-search-info';
 
 @Injectable({
   providedIn: 'root',

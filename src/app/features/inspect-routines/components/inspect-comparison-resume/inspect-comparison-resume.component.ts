@@ -8,7 +8,7 @@ import { countPlantOccurrenceDifferences } from '../../../../utils/plant-computa
 import { DatePipe } from '@angular/common';
 import { injectSupabase } from '../../../../utils/inject-supabase';
 import { occurenceKeys } from '../../../../utils/occurrences';
-import { RoutinePlants } from '../../models/routine.model';
+import { RoutinePlants } from '../../models/routine';
 import { ToastService } from '../../../../shared/services/toast.service';
 import { PlantsService } from '../../../plants/services/plants.service';
 

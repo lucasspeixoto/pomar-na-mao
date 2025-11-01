@@ -1,4 +1,4 @@
-import type { BooleanKeys } from '../features/inspect-routines/models/plant-data.model';
+import type { BooleanKeys } from '../features/plants/models/plant-data';
 import type { Option } from '../shared/components/form/select/select.component';
 
 export const occurenceKeys: BooleanKeys[] = [

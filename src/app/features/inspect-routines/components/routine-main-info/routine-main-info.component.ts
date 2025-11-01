@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import type { RoutineMainInfo } from '../../models/routine-main-info.model';
+import type { RoutineMainInfo } from '../../models/routine-main-info';
 import { DatePipe } from '@angular/common';
 import { FirstAndLastnamePipe } from '../../../../shared/pipe/first-and-lastname.pipe';
 

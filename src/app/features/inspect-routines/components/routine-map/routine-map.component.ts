@@ -8,7 +8,7 @@ import {
   effect,
 } from '@angular/core';
 
-import { RoutineMainInfo } from '../../models/routine-main-info.model';
+import { RoutineMainInfo } from '../../models/routine-main-info';
 import { FarmRegionService } from '../../../../shared/services/farm-region.service';
 import { sortCoordinatesClockwise } from '../../../../utils/sort-coordinates';
 import { GeolocationNavigatorService } from '../../../../shared/services/geolocation-navigator.service';

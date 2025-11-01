@@ -1,14 +1,9 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { PlantData } from '../../../features/inspect-routines/models/plant-data.model';
+import { PlantData } from '../models/plant-data';
 import { injectSupabase } from '../../../utils/inject-supabase';
 import { ToastService } from '../../../shared/services/toast.service';
 import { parseDateString } from '../../../utils/date';
-
-export type PlantsSearchInfo = {
-  occurrence: string | null;
-  region: string | null;
-  lastWorkRangeDate: string | null;
-};
+import type { PlantsSearchInfo } from '../models/plants-search-info';
 
 @Injectable({
   providedIn: 'root',

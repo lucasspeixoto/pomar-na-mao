@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, inject, Input } from '@angular/core';
-import { RoutineMainInfo } from '../../models/routine-main-info.model';
+import { RoutineMainInfo } from '../../models/routine-main-info';
 import { InspectRoutineService } from '../../services/inspect-routine.service';
 import { InspectRoutinePlantsService } from '../../services/inspect-routine-plants.service';
 

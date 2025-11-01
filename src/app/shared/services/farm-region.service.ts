@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import type { FarmRegion } from '../../models/farm-region.model';
+import type { FarmRegion } from '../../models/farm-region';
 import { injectSupabase } from '../../utils/inject-supabase';
 
 export const REGIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'FEAGRI', 'Z'];
